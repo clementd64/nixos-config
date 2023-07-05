@@ -1,0 +1,32 @@
+{ ... }:
+{
+  programs.fish = {
+    enable = true;
+    shellAbbrs = {
+      g = "git";
+      gd = "cd (git rev-parse --show-toplevel)";
+
+      d = "docker";
+      dc = "docker compose";
+      dcd = "docker compose down -t0 -v --remove-orphans";
+      docker-compose = "docker compose"; # migrate legacy for cleaner history
+
+      k = "kubectl";
+      kctx = "kubectl config use-context";
+      kns = "kubectl config set-context --current --namespace";
+
+      ls = "exa";
+      cat = "bat";
+      xcp = "xclip -selection clipboard";
+
+      vim = "nvim";
+      v = "nvim";
+    };
+  };
+
+  programs.bat.enable = true;
+  programs.direnv.enable = true;
+  programs.exa.enable = true;
+
+  programs.bash.enable = true;
+}

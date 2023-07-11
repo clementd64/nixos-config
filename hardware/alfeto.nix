@@ -14,13 +14,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/e3cfb256-34ad-47cf-9814-336a2f343ef3";
+    { device = "/dev/disk/by-uuid/d5a73780-599c-47d3-b9fa-afc6e899aa31";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B993-5387";
+    { device = "/dev/disk/by-uuid/AC78-244C";
       fsType = "vfat";
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/9b6820b1-c637-48b2-9391-77f2d83b2abe";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var/lib/docker" =
+    { device = "/dev/disk/by-uuid/3fddf18c-c682-4b71-b017-3896adcf8d8e";
+      fsType = "ext4";
     };
 
   swapDevices = [ ];

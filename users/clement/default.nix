@@ -1,19 +1,26 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./alacritty.nix
-    ./dunst.nix
-    ./fish.nix
-    ./git.nix
-    ./htop.nix
     ./i3.nix
-    ./nvim.nix
-    ./rofi.nix
-    ./ssh-agent.nix
-    ./starship.nix
     ./tmux.nix
-    ./vscode
   ];
+
+  clement = {
+    alacritty.enable = true;
+    dunst.enable = true;
+    fish.enable = true;
+    git.enable = true;
+    htop.enable = true;
+    ssh-agent.enable = true;
+    starship.enable = true;
+    vscode.enable = true;
+    neovim.enable = true;
+
+    rofi = {
+      enable = true;
+      size = 14;
+    };
+  };
 
   programs.chromium.enable = true;
   programs.chromium.commandLineArgs = [
@@ -36,12 +43,27 @@
     ansible
     ansible-lint
     dbeaver
+    deno
+    dig
     discord
+    fluxcd
+    gcc
+    gnumake
+    go
+    jq
+    keepassxc
+    kubectl
+    kubernetes-helm
+    ldns
     neofetch
+    nodejs_20
+    openssl
     signal-desktop
     skypeforlinux
     telegram-desktop
+    terraform
     thunderbird
     tmux
+    wireguard-tools
   ];
 }

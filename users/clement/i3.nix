@@ -12,7 +12,6 @@
     i3lock
     i3status
     imagemagick
-    keepassxc
     libnotify
     lm_sensors
     maim

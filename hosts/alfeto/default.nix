@@ -1,16 +1,10 @@
 { ... }:
 {
-  imports = [
-    ../../system/base.nix
-    ../../system/docker.nix
-    ../../system/i3.nix
-  ];
-
   networking.hostName = "alfeto";
 
   boot.loader.systemd-boot.enable = true;
   boot.initrd.luks.devices.root = {
-    device = "/dev/disk/by-uuid/7614576f-69a6-4767-9418-47e599d2bc5f";
+    device = "/dev/disk/by-uuid/9ffb7b2c-2134-4df8-8be4-7b089997f769";
   };
 
   networking.wireless.iwd.enable = true;
@@ -21,7 +15,19 @@
       matchConfig.Name = "wlan0";
       networkConfig.DHCP = "yes";
     };
+
+    networks."10-eth0" = {
+      matchConfig.Name = "eth*";
+      networkConfig.DHCP = "yes";
+    };
   };
+
+  hardware.pulseaudio.enable = true;
+  hardware.bluetooth.enable = true;
+
+  clement.docker.enable = true;
+  clement.xserver.enable = true;
+  services.tailscale.enable = true;
 
   system.stateVersion = "23.05";
 }

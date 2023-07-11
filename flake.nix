@@ -11,37 +11,48 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixpkgs-unstable, ... }@inputs:
   let
-    currentSystem = "x86_64-linux";
-    # Get unstable nixpkgs with allowUnfree for vscode
-    pkgs-unstable = import nixpkgs-unstable {
-      system = currentSystem;
-      config.allowUnfree = true;
-    };
-  in {
-    # TODO: factorize
-    nixosConfigurations.alfeto = nixpkgs.lib.nixosSystem {
-      system = currentSystem;
+    module-list = import ./modules;
 
-      modules = [
-        home-manager.nixosModule
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.clement =  import ./users/clement;
-        }
-        ./hardware/alfeto.nix
-        ./hosts/alfeto
-        {
-          nixpkgs.config.allowUnfree = true;
-          nixpkgs.overlays = [
-            (final: prev: {
-              vscode =  pkgs-unstable.vscode;
-            })
-          ];
-        }
-      ];
+    mkSystem = { system, name }:
+      let
+        specialArgs = {
+          inherit inputs;
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        };
+      in nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+
+        modules = [
+          home-manager.nixosModule
+          { imports = module-list.system; }
+          ./hardware/${name}.nix
+          ./hosts/${name}
+          {
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            nixpkgs.config.allowUnfree = true;
+
+            networking.hostName = name;
+
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.clement = {
+              # TODO: move users configuration per hosts as every machine can have different profile
+              # TODO: migrate end of ./users/clement as module
+              imports = module-list.home ++ [ ./users/clement ];
+            };
+          }
+        ];
+      };
+  in {
+    nixosConfigurations.alfeto = mkSystem {
+      name = "alfeto";
+      system = "x86_64-linux";
     };
   };
 }

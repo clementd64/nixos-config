@@ -36,18 +36,6 @@
     sha256 = "1r9n05szlim86mlk81p8i9s3jgggigxlsfkfbnmdx83nkjil2q95";
   }
   {
-    name = "hcl";
-    publisher = "hashicorp";
-    version = "0.3.2";
-    sha256 = "0snjivxdhr3s0lqarrzdzkv2f4qv28plbr3s9zpx7nqqfs97f4bk";
-  }
-  {
-    name = "terraform";
-    publisher = "hashicorp";
-    version = "2.27.2023062109";
-    sha256 = "1nb6vz2a6sh32mx1cc1hq61gfvgq632rbki7i3swj2f9jmzn1j85";
-  }
-  {
     name = "rainbow-csv";
     publisher = "mechatroner";
     version = "3.7.0";

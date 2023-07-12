@@ -1,13 +1,12 @@
 { config, lib, pkgs, ... }:
 {
+  # TODO: migrate end of ./users/clement as module
   imports = [
-    ./i3.nix
-    ./tmux.nix
+    ../../users/clement/i3.nix
+    ../../users/clement/tmux.nix
   ];
 
   clement = {
-    alacritty.enable = true;
-    dunst.enable = true;
     fish.enable = true;
     git.enable = true;
     htop.enable = true;
@@ -15,6 +14,16 @@
     starship.enable = true;
     vscode.enable = true;
     neovim.enable = true;
+
+    alacritty = {
+      enable = true;
+      size = 8;
+    };
+
+    dunst = {
+      enable = true;
+      size = 12;
+    };
 
     rofi = {
       enable = true;

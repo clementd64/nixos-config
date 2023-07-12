@@ -31,7 +31,7 @@
           home-manager.nixosModule
           { imports = module-list.system; }
           ./hardware/${name}.nix
-          ./hosts/${name}
+          ./hosts/${name}/system.nix
           {
             nix.settings.experimental-features = [ "nix-command" "flakes" ];
             nixpkgs.config.allowUnfree = true;
@@ -42,9 +42,7 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.clement = {
-              # TODO: move users configuration per hosts as every machine can have different profile
-              # TODO: migrate end of ./users/clement as module
-              imports = module-list.home ++ [ ./users/clement ];
+              imports = module-list.home ++ [ ./hosts/${name}/home.nix ];
             };
           }
         ];

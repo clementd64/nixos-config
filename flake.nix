@@ -52,5 +52,10 @@
       name = "alfeto";
       system = "x86_64-linux";
     };
+
+    nixosConfigurations.syra = mkSystem {
+      name = "syra";
+      system = "x86_64-linux";
+    };
   };
 }

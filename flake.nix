@@ -2,7 +2,7 @@
   description = "NixOS configuration for clementd64";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/23.05;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-23.05;
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {

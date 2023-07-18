@@ -29,6 +29,10 @@ in with lib; {
         vim = "nvim";
         v = "nvim";
       };
+
+      functions = {
+        fish_greeting = "";
+      };
     };
 
     programs.bat.enable = true;

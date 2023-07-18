@@ -18,6 +18,8 @@
       matchConfig.Name = "eth*";
       networkConfig.DHCP = "yes";
     };
+
+    wait-online.anyInterface = true;
   };
 
   hardware.pulseaudio.enable = true;

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 {
   # TODO: Add missing wallpaper
 
@@ -38,31 +38,35 @@
   };
 
   home.stateVersion = "23.05";
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
+    dig
+    gcc
+    gnumake
+    jq
+    ldns
+    neofetch
+    openssl
+    python311
+    thunderbirdPackages.thunderbird-115
+    tmux
+    wireguard-tools
+  ]) ++ (with pkgs-unstable; [
     ansible
     ansible-lint
     dbeaver
     deno
-    dig
     discord
     fluxcd
-    gcc
-    gnumake
     go
-    jq
     keepassxc
     kubectl
     kubernetes-helm
-    ldns
-    neofetch
     nodejs_20
-    openssl
     signal-desktop
     skypeforlinux
+    sops
     telegram-desktop
     terraform
-    thunderbird
-    tmux
-    wireguard-tools
-  ];
+    vcluster
+  ]);
 }

@@ -17,6 +17,11 @@
 
     mkSystem = { system, name }:
       let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
         specialArgs = {
           inherit inputs;
           pkgs-unstable = import nixpkgs-unstable {
@@ -44,6 +49,12 @@
             home-manager.users.clement = {
               imports = module-list.home ++ [ ./hosts/${name}/home.nix ];
             };
+          }
+          # Update Docker
+          {
+            nixpkgs.overlays = [ (final: prev: {
+              docker = (pkgs.callPackage ./overlay/docker.nix {}).docker_24_0;
+            }) ];
           }
         ];
       };

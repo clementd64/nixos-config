@@ -58,15 +58,17 @@
           }
         ];
       };
-  in {
-    nixosConfigurations.alfeto = mkSystem {
-      name = "alfeto";
-      system = "x86_64-linux";
-    };
 
-    nixosConfigurations.syra = mkSystem {
-      name = "syra";
-      system = "x86_64-linux";
+    hosts = {
+      alfeto = {
+        system = "x86_64-linux";
+      };
+
+      syra = {
+        system = "x86_64-linux";
+      };
     };
+  in {
+    nixosConfigurations = builtins.mapAttrs (name: value: mkSystem (value // { inherit name; })) hosts;
   };
 }

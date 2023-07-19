@@ -59,8 +59,10 @@
     fluxcd
     go
     keepassxc
+    kind
     kubectl
     kubernetes-helm
+    minikube
     nodejs_20
     signal-desktop
     skypeforlinux

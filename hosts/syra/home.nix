@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, pkgs-2305, ... }:
 {
   # TODO: Add missing wallpaper
 
@@ -47,7 +47,8 @@
     neofetch
     openssl
     python311
-    thunderbirdPackages.thunderbird-115
+    # thunderbird 115 not in commit before Go 1.20.6 (Docker regression)
+    # thunderbirdPackages.thunderbird-115
     tmux
     wireguard-tools
   ]) ++ (with pkgs-unstable; [
@@ -70,5 +71,5 @@
     telegram-desktop
     terraform
     vcluster
-  ]);
+  ]) ++ [ pkgs-2305.thunderbirdPackages.thunderbird-115 ];
 }

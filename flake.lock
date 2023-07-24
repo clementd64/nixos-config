@@ -23,22 +23,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1689254525,
-        "narHash": "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc",
-        "type": "github"
-      }
-    },
-    "nixpkgs-2305": {
-      "locked": {
         "lastModified": 1689956312,
         "narHash": "sha256-NV9yamMhE5jgz+ZSM2IgXeYqOvmGIbIIJ+AFIhfD7Ek=",
         "owner": "NixOS",
@@ -50,6 +34,22 @@
         "owner": "NixOS",
         "ref": "nixos-23.05",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-docker": {
+      "locked": {
+        "lastModified": 1689254525,
+        "narHash": "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc",
         "type": "github"
       }
     },
@@ -73,7 +73,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-2305": "nixpkgs-2305",
+        "nixpkgs-docker": "nixpkgs-docker",
         "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }

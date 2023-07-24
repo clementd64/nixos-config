@@ -2,14 +2,11 @@
   description = "NixOS configuration for clementd64";
 
   inputs = {
-    # Rollback Go 1.20.6 to mitigate a upstream Docker bug https://github.com/moby/moby/issues/45935
-    # See https://github.com/NixOS/nixpkgs/issues/244159#issuecomment-1640353626 for workaround
-    # nixpkgs.url = github:NixOS/nixpkgs/nixos-23.05;
-    nixpkgs.url = github:NixOS/nixpkgs?rev=b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-23.05;
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    # Get up to date nixpkgs for thunderbird 115
-    nixpkgs-2305.url = github:NixOS/nixpkgs/nixos-23.05;
+    # Rollback Go 1.20.6 to mitigate a upstream Docker bug https://github.com/moby/moby/issues/45935
+    nixpkgs-docker.url = github:NixOS/nixpkgs?rev=b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc;
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
@@ -31,11 +28,6 @@
         specialArgs = {
           inherit inputs;
           pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-
-          pkgs-2305 = import inputs.nixpkgs-2305 {
             inherit system;
             config.allowUnfree = true;
           };
@@ -62,11 +54,15 @@
             };
           }
           # Update Docker
-          {
+          (let
+            pkgs-docker = import inputs.nixpkgs-docker {
+              inherit system;
+            };
+          in {
             nixpkgs.overlays = [ (final: prev: {
-              docker = (pkgs.callPackage ./overlay/docker.nix {}).docker_24_0;
+              docker = (pkgs-docker.callPackage ./overlay/docker.nix {}).docker_24_0;
             }) ];
-          }
+          })
         ];
       };
 

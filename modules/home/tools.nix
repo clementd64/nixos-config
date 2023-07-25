@@ -17,11 +17,12 @@ in with lib; {
       python311
 
       # HashiCorp
-      consul-bin
-      nomad-bin
-      packer-bin
-      terraform-bin
-      vault-bin
+      hashicorp.consul
+      hashicorp.nomad
+      hashicorp.packer
+      hashicorp.terraform
+      hashicorp.vault
+      hashicorp.waypoint
     ]) ++ (with pkgs-unstable; [
       ansible
       ansible-lint

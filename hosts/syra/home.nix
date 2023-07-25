@@ -18,6 +18,7 @@
     rofi.enable = true;
     ssh-agent.enable = true;
     starship.enable = true;
+    tools.enable = true;
     vscode.enable = true;
   };
 
@@ -37,38 +38,17 @@
     components = [ "secrets" ];
   };
 
-  home.stateVersion = "23.05";
   home.packages = (with pkgs; [
-    dig
-    gcc
-    gnumake
-    jq
-    ldns
     neofetch
-    openssl
-    python311
     thunderbirdPackages.thunderbird-115
-    tmux
     wireguard-tools
   ]) ++ (with pkgs-unstable; [
-    ansible
-    ansible-lint
-    dbeaver
-    deno
     discord
-    fluxcd
-    go
     keepassxc
-    kind
-    kubectl
-    kubernetes-helm
-    minikube
-    nodejs_20
     signal-desktop
     skypeforlinux
-    sops
     telegram-desktop
-    terraform
-    vcluster
   ]);
+
+  home.stateVersion = "23.05";
 }

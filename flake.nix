@@ -32,12 +32,28 @@
             config.allowUnfree = true;
           };
         };
+
+        pkgs-docker = import inputs.nixpkgs-docker {
+          inherit system;
+        };
+
+        overlays = [
+          (import ./overlays/hashicorp.nix)
+          (final: prev: {
+            docker = (pkgs-docker.callPackage ./pkgs/docker.nix {}).docker_24_0;
+          })
+        ];
       in nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
 
         modules = [
-          home-manager.nixosModule
+          # Custom modules
           { imports = module-list.system; }
+
+          # Overlays
+          { nixpkgs.overlays = overlays; }
+
+          home-manager.nixosModule
           ./hardware/${name}.nix
           ./hosts/${name}/system.nix
           {
@@ -53,16 +69,6 @@
               imports = module-list.home ++ [ ./hosts/${name}/home.nix ];
             };
           }
-          # Update Docker
-          (let
-            pkgs-docker = import inputs.nixpkgs-docker {
-              inherit system;
-            };
-          in {
-            nixpkgs.overlays = [ (final: prev: {
-              docker = (pkgs-docker.callPackage ./overlay/docker.nix {}).docker_24_0;
-            }) ];
-          })
         ];
       };
 

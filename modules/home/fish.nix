@@ -32,6 +32,7 @@ in with lib; {
 
       functions = {
         fish_greeting = "";
+        mkcd = "mkdir -p $argv && cd $argv";
       };
     };
 

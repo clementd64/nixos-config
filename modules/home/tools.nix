@@ -27,6 +27,7 @@ in with lib; {
       ansible
       ansible-lint
       dbeaver
+      restic
       sops
 
       # Language

@@ -29,10 +29,10 @@
     };
   };
   vault = {
-    version = "1.14.0";
+    version = "1.14.1";
     sha256 = {
-      x86_64-linux = "3d5c27e35d8ed43d861e892fc7d8f888f2fda4319a36f344f8c09603fb184b50";
-      aarch64-linux = "116ed35f19b3b91a7afc9533f602cd9cdbfbb08e66c785080b0046a034b0a051";
+      x86_64-linux = "6031432dfc3de07f6523d206c44fc018aa969d94c8e9125a77340af359f57ea3";
+      aarch64-linux = "1ab6252b04cde5d238fbd37f16c2be4585169886002ab50198fe0d9a2bf270fe";
     };
   };
   waypoint = {

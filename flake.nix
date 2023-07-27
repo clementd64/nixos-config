@@ -25,22 +25,20 @@
           config.allowUnfree = true;
         };
 
-        specialArgs = {
-          inherit inputs;
-          pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
+        pkgs-unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
         };
 
-        pkgs-docker = import inputs.nixpkgs-docker {
-          inherit system;
+        specialArgs = {
+          inherit inputs pkgs-unstable;
         };
 
         overlays = [
           (import ./overlays/hashicorp.nix)
-          (final: prev: {
-            docker = (pkgs-docker.callPackage ./pkgs/docker.nix {}).docker_24_0;
+          (import ./overlays/docker.nix {
+            inherit system pkgs-unstable;
+            inherit (inputs) nixpkgs-docker;
           })
         ];
       in nixpkgs.lib.nixosSystem {

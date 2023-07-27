@@ -22,10 +22,10 @@
     };
   };
   terraform = {
-    version = "1.5.3";
+    version = "1.5.4";
     sha256 = {
-      x86_64-linux = "5ce4e0fc73d42b79f26ebb8c8d192bdbcff75bdc44e3d66895a48945b6ff5d48";
-      aarch64-linux = "776c78281c1b517d1e2d9e78b2e60900b8ef9ecd51c4a5d2ffa68f66fea35dd2";
+      x86_64-linux = "16d9c05137ecf7f427a8cfa14ca9e7c0e73cb339f2c88ee368824ac7b4d077ea";
+      aarch64-linux = "c087c129891816109296738d2bf83d46fdca110825a308d5192f330e80dad71a";
     };
   };
   vault = {

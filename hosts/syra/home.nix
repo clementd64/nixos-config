@@ -41,6 +41,7 @@
   home.packages = (with pkgs; [
     neofetch
     thunderbirdPackages.thunderbird-115
+    vlc
     wireguard-tools
   ]) ++ (with pkgs-unstable; [
     discord

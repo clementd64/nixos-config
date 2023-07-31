@@ -12,6 +12,7 @@
     networks."10-wlan" = {
       matchConfig.Name = "wlan*";
       networkConfig.DHCP = "yes";
+      dhcpV4Config.UseMTU = "yes";
     };
 
     networks."10-eth" = {

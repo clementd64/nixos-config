@@ -15,8 +15,10 @@ in with lib; {
       ldns
       openssl
       python311
+      whois
 
       # HashiCorp
+      hashicorp.boundary
       hashicorp.consul
       hashicorp.nomad
       hashicorp.packer
@@ -27,6 +29,7 @@ in with lib; {
       ansible
       ansible-lint
       dbeaver
+      gh
       restic
       sops
 

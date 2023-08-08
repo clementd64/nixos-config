@@ -8,10 +8,10 @@
     };
   };
   consul = {
-    version = "1.16.0";
+    version = "1.16.1";
     sha256 = {
-      x86_64-linux = "c112d1b2ffcfa7d98cde5508bec3bce383ed3650290cc8be3cfe682b79bb13f1";
-      aarch64-linux = "e9b926bcd71f53ef0266141338e75c381a76d769756cc1a02b5250bbf6b7195e";
+      x86_64-linux = "1d48942fa9f1d0df3f56a1622c7a46e9b85924ed9976338912101bb5519aadf1";
+      aarch64-linux = "b949438fddc180825fe8917dd58ed80282b2ed4eea7c9f421ccec0c23cf77507";
     };
   };
   nomad = {

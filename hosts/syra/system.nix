@@ -12,7 +12,11 @@
     networks."10-wlan" = {
       matchConfig.Name = "wlan*";
       networkConfig.DHCP = "yes";
-      dhcpV4Config.UseMTU = "yes";
+      dhcpV4Config = {
+        UseMTU = "yes";
+        RouteMetric = 2048;
+      };
+      ipv6AcceptRAConfig.RouteMetric = 2048;
     };
 
     networks."10-eth" = {

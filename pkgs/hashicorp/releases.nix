@@ -43,10 +43,10 @@
     };
   };
   waypoint = {
-    version = "0.11.3";
+    version = "0.11.4";
     sha256 = {
-      x86_64-linux = "17e9e39bf8ffc658ae162c8dc3418a16752109042c2e5f1e07896b117c3616d1";
-      aarch64-linux = "d76c2b17561be5576411805909f373de508bdc2834bca34eb0bc4aa54c9ee376";
+      x86_64-linux = "96d314f1bc182a30ca9e93910981fbd4ecf7290763c55d2d4e8ddce2b23abdca";
+      aarch64-linux = "bbf331be8785a99a0bfcb4707a013355ba58516d0e9b1b78fd8808e4d2213e66";
     };
   };
 }

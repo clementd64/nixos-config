@@ -7,10 +7,9 @@ in with lib; {
   };
 
   config = mkIf cfg.enable {
-    # TODO: remove prefix
     programs.starship = {
       enable = true;
-      settings = {
+      settings = lib.recursiveUpdate (import ./format.nix) {
         format = "$all$fill$cmd_duration$kubernetes$time$line_break$jobs$battery$shell$status$sudo$character";
 
         fill = {

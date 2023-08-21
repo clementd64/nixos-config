@@ -26,6 +26,7 @@ in with lib; {
       hashicorp.vault
       hashicorp.waypoint
     ]) ++ (with pkgs-unstable; [
+      age
       ansible
       ansible-lint
       dbeaver
@@ -43,7 +44,9 @@ in with lib; {
       kind
       kubectl
       kubernetes-helm
+      kubevirt # virtctl
       minikube
+      talosctl
       vcluster
     ]);
   };

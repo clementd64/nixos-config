@@ -49,6 +49,7 @@
     signal-desktop
     skypeforlinux
     telegram-desktop
+    prismlauncher
   ]);
 
   home.stateVersion = "23.05";

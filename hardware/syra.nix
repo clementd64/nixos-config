@@ -26,6 +26,7 @@
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/9b6d27ea-004c-4708-9fb9-93b15005f5eb";
       fsType = "ext4";
+      options = [ "noatime" ];
     };
 
   fileSystems."/var/lib/docker" =

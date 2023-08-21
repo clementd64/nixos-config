@@ -22,10 +22,10 @@
     };
   };
   packer = {
-    version = "1.9.2";
+    version = "1.9.4";
     sha256 = {
-      x86_64-linux = "34fe48d0d5f99670af15d8a3b581db7ce9d08093ce37240d7c7b996de7947275";
-      aarch64-linux = "001f0c8e85742bf2c2f9ef751ec1d6b1d2fdf8ea3c1db4b1abb77340c5e28fc8";
+      x86_64-linux = "6cd5269c4245aa8c99e551d1b862460d63fe711c58bec618fade25f8492e80d9";
+      aarch64-linux = "f00a4fc221b20a166cfac8a63513054775988a068667517bb3edcfab8b1700ba";
     };
   };
   terraform = {

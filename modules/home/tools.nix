@@ -19,6 +19,16 @@ in with lib; {
       wget
       whois
 
+      # Kubernetes
+      fluxcd
+      kind
+      kubectl
+      kubernetes-helm
+      minikube
+      talosctl
+      vcluster
+      virtctl
+
       # HashiCorp
       hashicorp.boundary
       hashicorp.consul
@@ -40,16 +50,6 @@ in with lib; {
       deno
       go
       nodejs_20
-
-      # Kubernetes
-      fluxcd
-      kind
-      kubectl
-      kubernetes-helm
-      kubevirt # virtctl
-      minikube
-      talosctl
-      vcluster
     ]);
   };
 }

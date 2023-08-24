@@ -36,6 +36,7 @@
 
         overlays = [
           (import ./overlays/hashicorp.nix)
+          (import ./overlays/kubernetes.nix)
           (import ./overlays/docker.nix {
             inherit system pkgs-unstable;
             inherit (inputs) nixpkgs-docker;

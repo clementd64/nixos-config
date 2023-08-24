@@ -11,10 +11,12 @@ in with lib; {
       dig
       gcc
       gnumake
+      graphviz
       jq
       ldns
       openssl
       python311
+      wget
       whois
 
       # HashiCorp

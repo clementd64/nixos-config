@@ -1,7 +1,5 @@
 prev: final:
-let
-  load = path: final.callPackage (import path) {};
-in {
+{
   fluxcd = final.callPackage ../pkgs/kubernetes/fluxcd.nix {};
   kind = final.callPackage ../pkgs/kubernetes/kind.nix {};
   kubectl = final.callPackage ../pkgs/kubernetes/kubectl.nix {};

@@ -5,6 +5,8 @@
     keyMap = "fr";
   };
 
+  boot.tmp.cleanOnBoot = true;
+
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
 

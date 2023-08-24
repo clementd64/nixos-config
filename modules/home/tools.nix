@@ -18,8 +18,11 @@ in with lib; {
       python311
       wget
       whois
+      restic
 
       # Kubernetes
+      calicoctl
+      cilium-cli
       fluxcd
       kind
       kubectl
@@ -43,7 +46,6 @@ in with lib; {
       ansible-lint
       dbeaver
       gh
-      restic
       sops
 
       # Language

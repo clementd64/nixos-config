@@ -2,6 +2,9 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "virtctl";
   version = "1.0.0";
+  aliases = [
+    "kubectl-virt"
+  ];
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubevirt/kubevirt/releases/download/v${version}/virtctl-v${version}-linux-amd64";

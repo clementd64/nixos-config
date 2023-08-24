@@ -1,5 +1,6 @@
 {
   autoPatchelfHook,
+  bzip2,
   fetchurl,
   lib,
   stdenv,
@@ -9,7 +10,8 @@
   name,
   pname ? "${name}-bin",
   version,
-  arch
+  arch,
+  aliases ? [],
 }:
 let
   sys = arch.${system} or (throw "unsupported system: ${system}");
@@ -25,10 +27,22 @@ in stdenv.mkDerivation {
 
   sourceRoot = ".";
   inherit dontUnpack;
-  nativeBuildInputs = [ unzip autoPatchelfHook ];
+  nativeBuildInputs = [ bzip2 unzip autoPatchelfHook ];
 
-  installPhase =
-    if dontUnpack
-    then "mkdir -p $out/bin; cp $src $out/bin/${name}; chmod +x $out/bin/${name}"
-    else "mkdir -p $out/bin; ls; mv ${binaryPath} $out/bin/${name}";
+  installPhase = lib.strings.concatStringsSep "\n" (
+    [ "mkdir -p $out/bin" ]
+    ++ (
+      if dontUnpack
+      then [
+        (
+          if lib.hasSuffix ".bz2" sys.url
+          then "bzip2 -dc $src > $out/bin/${name}"
+          else "cp $src $out/bin/${name}"
+        )
+        "chmod +x $out/bin/${name}"
+      ]
+      else [ "mv ${binaryPath} $out/bin/${name}" ]
+    )
+    ++ (map (x: "ln -s ${name} $out/bin/${x}") aliases)
+  );
 }

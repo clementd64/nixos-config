@@ -1,8 +1,9 @@
 {
   system = [
-    system/xserver.nix
-    system/docker.nix
     system/common.nix
+    system/docker.nix
+    system/traefik.nix
+    system/xserver.nix
   ];
 
   home = [

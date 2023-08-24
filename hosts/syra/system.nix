@@ -31,6 +31,7 @@
   hardware.bluetooth.enable = true;
 
   clement.docker.enable = true;
+  clement.traefik.enable = true;
   clement.xserver.enable = true;
   services.xserver.dpi = 140;
 

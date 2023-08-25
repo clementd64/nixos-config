@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, ... }:
 {
   # TODO: Add missing wallpaper
 
@@ -38,19 +38,18 @@
     components = [ "secrets" ];
   };
 
-  home.packages = (with pkgs; [
-    neofetch
-    thunderbirdPackages.thunderbird-115
-    vlc
-    wireguard-tools
-  ]) ++ (with pkgs-unstable; [
+  home.packages = with pkgs; [
     discord
     keepassxc
+    neofetch
+    prismlauncher
     signal-desktop
     skypeforlinux
     telegram-desktop
-    prismlauncher
-  ]);
+    thunderbirdPackages.thunderbird-115
+    vlc
+    wireguard-tools
+  ];
 
   home.stateVersion = "23.05";
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 let cfg = config.clement.tools;
 in with lib; {
@@ -7,18 +7,29 @@ in with lib; {
   };
 
   config = mkIf cfg.enable {
-    home.packages = (with pkgs; [
+    home.packages = with pkgs; [
+      age
+      ansible
+      ansible-lint
+      dbeaver
+      deno
       dig
+      file
       gcc
+      gh
       gnumake
+      go
       graphviz
       jq
       ldns
+      nodejs_20
       openssl
+      oras
       python311
+      restic
+      sops
       wget
       whois
-      restic
 
       # Kubernetes
       calicoctl
@@ -40,18 +51,6 @@ in with lib; {
       hashicorp.terraform
       hashicorp.vault
       hashicorp.waypoint
-    ]) ++ (with pkgs-unstable; [
-      age
-      ansible
-      ansible-lint
-      dbeaver
-      gh
-      sops
-
-      # Language
-      deno
-      go
-      nodejs_20
-    ]);
+    ];
   };
 }

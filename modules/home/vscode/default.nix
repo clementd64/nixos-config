@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, ... }:
 
 let cfg = config.clement.vscode;
 in with lib; {
@@ -9,7 +9,6 @@ in with lib; {
   config = mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      package = pkgs-unstable.vscode;
 
       # TODO: don't install pre release
 

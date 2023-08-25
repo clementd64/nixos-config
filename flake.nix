@@ -20,29 +20,23 @@
 
     mkSystem = { system, name }:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-
         pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
 
-        specialArgs = {
-          inherit inputs pkgs-unstable;
-        };
-
         overlays = [
           (import ./overlays/pkgs.nix)
+          (import ./overlays/unstable.nix {
+            inherit pkgs-unstable;
+          })
           (import ./overlays/docker.nix {
             inherit system pkgs-unstable;
             inherit (inputs) nixpkgs-docker;
           })
         ];
       in nixpkgs.lib.nixosSystem {
-        inherit system specialArgs;
+        inherit system;
 
         modules = [
           # Custom modules
@@ -65,7 +59,6 @@
 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.clement = {
               imports = module-list.home ++ [ ./hosts/${name}/home.nix ];
             };

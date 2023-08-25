@@ -1,15 +1,15 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "vcluster";
-  version = "0.15.6";
+  version = "0.15.7";
   arch = {
     x86_64-linux = {
       url = "https://github.com/loft-sh/vcluster/releases/download/v${version}/vcluster-linux-amd64";
-      sha256 = "bd5fec6a4c6ace116cece7d847ebc4f44a7808a37db1915a218613275e3ecc24";
+      sha256 = "dd9138e507456ef4e57e9f64884942b67e9b97783eaf66e22fb33388979db480";
     };
     aarch64-linux = {
       url = "https://github.com/loft-sh/vcluster/releases/download/v${version}/vcluster-linux-arm64";
-      sha256 = "e7851685d7c3e92c4c919899c106c4ef8656d7ad30f5198d30680ddf0e4c7abf";
+      sha256 = "c82980de8fc1e11e7463fed4473bed8510c5f80b56ef3dc5bc665221e9b89f5c";
     };
   };
 }

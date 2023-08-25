@@ -1,4 +1,4 @@
-{ lib, pkgs-unstable, ... }:
+{ lib, ... }:
 {
   boot.loader.systemd-boot.enable = true;
   boot.initrd.luks.devices.root = {
@@ -35,10 +35,7 @@
   clement.xserver.enable = true;
   services.xserver.dpi = 140;
 
-  services.tailscale = {
-    enable = true;
-    package = pkgs-unstable.tailscale;
-  };
+  services.tailscale.enable = true;
 
   system.stateVersion = "23.05";
 }

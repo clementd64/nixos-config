@@ -8,6 +8,8 @@ prev: final:
     dbeaver
     deno
     discord
+    docker-compose
+    docker-proxy
     gh
     go
     keepassxc
@@ -19,4 +21,6 @@ prev: final:
     tailscale
     telegram-desktop
     vscode;
+
+  docker = pkgs-unstable.docker_24;
 }

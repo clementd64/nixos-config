@@ -42,6 +42,7 @@
     discord
     keepassxc
     neofetch
+    osu-lazer-bin
     prismlauncher
     signal-desktop
     skypeforlinux

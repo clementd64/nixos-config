@@ -12,6 +12,7 @@ prev: final:
     go
     keepassxc
     nodejs_20
+    osu-lazer-bin
     prismlauncher
     signal-desktop
     skypeforlinux

@@ -26,6 +26,7 @@ in with lib; {
       openssl
       oras
       python311
+      python311Packages.requests
       restic
       sops
       wget

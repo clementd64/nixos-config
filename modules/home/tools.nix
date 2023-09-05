@@ -29,6 +29,7 @@ in with lib; {
       python311Packages.requests
       restic
       sops
+      unzip
       wget
       whois
 

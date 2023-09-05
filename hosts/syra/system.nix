@@ -27,6 +27,11 @@
     wait-online.anyInterface = true;
   };
 
+  users.users.clement = {
+    # TODO: find a way to manage secret that is installer friendly
+    passwordFile = "/etc/user-password";
+  };
+
   hardware.pulseaudio.enable = true;
   hardware.bluetooth.enable = true;
 

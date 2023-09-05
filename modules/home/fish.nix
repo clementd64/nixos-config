@@ -40,6 +40,7 @@ in with lib; {
     programs.direnv.enable = true;
     programs.exa.enable = true;
 
+    # Also enable bash for nix-shell
     programs.bash.enable = true;
   };
 }

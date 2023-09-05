@@ -41,6 +41,7 @@
   home.packages = with pkgs; [
     discord
     keepassxc
+    melonDS
     neofetch
     osu-lazer-bin
     prismlauncher

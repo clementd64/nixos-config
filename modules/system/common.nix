@@ -15,8 +15,6 @@
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [ "wheel" ];
-    # TODO: find a way to manage secret that is installer friendly
-    passwordFile = "/etc/user-password";
   };
   security.sudo.wheelNeedsPassword = false;
 

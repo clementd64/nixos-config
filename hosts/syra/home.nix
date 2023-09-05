@@ -43,6 +43,7 @@
     keepassxc
     melonDS
     neofetch
+    opentf
     osu-lazer-bin
     prismlauncher
     signal-desktop

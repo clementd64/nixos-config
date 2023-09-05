@@ -2,6 +2,7 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "vcluster";
   version = "0.15.7";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/loft-sh/vcluster/releases/download/v${version}/vcluster-linux-amd64";

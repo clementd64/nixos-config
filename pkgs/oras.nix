@@ -2,6 +2,7 @@
 callPackage ../lib/genGoBinary.nix rec {
   name = "oras";
   version = "1.0.1";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/oras-project/oras/releases/download/v${version}/oras_${version}_linux_amd64.tar.gz";

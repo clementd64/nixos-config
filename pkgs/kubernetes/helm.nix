@@ -2,6 +2,7 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "helm";
   version = "3.12.3";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://get.helm.sh/helm-v${version}-linux-amd64.tar.gz";

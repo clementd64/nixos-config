@@ -2,6 +2,7 @@
   autoPatchelfHook,
   bzip2,
   fetchurl,
+  installShellFiles,
   lib,
   stdenv,
   system,
@@ -12,6 +13,7 @@
   version,
   arch,
   aliases ? [],
+  commonCompletion ? false,
 }:
 let
   sys = arch.${system} or (throw "unsupported system: ${system}");
@@ -27,7 +29,7 @@ in stdenv.mkDerivation {
 
   sourceRoot = ".";
   inherit dontUnpack;
-  nativeBuildInputs = [ bzip2 unzip autoPatchelfHook ];
+  nativeBuildInputs = [ bzip2 unzip autoPatchelfHook installShellFiles ];
 
   installPhase = lib.strings.concatStringsSep "\n" (
     [ "mkdir -p $out/bin" ]
@@ -44,5 +46,13 @@ in stdenv.mkDerivation {
       else [ "mv ${binaryPath} $out/bin/${name}" ]
     )
     ++ (map (x: "ln -s ${name} $out/bin/${x}") aliases)
+    ++ [ "runHook postInstall" ]
   );
+
+  postInstall = lib.optionalString commonCompletion ''
+    installShellCompletion --cmd ${name} \
+      --bash <($out/bin/${name} completion bash) \
+      --fish <($out/bin/${name} completion fish) \
+      --zsh <($out/bin/${name} completion zsh)
+  '';
 }

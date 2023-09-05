@@ -2,6 +2,7 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "talosctl";
   version = "1.5.1";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/siderolabs/talos/releases/download/v${version}/talosctl-linux-amd64";

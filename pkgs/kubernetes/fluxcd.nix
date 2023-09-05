@@ -3,6 +3,7 @@ callPackage ../../lib/genGoBinary.nix rec {
   name = "flux";
   pname = "fluxcd-bin";
   version = "2.1.0";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/fluxcd/flux2/releases/download/v${version}/flux_${version}_linux_amd64.tar.gz";

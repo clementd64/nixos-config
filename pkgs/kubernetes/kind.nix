@@ -2,6 +2,7 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "kind";
   version = "0.20.0";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubernetes-sigs/kind/releases/download/v${version}/kind-linux-amd64";

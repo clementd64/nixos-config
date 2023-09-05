@@ -2,6 +2,7 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "kubectl";
   version = "1.28.1";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://dl.k8s.io/release/v${version}/bin/linux/amd64/kubectl";

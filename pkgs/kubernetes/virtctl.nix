@@ -5,6 +5,7 @@ callPackage ../../lib/genGoBinary.nix rec {
   aliases = [
     "kubectl-virt"
   ];
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubevirt/kubevirt/releases/download/v${version}/virtctl-v${version}-linux-amd64";

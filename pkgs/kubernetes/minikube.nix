@@ -2,6 +2,7 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "minikube";
   version = "1.31.2";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubernetes/minikube/releases/download/v${version}/minikube-linux-amd64";

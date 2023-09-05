@@ -3,6 +3,7 @@ callPackage ../../lib/genGoBinary.nix rec {
   pname = "cilium-cli-bin";
   name = "cilium";
   version = "0.15.6";
+  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/cilium/cilium-cli/releases/download/v${version}/cilium-linux-amd64.tar.gz";

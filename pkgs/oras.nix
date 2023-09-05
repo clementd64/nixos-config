@@ -1,16 +1,16 @@
 { callPackage }:
 callPackage ../lib/genGoBinary.nix rec {
   name = "oras";
-  version = "1.0.1";
+  version = "1.1.0";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/oras-project/oras/releases/download/v${version}/oras_${version}_linux_amd64.tar.gz";
-      sha256 = "6b51b87360d373dd3c19b91d2627d2efd320513380a878b6f06702f72fe8c5ab";
+      sha256 = "e09e85323b24ccc8209a1506f142e3d481e6e809018537c6b3db979c891e6ad7";
     };
     aarch64-linux = {
       url = "https://github.com/oras-project/oras/releases/download/v${version}/oras_${version}_linux_arm64.tar.gz";
-      sha256 = "352a5b21d5840418c7710fa55db9881d46a4c3e2c0fdb14672f9df38ba66dd3d";
+      sha256 = "e450b081f67f6fda2f16b7046075c67c9a53f3fda92fd20ecc59873b10477ab4";
     };
   };
 }

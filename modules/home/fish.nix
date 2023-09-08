@@ -22,6 +22,8 @@ in with lib; {
         kctx = "kubectl config use-context";
         kns = "kubectl config set-context --current --namespace";
 
+        tf = "terraform";
+
         ls = "exa";
         cat = "bat";
         xcp = "xclip -selection clipboard";

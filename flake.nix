@@ -13,9 +13,11 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-unstable, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixpkgs-unstable, impermanence, ... }@inputs:
   let
     module-list = import ./modules;
 
@@ -47,6 +49,7 @@
           { nixpkgs.overlays = overlays; }
 
           home-manager.nixosModule
+          impermanence.nixosModules.impermanence
           ./hardware/${name}.nix
           ./hosts/${name}/system.nix
           {

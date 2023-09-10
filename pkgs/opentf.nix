@@ -15,7 +15,7 @@ let
       src = fetchFromGitHub {
         owner = "opentffoundation";
         repo = "opentf";
-        rev = "f330ace4e5e0973d20d10ca3d51bd8bf83e46542";
+        rev = "e8c1c3a7007394111d610acc1015be73f8776398";
         inherit hash;
       };
 
@@ -54,6 +54,6 @@ let
 in
 mkOpenTf {
   version = "1.6.0-dev";
-  hash = "sha256-G5Ads3jkmc3EKam1JJBhY1lNIHyozv/zcYLsF0Fs1S8=";
+  hash = "sha256-k4DW55moxrEVeMJiZFczN9JiLInJ6GkacIRPRz2H63w=";
   vendorHash = "sha256-ew3wpAd4R5agEyv4/F/dTHouM7DpUezQC0YBDpTA3Wg=";
 }

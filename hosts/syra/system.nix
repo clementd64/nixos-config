@@ -24,6 +24,11 @@
       networkConfig.DHCP = "yes";
     };
 
+    networks."10-en" = {
+      matchConfig.Name = "en*";
+      networkConfig.DHCP = "yes";
+    };
+
     wait-online.anyInterface = true;
   };
 

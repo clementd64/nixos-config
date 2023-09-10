@@ -10,6 +10,7 @@ prev: final:
     discord
     docker-compose
     docker-proxy
+    eza
     gh
     go
     keepassxc

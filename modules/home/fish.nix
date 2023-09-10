@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let cfg = config.clement.fish;
 in with lib; {
@@ -24,7 +24,7 @@ in with lib; {
 
         tf = "terraform";
 
-        ls = "exa";
+        ls = "eza";
         cat = "bat";
         xcp = "xclip -selection clipboard";
 
@@ -40,7 +40,10 @@ in with lib; {
 
     programs.bat.enable = true;
     programs.direnv.enable = true;
-    programs.exa.enable = true;
+    # programs.exa.enable = true;
+    home.packages = with pkgs; [
+      eza
+    ];
 
     # Also enable bash for nix-shell
     programs.bash.enable = true;

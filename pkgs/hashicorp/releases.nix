@@ -15,10 +15,10 @@
     };
   };
   nomad = {
-    version = "1.6.1";
+    version = "1.6.2";
     sha256 = {
-      x86_64-linux = "e4c01c51c393b266aee4ff184dd97704ae3d838c233a6189425a9f1c31a55f4f";
-      aarch64-linux = "67b2b2b62cee102f7436391588f67440d44737b75c3d29dfebec94948928374d";
+      x86_64-linux = "f6f879a359a667a6b1ca4366abd8383d89118dabd0d28af5bbc4721685ff17b8";
+      aarch64-linux = "799c2af0366bf37edfe5b63f068e02b22394cb1406c2cf8150b484cce8c799f7";
     };
   };
   packer = {
@@ -36,10 +36,10 @@
     };
   };
   vault = {
-    version = "1.14.2";
+    version = "1.14.3";
     sha256 = {
-      x86_64-linux = "134a4b8d9473722b2d37d4677e8e5c7e18f5010f8866c4bbb84e2cef3daea532";
-      aarch64-linux = "ce4c5eb14c1362a2513d60592b91b3b3a0076bd564df90d1ba2c675b3a719717";
+      x86_64-linux = "01e1698d2563cf4780438468f9f815eedf707e8ea01f87bb7621e24a00e21d12";
+      aarch64-linux = "326922155685ab17e659e921e0e66af2694b9743005e0e73c917e5d19408986d";
     };
   };
   waypoint = {

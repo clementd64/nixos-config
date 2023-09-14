@@ -37,6 +37,7 @@ in with lib; {
       calicoctl
       cilium-cli
       fluxcd
+      hubble
       kind
       kubectl
       kubernetes-helm

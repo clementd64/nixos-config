@@ -4,6 +4,7 @@ prev: final:
   cilium-cli = final.callPackage ../pkgs/kubernetes/cilium.nix {};
   fluxcd = final.callPackage ../pkgs/kubernetes/fluxcd.nix {};
   hashicorp = final.callPackage ../pkgs/hashicorp {};
+  hubble = final.callPackage ../pkgs/kubernetes/hubble.nix {};
   kind = final.callPackage ../pkgs/kubernetes/kind.nix {};
   kubectl = final.callPackage ../pkgs/kubernetes/kubectl.nix {};
   kubernetes-helm = final.callPackage ../pkgs/kubernetes/helm.nix {};

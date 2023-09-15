@@ -5,8 +5,8 @@
 }:
 
 let
-  mkOpenTf = { version, hash, vendorHash ? null, ... }@attrs:
-    let attrs' = builtins.removeAttrs attrs [ "version" "hash" "vendorHash" ];
+  mkOpenTf = { version, hash, vendorHash ? null, rev, ... }@attrs:
+    let attrs' = builtins.removeAttrs attrs [ "version" "hash" "vendorHash" "rev" ];
     in
     buildGoModule ({
       pname = "opentf";
@@ -15,8 +15,7 @@ let
       src = fetchFromGitHub {
         owner = "opentffoundation";
         repo = "opentf";
-        rev = "e8c1c3a7007394111d610acc1015be73f8776398";
-        inherit hash;
+        inherit hash rev;
       };
 
       ldflags = [ "-s" "-w" ];
@@ -52,8 +51,9 @@ let
       subPackages = [ "." ];
     } // attrs');
 in
-mkOpenTf {
+mkOpenTf rec {
   version = "1.6.0-dev";
-  hash = "sha256-k4DW55moxrEVeMJiZFczN9JiLInJ6GkacIRPRz2H63w=";
-  vendorHash = "sha256-ew3wpAd4R5agEyv4/F/dTHouM7DpUezQC0YBDpTA3Wg=";
+  hash = "sha256-SbGfKzCTv9K+gSZAqVJfwapjBp5xtK88ePJfmP/rsd8=";
+  vendorHash = "sha256-7GLmgdESm28PTB+aK/9vjCk0JGA2dA5KUCXr2a4iLEw=";
+  rev = "a4f9c632881c9cfab3ba53d690d2ae369e594105";
 }

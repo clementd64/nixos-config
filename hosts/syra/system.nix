@@ -37,11 +37,28 @@
     passwordFile = "/etc/user-password";
   };
 
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    # Auto switch between A2DP and HFP to make airpods mic working
+    extraConfig = ''
+      .ifexists module-bluetooth-policy.so
+      .nofail
+      unload-module module-bluetooth-policy
+      .fail
+      load-module module-bluetooth-policy auto_switch=2
+      .endif
+    '';
+  };
   hardware.bluetooth.enable = true;
 
-  clement.docker.enable = true;
-  clement.traefik.enable = true;
+  clement.docker = {
+    enable = true;
+    gvisor = {
+      enable = true;
+      platform = "kvm";
+    };
+  };
+
   clement.xserver.enable = true;
   services.xserver.dpi = 140;
 

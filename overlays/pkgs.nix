@@ -3,6 +3,7 @@ prev: final:
   calicoctl = final.callPackage ../pkgs/kubernetes/calicoctl.nix {};
   cilium-cli = final.callPackage ../pkgs/kubernetes/cilium.nix {};
   fluxcd = final.callPackage ../pkgs/kubernetes/fluxcd.nix {};
+  flyctl = final.callPackage ../pkgs/flyctl.nix {};
   hashicorp = final.callPackage ../pkgs/hashicorp {};
   hubble = final.callPackage ../pkgs/kubernetes/hubble.nix {};
   kind = final.callPackage ../pkgs/kubernetes/kind.nix {};

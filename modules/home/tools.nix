@@ -15,6 +15,7 @@ in with lib; {
       deno
       dig
       file
+      flyctl
       gcc
       gh
       gnumake

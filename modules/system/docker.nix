@@ -4,6 +4,15 @@ let cfg = config.clement.docker;
 in with lib; {
   options.clement.docker = {
     enable = mkEnableOption "Enable Docker";
+
+    gvisor = {
+      enable = mkEnableOption "Enable gVisor";
+
+      platform = mkOption {
+        type = types.str;
+        default = "systrap";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -16,6 +25,15 @@ in with lib; {
         exec-opts = [
           "native.cgroupdriver=systemd"
         ];
+
+        runtimes = {
+          runsc = mkIf cfg.gvisor.enable {
+            path = "${pkgs.gvisor}/bin/runsc";
+            runtimeArgs = [
+              "--platform=${cfg.gvisor.platform}"
+            ];
+          };
+        };
 
         features = {
           buildkit = true;
@@ -30,5 +48,7 @@ in with lib; {
         bip = "172.17.0.1/24";
       };
     };
+
+    environment.systemPackages = mkIf cfg.gvisor.enable [ pkgs.gvisor ];
   };
 }

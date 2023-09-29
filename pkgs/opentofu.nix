@@ -5,16 +5,16 @@
 }:
 
 let
-  mkOpenTf = { version, hash, vendorHash ? null, rev, ... }@attrs:
+  mkOpenTofu = { version, hash, vendorHash ? null, rev, ... }@attrs:
     let attrs' = builtins.removeAttrs attrs [ "version" "hash" "vendorHash" "rev" ];
     in
     buildGoModule ({
-      pname = "opentf";
+      pname = "opentofu";
       inherit version vendorHash;
 
       src = fetchFromGitHub {
-        owner = "opentffoundation";
-        repo = "opentf";
+        owner = "opentofu";
+        repo = "opentofu";
         inherit hash rev;
       };
 
@@ -30,17 +30,17 @@ let
 
       postInstall = ''
         # https://github.com/posener/complete/blob/9a4745ac49b29530e07dc2581745a218b646b7a3/cmd/install/bash.go#L8
-        installShellCompletion --bash --name opentf <(echo complete -C opentf opentf)
-        cat > opentf.fish <<EOF
-        function __complete_opentf
+        installShellCompletion --bash --name tofu <(echo complete -C tofu tofu)
+        cat > tofu.fish <<EOF
+        function __complete_tofu
             set -lx COMP_LINE (commandline -cp)
             test -z (commandline -ct)
             and set COMP_LINE "$COMP_LINE "
-            opentf
+            tofu
         end
-        complete -f -c opentf -a "(__complete_opentf)"
+        complete -f -c tofu -a "(__complete_tofu)"
         EOF
-        installShellCompletion opentf.fish
+        installShellCompletion tofu.fish
       '';
 
       preCheck = ''
@@ -48,12 +48,12 @@ let
         export TF_SKIP_REMOTE_TESTS=1
       '';
 
-      subPackages = [ "." ];
+      subPackages = [ "cmd/tofu" ];
     } // attrs');
 in
-mkOpenTf rec {
+mkOpenTofu rec {
   version = "1.6.0-dev";
-  hash = "sha256-SbGfKzCTv9K+gSZAqVJfwapjBp5xtK88ePJfmP/rsd8=";
-  vendorHash = "sha256-7GLmgdESm28PTB+aK/9vjCk0JGA2dA5KUCXr2a4iLEw=";
-  rev = "a4f9c632881c9cfab3ba53d690d2ae369e594105";
+  hash = "sha256-V5i4PQiLBgTXzpWUpiqn9nf9+ddXI7330ZO9yaSxPbg=";
+  vendorHash = "sha256-wKy2q5EVwipHGT2upT+w0Ri2wuXtiJsdSHnmM01BKjc=";
+  rev = "6cd1c00e1dac8df9427927eb6f31f601a6966c49";
 }

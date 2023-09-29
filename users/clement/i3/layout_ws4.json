@@ -23,7 +23,8 @@
       "type": "con",
       "swallows": [
         {
-          "class": "thunderbird"
+          "class": "thunderbird",
+          "title": "Thunderbird(?! - Choose User Profile)"
         }
       ]
     }

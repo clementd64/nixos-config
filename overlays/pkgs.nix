@@ -10,7 +10,7 @@ prev: final:
   kubectl = final.callPackage ../pkgs/kubernetes/kubectl.nix {};
   kubernetes-helm = final.callPackage ../pkgs/kubernetes/helm.nix {};
   minikube = final.callPackage ../pkgs/kubernetes/minikube.nix {};
-  opentf = final.callPackage ../pkgs/opentf.nix {};
+  opentofu = final.callPackage ../pkgs/opentofu.nix {};
   oras = final.callPackage ../pkgs/oras.nix {};
   restic = final.callPackage ../pkgs/restic.nix {};
   sops = final.callPackage ../pkgs/sops.nix {};

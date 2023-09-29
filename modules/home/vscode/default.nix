@@ -50,9 +50,7 @@ in with lib; {
         "github.copilot.enable" = {
             "*" = true;
             "plaintext" = false;
-            "markdown" = false;
             "scminput" = false;
-            "terraform" = false;
         };
 
         "editor.stickyScroll.enabled" = true;

@@ -19,7 +19,7 @@ let
   sys = arch.${system} or (throw "unsupported system: ${system}");
   binaryPath = sys.path or name;
 
-  dontUnpack = !builtins.any (suffix: lib.hasSuffix ".tar.gz" sys.url) [ ".tar.gz" ".tar.xz" ".zip" ];
+  dontUnpack = !builtins.any (suffix: lib.hasSuffix suffix sys.url) [ ".tar.gz" ".tar.xz" ".zip" ];
 in stdenv.mkDerivation {
   inherit pname version;
 

@@ -22,7 +22,8 @@ prev: final:
     skypeforlinux
     tailscale
     telegram-desktop
-    vscode;
+    vscode
+    zig;
 
   docker = pkgs-unstable.docker_24;
 }

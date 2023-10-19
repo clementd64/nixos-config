@@ -2,16 +2,16 @@
 callPackage ../../lib/genGoBinary.nix rec {
   pname = "cilium-cli-bin";
   name = "cilium";
-  version = "0.15.8";
+  version = "0.15.11";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/cilium/cilium-cli/releases/download/v${version}/cilium-linux-amd64.tar.gz";
-      sha256 = "e546ef1eb5df5f7342d92c1ac9c21dbf7bce56004858db4091f0b62df1725ac3";
+      sha256 = "5580835cd4f1e4e0aeaaef26de9887ccdb00803b7ef57f57969a0ceda1656c6c";
     };
     aarch64-linux = {
       url = "https://github.com/cilium/cilium-cli/releases/download/v${version}/cilium-linux-arm64.tar.gz";
-      sha256 = "a879a5c5cf3e2e6cd9dbf380a67bb50652b86ed0c5a0366305ff34c16e3be47c";
+      sha256 = "26b4dc17217f6caa1aad50a5e98c69e2256baca6925f8286cad6eeb09a5370d8";
     };
   };
 }

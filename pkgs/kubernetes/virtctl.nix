@@ -1,7 +1,7 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "virtctl";
-  version = "1.0.0";
+  version = "1.0.1";
   aliases = [
     "kubectl-virt"
   ];
@@ -9,11 +9,11 @@ callPackage ../../lib/genGoBinary.nix rec {
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubevirt/kubevirt/releases/download/v${version}/virtctl-v${version}-linux-amd64";
-      sha256 = "9c4cf18807d683c6f8c888553b3d711a3e0a40bf48f927fdcf5905440aa416c0";
+      sha256 = "386b50fb83c6babb5d4ec2dc4251fac2e41c487bf493c9e664a940de045615e0";
     };
     aarch64-linux = {
       url = "https://github.com/kubevirt/kubevirt/releases/download/v${version}/virtctl-v${version}-linux-arm64";
-      sha256 = "0ec5c93d313c91fad3002e07c5a5c47a6a8cdd1f8f17b0d838f04af9f874b555";
+      sha256 = "2441607bf268b915a8f5e2b174a9e147f98a39ce038a07731082d0aa41c6badb";
     };
   };
 }

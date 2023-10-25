@@ -22,7 +22,7 @@ in with lib; {
         kctx = "kubectl config use-context";
         kns = "kubectl config set-context --current --namespace";
 
-        tf = "terraform";
+        tf = "tofu";
 
         ls = "eza";
         cat = "bat";

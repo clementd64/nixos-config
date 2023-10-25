@@ -15,6 +15,7 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
+    zig.url = "github:mitchellh/zig-overlay";
   };
 
   outputs = { nixpkgs, home-manager, nixpkgs-unstable, impermanence, ... }@inputs:
@@ -29,6 +30,7 @@
         };
 
         overlays = [
+          inputs.zig.overlays.default
           (import ./overlays/pkgs.nix)
           (import ./overlays/unstable.nix {
             inherit pkgs-unstable;

@@ -60,6 +60,9 @@ in with lib; {
         "workbench.settings.enableNaturalLanguageSearch" = false;
         "yaml.customTags" = [ "!vault" ];
         gopls = { "ui.semanticTokens" = true; };
+        "zig.path" = "";
+        "zig.zls.path" = "";
+        "zig.initialSetupDone" = true;
 
           # Theme
         "editor.fontFamily" = "'Fira Code', 'monospace'";

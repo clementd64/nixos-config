@@ -33,7 +33,8 @@ in with lib; {
       unzip
       wget
       whois
-      zig
+      zigpkgs.master
+      zls
 
       # Kubernetes
       calicoctl

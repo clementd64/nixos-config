@@ -23,7 +23,7 @@ prev: final:
     tailscale
     telegram-desktop
     vscode
-    zig;
+    zls;
 
   docker = pkgs-unstable.docker_24;
 }

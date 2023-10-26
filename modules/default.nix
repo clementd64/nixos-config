@@ -10,6 +10,7 @@
     home/alacritty.nix
     home/dunst.nix
     home/fish.nix
+    home/ghostty.nix
     home/git.nix
     home/htop.nix
     home/neovim

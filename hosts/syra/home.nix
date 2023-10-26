@@ -12,6 +12,7 @@
     alacritty.enable = true;
     dunst.enable = true;
     fish.enable = true;
+    ghostty.enable = true;
     git.enable = true;
     htop.enable = true;
     neovim.enable = true;

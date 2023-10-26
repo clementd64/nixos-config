@@ -36,6 +36,11 @@ in with lib; {
         fish_greeting = "";
         mkcd = "mkdir -p $argv && cd $argv";
       };
+
+      # TMP(ghostty): add .local/bin to PATH
+      shellInit = ''
+        fish_add_path $HOME/.local/bin
+      '';
     };
 
     programs.bat.enable = true;

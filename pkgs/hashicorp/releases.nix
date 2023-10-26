@@ -29,17 +29,17 @@
     };
   };
   terraform = {
-    version = "1.6.1";
+    version = "1.6.2";
     sha256 = {
-      x86_64-linux = "d1a778850cc44d9348312c9527f471ea1b7a9213205bb5091ec698f3dc92e2a6";
-      aarch64-linux = "ae328d5733657f35233fd228d9a14fccde3b1d19b99158eff1906888b3ca4935";
+      x86_64-linux = "107142241b12ff78b6eb9c419757d406a8714704f7928750a662ba19de055e98";
+      aarch64-linux = "ac70f54865d1c0a945d3efa221074e32a3818c666a412148ee5f9f0b14fd330d";
     };
   };
   vault = {
-    version = "1.15.0";
+    version = "1.15.1";
     sha256 = {
-      x86_64-linux = "b69c209f05c1ccfa012a60090adfca1607c8fad14728a5a208979a1706b6cd46";
-      aarch64-linux = "59f9349e6897fd0f89790fb81780944cab84f4507aa259494013c24db6d083bb";
+      x86_64-linux = "c23cc68ce9c9be95782d70ff9db634a20e56e4ee16accc74d3d87e67eac5611e";
+      aarch64-linux = "905787bfa4e13b12447f35d9efc88b07388f152347658890261de682db4237d1";
     };
   };
   waypoint = {

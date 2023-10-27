@@ -58,7 +58,7 @@
   clement.docker = {
     enable = true;
     gvisor = {
-      enable = true;
+      enable = false;
       platform = "kvm";
     };
   };

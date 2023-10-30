@@ -1,15 +1,15 @@
 { callPackage }:
 callPackage ../lib/genGoBinary.nix rec {
   name = "restic";
-  version = "0.16.1";
+  version = "0.16.2";
   arch = {
     x86_64-linux = {
       url = "https://github.com/restic/restic/releases/download/v${version}/restic_${version}_linux_amd64.bz2";
-      sha256 = "68200563fb40d6ba3b6f744c919867bfc6fd6106b6317e55853d37f797b783b5";
+      sha256 = "dae5e6e39107a66dc5c8ea59f6f27b16c54bd6be31f57e3281f6d87de30e05b0";
     };
     aarch64-linux = {
       url = "https://github.com/restic/restic/releases/download/v${version}/restic_${version}_linux_arm64.bz2";
-      sha256 = "5ad984e4bc9cf2b67a414f99c48b2f5621b12efaa1c838e4a6a13a7333641dc7";
+      sha256 = "efdd75eb5c12af6fec4189aa57dc777035a87dd57204daa52293901199569157";
     };
   };
 }

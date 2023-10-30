@@ -4,8 +4,7 @@
 # To install it manually:
 # $ git clone git@github.com:mitchellh/ghostty.git
 # $ cd ghostty
-# $ direnv allow # enter nix shell
-# $ zig build -p $HOME/.local -Doptimize=ReleaseFast
+# $ nix develop --command zig build -p $HOME/.local -Doptimize=ReleaseFast
 
 let
   cfg = config.clement.ghostty;

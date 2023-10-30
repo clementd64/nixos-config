@@ -13,6 +13,9 @@ in with lib; {
         detailed_cpu_time = 1;
         hide_userland_threads = 1;
         highlight_base_name = 1;
+        screen_tabs = 1;
+        show_cpu_frequency = 1;
+        show_cpu_temperature = 1;
       } // (with config.lib.htop; leftMeters [
         (bar "CPU")
         (bar "Memory")

@@ -57,6 +57,9 @@ let
     "window-decoration" = false;
     "window-padding-balance" = true;
 
+    # Disable automatic shell integration, as it does not work with tmux
+    "shell-integration" = "none";
+
     # No need to confim the close as tmux is used
     "confirm-close-surface" = false;
     "gtk-single-instance" = false;
@@ -75,6 +78,30 @@ in with lib; {
       type = types.int;
       default = 16;
     };
+
+    enableBashIntegration = mkOption {
+      default = true;
+      type = types.bool;
+      description = ''
+        Whether to enable Bash integration.
+      '';
+    };
+
+    enableZshIntegration = mkOption {
+      default = true;
+      type = types.bool;
+      description = ''
+        Whether to enable Zsh integration.
+      '';
+    };
+
+    enableFishIntegration = mkOption {
+      default = true;
+      type = types.bool;
+      description = ''
+        Whether to enable Fish integration.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -92,5 +119,26 @@ in with lib; {
         lib.attrsets.mapAttrsToList (name: value: "${name}=${mkValueString value}") (cfg.config // defaultConfig)
       );
     };
+
+    programs.bash.initExtra = mkIf cfg.enableBashIntegration (
+      mkBefore ''
+        if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+            builtin source "''${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+        fi
+      '');
+
+    programs.zsh.initExtra = mkIf cfg.enableZshIntegration (
+      mkBefore ''
+        if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+            builtin source "''${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+        fi
+      '');
+
+    programs.fish.interactiveShellInit = mkIf cfg.enableFishIntegration (
+      mkBefore ''
+        if test -n "$GHOSTTY_RESOURCES_DIR"
+          builtin source "''$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
+        end
+      '');
   };
 }

@@ -8,17 +8,17 @@
     };
   };
   consul = {
-    version = "1.16.2";
+    version = "1.16.3";
     sha256 = {
-      x86_64-linux = "2c87fffbb8abb3ba776519514db659f174a7c5b65faad7818457049ca9ff338b";
-      aarch64-linux = "1903a5ecb6e17437bb6e0ada5e9ef403fd791ec1130c52cd76508260c4a2a719";
+      x86_64-linux = "9d0d7ad123844d43543d285cc0b3e15393d75ffa384bf84e5d64226a7f3d3132";
+      aarch64-linux = "349d1a996349ee496d389464884a10bf0899bd46b2820bf6fc1dc29c49caa50b";
     };
   };
   nomad = {
-    version = "1.6.2";
+    version = "1.6.3";
     sha256 = {
-      x86_64-linux = "f6f879a359a667a6b1ca4366abd8383d89118dabd0d28af5bbc4721685ff17b8";
-      aarch64-linux = "799c2af0366bf37edfe5b63f068e02b22394cb1406c2cf8150b484cce8c799f7";
+      x86_64-linux = "1771f83030d9c0e25b4b97b73e824f4b566721e3b9898ae9940eceb95bb7f4d0";
+      aarch64-linux = "1b85902b62fcaf992c98f6c3970742608c919d2d2e8db59933702859600b866e";
     };
   };
   packer = {
@@ -29,10 +29,10 @@
     };
   };
   terraform = {
-    version = "1.6.2";
+    version = "1.6.3";
     sha256 = {
-      x86_64-linux = "107142241b12ff78b6eb9c419757d406a8714704f7928750a662ba19de055e98";
-      aarch64-linux = "ac70f54865d1c0a945d3efa221074e32a3818c666a412148ee5f9f0b14fd330d";
+      x86_64-linux = "caa432f110db519bf9b7c84df23ead398e59b6cc3da2938f010200f1ee8f2ae4";
+      aarch64-linux = "01d8dc9bda3d4de585d5901c5099d9155faeb0730fbd9dc6c6e13735cba76700";
     };
   };
   vault = {

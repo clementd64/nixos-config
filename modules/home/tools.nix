@@ -28,6 +28,7 @@ in with lib; {
       oras
       python311
       python311Packages.requests
+      rclone
       restic
       sops
       unzip

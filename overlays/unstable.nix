@@ -18,6 +18,7 @@ prev: final:
     nodejs_20
     osu-lazer-bin
     prismlauncher
+    rclone
     signal-desktop
     skypeforlinux
     tailscale

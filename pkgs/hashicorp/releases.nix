@@ -28,13 +28,6 @@
       aarch64-linux = "f00a4fc221b20a166cfac8a63513054775988a068667517bb3edcfab8b1700ba";
     };
   };
-  terraform = {
-    version = "1.6.3";
-    sha256 = {
-      x86_64-linux = "caa432f110db519bf9b7c84df23ead398e59b6cc3da2938f010200f1ee8f2ae4";
-      aarch64-linux = "01d8dc9bda3d4de585d5901c5099d9155faeb0730fbd9dc6c6e13735cba76700";
-    };
-  };
   vault = {
     version = "1.15.2";
     sha256 = {
@@ -47,6 +40,13 @@
     sha256 = {
       x86_64-linux = "96d314f1bc182a30ca9e93910981fbd4ecf7290763c55d2d4e8ddce2b23abdca";
       aarch64-linux = "bbf331be8785a99a0bfcb4707a013355ba58516d0e9b1b78fd8808e4d2213e66";
+    };
+  };
+  terraform = {
+    version = "1.5.7";
+    sha256 = {
+      x86_64-linux = "c0ed7bc32ee52ae255af9982c8c88a7a4c610485cf1d55feeb037eab75fa082c";
+      aarch64-linux = "f4b4ad7c6b6088960a667e34495cae490fb072947a9ff266bf5929f5333565e4";
     };
   };
 }

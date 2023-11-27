@@ -1,16 +1,16 @@
 { callPackage }:
 callPackage ../lib/genGoBinary.nix rec {
   name = "flyctl";
-  version = "0.1.115";
+  version = "0.1.128";
   aliases = [ "fly" ];
   arch = {
     x86_64-linux = {
       url = "https://github.com/superfly/flyctl/releases/download/v${version}/flyctl_${version}_Linux_x86_64.tar.gz";
-      sha256 = "4da4b1edca42f91cc220cb69cad922c6f927a377668cb706e99c9a75f3a53f15";
+      sha256 = "5c4b68479deb0aaa9b90c074996b951ead154b94a80a947b22c7931a605f5922";
     };
     aarch64-linux = {
       url = "https://github.com/superfly/flyctl/releases/download/v${version}/flyctl_${version}_Linux_arm64.tar.gz";
-      sha256 = "704668c8be5cfd85c4c42353adc2b8eab57444812b439a81cca2b3b8c39f3867";
+      sha256 = "895a1bd0bcd25efd7d580657a3117df972aa02fa5c3c408eac4cb7e78500b72c";
     };
   };
 }

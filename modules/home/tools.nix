@@ -38,7 +38,6 @@ in with lib; {
       zls
 
       # Kubernetes
-      calicoctl
       cilium-cli
       fluxcd
       hubble
@@ -47,8 +46,6 @@ in with lib; {
       kubernetes-helm
       minikube
       talosctl
-      vcluster
-      virtctl
 
       # HashiCorp
       hashicorp.boundary

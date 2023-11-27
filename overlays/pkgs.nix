@@ -1,6 +1,5 @@
 prev: final:
 {
-  calicoctl = final.callPackage ../pkgs/kubernetes/calicoctl.nix {};
   cilium-cli = final.callPackage ../pkgs/kubernetes/cilium.nix {};
   fluxcd = final.callPackage ../pkgs/kubernetes/fluxcd.nix {};
   flyctl = final.callPackage ../pkgs/flyctl.nix {};
@@ -16,6 +15,4 @@ prev: final:
   sops = final.callPackage ../pkgs/sops.nix {};
   talosctl = final.callPackage ../pkgs/kubernetes/talosctl.nix {};
   traefik = final.callPackage ../pkgs/traefik.nix {};
-  vcluster = final.callPackage ../pkgs/kubernetes/vcluster.nix {};
-  virtctl = final.callPackage ../pkgs/kubernetes/virtctl.nix {};
 }

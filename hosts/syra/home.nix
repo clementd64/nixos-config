@@ -41,6 +41,7 @@
 
   home.packages = with pkgs; [
     discord
+    factorio
     keepassxc
     melonDS
     neofetch

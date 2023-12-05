@@ -1,6 +1,7 @@
 prev: final:
 {
   cilium-cli = final.callPackage ../pkgs/kubernetes/cilium.nix {};
+  factorio = final.callPackage ../pkgs/factorio.nix {};
   fluxcd = final.callPackage ../pkgs/kubernetes/fluxcd.nix {};
   flyctl = final.callPackage ../pkgs/flyctl.nix {};
   hashicorp = final.callPackage ../pkgs/hashicorp {};

@@ -38,7 +38,7 @@
 
   users.users.clement = {
     # TODO: find a way to manage secret that is installer friendly
-    passwordFile = "/etc/user-password";
+    hashedPasswordFile = "/etc/user-password";
   };
 
   hardware.pulseaudio = {

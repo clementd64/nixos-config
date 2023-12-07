@@ -83,22 +83,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-docker": {
-      "locked": {
-        "lastModified": 1689254525,
-        "narHash": "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc",
-        "type": "github"
-      }
-    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1701693815,
@@ -136,7 +120,6 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-docker": "nixpkgs-docker",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "zig": "zig"
       }

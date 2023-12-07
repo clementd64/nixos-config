@@ -8,6 +8,7 @@ prev: final:
     dbeaver
     deno
     discord
+    docker-buildx
     docker-compose
     docker-proxy
     eza

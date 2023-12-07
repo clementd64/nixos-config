@@ -42,7 +42,9 @@
   home.packages = with pkgs; [
     discord
     factorio
+    factorio-env
     keepassxc
+    mapshot
     melonDS
     neofetch
     opentofu

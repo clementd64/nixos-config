@@ -1,7 +1,10 @@
 prev: final:
-{
-  cilium-cli = final.callPackage ../pkgs/kubernetes/cilium.nix {};
+let
   factorio = final.callPackage ../pkgs/factorio.nix {};
+in {
+  cilium-cli = final.callPackage ../pkgs/kubernetes/cilium.nix {};
+  factorio = factorio.factorio;
+  factorio-env = factorio.factorio-env;
   fluxcd = final.callPackage ../pkgs/kubernetes/fluxcd.nix {};
   flyctl = final.callPackage ../pkgs/flyctl.nix {};
   hashicorp = final.callPackage ../pkgs/hashicorp {};
@@ -9,6 +12,7 @@ prev: final:
   kind = final.callPackage ../pkgs/kubernetes/kind.nix {};
   kubectl = final.callPackage ../pkgs/kubernetes/kubectl.nix {};
   kubernetes-helm = final.callPackage ../pkgs/kubernetes/helm.nix {};
+  mapshot = factorio.mapshot;
   minikube = final.callPackage ../pkgs/kubernetes/minikube.nix {};
   opentofu = final.callPackage ../pkgs/opentofu.nix {};
   oras = final.callPackage ../pkgs/oras.nix {};

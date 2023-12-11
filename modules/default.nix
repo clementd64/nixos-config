@@ -2,7 +2,6 @@
   system = [
     system/common.nix
     system/docker.nix
-    system/traefik.nix
     system/xserver.nix
   ];
 

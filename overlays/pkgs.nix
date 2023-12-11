@@ -19,5 +19,4 @@ in {
   restic = final.callPackage ../pkgs/restic.nix {};
   sops = final.callPackage ../pkgs/sops.nix {};
   talosctl = final.callPackage ../pkgs/kubernetes/talosctl.nix {};
-  traefik = final.callPackage ../pkgs/traefik.nix {};
 }

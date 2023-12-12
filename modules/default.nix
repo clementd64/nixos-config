@@ -14,7 +14,6 @@
     home/htop.nix
     home/neovim
     home/rofi.nix
-    home/ssh-agent.nix
     home/starship
     home/tools.nix
     home/vscode

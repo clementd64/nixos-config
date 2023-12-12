@@ -17,7 +17,6 @@
     htop.enable = true;
     neovim.enable = true;
     rofi.enable = true;
-    ssh-agent.enable = true;
     starship.enable = true;
     tools.enable = true;
     vscode.enable = true;
@@ -34,6 +33,7 @@
   qt.enable = true;
   qt.style.name = "adwaita-dark";
 
+  services.ssh-agent.enable = true;
   services.gnome-keyring = {
     enable = true;
     components = [ "secrets" ];

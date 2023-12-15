@@ -65,8 +65,8 @@
       };
 
     hosts = {
-      alfeto = {
-        system = "x86_64-linux";
+      engardo = {
+        system = "aarch64-linux";
       };
 
       syra = {

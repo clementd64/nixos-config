@@ -66,6 +66,10 @@ in with lib; {
         git_metrics = {
           disabled = false;
         };
+
+        hostname = {
+          ssh_symbol = "@";
+        };
       };
     };
   };

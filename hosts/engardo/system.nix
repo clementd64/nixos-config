@@ -48,5 +48,13 @@
     };
   };
 
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:clementd64/nixos-config";
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+    allowReboot = true;
+  };
+
   system.stateVersion = "23.11";
 }

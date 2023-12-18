@@ -21,6 +21,8 @@ in with lib; {
       gnumake
       go
       graphviz
+      hashicorp.packer
+      hashicorp.terraform
       jq
       ldns
       nodejs_20
@@ -46,15 +48,6 @@ in with lib; {
       kubernetes-helm
       minikube
       talosctl
-
-      # HashiCorp
-      hashicorp.boundary
-      hashicorp.consul
-      hashicorp.nomad
-      hashicorp.packer
-      hashicorp.terraform
-      hashicorp.vault
-      hashicorp.waypoint
     ];
   };
 }

@@ -27,7 +27,6 @@ in with lib; {
       ldns
       nodejs_20
       openssl
-      oras
       python311
       python311Packages.requests
       rclone
@@ -40,9 +39,7 @@ in with lib; {
       zls
 
       # Kubernetes
-      cilium-cli
       fluxcd
-      hubble
       kind
       kubectl
       kubernetes-helm

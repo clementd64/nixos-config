@@ -2,16 +2,16 @@
 callPackage ../lib/genGoBinary.nix rec {
   pname = "opentofu-bin";
   name = "tofu";
-  version = "1.6.0-beta3";
+  version = "1.6.0-rc1";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/opentofu/opentofu/releases/download/v${version}/tofu_${version}_linux_amd64.zip";
-      sha256 = "c1e6720fdc6b343d3df0ab6f4e80512518e73bf9615f1dd63c47985c85ff5b29";
+      sha256 = "c810fa64d7147df4272681360ef5bc9a366e574bfdabd6b88b18e2c36c3b1aee";
     };
     aarch64-linux = {
       url = "https://github.com/opentofu/opentofu/releases/download/v${version}/tofu_${version}_linux_arm64.zip";
-      sha256 = "67eab571b59f0551dce78a93d7bf8d219aecf651b7476d06c4f93a3d66bad68e";
+      sha256 = "c04c52c5afd4a0417fcf9c7ad0d7ff05748983549ae830ee451ba77de0bd776c";
     };
   };
 }

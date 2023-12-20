@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   time.timeZone = "Europe/Paris";
   console = {
@@ -19,4 +19,5 @@
   security.sudo.wheelNeedsPassword = false;
 
   programs.command-not-found.enable = false;
+  environment.defaultPackages = lib.mkForce [];
 }

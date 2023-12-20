@@ -31,6 +31,7 @@ in with lib; {
       python311Packages.requests
       rclone
       restic
+      rsync
       sops
       unzip
       wget

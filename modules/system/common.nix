@@ -16,7 +16,11 @@
     shell = pkgs.fish;
     extraGroups = [ "wheel" ];
   };
-  security.sudo.wheelNeedsPassword = false;
+
+  security.sudo = {
+    execWheelOnly = true;
+    wheelNeedsPassword = false;
+  };
 
   programs.command-not-found.enable = false;
   environment.defaultPackages = lib.mkForce [];

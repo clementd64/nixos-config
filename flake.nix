@@ -75,5 +75,8 @@
     };
   in {
     nixosConfigurations = builtins.mapAttrs (name: value: mkSystem (value // { inherit name; })) hosts;
+
+    diskoConfigurations = builtins.mapAttrs (name: value: import ./hosts/${name}/disk.nix)
+      (nixpkgs.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts);
   };
 }

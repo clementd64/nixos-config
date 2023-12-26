@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk.main = {
-      device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_40408249";
+      device = "/dev/sda";
       type = "disk";
       content = {
         type = "gpt";
@@ -19,37 +19,19 @@
           main = {
             size = "100%";
             content = {
-              type = "lvm_pv";
-              vg = "pool";
+              type = "btrfs";
+              extraArgs = [ "-f" ];
+              subvolumes = {
+                "/nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = [ "compress=zstd" "noatime" ];
+                };
+                "/persist" = {
+                  mountpoint = "/nix/persist";
+                  mountOptions = [ "compress=zstd" ];
+                };
+              };
             };
-          };
-        };
-      };
-    };
-    lvm_vg.pool = {
-      type = "lvm_vg";
-      lvs = {
-        nix = {
-          size = "20G";
-          content = {
-            type = "filesystem";
-            format = "ext4";
-            mountpoint = "/nix";
-            mountOptions = [
-              "defaults"
-              "noatime"
-            ];
-          };
-        };
-        persist = {
-          size = "5G";
-          content = {
-            type = "filesystem";
-            format = "ext4";
-            mountpoint = "/nix/persist";
-            mountOptions = [
-              "defaults"
-            ];
           };
         };
       };

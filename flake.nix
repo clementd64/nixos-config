@@ -40,7 +40,6 @@
 
           home-manager.nixosModule
           inputs.impermanence.nixosModules.impermanence
-          ./hardware/${name}.nix
           ./hosts/${name}/system.nix
           {
             nix = {

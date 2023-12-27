@@ -1,5 +1,9 @@
 { lib, ... }:
 {
+  imports = [
+    ./hardware.nix
+  ];
+
   boot.loader.systemd-boot.enable = true;
 
   networking.useDHCP = false; # handled by systemd

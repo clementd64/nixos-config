@@ -2,54 +2,54 @@
   description = "NixOS configuration for clementd64";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-23.11;
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
-    home-manager = {
+    nixpkgs-stable.url = github:NixOS/nixpkgs/nixos-23.11;
+    home-manager-stable = {
       url = "github:nix-community/home-manager/release-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     impermanence.url = "github:nix-community/impermanence";
     zig.url = "github:mitchellh/zig-overlay";
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-unstable, impermanence, ... }@inputs:
+  outputs = { ... }@inputs:
   let
     module-list = import ./modules;
 
-    mkSystem = { system, name }:
-      let
-        pkgs-unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
-
-        overlays = [
-          inputs.zig.overlays.default
-          (import ./overlays/pkgs.nix)
-          (import ./overlays/unstable.nix {
-            inherit pkgs-unstable;
-          })
-        ];
-      in nixpkgs.lib.nixosSystem {
+    mkSystem = { system, name, nixpkgs, home-manager, overlays ? [] }:
+      nixpkgs.lib.nixosSystem {
         inherit system;
 
         modules = [
-          # Custom modules
-          { imports = module-list.system; }
+          {
+            # Custom modules
+            imports = module-list.system;
 
-          # Overlays
-          { nixpkgs.overlays = overlays; }
+            # Overlays
+            nixpkgs.overlays = [
+              inputs.zig.overlays.default
+              (import ./overlays/pkgs.nix)
+            ] ++ overlays;
+          }
 
           home-manager.nixosModule
-          impermanence.nixosModules.impermanence
+          inputs.impermanence.nixosModules.impermanence
           ./hardware/${name}.nix
           ./hosts/${name}/system.nix
           {
-            nix.settings = {
-              auto-optimise-store = true;
-              experimental-features = [ "nix-command" "flakes" ];
+            nix = {
+              settings = {
+                auto-optimise-store = true;
+                experimental-features = [ "nix-command" "flakes" ];
+              };
+
+              registry.nixpkgs.flake = nixpkgs;
             };
             nixpkgs.config.allowUnfree = true;
 
@@ -64,12 +64,32 @@
         ];
       };
 
+    mkStable = { system }: {
+      inherit system;
+      nixpkgs = inputs.nixpkgs-stable;
+      home-manager = inputs.home-manager-stable;
+      overlays = [
+        (import ./overlays/unstable.nix {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        })
+      ];
+    };
+
+    mkUnstable = { system }: {
+      inherit system;
+      nixpkgs = inputs.nixpkgs-unstable;
+      home-manager = inputs.home-manager-unstable;
+    };
+
     hosts = {
-      engardo = {
+      engardo = mkStable {
         system = "aarch64-linux";
       };
 
-      syra = {
+      syra = mkUnstable {
         system = "x86_64-linux";
       };
     };
@@ -77,6 +97,6 @@
     nixosConfigurations = builtins.mapAttrs (name: value: mkSystem (value // { inherit name; })) hosts;
 
     diskoConfigurations = builtins.mapAttrs (name: value: import ./hosts/${name}/disk.nix)
-      (nixpkgs.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts);
+      (inputs.nixpkgs-stable.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts);
   };
 }

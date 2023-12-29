@@ -22,7 +22,7 @@
   let
     module-list = import ./modules;
 
-    mkSystem = { system, name, nixpkgs, home-manager, overlays ? [] }:
+    mkSystem = { system, name, nixpkgs, home-manager, modules ? [], overlays ? [] }:
       nixpkgs.lib.nixosSystem {
         inherit system;
 
@@ -60,7 +60,7 @@
               imports = module-list.home ++ [ ./hosts/${name}/home.nix ];
             };
           }
-        ];
+        ] ++ modules;
       };
 
     mkStable = { system }: {
@@ -81,6 +81,9 @@
       inherit system;
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
+      modules = [
+        { clement.unstable.enable = true; }
+      ];
     };
 
     hosts = {

@@ -2,6 +2,7 @@
   system = [
     system/common.nix
     system/docker.nix
+    system/unstable.nix
     system/xserver.nix
   ];
 

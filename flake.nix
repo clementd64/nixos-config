@@ -88,6 +88,10 @@
         system = "aarch64-linux";
       };
 
+      flamii = mkStable {
+        system = "x86_64-linux";
+      };
+
       syra = mkUnstable {
         system = "x86_64-linux";
       };

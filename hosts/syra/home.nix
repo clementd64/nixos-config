@@ -45,8 +45,6 @@
     factorio-env
     keepassxc
     mapshot
-    melonDS
-    neofetch
     opentofu
     osu-lazer-bin
     prismlauncher

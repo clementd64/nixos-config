@@ -61,10 +61,9 @@
     allowReboot = true;
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+  clement.bird = {
+    enable = true;
+    routerId = "194.28.98.82";
   };
 
   system.stateVersion = "23.11";

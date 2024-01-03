@@ -1,5 +1,6 @@
 {
   system = [
+    system/bird.nix
     system/common.nix
     system/docker.nix
     system/unstable.nix

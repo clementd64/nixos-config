@@ -73,12 +73,5 @@
 
   services.tailscale.enable = true;
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    randomizedDelaySec = "45min";
-    options = "--delete-older-than 30d";
-  };
-
   system.stateVersion = "23.05";
 }

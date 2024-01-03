@@ -1,5 +1,12 @@
 { pkgs, lib, ... }:
 {
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    randomizedDelaySec = "45min";
+    options = "--delete-older-than 30d";
+  };
+
   time.timeZone = "Europe/Paris";
   console = {
     keyMap = "fr";

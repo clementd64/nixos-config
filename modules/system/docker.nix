@@ -46,6 +46,11 @@ in with lib; {
           cfg.useResolved.ipv6
         ];
       };
+
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
     };
 
     systemd.network = mkIf cfg.useResolved.enable {

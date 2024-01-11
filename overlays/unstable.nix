@@ -14,7 +14,6 @@ prev: final:
     eza
     gh
     go
-    gvisor
     keepassxc
     nodejs_20
     osu-lazer-bin

@@ -62,10 +62,6 @@
   clement.docker = {
     enable = true;
     useResolved.enable = true;
-    gvisor = {
-      enable = false;
-      platform = "kvm";
-    };
   };
 
   clement.xserver.enable = true;

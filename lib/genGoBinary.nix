@@ -14,6 +14,7 @@
   arch,
   aliases ? [],
   commonCompletion ? false,
+  buildInputs ? [],
 }:
 let
   sys = arch.${system} or (throw "unsupported system: ${system}");
@@ -28,7 +29,7 @@ in stdenv.mkDerivation {
   };
 
   sourceRoot = ".";
-  inherit dontUnpack;
+  inherit dontUnpack buildInputs;
   nativeBuildInputs = [ bzip2 unzip autoPatchelfHook installShellFiles ];
 
   installPhase = lib.strings.concatStringsSep "\n" (

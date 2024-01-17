@@ -12,6 +12,7 @@ in {
   kubernetes-helm = final.callPackage ../pkgs/kubernetes/helm.nix {};
   mapshot = factorio.mapshot;
   minikube = final.callPackage ../pkgs/kubernetes/minikube.nix {};
+  ollama = final.callPackage ../pkgs/ollama.nix {};
   opentofu = final.callPackage ../pkgs/opentofu.nix {};
   restic = final.callPackage ../pkgs/restic.nix {};
   sops = final.callPackage ../pkgs/sops.nix {};

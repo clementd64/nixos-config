@@ -50,7 +50,6 @@
     osu-lazer-bin
     prismlauncher
     signal-desktop
-    skypeforlinux
     telegram-desktop
     thunderbirdPackages.thunderbird-115
     vlc

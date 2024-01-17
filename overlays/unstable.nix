@@ -21,7 +21,6 @@ prev: final:
     prismlauncher
     rclone
     signal-desktop
-    skypeforlinux
     tailscale
     telegram-desktop
     vscode

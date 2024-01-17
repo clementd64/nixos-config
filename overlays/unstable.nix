@@ -8,6 +8,7 @@ prev: final:
     dbeaver
     deno
     discord
+    docker
     docker-buildx
     docker-compose
     docker-proxy
@@ -25,6 +26,4 @@ prev: final:
     telegram-desktop
     vscode
     zls;
-
-  docker = pkgs-unstable.docker_24;
 }

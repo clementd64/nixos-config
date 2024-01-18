@@ -52,6 +52,11 @@
     };
   };
 
+  clement.docker = {
+    enable = true;
+    useResolved.enable = true;
+  };
+
   system.autoUpgrade = {
     enable = true;
     flake = "github:clementd64/nixos-config";

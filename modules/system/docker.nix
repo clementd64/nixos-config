@@ -43,7 +43,7 @@ in with lib; {
 
         dns = mkIf cfg.useResolved.enable [
           cfg.useResolved.ipv4
-          cfg.useResolved.ipv6
+          # cfg.useResolved.ipv6
         ];
       };
 

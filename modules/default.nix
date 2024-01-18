@@ -13,6 +13,7 @@
     home/fish.nix
     home/ghostty.nix
     home/git.nix
+    home/helix.nix
     home/htop.nix
     home/neovim
     home/rofi.nix

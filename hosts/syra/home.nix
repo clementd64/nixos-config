@@ -14,6 +14,7 @@
     fish.enable = true;
     ghostty.enable = true;
     git.enable = true;
+    helix.enable = true;
     htop.enable = true;
     neovim.enable = true;
     rofi.enable = true;

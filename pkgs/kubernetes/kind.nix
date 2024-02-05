@@ -1,16 +1,16 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "kind";
-  version = "0.20.0";
+  version = "0.21.0";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubernetes-sigs/kind/releases/download/v${version}/kind-linux-amd64";
-      sha256 = "513a7213d6d3332dd9ef27c24dab35e5ef10a04fa27274fe1c14d8a246493ded";
+      sha256 = "7bf22d258142eaa0e53899ded3ad06bae1b3e8ae5425a5e4dc5c8f9f263094a7";
     };
     aarch64-linux = {
       url = "https://github.com/kubernetes-sigs/kind/releases/download/v${version}/kind-linux-arm64";
-      sha256 = "639f7808443559aa30c3642d9913b1615d611a071e34f122340afeda97b8f422";
+      sha256 = "d56d98fe8a22b5a9a12e35d5ff7be254ae419b0cfe93b6241d0d14ece8f5adc8";
     };
   };
 }

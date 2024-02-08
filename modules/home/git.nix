@@ -35,6 +35,10 @@ in with lib; {
         diff = {
           colorMoved = "default";
         };
+
+        rerere = {
+          enabled = true;
+        };
       };
 
       ignores = [

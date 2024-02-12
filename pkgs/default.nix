@@ -1,0 +1,20 @@
+{ callPackage }:
+let
+  factorio = callPackage ./factorio.nix {};
+in {
+  factorio = factorio.factorio;
+  factorio-env = factorio.factorio-env;
+  fluxcd = callPackage ./kubernetes/fluxcd.nix {};
+  flyctl = callPackage ./flyctl.nix {};
+  hashicorp = callPackage ./hashicorp {};
+  kind = callPackage ./kubernetes/kind.nix {};
+  kubectl = callPackage ./kubernetes/kubectl.nix {};
+  kubernetes-helm = callPackage ./kubernetes/helm.nix {};
+  mapshot = factorio.mapshot;
+  minikube = callPackage ./kubernetes/minikube.nix {};
+  ollama = callPackage ./ollama.nix {};
+  opentofu = callPackage ./opentofu.nix {};
+  restic = callPackage ./restic.nix {};
+  sops = callPackage ./sops.nix {};
+  talosctl = callPackage ./kubernetes/talosctl.nix {};
+}

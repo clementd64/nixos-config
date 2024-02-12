@@ -104,5 +104,10 @@
 
     diskoConfigurations = builtins.mapAttrs (name: value: import ./hosts/${name}/disk.nix)
       (inputs.nixpkgs-stable.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts);
+
+    packages = builtins.listToAttrs (builtins.map (system: {
+      name = system;
+      value = inputs.nixpkgs-unstable.legacyPackages.${system}.callPackage (import ./pkgs) {};
+    }) ["x86_64-linux" "aarch64-linux"]);
   };
 }

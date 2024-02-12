@@ -31,4 +31,10 @@
 
   programs.command-not-found.enable = false;
   environment.defaultPackages = lib.mkForce [];
+
+  system.extraSystemBuilderCmds = ''
+    ln -sv ${pkgs.path} $out/nixpkgs
+  '';
+
+  nix.nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
 }

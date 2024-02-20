@@ -95,6 +95,10 @@
         system = "x86_64-linux";
       };
 
+      seebu = mkStable {
+        system = "aarch64-linux";
+      };
+
       syra = mkUnstable {
         system = "x86_64-linux";
       };

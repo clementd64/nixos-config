@@ -18,11 +18,11 @@ let
 
   mapshot-bin = callPackage ../lib/genGoBinary.nix rec {
     name = "mapshot";
-    version = "0.0.19";
+    version = "0.0.21";
     arch = {
       x86_64-linux = {
         url = "https://github.com/Palats/mapshot/releases/download/${version}/mapshot-linux";
-        sha256 = "02efab8a3397a88aa1c3f233788f6379e8de6675a1d636bc88c82f17b8428e80";
+        sha256 = "3c242f3a7ab5749f4b1d88201f4c04be692cc9b22cc2009af961911f6880b67b";
       };
     };
   };

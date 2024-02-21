@@ -57,10 +57,14 @@
     package = pkgs.postgresql_16;
     enableTCPIP = true;
     authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
+      #type  database  DBuser   address  auth-method
+      local  all       all               trust
+      host   all       clement  all      scram-sha-256
+      host   hehdon    hehdon   all      scram-sha-256
     '';
   };
+
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 5432 ];
 
   system.autoUpgrade = {
     enable = true;

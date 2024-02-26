@@ -55,6 +55,7 @@
     thunderbirdPackages.thunderbird-115
     vlc
     wireguard-tools
+    bpftop
   ];
 
   home.stateVersion = "23.05";

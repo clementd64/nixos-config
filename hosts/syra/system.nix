@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./hardware.nix
@@ -68,6 +68,11 @@
   services.xserver.dpi = 140;
 
   services.tailscale.enable = true;
+  services.flatpak.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 
   system.stateVersion = "23.05";
 }

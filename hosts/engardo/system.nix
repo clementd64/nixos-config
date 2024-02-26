@@ -41,6 +41,7 @@
   environment.persistence."/nix/persist" = {
     directories = [
       "/var/lib/tailscale"
+      "/var/lib/docker"
     ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"

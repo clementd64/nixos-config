@@ -11,7 +11,6 @@ in with lib; {
       age
       ansible
       ansible-lint
-      dbeaver
       deno
       dig
       file

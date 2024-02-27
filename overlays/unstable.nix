@@ -5,7 +5,6 @@ prev: final:
     age
     ansible
     ansible-lint
-    dbeaver
     deno
     discord
     docker

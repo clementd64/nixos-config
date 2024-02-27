@@ -9,9 +9,11 @@ in with lib; {
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
-      layout = "fr";
-      xkbVariant = "oss";
-      xkbOptions = "caps:none";
+      xkb = {
+        layout = "fr";
+        options = "caps:none";
+        variant = "oss";
+      };
 
       libinput = {
         enable = true;

@@ -9,12 +9,23 @@
     device = "/dev/disk/by-uuid/6e7a3345-fa2c-419e-95ee-aa51b44d264e";
   };
 
-  networking.wireless.iwd.enable = true;
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      Generals = {
+        Country = "FR";
+      };
+    };
+  };
+
   networking.useDHCP = false; # handled by systemd
   systemd.network = {
     enable = true;
     networks."10-wlan" = {
-      matchConfig.Name = "wlan*";
+      matchConfig = {
+        Name = "wlan*";
+        WLANInterfaceType = "!ap";
+      };
       networkConfig.DHCP = "yes";
       dhcpV4Config = {
         UseMTU = "yes";
@@ -33,7 +44,29 @@
       networkConfig.DHCP = "yes";
     };
 
+    networks."10-wlan0-ap" = {
+      matchConfig = {
+        Name = "wlan0";
+        WLANInterfaceType = "ap";
+      };
+      networkConfig = {
+        Address = [ "192.168.200.1/24" ];
+        DHCPServer = true;
+        IPMasquerade = "ipv4";
+        IPForward = true;
+      };
+      dhcpServerConfig = {
+        EmitDNS = true;
+        DNS = "1.1.1.1 1.0.0.1";
+      };
+    };
+
     wait-online.anyInterface = true;
+  };
+
+  networking.firewall = {
+    interfaces."wlan0".allowedUDPPorts = [ 67 ];
+    extraCommands = "iptables -t nat -A POSTROUTING -s 192.168.200.0/24 -j MASQUERADE";
   };
 
   services.resolved.extraConfig = ''
@@ -72,6 +105,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    configPackages = [pkgs.gnome.gnome-session];
   };
 
   system.stateVersion = "23.05";

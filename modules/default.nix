@@ -19,6 +19,6 @@
     home/rofi.nix
     home/starship
     home/tools.nix
-    home/vscode
+    home/vscode.nix
   ];
 }

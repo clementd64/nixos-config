@@ -5,9 +5,6 @@
   ];
 
   boot.loader.systemd-boot.enable = true;
-  boot.initrd.luks.devices.root = {
-    device = "/dev/disk/by-uuid/6e7a3345-fa2c-419e-95ee-aa51b44d264e";
-  };
 
   networking.wireless.iwd = {
     enable = true;
@@ -108,5 +105,5 @@
     configPackages = [pkgs.gnome.gnome-session];
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }

@@ -19,20 +19,24 @@
           main = {
             size = "100%";
             content = {
-              type = "btrfs";
-              extraArgs = [ "-f" ];
-              subvolumes = {
-                "/" = {
-                  mountpoint = "/";
-                  mountOptions = [ "compress=zstd" ];
-                };
-                "/nix" = {
-                  mountpoint = "/nix";
-                  mountOptions = [ "compress=zstd" "noatime" ];
-                };
-                "/docker" = {
-                  mountpoint = "/var/lib/docker";
-                  mountOptions = [ "compress=zstd" ];
+              type = "luks";
+              name = "main";
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ];
+                subvolumes = {
+                  "/" = {
+                    mountpoint = "/";
+                    mountOptions = [ "compress=zstd" ];
+                  };
+                  "/nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [ "compress=zstd" "noatime" ];
+                  };
+                  "/docker" = {
+                    mountpoint = "/var/lib/docker";
+                    mountOptions = [ "compress=zstd" ];
+                  };
                 };
               };
             };

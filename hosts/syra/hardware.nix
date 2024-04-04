@@ -8,42 +8,38 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/284142c9-d0ee-4579-a58d-60a098db4419";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/a0d3b80e-031d-477e-baf7-d45496e4929e";
+      fsType = "btrfs";
+      options = [ "subvol=root" ];
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B3F9-B38C";
-      fsType = "vfat";
-    };
+  boot.initrd.luks.devices."main".device = "/dev/disk/by-uuid/65f255b5-a63f-4e47-85be-aee78d700afd";
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/9b6d27ea-004c-4708-9fb9-93b15005f5eb";
-      fsType = "ext4";
-      options = [ "noatime" ];
+    { device = "/dev/disk/by-uuid/a0d3b80e-031d-477e-baf7-d45496e4929e";
+      fsType = "btrfs";
+      options = [ "subvol=nix" ];
     };
 
   fileSystems."/var/lib/docker" =
-    { device = "/dev/disk/by-uuid/b640eff2-8fbd-4511-a26a-9f9d5e7d86cc";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/a0d3b80e-031d-477e-baf7-d45496e4929e";
+      fsType = "btrfs";
+      options = [ "subvol=docker" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/782E-35B7";
+      fsType = "vfat";
     };
 
   swapDevices = [ ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp170s0.useDHCP = lib.mkDefault true;
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

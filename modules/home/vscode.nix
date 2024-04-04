@@ -10,20 +10,6 @@ in with lib; {
     programs.vscode = {
       enable = true;
 
-      # TODO: don't install pre release
-
-      # Update extensions with
-      # $ curl -o /tmp/update_installed_exts.sh https://raw.githubusercontent.com/NixOS/nixpkgs/master/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh
-      # $ chmod 775 /tmp/update_installed_exts.sh
-      # $ /tmp/update_installed_exts.sh > extensions.nix
-      extensions = map
-        (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-          mktplcRef = {
-            inherit (extension) name publisher version sha256;
-          };
-        })
-        (import ./extensions.nix).extensions;
-
       keybindings = [
         {
           key = "alt+k";

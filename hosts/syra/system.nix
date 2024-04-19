@@ -73,6 +73,7 @@
   users.users.clement = {
     # TODO: find a way to manage secret that is installer friendly
     hashedPasswordFile = "/etc/user-password";
+    extraGroups = [ "dialout" ];
   };
 
   hardware.pulseaudio = {

@@ -2,7 +2,9 @@
   system = [
     system/bird.nix
     system/common.nix
+    system/container.nix
     system/docker.nix
+    system/ssh.nix
     system/unstable.nix
     system/xserver.nix
   ];

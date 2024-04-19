@@ -21,21 +21,6 @@
     wait-online.anyInterface = true;
   };
 
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    hostKeys = [
-      {
-        path = "/etc/ssh/ssh_host_ed25519_key";
-        type = "ed25519";
-      }
-    ];
-  };
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  users.users.clement.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJsOQOBnx+1nhll6uLtEUBcaiwSzoj7hEnJrSObVKZaM clement.dubreuil@spacefoot.com"
-  ];
-
   services.tailscale.enable = true;
 
   environment.persistence."/nix/persist" = {
@@ -53,10 +38,22 @@
     };
   };
 
-  clement.docker = {
-    enable = true;
-    useResolved.enable = true;
+  clement = {
+    ssh.enable = true;
+    docker = {
+      enable = true;
+      useResolved.enable = true;
+    };
+
+    container = {
+      enable = true;
+      addresses = [ "2a01:4f8:c17:aad:ff00::ffff/72" "10.0.0.254/24" ];
+      containers = {
+        runo = {};
+      };
+    };
   };
+
 
   system.autoUpgrade = {
     enable = true;

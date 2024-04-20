@@ -1,12 +1,17 @@
 { config, lib, pkgs, ... }:
 
-let
+with lib; let
   cfg = config.clement.container;
 
   containerOptions = {
-    options = {};
+    options = {
+      autostart = mkOption {
+        type = types.bool;
+        default = false;
+      };
+    };
   };
-in with lib; {
+in {
   options.clement.container = {
     enable = mkEnableOption "Enable container";
 
@@ -50,5 +55,9 @@ in with lib; {
       # Allow running containers
       execConfig.SystemCallFilter = [ "add_key" "keyctl" "bpf" ];
     }) cfg.containers;
+
+    # Start on boot
+    systemd.targets.machines.wants = attrsets.mapAttrsToList (n: v: "container@${n}.service")
+        (filterAttrs (n: v: v.autostart) cfg.containers);
   };
 }

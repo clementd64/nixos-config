@@ -19,5 +19,13 @@
 
   clement.ssh.enable = true;
   clement.docker.enable = true;
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:clementd64/nixos-config";
+    dates = "02:00";
+    randomizedDelaySec = "30min";
+  };
+
   system.stateVersion = "23.11";
 }

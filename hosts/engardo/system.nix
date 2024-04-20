@@ -25,8 +25,10 @@
 
   environment.persistence."/nix/persist" = {
     directories = [
-      "/var/lib/tailscale"
+      "/etc/nixos-containers"
       "/var/lib/docker"
+      "/var/lib/nixos-containers"
+      "/var/lib/tailscale"
     ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
@@ -49,7 +51,7 @@
       enable = true;
       addresses = [ "2a01:4f8:c17:aad:ff00::ffff/72" "10.0.0.254/24" ];
       containers = {
-        runo = {};
+        runo.autostart = true;
       };
     };
   };
@@ -58,7 +60,7 @@
   system.autoUpgrade = {
     enable = true;
     flake = "github:clementd64/nixos-config";
-    dates = "02:00";
+    dates = "03:00";
     randomizedDelaySec = "45min";
     allowReboot = true;
   };

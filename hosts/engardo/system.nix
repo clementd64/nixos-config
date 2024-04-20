@@ -56,7 +56,6 @@
     };
   };
 
-
   system.autoUpgrade = {
     enable = true;
     flake = "github:clementd64/nixos-config";

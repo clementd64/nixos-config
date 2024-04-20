@@ -26,6 +26,7 @@
     dates = "02:00";
     randomizedDelaySec = "30min";
   };
+  systemd.services.nixos-upgrade.environment.NIX_REMOTE = "daemon";
 
   system.stateVersion = "23.11";
 }

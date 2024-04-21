@@ -23,12 +23,7 @@
 
   clement.ssh.enable = true;
 
-  services.tailscale.enable = true;
-
   environment.persistence."/nix/persist" = {
-    directories = [
-      "/var/lib/tailscale"
-    ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
     ];
@@ -50,8 +45,6 @@
       host   hehdon    hehdon   all      scram-sha-256
     '';
   };
-
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 5432 ];
 
   system.autoUpgrade = {
     enable = true;

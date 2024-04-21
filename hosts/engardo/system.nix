@@ -21,14 +21,11 @@
     wait-online.anyInterface = true;
   };
 
-  services.tailscale.enable = true;
-
   environment.persistence."/nix/persist" = {
     directories = [
       "/etc/nixos-containers"
       "/var/lib/docker"
       "/var/lib/nixos-containers"
-      "/var/lib/tailscale"
     ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"

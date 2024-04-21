@@ -18,7 +18,6 @@
   };
 
   clement.ssh.enable = true;
-  clement.docker.enable = true;
 
   system.autoUpgrade = {
     enable = true;
@@ -27,6 +26,7 @@
     randomizedDelaySec = "30min";
   };
   systemd.services.nixos-upgrade.environment.NIX_REMOTE = "daemon";
+  environment.sessionVariables.NIX_REMOTE = "daemon";
 
   system.stateVersion = "23.11";
 }

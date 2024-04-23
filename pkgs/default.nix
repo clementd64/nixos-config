@@ -10,6 +10,7 @@ in {
   hashicorp = callPackage ./hashicorp {};
   kind = callPackage ./kubernetes/kind.nix {};
   kubectl = callPackage ./kubernetes/kubectl.nix {};
+  kubelet = callPackage ./kubernetes/kubelet.nix {};
   kubernetes-helm = callPackage ./kubernetes/helm.nix {};
   mapshot = factorio.mapshot;
   minikube = callPackage ./kubernetes/minikube.nix {};

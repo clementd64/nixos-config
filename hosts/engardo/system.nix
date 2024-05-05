@@ -28,11 +28,6 @@
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
     ];
-    users.clement = {
-      files = [
-        ".local/share/fish/fish_history"
-      ];
-    };
   };
 
   clement = {

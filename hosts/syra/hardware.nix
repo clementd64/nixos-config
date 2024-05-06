@@ -16,7 +16,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/a0d3b80e-031d-477e-baf7-d45496e4929e";
       fsType = "btrfs";
-      options = [ "subvol=root" ];
+      options = [ "compress=zstd" "subvol=root" ];
     };
 
   boot.initrd.luks.devices."main".device = "/dev/disk/by-uuid/65f255b5-a63f-4e47-85be-aee78d700afd";
@@ -24,13 +24,13 @@
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/a0d3b80e-031d-477e-baf7-d45496e4929e";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "compress=zstd" "subvol=nix" ];
     };
 
   fileSystems."/var/lib/docker" =
     { device = "/dev/disk/by-uuid/a0d3b80e-031d-477e-baf7-d45496e4929e";
       fsType = "btrfs";
-      options = [ "subvol=docker" ];
+      options = [ "compress=zstd" "subvol=docker" ];
     };
 
   fileSystems."/boot" =

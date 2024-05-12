@@ -15,30 +15,27 @@ in with lib; {
         variant = "oss";
       };
 
+      libinput = {
+        enable = true;
+        # Make the touchpad usable
+        touchpad = {
+          clickMethod = "clickfinger";
+          naturalScrolling = true;
+        };
+      };
+
       desktopManager.xterm.enable = false;
 
       displayManager = {
+        defaultSession = "none+i3";
         lightdm.enable = true;
+        autoLogin.enable = true;
+        autoLogin.user = "clement";
       };
 
       windowManager.i3 = {
         enable = true;
       };
-    };
-
-    services.libinput = {
-      enable = true;
-      # Make the touchpad usable
-      touchpad = {
-        clickMethod = "clickfinger";
-        naturalScrolling = true;
-      };
-    };
-
-    services.displayManager = {
-      defaultSession = "none+i3";
-      autoLogin.enable = true;
-      autoLogin.user = "clement";
     };
 
     fonts.packages = with pkgs; [

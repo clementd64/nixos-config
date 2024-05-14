@@ -1,16 +1,16 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "kubectl";
-  version = "1.29.1";
+  version = "1.30.0";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://dl.k8s.io/release/v${version}/bin/linux/amd64/kubectl";
-      sha256 = "69ab3a931e826bf7ac14d38ba7ca637d66a6fcb1ca0e3333a2cafdf15482af9f";
+      sha256 = "7c3807c0f5c1b30110a2ff1e55da1d112a6d0096201f1beb81b269f582b5d1c5";
     };
     aarch64-linux = {
       url = "https://dl.k8s.io/release/v${version}/bin/linux/arm64/kubectl";
-      sha256 = "96d6dc7b2bdcd344ce58d17631c452225de5bbf59b83fd3c89c33c6298fb5d8b";
+      sha256 = "669af0cf520757298ea60a8b6eb6b719ba443a9c7d35f36d3fb2fd7513e8c7d2";
     };
   };
 }

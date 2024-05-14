@@ -1,16 +1,16 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "minikube";
-  version = "1.33.0";
+  version = "1.33.1";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubernetes/minikube/releases/download/v${version}/minikube-linux-amd64";
-      sha256 = "4bfdc17f0dce678432d5c02c2a681c7a72921cb72aa93ccc00c112070ec5d2bc";
+      sha256 = "386eb267e0b1c1f000f1b7924031557402fffc470432dc23b9081fc6962fd69b";
     };
     aarch64-linux = {
       url = "https://github.com/kubernetes/minikube/releases/download/v${version}/minikube-linux-arm64";
-      sha256 = "d7afb43f87190331b2aee451eef0bae699c93d0acb7b57404cc6b6d3698033a7";
+      sha256 = "0b6a17d230b4a605002981f1eba2f5aa3f2153361a1ab000c01e7a95830b40ba";
     };
   };
 }

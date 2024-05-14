@@ -2,7 +2,6 @@
 let
   factorio = callPackage ./factorio.nix {};
 in {
-  bpftop = callPackage ./bpftop.nix {};
   factorio = factorio.factorio;
   factorio-env = factorio.factorio-env;
   fluxcd = callPackage ./kubernetes/fluxcd.nix {};

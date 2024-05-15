@@ -1,15 +1,15 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "kubelet";
-  version = "1.30.0";
+  version = "1.30.1";
   arch = {
     x86_64-linux = {
       url = "https://dl.k8s.io/release/v${version}/bin/linux/amd64/kubelet";
-      sha256 = "32a32ec3d7e7f8b2648c9dd503ce9ef63b4af1d1677f5b5aed7846fb02d66f18";
+      sha256 = "87bd6e5de9c0769c605da5fedb77a35c8b764e3bda1632447883c935dcf219d3";
     };
     aarch64-linux = {
       url = "https://dl.k8s.io/release/v${version}/bin/linux/arm64/kubelet";
-      sha256 = "fa887647422d34f3c7cc5b30fefcf97084d2c3277eff237c5808685ba8e4b15a";
+      sha256 = "c45049b829af876588ec1a30def3884ce77c2c175cd77485d49c78d2064a38fb";
     };
   };
 }

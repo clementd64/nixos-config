@@ -1,5 +1,10 @@
 { config, lib, pkgs, ... }:
 
+# (almost) declaratively manage imperative nixos-containers
+# Need to be bootstrapped (to add profile to nix store) with
+#   sudo nixos-container update hostname --flake github:clementd64/nixos-config#hostname
+# rootfs in /var/lib/nixos-containers is generated when started, so tmpfs as root setup is possible
+
 with lib; let
   cfg = config.clement.container;
 
@@ -50,6 +55,16 @@ in {
         };
       };
     };
+
+    environment.etc = attrsets.mapAttrs' (name: value: {
+      name = "nixos-containers/${name}.conf";
+      value = {
+        text = ''
+          PRIVATE_NETWORK=1
+          HOST_BRIDGE=br-ctr
+        '';
+      };
+    }) cfg.containers;
 
     systemd.nspawn = builtins.mapAttrs (name: value: {
       # Allow running containers

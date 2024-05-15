@@ -28,5 +28,8 @@
   systemd.services.nixos-upgrade.environment.NIX_REMOTE = "daemon";
   environment.sessionVariables.NIX_REMOTE = "daemon";
 
+  # Required for kubelet. Can't use tmpfiles because /dev is ignored.
+  boot.postBootCommands = "ln -s /dev/null /dev/kmsg";
+
   system.stateVersion = "23.11";
 }

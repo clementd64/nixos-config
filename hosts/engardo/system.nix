@@ -45,6 +45,13 @@
     };
   };
 
+  # Required for kubelet as nspawn can't override it
+  boot.kernel.sysctl = {
+    "vm.overcommit_memory" = 1;
+    "kernel.panic" = 10;
+    "kernel.panic_on_oops" = 1;
+  };
+
   system.autoUpgrade = {
     enable = true;
     flake = "github:clementd64/nixos-config";

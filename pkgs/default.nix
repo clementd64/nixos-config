@@ -7,6 +7,7 @@ in {
   fluxcd = callPackage ./kubernetes/fluxcd.nix {};
   flyctl = callPackage ./flyctl.nix {};
   hashicorp = callPackage ./hashicorp {};
+  k3s = callPackage ./kubernetes/k3s.nix {};
   kind = callPackage ./kubernetes/kind.nix {};
   kubectl = callPackage ./kubernetes/kubectl.nix {};
   kubelet = callPackage ./kubernetes/kubelet.nix {};

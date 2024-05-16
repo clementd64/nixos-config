@@ -40,7 +40,7 @@
       enable = true;
       addresses = [ "2a01:4f8:c17:aad:ff00::ffff/72" "10.0.0.254/24" ];
       containers = {
-        runo = {};
+        runo.persistDir = true;
       };
     };
   };

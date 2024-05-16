@@ -4,6 +4,8 @@
 # Need to be bootstrapped (to add profile to nix store) with
 #   sudo nixos-container update hostname --flake github:clementd64/nixos-config#hostname
 # rootfs in /var/lib/nixos-containers is generated when started, so tmpfs as root setup is possible
+# If using persistDir, the directory must be created before starting the container
+#   sudo mkdir -p /nix/persist/nixos-containers/hostname
 
 with lib; let
   cfg = config.clement.container;
@@ -11,6 +13,11 @@ with lib; let
   containerOptions = {
     options = {
       autostart = mkOption {
+        type = types.bool;
+        default = false;
+      };
+
+      persistDir = mkOption {
         type = types.bool;
         default = false;
       };
@@ -59,10 +66,13 @@ in {
     environment.etc = attrsets.mapAttrs' (name: value: {
       name = "nixos-containers/${name}.conf";
       value = {
-        text = ''
-          PRIVATE_NETWORK=1
-          HOST_BRIDGE=br-ctr
-        '';
+        text = strings.concatStringsSep "\n" (
+          [
+            "PRIVATE_NETWORK=1"
+            "HOST_BRIDGE=br-ctr"
+          ]
+          ++ optional value.persistDir "EXTRA_NSPAWN_FLAGS=--bind=/nix/persist/nixos-containers/${name}:/nix/persist"
+        );
       };
     }) cfg.containers;
 

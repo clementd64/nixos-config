@@ -4,6 +4,7 @@
     system/common.nix
     system/container.nix
     system/docker.nix
+    system/k3s.nix
     system/ssh.nix
     system/unstable.nix
     system/xserver.nix

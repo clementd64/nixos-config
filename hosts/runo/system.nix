@@ -18,6 +18,23 @@
   };
 
   clement.ssh.enable = true;
+  clement.k3s = {
+    enable = true;
+    role = "server";
+  };
+
+  environment.persistence."/nix/persist" = {
+    directories = [
+      "/var/lib/rancher/k3s"
+    ];
+    files = [
+      "/etc/ssh/ssh_host_ed25519_key"
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    k3s
+  ];
 
   system.autoUpgrade = {
     enable = true;

@@ -9,6 +9,7 @@ with lib; let
     server = {
       disable = [ "servicelb" "traefik" "local-storage" ];
       disable-helm-controller = true;
+      secrets-encryption = true;
     };
     agent = {};
   };

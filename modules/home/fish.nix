@@ -28,8 +28,8 @@ in with lib; {
         cat = "bat";
         xcp = "xclip -selection clipboard";
 
-        vim = "nvim";
-        v = "nvim";
+        vim = mkIf config.clement.neovim.enable "nvim";
+        v = mkIf config.clement.neovim.enable "nvim";
       };
 
       functions = {

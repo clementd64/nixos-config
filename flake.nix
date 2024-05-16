@@ -56,8 +56,17 @@
 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.clement = {
-              imports = module-list.home ++ [ ./hosts/${name}/home.nix ];
+            home-manager.users.clement = with nixpkgs.lib; {
+              imports = module-list.home
+                ++ optional (builtins.pathExists ./hosts/${name}/home.nix) ./hosts/${name}/home.nix;
+
+              clement = {
+                fish.enable = mkDefault true;
+                htop.enable = mkDefault true;
+                starship.enable = mkDefault true;
+              };
+
+              home.stateVersion = mkDefault "23.11";
             };
           }
         ] ++ modules;

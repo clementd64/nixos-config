@@ -1,7 +1,7 @@
 {
   autoPatchelfHook,
   fetchurl,
-  stdenv,
+  stdenvNoCC,
   system,
   unzip
 }:
@@ -20,7 +20,7 @@ let
   }:
     let
       arch = systemMap.${system} or (throw "unsupported system: ${system}");
-    in stdenv.mkDerivation {
+    in stdenvNoCC.mkDerivation {
       inherit pname version;
       src = fetchurl {
         url = "https://releases.hashicorp.com/${name}/${version}/${name}_${version}_${arch}.zip";

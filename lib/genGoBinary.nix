@@ -4,7 +4,7 @@
   fetchurl,
   installShellFiles,
   lib,
-  stdenv,
+  stdenvNoCC,
   system,
   unzip,
 
@@ -21,7 +21,7 @@ let
   binaryPath = sys.path or name;
 
   dontUnpack = !builtins.any (suffix: lib.hasSuffix suffix sys.url) [ ".tar.gz" ".tar.xz" ".zip" ];
-in stdenv.mkDerivation {
+in stdenvNoCC.mkDerivation {
   inherit pname version;
 
   src = fetchurl {

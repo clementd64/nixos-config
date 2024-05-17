@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
-  nix.gc = {
+  nix.gc = lib.mkIf (!config.boot.isContainer) {
     automatic = true;
     dates = "weekly";
     randomizedDelaySec = "45min";

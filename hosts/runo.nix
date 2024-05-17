@@ -48,5 +48,15 @@
   # Required for kubelet. Can't use tmpfiles because /dev is ignored.
   boot.postBootCommands = "ln -s /dev/null /dev/kmsg";
 
+  clement.secrets."test".text = ''
+    -----BEGIN AGE ENCRYPTED FILE-----
+    YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNzaC1lZDI1NTE5IG4vVnFaUSB0Mkxx
+    SDFBQndwM1FZSHdjZzFGTGZzZU5HcytkZ1V1V1I5d0hiUkVjVUFrCjVUZ095VGpw
+    QUhJMHFwU3NMT0ZueFZHSDZudlloRjlqZ2tsTTJaTmt0blEKLS0tIGhGejRLcENZ
+    cEh5MXdONUlxOW1JVXhiUW10ZitwdDRQQjhINm9ESXFlaWMKZLgfcqkFxP3uVgHH
+    BcCWLYuPPf3JlZSYvZLtomu+IH0Ru/JDSw==
+    -----END AGE ENCRYPTED FILE-----
+    '';
+
   system.stateVersion = "23.11";
 }

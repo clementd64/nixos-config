@@ -27,6 +27,8 @@
         inherit system;
 
         modules = [
+          home-manager.nixosModule
+          inputs.impermanence.nixosModules.impermanence
           {
             # Custom modules
             imports = module-list.system;
@@ -36,12 +38,7 @@
               inputs.zig.overlays.default
               (import ./overlays/pkgs.nix)
             ] ++ overlays;
-          }
 
-          home-manager.nixosModule
-          inputs.impermanence.nixosModules.impermanence
-          ./hosts/${name}/system.nix
-          {
             nix = {
               settings = {
                 auto-optimise-store = true;
@@ -69,7 +66,9 @@
               home.stateVersion = mkDefault "23.11";
             };
           }
-        ] ++ modules;
+        ] ++ modules
+          ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/system.nix) ./hosts/${name}/system.nix
+          ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix;
       };
 
     mkStable = { system }: {

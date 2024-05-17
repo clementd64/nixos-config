@@ -36,6 +36,7 @@ with lib; let
 in {
   options.clement.secrets = mkOption {
     type = types.attrsOf secret;
+    default = {};
   };
 
   config = {

@@ -10,7 +10,6 @@ with lib; let
       disable = [ "servicelb" "traefik" "local-storage" ];
       disable-helm-controller = true;
       secrets-encryption = true;
-      cluster-init = true;
     };
     agent = {};
   };

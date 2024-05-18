@@ -10,6 +10,7 @@ with lib; let
       disable = [ "servicelb" "traefik" "local-storage" ];
       disable-helm-controller = true;
       secrets-encryption = true;
+      cluster-init = true;
     };
     agent = {};
   };
@@ -18,6 +19,7 @@ with lib; let
     [k3sConfig.base]
     ++ optional (cfg.role == "server") k3sConfig.server
     ++ optional (cfg.role == "agent") k3sConfig.agent
+    ++ [cfg.config]
   );
 
   configPath = pkgs.writeText "config.json" (builtins.toJSON mergeConfig);
@@ -28,6 +30,12 @@ in {
     role = mkOption {
       type = types.enum [ "server" "agent" ];
       description = "Role of the k3s instance";
+    };
+
+    config = mkOption {
+      type = (pkgs.formats.json {}).type;
+      default = {};
+      description = "Configuration for k3s";
     };
   };
 

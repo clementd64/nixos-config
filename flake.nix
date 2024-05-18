@@ -103,16 +103,24 @@
         system = "x86_64-linux";
       };
 
-      runo = mkStable {
-        system = "aarch64-linux";
-      };
-
       seebu = mkStable {
         system = "aarch64-linux";
       };
 
       syra = mkUnstable {
         system = "x86_64-linux";
+      };
+
+      aeacus = mkStable {
+        system = "aarch64-linux";
+      };
+
+      minos = mkStable {
+        system = "aarch64-linux";
+      };
+
+      rhadamanthus = mkStable {
+        system = "aarch64-linux";
       };
     };
   in {

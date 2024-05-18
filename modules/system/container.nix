@@ -55,7 +55,9 @@ in {
         };
         routes = [
           # TODO: set configurable
-          { routeConfig = { Destination = "2a01:4f8:c17:aad:1::1/80"; Gateway = "2a01:4f8:c17:aad:ff00::1"; };}
+          { routeConfig = { Destination = "2a01:4f8:c17:aad:1::/80"; Gateway = "2a01:4f8:c17:aad:ff00::1"; };}
+          { routeConfig = { Destination = "2a01:4f8:c17:aad:2::/80"; Gateway = "2a01:4f8:c17:aad:ff00::2"; };}
+          { routeConfig = { Destination = "2a01:4f8:c17:aad:3::/80"; Gateway = "2a01:4f8:c17:aad:ff00::3"; };}
         ];
         linkConfig = {
           RequiredForOnline = "no";

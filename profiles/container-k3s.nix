@@ -35,8 +35,10 @@
     '';
   };
 
-  # TODO: set only for server
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  networking.firewall.extraCommands = ''
+    iptables -A INPUT -s 10.0.0.0/24 -p tcp -m multiport --dports 2379,2380,6443,10250 -j ACCEPT
+    iptables -A INPUT -s 10.0.0.0/24 -p udp -m multiport --dports 8472 -j ACCEPT
+  '';
 
   environment.persistence."/nix/persist" = {
     directories = [

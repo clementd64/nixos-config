@@ -50,7 +50,6 @@ in {
         matchConfig.Name = "br-ctr";
         networkConfig = {
           Address = cfg.addresses;
-          IPMasquerade = "ipv4";
           IPForward = true;
         };
         routes = [
@@ -64,6 +63,10 @@ in {
         };
       };
     };
+
+    networking.firewall.extraCommands = ''
+      iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -o br-ctr -j MASQUERADE
+    '';
 
     environment.etc = attrsets.mapAttrs' (name: value: {
       name = "nixos-containers/${name}.conf";

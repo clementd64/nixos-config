@@ -4,8 +4,6 @@
 # Need to be bootstrapped (to add profile to nix store) with
 #   sudo nixos-container update hostname --flake github:clementd64/nixos-config#hostname
 # rootfs in /var/lib/nixos-containers is generated when started, so tmpfs as root setup is possible
-# If using persistDir, the directory must be created before starting the container
-#   sudo mkdir -p /nix/persist/nixos-containers/hostname
 
 with lib; let
   cfg = config.clement.container;
@@ -82,12 +80,18 @@ in {
     }) cfg.containers;
 
     systemd.nspawn = builtins.mapAttrs (name: value: {
-      # Allow running containers
+      # Allow running OCI containers
       execConfig.SystemCallFilter = [ "add_key" "keyctl" "bpf" ];
     }) cfg.containers;
 
     # Start on boot
     systemd.targets.machines.wants = attrsets.mapAttrsToList (n: v: "container@${n}.service")
         (filterAttrs (n: v: v.autostart) cfg.containers);
+
+    # Create required directories
+    systemd.tmpfiles.rules = lists.flatten (attrsets.mapAttrsToList (name: value:
+      ["d /nix/var/nix/profiles/per-container/${name} - root root - -"]
+      ++ optional value.persistDir "d /nix/persist/nixos-containers/${name} - root root - -"
+    ) cfg.containers);
   };
 }

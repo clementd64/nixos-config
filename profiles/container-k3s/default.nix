@@ -13,7 +13,7 @@
   clement.k3s = {
     enable = true;
     config = {
-      server = "https://10.0.0.1:6443";
+      server = "https://10.0.0.200:6443";
       token-file = "/run/secrets/k3s-server-token";
       tls-san = [ "10.0.0.200" ];
     };

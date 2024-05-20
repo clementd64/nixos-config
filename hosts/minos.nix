@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ../profiles/container-k3s.nix
+    ../profiles/container-k3s
   ];
 
   systemd.network = {

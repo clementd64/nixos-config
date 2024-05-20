@@ -36,6 +36,12 @@ in {
       default = {};
       description = "Configuration for k3s";
     };
+
+    manifests = mkOption {
+      type = types.attrsOf types.path;
+      default = {};
+      description = "Extra Auto-Deploying Manifests";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -59,5 +65,9 @@ in {
         RestartSec = "5s";
       };
     };
+
+    systemd.tmpfiles.rules = attrsets.mapAttrsToList (name: value:
+      "L+ /var/lib/rancher/k3s/server/manifests/${name}.yaml - - - - ${value}"
+    ) cfg.manifests;
   };
 }

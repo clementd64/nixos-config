@@ -22,12 +22,11 @@
   let
     module-list = import ./modules;
 
-    mkSystem = { system, name, nixpkgs, home-manager, modules ? [], overlays ? [] }:
+    mkSystem = { system, name, nixpkgs, home-manager, enable-home-manager ? false, modules ? [], overlays ? [] }:
       nixpkgs.lib.nixosSystem {
         inherit system;
 
         modules = [
-          home-manager.nixosModule
           inputs.impermanence.nixosModules.impermanence
           {
             # Custom modules
@@ -50,31 +49,36 @@
             nixpkgs.config.allowUnfree = true;
 
             networking.hostName = name;
-
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.clement = with nixpkgs.lib; {
-              imports = module-list.home
-                ++ optional (builtins.pathExists ./hosts/${name}/home.nix) ./hosts/${name}/home.nix;
-
-              clement = {
-                fish.enable = mkDefault true;
-                htop.enable = mkDefault true;
-                starship.enable = mkDefault true;
-              };
-
-              home.stateVersion = mkDefault "23.11";
-            };
           }
         ] ++ modules
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/system.nix) ./hosts/${name}/system.nix
-          ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix;
+          ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix
+          ++ nixpkgs.lib.optionals enable-home-manager [
+            home-manager.nixosModule
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.clement = with nixpkgs.lib; {
+                imports = module-list.home
+                  ++ optional (builtins.pathExists ./hosts/${name}/home.nix) ./hosts/${name}/home.nix;
+
+                clement = {
+                  fish.enable = mkDefault true;
+                  htop.enable = mkDefault true;
+                  starship.enable = mkDefault true;
+                };
+
+                home.stateVersion = mkDefault "23.11";
+              };
+            }
+          ];
       };
 
-    mkStable = { system }: {
+    mkStable = { system, home ? false }: {
       inherit system;
       nixpkgs = inputs.nixpkgs-stable;
       home-manager = inputs.home-manager-stable;
+      enable-home-manager = home;
       overlays = [
         (import ./overlays/unstable.nix {
           pkgs-unstable = import inputs.nixpkgs-unstable {
@@ -85,10 +89,11 @@
       ];
     };
 
-    mkUnstable = { system }: {
+    mkUnstable = { system, home ? false }: {
       inherit system;
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
+      enable-home-manager = home;
       modules = [
         { clement.unstable.enable = true; }
       ];
@@ -109,6 +114,7 @@
 
       syra = mkUnstable {
         system = "x86_64-linux";
+        home = true;
       };
 
       aeacus = mkStable {

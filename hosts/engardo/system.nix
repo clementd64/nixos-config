@@ -40,9 +40,9 @@
       enable = true;
       addresses = [ "2a01:4f8:c17:aad:ff00::ffff/72" "10.0.0.254/24" ];
       containers = {
-        aeacus.persistDir = true;
-        minos.persistDir = true;
-        rhadamanthus.persistDir = true;
+        aeacus = { autostart = true; persistDir = true; };
+        minos = { autostart = true; persistDir = true; };
+        rhadamanthus = { autostart = true; persistDir = true; };
       };
     };
   };

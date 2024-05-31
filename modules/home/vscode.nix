@@ -38,6 +38,7 @@ in with lib; {
             "plaintext" = false;
             "scminput" = false;
         };
+        "github.copilot.editor.enableAutoCompletions" = true;
 
         "editor.stickyScroll.enabled" = true;
         "editor.unicodeHighlight.invisibleCharacters" = false;

@@ -62,9 +62,13 @@ in {
       };
     };
 
-    networking.firewall.extraCommands = ''
-      iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -o br-ctr -j MASQUERADE
-    '';
+
+    networking.nat = {
+      enable = true;
+      extraCommands = ''
+        iptables -t nat -A nixos-nat-post -s 10.0.0.0/24 ! -o br-ctr -j MASQUERADE
+      '';
+    };
 
     environment.etc = attrsets.mapAttrs' (name: value: {
       name = "nixos-containers/${name}.conf";

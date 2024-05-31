@@ -78,8 +78,8 @@ in with lib; {
     '';
 
     networking.firewall.extraCommands = mkIf cfg.useResolved.enable ''
-      iptables -A INPUT -p udp --dport 53 -s 172.17.0.0/16 -j ACCEPT
-      iptables -A INPUT -p tcp --dport 53 -s 172.17.0.0/16 -j ACCEPT
+      iptables -A nixos-fw -p udp --dport 53 -s 172.17.0.0/16 -j ACCEPT
+      iptables -A nixos-fw -p tcp --dport 53 -s 172.17.0.0/16 -j ACCEPT
     '';
   };
 }

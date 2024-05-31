@@ -63,7 +63,17 @@
 
   networking.firewall = {
     interfaces."wlan0".allowedUDPPorts = [ 67 ];
-    extraCommands = "iptables -t nat -A POSTROUTING -s 192.168.200.0/24 -j MASQUERADE";
+    extraCommands = ''
+      iptables -A nixos-fw -s 192.168.1.0/24 -p udp --dport 1900 -j ACCEPT
+      iptables -A nixos-fw -s 192.168.1.0/24 -p tcp --dport 7879 -j ACCEPT
+    '';
+  };
+
+  networking.nat = {
+    enable = true;
+    extraCommands = ''
+      iptables -t nat -A nixos-nat-post -s 192.168.200.0/24 -j MASQUERADE
+    '';
   };
 
   services.resolved.extraConfig = ''

@@ -24,10 +24,10 @@ in with lib; {
       hashicorp.terraform
       jq
       ldns
-      nodejs_20
+      nodejs_22
       openssl
-      python311
-      python311Packages.requests
+      python312
+      python312Packages.requests
       rclone
       restic
       rsync

@@ -41,6 +41,18 @@ in with lib; {
       shellInit = ''
         fish_add_path $HOME/.local/bin
       '';
+
+      interactiveShellInit = ''
+        if string match -q "$TERM_PROGRAM" "vscode"
+          function cd
+            if count $argv > /dev/null
+              builtin cd $argv
+            else
+              builtin cd (git rev-parse --show-toplevel 2>/dev/null) || builtin cd
+            end
+          end
+        end
+      '';
     };
 
     programs.bat.enable = true;

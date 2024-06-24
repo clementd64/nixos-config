@@ -16,6 +16,15 @@ in with lib; {
         default = "fd55:d249:5b9d:4dce:64fd:f7c3:cf53:9905";
       };
     };
+
+    gvisor = {
+      enable = mkEnableOption "Enable gVisor";
+
+      platform = mkOption {
+        type = types.str;
+        default = "systrap";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -45,6 +54,15 @@ in with lib; {
           cfg.useResolved.ipv4
           # cfg.useResolved.ipv6
         ];
+
+        runtimes = {
+          runsc = mkIf cfg.gvisor.enable {
+            path = "${pkgs.gvisor}/bin/runsc";
+            runtimeArgs = [
+              "--platform=${cfg.gvisor.platform} --network=host"
+            ];
+          };
+        };
       };
 
       autoPrune = {

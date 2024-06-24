@@ -85,6 +85,7 @@
     hashedPasswordFile = "/etc/user-password";
     extraGroups = [ "dialout" ];
   };
+  nix.settings.trusted-users = [ "clement" ];
 
   hardware.pulseaudio = {
     enable = true;
@@ -103,6 +104,10 @@
   clement.docker = {
     enable = true;
     useResolved.enable = true;
+    gvisor = {
+      enable = true;
+      platform = "kvm";
+    };
   };
 
   clement.xserver.enable = true;

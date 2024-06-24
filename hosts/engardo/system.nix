@@ -36,15 +36,6 @@
       enable = true;
       useResolved.enable = true;
     };
-    container = {
-      enable = true;
-      addresses = [ "2a01:4f8:c17:aad:ff00::ffff/72" "10.0.0.254/24" ];
-      containers = {
-        aeacus = { autostart = true; persistDir = true; };
-        minos = { autostart = true; persistDir = true; };
-        rhadamanthus = { autostart = true; persistDir = true; };
-      };
-    };
   };
 
   # Required for kubelet as nspawn can't override it

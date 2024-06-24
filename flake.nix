@@ -116,18 +116,6 @@
         system = "x86_64-linux";
         home = true;
       };
-
-      aeacus = mkStable {
-        system = "aarch64-linux";
-      };
-
-      minos = mkStable {
-        system = "aarch64-linux";
-      };
-
-      rhadamanthus = mkStable {
-        system = "aarch64-linux";
-      };
     };
   in {
     nixosConfigurations = builtins.mapAttrs (name: value: mkSystem (value // { inherit name; })) hosts;

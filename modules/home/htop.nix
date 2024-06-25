@@ -19,7 +19,7 @@ in with lib; {
       } // (with config.lib.htop; leftMeters [
         (bar "CPU")
         (bar "Memory")
-        (text "Blank")
+        (bar "Zram")
         (bar "LeftCPUs")
       ]) // (with config.lib.htop; rightMeters [
         (text "Tasks")

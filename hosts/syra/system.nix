@@ -120,5 +120,11 @@
     configPackages = [pkgs.gnome.gnome-session];
   };
 
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 100;
+  };
+
   system.stateVersion = "23.11";
 }

@@ -1,5 +1,6 @@
 { lib, ... }:
 {
+  clement.isServer = true;
   imports = [
     ./hardware.nix
   ];
@@ -30,12 +31,9 @@
     ];
   };
 
-  clement = {
-    ssh.enable = true;
-    docker = {
-      enable = true;
-      useResolved.enable = true;
-    };
+  clement.docker = {
+    enable = true;
+    useResolved.enable = true;
   };
 
   # Required for kubelet as nspawn can't override it
@@ -44,14 +42,6 @@
     "vm.overcommit_memory" = 1;
     "kernel.panic" = 10;
     "kernel.panic_on_oops" = 1;
-  };
-
-  system.autoUpgrade = {
-    enable = true;
-    flake = "github:clementd64/nixos-config";
-    dates = "03:00";
-    randomizedDelaySec = "45min";
-    allowReboot = true;
   };
 
   system.stateVersion = "23.11";

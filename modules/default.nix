@@ -6,6 +6,7 @@
     system/docker.nix
     system/k3s.nix
     system/secrets.nix
+    system/server.nix
     system/ssh.nix
     system/unstable.nix
     system/xserver.nix

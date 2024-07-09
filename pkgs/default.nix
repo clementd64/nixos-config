@@ -1,7 +1,9 @@
 { callPackage }:
 let
   factorio = callPackage ./factorio.nix {};
+  qemu-user-static = callPackage ./qemu-user-static.nix {};
 in {
+  inherit (qemu-user-static) qemu-aarch64-static;
   factorio = factorio.factorio;
   factorio-env = factorio.factorio-env;
   fluxcd = callPackage ./kubernetes/fluxcd.nix {};

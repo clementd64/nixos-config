@@ -1,16 +1,16 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "talosctl";
-  version = "1.7.2";
+  version = "1.7.5";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/siderolabs/talos/releases/download/v${version}/talosctl-linux-amd64";
-      sha256 = "3d7d52a1fa79a49817630174f7078279c1f5ce825351f63b976e967ce17ee8e0";
+      sha256 = "285a8d8d2a0601e4e9ff55972afb9bc0b4f23745d56dfa96e10cc3bafa13de26";
     };
     aarch64-linux = {
       url = "https://github.com/siderolabs/talos/releases/download/v${version}/talosctl-linux-arm64";
-      sha256 = "78cb0a19fca48120c5536a4599f4d0083e8553f17e42209d19c9ae9cf413d2b8";
+      sha256 = "a28a0049a143c38da29d2c4a6ba41dbb8a0b53ef5a9d1a528126f4c4cf651224";
     };
   };
 }

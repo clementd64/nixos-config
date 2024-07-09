@@ -1,16 +1,16 @@
 { callPackage, stdenv }:
 callPackage ../lib/genGoBinary.nix rec {
   name = "ollama";
-  version = "0.1.37";
+  version = "0.2.1";
   buildInputs = [ stdenv.cc.cc ];
   arch = {
     x86_64-linux = {
-      url = "https://github.com/jmorganca/ollama/releases/download/v${version}/ollama-linux-amd64";
-      sha256 = "2d1f94a15d7d96190a521da16103be70a6e2b8fec81e4bef45d02d12d3b3c79c";
+      url = "https://github.com/ollama/ollama/releases/download/v${version}/ollama-linux-amd64";
+      sha256 = "8a29a80403f67abe0f5b3737767b2a21732409e8e4429098af75474484e43c18";
     };
     aarch64-linux = {
-      url = "https://github.com/jmorganca/ollama/releases/download/v${version}/ollama-linux-arm64";
-      sha256 = "5886ce31637ad13af3d5c60dc0a74d8aa4a9b9903acfd846274b9a051d444108";
+      url = "https://github.com/ollama/ollama/releases/download/v${version}/ollama-linux-arm64";
+      sha256 = "6a9080c6f857db9293817845b20a9e35c5e55cef944da6af0abbb6f2f8afb22d";
     };
   };
 }

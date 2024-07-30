@@ -21,4 +21,5 @@ in {
   restic = callPackage ./restic.nix {};
   sops = callPackage ./sops.nix {};
   talosctl = callPackage ./kubernetes/talosctl.nix {};
+  workerd = callPackage ./workerd.nix {};
 }

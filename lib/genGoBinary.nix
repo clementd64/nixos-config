@@ -38,8 +38,8 @@ in stdenvNoCC.mkDerivation {
       if dontUnpack
       then [
         (
-          if lib.hasSuffix ".bz2" sys.url
-          then "bzip2 -dc $src > $out/bin/${name}"
+          if lib.hasSuffix ".gz" sys.url then "gzip -dc $src > $out/bin/${name}"
+          else if lib.hasSuffix ".bz2" sys.url then "bzip2 -dc $src > $out/bin/${name}"
           else "cp $src $out/bin/${name}"
         )
         "chmod +x $out/bin/${name}"

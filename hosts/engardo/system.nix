@@ -23,17 +23,9 @@
   };
 
   environment.persistence."/nix/persist" = {
-    directories = [
-      "/var/lib/docker"
-    ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
     ];
-  };
-
-  clement.docker = {
-    enable = true;
-    useResolved.enable = true;
   };
 
   # Required for kubelet as nspawn can't override it

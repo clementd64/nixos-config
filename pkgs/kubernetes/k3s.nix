@@ -2,7 +2,6 @@
 callPackage ../../lib/genGoBinary.nix rec {
   name = "k3s";
   version = "1.30.3+k3s1";
-  commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/k3s-io/k3s/releases/download/v${version}/k3s";

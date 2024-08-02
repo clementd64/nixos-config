@@ -3,25 +3,7 @@
 with lib; let
   cfg = config.clement.k3s;
 
-  # TODO
-  k3sConfig = {
-    base = {};
-    server = {
-      disable = [ "servicelb" "traefik" "local-storage" ];
-      disable-helm-controller = true;
-      secrets-encryption = true;
-    };
-    agent = {};
-  };
-
-  mergeConfig = attrsets.mergeAttrsList (
-    [k3sConfig.base]
-    ++ optional (cfg.role == "server") k3sConfig.server
-    ++ optional (cfg.role == "agent") k3sConfig.agent
-    ++ [cfg.config]
-  );
-
-  configPath = pkgs.writeText "config.json" (builtins.toJSON mergeConfig);
+  configPath = pkgs.writeText "config.json" (builtins.toJSON cfg.config);
 in {
   options.clement.k3s = {
     enable = mkEnableOption "Enable k3s";

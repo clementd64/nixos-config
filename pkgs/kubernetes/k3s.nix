@@ -1,16 +1,16 @@
 { callPackage }:
 callPackage ../../lib/genGoBinary.nix rec {
   name = "k3s";
-  version = "1.30.2+k3s2";
+  version = "1.30.3+k3s1";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/k3s-io/k3s/releases/download/v${version}/k3s";
-      sha256 = "3b7f74edcc9b4a7649426b6816a7d3d6d76ddf742384ac63b86ee66e230de758";
+      sha256 = "00e9752be22c0e440cee3a8ffd51e2b8c18ef10cea7edf11cc33f37c70bb6385";
     };
     aarch64-linux = {
       url = "https://github.com/k3s-io/k3s/releases/download/v${version}/k3s-arm64";
-      sha256 = "759822eab4b92e5a36950e94b5810255c0cc145098393a7ea4b695ecef171857";
+      sha256 = "00786746ad8b61efc96e3ea9d4dd3315fbd47818d89d8f5cad2be8a17e69b9aa";
     };
   };
 }

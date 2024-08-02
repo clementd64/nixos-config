@@ -28,5 +28,7 @@ in with lib; {
         (bar "RightCPUs")
       ]);
     };
+
+    xdg.configFile."htop/htoprc".force = true;
   };
 }

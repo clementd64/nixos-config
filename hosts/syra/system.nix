@@ -50,7 +50,7 @@
         Address = [ "192.168.200.1/24" ];
         DHCPServer = true;
         IPMasquerade = "ipv4";
-        IPForward = true;
+        IPv4Forwarding = true;
       };
       dhcpServerConfig = {
         EmitDNS = true;

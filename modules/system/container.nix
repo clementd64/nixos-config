@@ -48,7 +48,8 @@ in {
         matchConfig.Name = "br-ctr";
         networkConfig = {
           Address = cfg.addresses;
-          IPForward = true;
+          IPv4Forwarding = true;
+          IPv6Forwarding = true;
         };
         routes = [
           # TODO: set configurable

@@ -94,7 +94,6 @@ in {
   networking.firewall.extraCommands = ''
     iptables -A nixos-fw -s 10.42.0.0/16 -p tcp -m multiport --dports 6443,10250 -j ACCEPT
   '';
-  networking.firewall.allowedTCPPorts = [ 6443 10250 ];
 
   environment.systemPackages = [
     pkgs.k3s

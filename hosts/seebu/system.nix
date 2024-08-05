@@ -24,6 +24,7 @@
 
   services.postgresql = {
     enable = true;
+    enableJIT = true;
     package = pkgs.postgresql_16;
     enableTCPIP = true;
     authentication = pkgs.lib.mkOverride 10 ''

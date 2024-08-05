@@ -1,5 +1,6 @@
 {
   system = [
+    profiles/k3s.nix
     system/bird.nix
     system/common.nix
     system/container.nix

@@ -19,6 +19,11 @@
       };
     };
 
+    networks."10-enp7s0" = {
+      matchConfig.Name = "enp7s0";
+      networkConfig.DHCP = "ipv4";
+    };
+
     wait-online.anyInterface = true;
   };
 

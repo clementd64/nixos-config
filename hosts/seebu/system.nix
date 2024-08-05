@@ -34,7 +34,7 @@
     enableTCPIP = true;
     authentication = pkgs.lib.mkOverride 10 ''
       #type  database  DBuser   address  auth-method
-      local  all       all               trust
+      local  all       all               peer
     '';
   };
 

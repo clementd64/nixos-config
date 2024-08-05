@@ -14,7 +14,7 @@
       matchConfig.Name = "enp1s0";
       networkConfig = {
         DHCP = "ipv4";
-        Address = "2a01:4f8:c17:aad::1/64";
+        Address = "2a01:4f8:c013:578a::1/64";
         Gateway = "fe80::1";
       };
     };

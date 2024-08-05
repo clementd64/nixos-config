@@ -100,7 +100,7 @@
     };
 
     hosts = {
-      engardo = mkStable {
+      loska = mkStable {
         system = "aarch64-linux";
       };
 

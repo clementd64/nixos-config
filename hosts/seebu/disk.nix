@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk.main = {
-      device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_43421473";
+      device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_50532511";
       type = "disk";
       content = {
         type = "gpt";
@@ -25,10 +25,6 @@
                 "/nix" = {
                   mountpoint = "/nix";
                   mountOptions = [ "compress=zstd" "noatime" ];
-                };
-                "/persist" = {
-                  mountpoint = "/nix/persist";
-                  mountOptions = [ "compress=zstd" ];
                 };
               };
             };

@@ -32,16 +32,6 @@
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
     ];
-    users.clement = {
-      files = [
-        ".local/share/fish/fish_history"
-      ];
-    };
-  };
-
-  clement.bird = {
-    enable = true;
-    routerId = "194.28.98.82";
   };
 
   system.stateVersion = "23.11";

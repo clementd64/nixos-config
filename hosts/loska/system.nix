@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 {
-  clement.isServer = true;
+  clement.profile.server.enable = true;
   imports = [
     ./hardware.nix
   ];

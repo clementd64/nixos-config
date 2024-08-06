@@ -2,9 +2,9 @@
 
 with lib;
 {
-  options.clement.isServer = mkEnableOption "Server configuration";
+  options.clement.profile.server.enable = mkEnableOption "server profile";
 
-  config = mkIf config.clement.isServer {
+  config = mkIf config.clement.profile.server.enable {
     # don't start getty on serial consoles
     systemd.services = {
       "getty@".enable = false;

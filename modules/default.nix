@@ -1,12 +1,12 @@
 {
   system = [
     profiles/k3s.nix
+    profiles/server.nix
     system/common.nix
     system/container.nix
     system/docker.nix
     system/k3s.nix
     system/secrets.nix
-    system/server.nix
     system/ssh.nix
     system/unstable.nix
     system/xserver.nix

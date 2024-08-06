@@ -33,10 +33,13 @@
     package = pkgs.postgresql_16;
     enableTCPIP = true;
     authentication = pkgs.lib.mkOverride 10 ''
-      #type  database  DBuser   address  auth-method
-      local  all       all               peer
+      #type  database  DBuser   address      auth-method
+      local  all       all                   peer
+      host   netbox    netbox   10.0.0.2/32  scram-sha-256
     '';
   };
+
+  networking.firewall.interfaces."enp7s0".allowedTCPPorts = [ 5432 ];
 
   system.stateVersion = "24.05";
 }

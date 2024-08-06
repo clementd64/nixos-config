@@ -79,14 +79,6 @@
       nixpkgs = inputs.nixpkgs-stable;
       home-manager = inputs.home-manager-stable;
       enable-home-manager = home;
-      overlays = [
-        (import ./overlays/unstable.nix {
-          pkgs-unstable = import inputs.nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        })
-      ];
     };
 
     mkUnstable = { system, home ? false }: {

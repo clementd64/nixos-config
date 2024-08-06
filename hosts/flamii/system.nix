@@ -30,5 +30,15 @@
     ];
   };
 
+  services.bird2 = {
+    enable = true;
+    config = builtins.readFile ./bird.conf;
+  };
+
+  networking.firewall.checkReversePath = false;
+  networking.firewall.extraCommands = ''
+    ip6tables -A nixos-fw -i ens18 -s 2a0c:b640:8::ffff/128 -p tcp --dport 179 -j ACCEPT
+  '';
+
   system.stateVersion = "23.11";
 }

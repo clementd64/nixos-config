@@ -1,8 +1,8 @@
 {
   system = [
+    profiles/baseline.nix
     profiles/k3s.nix
     profiles/server.nix
-    system/common.nix
     system/container.nix
     system/docker.nix
     system/k3s.nix

@@ -8,9 +8,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
 
-  networking.useDHCP = false;
   systemd.network = {
-    enable = true;
     networks."10-ens18" = {
       matchConfig.Name = "ens18";
       networkConfig = {
@@ -24,8 +22,6 @@
         ];
       };
     };
-
-    wait-online.anyInterface = true;
   };
 
   environment.persistence."/nix/persist" = {

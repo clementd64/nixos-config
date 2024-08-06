@@ -7,9 +7,7 @@
 
   boot.loader.systemd-boot.enable = true;
 
-  networking.useDHCP = false; # handled by systemd
   systemd.network = {
-    enable = true;
     networks."10-enp1s0" = {
       matchConfig.Name = "enp1s0";
       networkConfig = {
@@ -23,8 +21,6 @@
       matchConfig.Name = "enp7s0";
       networkConfig.DHCP = "ipv4";
     };
-
-    wait-online.anyInterface = true;
   };
 
   environment.persistence."/nix/persist" = {

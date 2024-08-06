@@ -15,9 +15,7 @@
     };
   };
 
-  networking.useDHCP = false; # handled by systemd
   systemd.network = {
-    enable = true;
     networks."10-wlan" = {
       matchConfig = {
         Name = "wlan*";
@@ -57,8 +55,6 @@
         DNS = "1.1.1.1 1.0.0.1";
       };
     };
-
-    wait-online.anyInterface = true;
   };
 
   networking.firewall = {

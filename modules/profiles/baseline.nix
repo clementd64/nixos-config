@@ -14,6 +14,12 @@
 
   boot.tmp.cleanOnBoot = true;
 
+  networking.useDHCP = false;
+  systemd.network = {
+    enable = true;
+    wait-online.anyInterface = true;
+  };
+
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
 

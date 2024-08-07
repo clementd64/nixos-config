@@ -3,6 +3,7 @@
   clement.profile.server.enable = true;
   imports = [
     ./hardware.nix
+    ./netbox.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

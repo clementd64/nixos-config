@@ -17,6 +17,11 @@ in {
 
     networking.firewall.checkReversePath = false;
 
+    boot.kernel.sysctl = {
+      "net.ipv6.conf.all.autoconf" = "0";
+      "net.ipv6.conf.all.accept_ra" = "0";
+    };
+
     services.bird2 = {
       enable = true;
       config = strings.concatMapStringsSep "\n" (x: builtins.readFile x) [

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   clement.profile.router.enable = true;
   imports = [
@@ -96,10 +96,20 @@
   };
 
   clement.profile.router.bird.config = ./bird.conf;
-  # TODO: restrict source IP
-  networking.firewall.extraCommands = ''
-    ip6tables -A nixos-fw -p tcp --dport 179 -j ACCEPT
-  '';
+
+  clement.profile.router.bgpAllowedIPv6 = [
+    "2a0c:b640:13::ffff" # Servperso
+    "2a0c:b641:870::ffff" # PIXINKO
+    "2001:7f8:f2:e1::6939:1" # Hurricane Electric
+    "2001:7f8:f2:e1:0:4:1051:1" # FreeTransit
+    "2a0c:b641:701::a5:20:2409:1" # LocIX DUS RS1
+    "2a0c:b641:701::a5:20:2409:2" # LocIX DUS RS2
+    "2001:7f8:f2:e1::babe:1" # LocIX FRA RS1
+    "2001:7f8:f2:e1::dead:1" # LocIX FRA RS2
+    "2001:7f8:f2:e1::be5a" # LocIX FRA RS3
+    "2a0e:8f01:1000:46::1" # bgp.exchange
+    "2a0c:2f07:9459::b4" # bgp.tools
+  ];
 
   system.stateVersion = "23.11";
 }

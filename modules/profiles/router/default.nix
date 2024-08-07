@@ -22,6 +22,10 @@ in {
       "net.ipv6.conf.all.accept_ra" = "0";
     };
 
+    systemd.network.config.networkConfig = {
+      ManageForeignRoutes = false;
+    };
+
     services.bird2 = {
       enable = true;
       config = strings.concatMapStringsSep "\n" (x: builtins.readFile x) [

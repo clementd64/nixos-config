@@ -72,6 +72,21 @@
         IPv6AcceptRA = "no";
       };
     };
+
+    # Loopback
+    netdevs."20-dum0".netdevConfig = {
+      Name = "dum0";
+      Kind = "dummy";
+    };
+
+    networks."20-dum0" = {
+      matchConfig.Name = "dum0";
+      networkConfig = {
+        Address = [
+          "2a0c:b641:2b1::1/128"
+        ];
+      };
+    };
   };
 
   environment.persistence."/nix/persist" = {

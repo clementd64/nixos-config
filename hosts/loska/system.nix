@@ -32,14 +32,7 @@
     ];
   };
 
-  # Required for kubelet as nspawn can't override it
-  boot.kernel.sysctl = {
-    "vm.panic_on_oom" = 0;
-    "vm.overcommit_memory" = 1;
-    "kernel.panic" = 10;
-    "kernel.panic_on_oops" = 1;
-  };
-
+  clement.kubelet.enableSysctls = true;
   clement.profile.k3s.enable = true;
 
   environment.systemPackages = [

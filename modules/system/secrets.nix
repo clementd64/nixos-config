@@ -61,7 +61,7 @@ in {
 
     # Ensure /run/secrets exist
     systemd.tmpfiles.rules = [
-      "d /run/secrets 0744 root root -"
+      "d /run/secrets 0755 root root -"
     ];
   };
 }

@@ -109,6 +109,8 @@
     "2001:7f8:f2:e1::be5a" # LocIX FRA RS3
     "2a0e:8f01:1000:46::1" # bgp.exchange
     "2a0c:2f07:9459::b4" # bgp.tools
+    "2a0c:b641:701:0:a5:0:112:1" # AS112 LocIX DUS
+    "2001:7f8:f2:e1::112" # AS112 LocIX FRA
   ];
 
   system.stateVersion = "23.11";

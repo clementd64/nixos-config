@@ -20,7 +20,7 @@
           "194.28.98.94"
           "2a0c:b640:8::ffff"
         ];
-        IPv6AcceptRA = "no";
+        IPv6AcceptRA = false;
       };
     };
   };

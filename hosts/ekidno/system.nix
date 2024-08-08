@@ -20,7 +20,7 @@
           "194.28.99.62"
           "2a0c:b640:13::ffff"
         ];
-        IPv6AcceptRA = "no";
+        IPv6AcceptRA = false;
       };
     };
 
@@ -32,7 +32,7 @@
           "185.1.155.60/24"
           "2a0c:b641:701::a5:21:2625:1/64"
         ];
-        IPv6AcceptRA = "no";
+        IPv6AcceptRA = false;
       };
     };
 
@@ -44,7 +44,7 @@
           "185.1.166.16/23"
           "2001:7f8:f2:e1:a5:21:2625:1/64"
         ];
-        IPv6AcceptRA = "no";
+        IPv6AcceptRA = false;
       };
     };
 
@@ -56,7 +56,7 @@
           "100.66.181.7/22"
           "2a0e:8f01:1000:46::107/64"
         ];
-        IPv6AcceptRA = "no";
+        IPv6AcceptRA = false;
       };
     };
 
@@ -68,7 +68,7 @@
           "10.192.72.1/24"
           "2a0c:b641:870::1/64"
         ];
-        IPv6AcceptRA = "no";
+        IPv6AcceptRA = false;
       };
     };
 
@@ -84,6 +84,7 @@
         Address = [
           "2a0c:b641:2b1::1/128"
         ];
+        IPv6AcceptRA = false;
       };
     };
   };

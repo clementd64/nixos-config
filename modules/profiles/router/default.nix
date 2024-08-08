@@ -61,6 +61,7 @@ in {
       "net.ipv6.conf.all.accept_ra" = "0";
     };
 
+    services.resolved.llmnr = "false";
     systemd.network.config.networkConfig = {
       ManageForeignRoutes = false;
     };

@@ -28,8 +28,13 @@
       (import ./overlays/lib.nix)
     ];
 
-    mkSystem = { system, name, nixpkgs, home-manager, enable-home-manager ? false, modules ? [], overlays ? [] }:
-      nixpkgs.lib.nixosSystem {
+    mkSystem =
+      # 1. Factory for mkStable and mkUnstable
+      { nixpkgs, home-manager, modules ? [], overlays ? [] }:
+      # 2. Hosts configuration
+      { system, home ? false }:
+      # 3. Auto hostname injection (avoid duplication)
+      name: nixpkgs.lib.nixosSystem {
         inherit system;
 
         modules = [
@@ -43,7 +48,7 @@
           ++ modules
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/system.nix) ./hosts/${name}/system.nix
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix
-          ++ nixpkgs.lib.optionals enable-home-manager [
+          ++ nixpkgs.lib.optionals home [
             home-manager.nixosModule
             {
               home-manager.useGlobalPkgs = true;
@@ -64,18 +69,14 @@
           ];
       };
 
-    mkStable = { system, home ? false }: {
-      inherit system;
+    mkStable = mkSystem {
       nixpkgs = inputs.nixpkgs-stable;
       home-manager = inputs.home-manager-stable;
-      enable-home-manager = home;
     };
 
-    mkUnstable = { system, home ? false }: {
-      inherit system;
+    mkUnstable = mkSystem {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
-      enable-home-manager = home;
       modules = [
         { clement.unstable.enable = true; }
       ];
@@ -104,7 +105,7 @@
       };
     };
   in {
-    nixosConfigurations = builtins.mapAttrs (name: value: mkSystem (value // { inherit name; })) hosts;
+    nixosConfigurations = builtins.mapAttrs (name: mkSystem: mkSystem name) hosts;
 
     diskoConfigurations = builtins.mapAttrs (name: value: import ./hosts/${name}/disk.nix)
       (inputs.nixpkgs-stable.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts);

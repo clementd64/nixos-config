@@ -29,11 +29,6 @@ in {
         default = "ipv4";
       };
 
-      subnet = {
-        ipv4 = mkOption { type = types.str; default = "172.16.0.0/24"; };
-        ipv6 = mkOption { type = types.str; };
-      };
-
       routes = mkOption {
         type = types.listOf (types.submodule {
           options = {
@@ -75,7 +70,7 @@ in {
         }
         (let
           mkHostAddress = host: local: mkIf (host != null && local != null) (mkDefault (builtins.head (splitString "/" host)));
-        in mkIf cfg.network.enable{
+        in mkIf cfg.network.enable {
           privateNetwork = mkDefault true;
           hostBridge = mkDefault cfg.network.bridge;
           hostAddress = mkHostAddress cfg.network.address.ipv4 config.localAddress;

@@ -22,7 +22,7 @@
 
   networking.useDHCP = false;
   systemd.network = {
-    enable = true;
+    enable = lib.mkIf (!config.boot.isContainer) true;
     wait-online.anyInterface = true;
   };
 

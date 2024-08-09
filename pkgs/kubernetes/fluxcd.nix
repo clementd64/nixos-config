@@ -1,5 +1,5 @@
-{ callPackage }:
-callPackage ../../lib/fetchStaticBinary.nix rec {
+{ fetchStaticBinary }:
+fetchStaticBinary rec {
   name = "flux";
   pname = "fluxcd-bin";
   version = "2.3.0";

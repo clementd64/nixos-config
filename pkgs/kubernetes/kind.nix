@@ -1,5 +1,5 @@
-{ callPackage }:
-callPackage ../../lib/fetchStaticBinary.nix rec {
+{ fetchStaticBinary }:
+fetchStaticBinary rec {
   name = "kind";
   version = "0.23.0";
   commonCompletion = true;

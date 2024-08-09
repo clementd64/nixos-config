@@ -1,5 +1,5 @@
-{ callPackage }:
-callPackage ../lib/fetchStaticBinary.nix rec {
+{ fetchStaticBinary }:
+fetchStaticBinary rec {
   name = "sops";
   version = "3.9.0";
   arch = {

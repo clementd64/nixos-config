@@ -1,5 +1,5 @@
 # Wrapper that provide the necessary environment for Factorio to run
-{ buildFHSEnv, callPackage }:
+{ buildFHSEnv, fetchStaticBinary }:
 let
   mkFactorioEnv = { name, runScript, extraPackages ? [] }: buildFHSEnv {
     inherit name runScript;
@@ -16,7 +16,7 @@ let
     ]) ++ extraPackages;
   };
 
-  mapshot-bin = callPackage ../lib/fetchStaticBinary.nix rec {
+  mapshot-bin = fetchStaticBinary rec {
     name = "mapshot";
     version = "0.0.22";
     arch = {

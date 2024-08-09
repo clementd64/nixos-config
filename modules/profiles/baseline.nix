@@ -1,5 +1,11 @@
 { config, pkgs, lib, ... }:
 {
+  nixpkgs.config.allowUnfree = true;
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
   nix.gc = lib.mkIf (!config.boot.isContainer) {
     automatic = true;
     dates = "weekly";
@@ -37,10 +43,4 @@
 
   programs.command-not-found.enable = false;
   environment.defaultPackages = lib.mkForce [];
-
-  system.extraSystemBuilderCmds = ''
-    ln -sv ${pkgs.path} $out/nixpkgs
-  '';
-
-  nix.nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
 }

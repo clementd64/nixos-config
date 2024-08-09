@@ -1,5 +1,5 @@
-{ callPackage }:
-callPackage ../../lib/fetchStaticBinary.nix rec {
+{ fetchStaticBinary }:
+fetchStaticBinary rec {
   name = "kubectl";
   version = "1.30.2";
   commonCompletion = true;

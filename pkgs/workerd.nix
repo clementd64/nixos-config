@@ -1,5 +1,5 @@
-{ callPackage }:
-callPackage ../lib/fetchStaticBinary.nix rec {
+{ fetchStaticBinary }:
+fetchStaticBinary rec {
   name = "workerd";
   version = "1.20240729.0";
   arch = {

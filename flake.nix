@@ -22,35 +22,25 @@
   let
     module-list = import ./modules;
 
+    baseOverlays = [
+      inputs.zig.overlays.default
+      (import ./overlays/pkgs.nix)
+      (import ./overlays/lib.nix)
+    ];
+
     mkSystem = { system, name, nixpkgs, home-manager, enable-home-manager ? false, modules ? [], overlays ? [] }:
       nixpkgs.lib.nixosSystem {
         inherit system;
 
         modules = [
-          inputs.impermanence.nixosModules.impermanence
           {
-            # Custom modules
-            imports = module-list.system;
-
-            # Overlays
-            nixpkgs.overlays = [
-              inputs.zig.overlays.default
-              (import ./overlays/pkgs.nix)
-            ] ++ overlays;
-
-            nix = {
-              settings = {
-                auto-optimise-store = true;
-                experimental-features = [ "nix-command" "flakes" ];
-              };
-
-              registry.nixpkgs.flake = nixpkgs;
-            };
-            nixpkgs.config.allowUnfree = true;
-
             networking.hostName = name;
+            nixpkgs.overlays = baseOverlays ++ overlays;
+            nix.registry.nixpkgs.flake = nixpkgs;
           }
-        ] ++ modules
+          inputs.impermanence.nixosModules.impermanence
+        ] ++ module-list.system
+          ++ modules
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/system.nix) ./hosts/${name}/system.nix
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix
           ++ nixpkgs.lib.optionals enable-home-manager [
@@ -119,9 +109,13 @@
     diskoConfigurations = builtins.mapAttrs (name: value: import ./hosts/${name}/disk.nix)
       (inputs.nixpkgs-stable.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts);
 
-    packages = builtins.listToAttrs (builtins.map (system: {
-      name = system;
-      value = inputs.nixpkgs-unstable.legacyPackages.${system}.callPackage (import ./pkgs) {};
-    }) ["x86_64-linux" "aarch64-linux"]);
+    packages = builtins.listToAttrs (builtins.map (system:
+      let
+        pkgs = import inputs.nixpkgs-unstable { inherit system; overlays = baseOverlays; };
+      in {
+        name = system;
+        value = pkgs.callPackage (import ./pkgs) {};
+      }
+    ) ["x86_64-linux" "aarch64-linux"]);
   };
 }

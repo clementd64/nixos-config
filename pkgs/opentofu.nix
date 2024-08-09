@@ -1,5 +1,5 @@
-{ callPackage }:
-callPackage ../lib/fetchStaticBinary.nix rec {
+{ fetchStaticBinary }:
+fetchStaticBinary rec {
   pname = "opentofu-bin";
   name = "tofu";
   version = "1.8.0";

@@ -1,5 +1,5 @@
-{ callPackage, stdenv }:
-callPackage ../lib/fetchStaticBinary.nix rec {
+{ fetchStaticBinary, stdenv }:
+fetchStaticBinary rec {
   name = "ollama";
   version = "0.2.1";
   buildInputs = [ stdenv.cc.cc ];

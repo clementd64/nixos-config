@@ -9,7 +9,7 @@
   unzip,
 
   name,
-  pname ? "${name}-bin",
+  pname ? name,
   version,
   arch,
   aliases ? [],

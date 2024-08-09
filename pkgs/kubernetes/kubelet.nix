@@ -1,5 +1,5 @@
 { callPackage }:
-callPackage ../../lib/genGoBinary.nix rec {
+callPackage ../../lib/fetchStaticBinary.nix rec {
   name = "kubelet";
   version = "1.30.2";
   arch = {

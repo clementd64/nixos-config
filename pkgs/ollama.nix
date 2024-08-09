@@ -1,5 +1,5 @@
 { callPackage, stdenv }:
-callPackage ../lib/genGoBinary.nix rec {
+callPackage ../lib/fetchStaticBinary.nix rec {
   name = "ollama";
   version = "0.2.1";
   buildInputs = [ stdenv.cc.cc ];

@@ -16,7 +16,7 @@ let
     ]) ++ extraPackages;
   };
 
-  mapshot-bin = callPackage ../lib/genGoBinary.nix rec {
+  mapshot-bin = callPackage ../lib/fetchStaticBinary.nix rec {
     name = "mapshot";
     version = "0.0.22";
     arch = {

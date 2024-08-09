@@ -1,5 +1,5 @@
 { callPackage }:
-callPackage ../../lib/genGoBinary.nix rec {
+callPackage ../../lib/fetchStaticBinary.nix rec {
   name = "talosctl";
   version = "1.7.5";
   commonCompletion = true;

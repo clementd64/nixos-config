@@ -1,5 +1,5 @@
 { callPackage }:
-callPackage ../../lib/genGoBinary.nix rec {
+callPackage ../../lib/fetchStaticBinary.nix rec {
   name = "kind";
   version = "0.23.0";
   commonCompletion = true;

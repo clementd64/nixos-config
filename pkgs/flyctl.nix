@@ -1,5 +1,5 @@
 { callPackage }:
-callPackage ../lib/genGoBinary.nix rec {
+callPackage ../lib/fetchStaticBinary.nix rec {
   name = "flyctl";
   version = "0.2.84";
   aliases = [ "fly" ];

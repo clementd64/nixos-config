@@ -1,5 +1,5 @@
 { callPackage }:
-callPackage ../lib/genGoBinary.nix rec {
+callPackage ../lib/fetchStaticBinary.nix rec {
   pname = "opentofu-bin";
   name = "tofu";
   version = "1.8.0";

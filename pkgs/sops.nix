@@ -1,5 +1,5 @@
 { callPackage }:
-callPackage ../lib/genGoBinary.nix rec {
+callPackage ../lib/fetchStaticBinary.nix rec {
   name = "sops";
   version = "3.9.0";
   arch = {

@@ -20,9 +20,5 @@ with lib;
     };
 
     clement.ssh.enable = true;
-
-    # remove nscd. cache are already disabled by default so running it is useless
-    services.nscd.enable = false;
-    system.nssModules = lib.mkForce [];
   };
 }

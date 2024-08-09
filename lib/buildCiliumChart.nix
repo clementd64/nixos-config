@@ -29,7 +29,6 @@ let
   '' else "";
 
   valuesFile = writeText "values.yaml" (builtins.toJSON values);
-
   helmTemplateCmd = "helm template cilium $src --no-hooks --skip-crds --namespace ${namespace} --values ${valuesFile}";
 
 in stdenvNoCC.mkDerivation {
@@ -45,7 +44,7 @@ in stdenvNoCC.mkDerivation {
   dontUnpack = true;
   nativeBuildInputs = [ kubernetes-helm ];
 
-  # Ensure that the generated manifests are the reproducible
+  # Ensure that the generated manifests are reproducible
   doCheck = true;
   checkPhase = ''
     ${helmTemplateCmd} > a

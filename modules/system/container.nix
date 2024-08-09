@@ -10,7 +10,7 @@ with lib; let
 
   containerOptions = {
     options = {
-      autostart = mkOption {
+      autoStart = mkOption {
         type = types.bool;
         default = false;
       };
@@ -91,7 +91,7 @@ in {
 
     # Start on boot
     systemd.targets.machines.wants = attrsets.mapAttrsToList (n: v: "container@${n}.service")
-        (filterAttrs (n: v: v.autostart) cfg.containers);
+        (filterAttrs (n: v: v.autoStart) cfg.containers);
 
     # Create required directories
     systemd.tmpfiles.rules = lists.flatten (attrsets.mapAttrsToList (name: value:

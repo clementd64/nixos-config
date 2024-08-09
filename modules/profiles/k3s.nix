@@ -24,7 +24,7 @@ let
     hubble.enabled = false;
   };
 
-  cilium-manifests = pkgs.callPackage ../../lib/buildCiliumChart.nix {
+  cilium-manifests = pkgs.buildCiliumChart {
     name = "cilium";
     version = "1.16.0";
     digest = "2d653f4826722da976791047f7f3d9e999526590ea4df2f36a3846aedbffae2d";

@@ -38,6 +38,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."/var/lib/nixos-containers" =
+    { device = "none";
+      fsType = "tmpfs";
+      options = [ "noatime" "mode=755" ];
+    };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

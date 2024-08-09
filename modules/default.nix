@@ -8,7 +8,7 @@
     system/container.nix
     system/docker.nix
     system/k3s.nix
-    system/kubelet-sysctls.nix
+    system/kubelet.nix
     system/secrets.nix
     system/ssh.nix
     system/unstable.nix

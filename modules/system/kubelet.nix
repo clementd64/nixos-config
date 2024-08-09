@@ -1,8 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib; {
-  options.clement.kubelet.enableSysctls = mkEnableOption "kubelet sysctls";
-  config = mkIf config.clement.kubelet.enableSysctls {
+  options.clement.kubelet.sysctls.enable = mkEnableOption "kubelet sysctls";
+
+  config = mkIf config.clement.kubelet.sysctls.enable {
     # Required for kubelet as nspawn can't override it
     boot.kernel.sysctl = {
       "vm.panic_on_oom" = mkForce "0";

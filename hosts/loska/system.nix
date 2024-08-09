@@ -33,7 +33,7 @@
     ];
   };
 
-  clement.kubelet.enableSysctls = true;
+  clement.kubelet.sysctls.enable = true;
   clement.profile.k3s.enable = true;
 
   environment.systemPackages = [

@@ -7,6 +7,7 @@
     profiles/server.nix
     system/container.nix
     system/docker.nix
+    system/ipset.nix
     system/k3s.nix
     system/kubelet.nix
     system/secrets.nix

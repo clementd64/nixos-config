@@ -32,7 +32,7 @@
   };
 
   clement.profile.router.bird.config = ./bird.conf;
-  clement.profile.router.bgpAllowedIPv6 = [
+  clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:8::ffff" # Servperso
   ];
 

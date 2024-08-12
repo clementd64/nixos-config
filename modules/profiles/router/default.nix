@@ -24,13 +24,7 @@ in {
       description = "Bird configuration";
     };
 
-    bgpAllowedIPv4 = mkOption {
-      type = types.listOf types.str;
-      default = [];
-      description = "List of allowed BGP peers";
-    };
-
-    bgpAllowedIPv6 = mkOption {
+    bgp.allowedIp = mkOption {
       type = types.listOf types.str;
       default = [];
       description = "List of allowed BGP peers";
@@ -38,8 +32,8 @@ in {
   };
 
   imports = [
-    (mkBgpAllowRule "ipv4" cfg.bgpAllowedIPv4)
-    (mkBgpAllowRule "ipv6" cfg.bgpAllowedIPv6)
+    (mkBgpAllowRule "ipv4" (pkgs.net.filterIPv4 cfg.bgp.allowedIp))
+    (mkBgpAllowRule "ipv6" (pkgs.net.filterIPv6 cfg.bgp.allowedIp))
   ];
 
   config = mkIf cfg.enable {

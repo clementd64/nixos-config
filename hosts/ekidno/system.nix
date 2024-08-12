@@ -96,8 +96,7 @@
   };
 
   clement.profile.router.bird.config = ./bird.conf;
-
-  clement.profile.router.bgpAllowedIPv6 = [
+  clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:13::ffff" # Servperso
     "2a0c:b641:870::ffff" # PIXINKO
     "2001:7f8:f2:e1::6939:1" # Hurricane Electric

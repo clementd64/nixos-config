@@ -24,13 +24,6 @@ let
     hubble.enabled = false;
   };
 
-  cilium-manifests = pkgs.buildCiliumChart {
-    name = "cilium";
-    version = "1.16.0";
-    digest = "2d653f4826722da976791047f7f3d9e999526590ea4df2f36a3846aedbffae2d";
-    values = cilium-values;
-  };
-
 in with lib; {
   options.clement.profile.k3s = {
     enable = mkEnableOption "profile k3s";
@@ -52,7 +45,15 @@ in with lib; {
         service-cidr = "10.43.0.0/16,fd62:ec16:d507:1af6::/112";
         kube-controller-manager-arg = "node-cidr-mask-size-ipv6=116";
       };
-      manifests.cilium = cilium-manifests;
+      manifests.cilium = pkgs.buildCiliumChart {
+        name = "cilium";
+        version = "1.16.0";
+        digest = "2d653f4826722da976791047f7f3d9e999526590ea4df2f36a3846aedbffae2d";
+        values = cilium-values;
+      };
+      # manifests.kube-vip = pkgs.kube-vip.generate {
+      #   version = "v0.8.2";
+      # };
     };
 
 

@@ -5,6 +5,7 @@
   stdenvNoCC,
   system,
   writeText,
+  k8s,
 
   name,
   version,
@@ -18,16 +19,6 @@ assert lib.attrsets.attrByPath [ "hubble" "enabled" ] true values == false
   || lib.attrsets.attrByPath [ "hubble" "tls" "auto" "enabled" ] true values == false;
 
 let
-  generateManifest = if namespace != "kube-system" then ''
-    cat >> $out <<EOF
-    ---
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: ${namespace}
-    EOF
-  '' else "";
-
   valuesFile = writeText "values.yaml" (builtins.toJSON values);
   helmTemplateCmd = "helm template cilium $src --no-hooks --skip-crds --namespace ${namespace} --values ${valuesFile}";
 
@@ -53,8 +44,7 @@ in stdenvNoCC.mkDerivation {
   '';
 
   installPhase = ''
-    touch $out
-    ${generateManifest}
+    echo '${builtins.toJSON (k8s.manifests.namespace namespace)}' > $out
     ${helmTemplateCmd} >> $out
   '';
 }

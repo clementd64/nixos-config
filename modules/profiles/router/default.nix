@@ -12,7 +12,7 @@ with lib; let
     };
 
     networking.firewall.extraCommands = ''
-      ${{ "ipv4" = "iptables"; "ipv6" = "ip6tables"; }.${family}} -A nixos-fw -m set --match-set nixos-bgp-allowed-${family} src -p tcp --dport 179 -j ACCEPT
+      ${{ "ipv4" = "iptables"; "ipv6" = "ip6tables"; }.${family}} -A nixos-fw -m set --match-set ${config.networking.ipset."bgp-allowed-${family}".name} src -p tcp --dport 179 -j ACCEPT
     '';
   };
 in {

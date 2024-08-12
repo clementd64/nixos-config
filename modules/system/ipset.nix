@@ -2,7 +2,7 @@
 
 with lib; {
   options.networking.ipset = mkOption {
-    type = types.attrsOf (types.submodule {
+    type = types.attrsOf (types.submodule ({ name, ... }: {
       options = {
         type = mkOption {
           type = types.str;
@@ -22,8 +22,15 @@ with lib; {
           type = types.str;
           default = "";
         };
+
+        name = mkOption {
+          type = types.str;
+          default = "nixos-${name}";
+          internal = true;
+          readOnly = true;
+        };
       };
-    });
+    }));
     default = {};
   };
 
@@ -40,12 +47,9 @@ with lib; {
     ];
 
     networking.firewall = let
-      mkSet = name: cfg:
-        let
-          setName = "nixos-${name}";
-        in ''
-          ipset create ${setName} ${cfg.type} family ${{ "ipv4" = "inet"; "ipv6" = "inet6"; }.${cfg.family}} ${cfg.extraArgs}
-          ${concatMapStringsSep "\n" (value: "ipset add ${setName} ${value}") cfg.set}
+      mkSet = name: cfg: ''
+          ipset create ${cfg.name} ${cfg.type} family ${{ "ipv4" = "inet"; "ipv6" = "inet6"; }.${cfg.family}} ${cfg.extraArgs}
+          ${concatMapStringsSep "\n" (value: "ipset add ${cfg.name} ${value}") cfg.set}
         '';
     in {
       extraPackages = [ pkgs.ipset ];

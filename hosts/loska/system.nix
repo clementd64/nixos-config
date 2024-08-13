@@ -3,7 +3,6 @@
   clement.profile.server.enable = true;
   imports = [
     ./hardware.nix
-    ./netbox.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -25,21 +24,12 @@
   };
 
   environment.persistence."/nix/persist" = {
-    directories = [
-      "/var/lib/rancher/k3s"
-    ];
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
     ];
   };
 
   clement.kubelet.sysctls.enable = true;
-  clement.profile.k3s.enable = true;
-
-  environment.systemPackages = [
-    pkgs.k3s
-    (pkgs.writeShellScriptBin "kubectl" "exec -a $0 ${pkgs.k3s}/bin/k3s $@")
-  ];
 
   system.stateVersion = "23.11";
 }

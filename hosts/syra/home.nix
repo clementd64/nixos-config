@@ -46,7 +46,6 @@
     factorio-env
     keepassxc
     mapshot
-    ollama
     opentofu
     osu-lazer-bin
     prismlauncher

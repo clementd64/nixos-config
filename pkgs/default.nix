@@ -15,7 +15,6 @@ in {
   kubelet = callPackage ./kubernetes/kubelet.nix {};
   kubernetes-helm = callPackage ./kubernetes/helm.nix {};
   minikube = callPackage ./kubernetes/minikube.nix {};
-  ollama = callPackage ./ollama.nix {};
   opentofu = callPackage ./opentofu.nix {};
   restic = callPackage ./restic.nix {};
   sops = callPackage ./sops.nix {};

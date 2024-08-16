@@ -1,16 +1,16 @@
 { fetchStaticBinary }:
 fetchStaticBinary rec {
   name = "kind";
-  version = "0.23.0";
+  version = "0.24.0";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubernetes-sigs/kind/releases/download/v${version}/kind-linux-amd64";
-      sha256 = "1d86e3069ffbe3da9f1a918618aecbc778e00c75f838882d0dfa2d363bc4a68c";
+      sha256 = "b89aada5a39d620da3fcd16435b7f28d858927dd53f92cbac77686b0588b600d";
     };
     aarch64-linux = {
       url = "https://github.com/kubernetes-sigs/kind/releases/download/v${version}/kind-linux-arm64";
-      sha256 = "a416d6c311882337f0e56910e4a2e1f8c106ec70c22cbf0ac1dd8f33c1e284fe";
+      sha256 = "2968808d916e12d0a25c56d07c9a1c987163f972513fa8a94a2125a69f9c50eb";
     };
   };
 }

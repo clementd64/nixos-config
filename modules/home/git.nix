@@ -11,7 +11,7 @@ in with lib; {
       enable = true;
 
       delta = {
-        enable = true;
+        enable = false; # TODO: 0.17 currently broken
         options = {
           navigate = true;
           side-by-side = true;

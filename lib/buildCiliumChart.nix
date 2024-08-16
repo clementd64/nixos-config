@@ -16,7 +16,8 @@
 
 # Ensure auto tls for hubble is disabled as it provide impure output
 assert lib.attrsets.attrByPath [ "hubble" "enabled" ] true values == false
-  || lib.attrsets.attrByPath [ "hubble" "tls" "auto" "enabled" ] true values == false;
+  || lib.attrsets.attrByPath [ "hubble" "tls" "auto" "enabled" ] true values == false
+  || lib.attrsets.attrByPath [ "hubble" "tls" "auto" "method" ] "helm" values != "helm";
 
 let
   valuesFile = writeText "values.yaml" (builtins.toJSON values);

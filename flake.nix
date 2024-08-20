@@ -99,6 +99,10 @@
         system = "aarch64-linux";
       };
 
+      olethro = mkStable {
+        system = "aarch64-linux";
+      };
+
       syra = mkUnstable {
         system = "x86_64-linux";
         home = true;

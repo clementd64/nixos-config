@@ -38,37 +38,12 @@
       matchConfig.Name = "en*";
       networkConfig.DHCP = "yes";
     };
-
-    networks."10-wlan0-ap" = {
-      matchConfig = {
-        Name = "wlan0";
-        WLANInterfaceType = "ap";
-      };
-      networkConfig = {
-        Address = [ "192.168.200.1/24" ];
-        DHCPServer = true;
-        IPMasquerade = "ipv4";
-        IPv4Forwarding = true;
-      };
-      dhcpServerConfig = {
-        EmitDNS = true;
-        DNS = "1.1.1.1 1.0.0.1";
-      };
-    };
   };
 
   networking.firewall = {
-    interfaces."wlan0".allowedUDPPorts = [ 67 ];
     extraCommands = ''
       iptables -A nixos-fw -s 192.168.1.0/24 -p udp --dport 1900 -j ACCEPT
       iptables -A nixos-fw -s 192.168.1.0/24 -p tcp --dport 7879 -j ACCEPT
-    '';
-  };
-
-  networking.nat = {
-    enable = true;
-    extraCommands = ''
-      iptables -t nat -A nixos-nat-post -s 192.168.200.0/24 -j MASQUERADE
     '';
   };
 

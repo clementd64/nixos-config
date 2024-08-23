@@ -66,6 +66,13 @@ in {
 
       config = mkMerge [
         {
+          config = { ... }: {
+            imports = (import ../../modules).system;
+            config.nixpkgs.overlays = [
+              (import ../../overlays/pkgs.nix)
+              (import ../../overlays/lib.nix)
+            ];
+          };
           extraFlags = optionals config.allowDocker (builtins.map (x: "--system-call-filter=${x}") ["add_key" "keyctl" "bpf"]);
         }
         (let

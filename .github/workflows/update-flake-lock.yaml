@@ -27,3 +27,8 @@ jobs:
           pr-labels: |
             dependencies
             nix-flake
+
+      - name: Auto merge pull request
+        run: "gh pr merge --auto --delete-branch --squash ${{ steps.update.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ github.token }}

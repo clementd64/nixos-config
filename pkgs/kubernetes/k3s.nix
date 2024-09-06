@@ -1,15 +1,15 @@
 { fetchStaticBinary }:
 fetchStaticBinary rec {
   name = "k3s";
-  version = "1.30.3+k3s1";
+  version = "1.31.0+k3s1";
   arch = {
     x86_64-linux = {
       url = "https://github.com/k3s-io/k3s/releases/download/v${version}/k3s";
-      sha256 = "00e9752be22c0e440cee3a8ffd51e2b8c18ef10cea7edf11cc33f37c70bb6385";
+      sha256 = "a6bef15460b89491e6a60e53fbec29aa20ae44ad02dbdaae9f235c1f27933a62";
     };
     aarch64-linux = {
       url = "https://github.com/k3s-io/k3s/releases/download/v${version}/k3s-arm64";
-      sha256 = "00786746ad8b61efc96e3ea9d4dd3315fbd47818d89d8f5cad2be8a17e69b9aa";
+      sha256 = "e12755a6965a7f50c6d2c62444ef2b6b8c724d0b8900752452fc2bbb1d5fab28";
     };
   };
 }

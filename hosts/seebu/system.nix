@@ -40,7 +40,7 @@
     tunnels.aegis = {
       credentialsFile = "/run/secrets/cloudflared";
       ingress = {
-        "miniflux.segfault.ovh" = "unix:${config.systemd.sockets.miniflux-socket.socketConfig.ListenStream}";
+        "miniflux.segfault.ovh" = "unix:${config.clement.sockets.miniflux.listen}";
       };
       default = "http_status:404";
     };

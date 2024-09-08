@@ -32,27 +32,10 @@ in {
     environment = lib.mapAttrs (_: toString) config;
   };
 
-  systemd.sockets.miniflux-socket = {
-    description = "Miniflux socket";
-    wantedBy = [ "sockets.target" ];
-    socketConfig = {
-      ListenStream = "/run/miniflux.sock";
-      SocketMode = "0660";
-      SocketUser = "miniflux";
-      SocketGroup = "cloudflared";
-    };
-  };
-
-  systemd.services.miniflux-socket = {
-    after = [ "network.target" "miniflux-socket.socket" "miniflux.service" ];
-    bindsTo = [ "miniflux-socket.socket" "miniflux.service" ];
-    serviceConfig = {
-      Type = "notify";
-      ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=1m ${config.LISTEN_ADDR}";
-      User = "miniflux";
-      Group = "miniflux";
-      PrivateTmp = true;
-    };
+  clement.sockets.miniflux = {
+    target = config.LISTEN_ADDR;
+    user = "miniflux";
+    group = "cloudflared";
   };
 
   systemd.services.miniflux-refresh = {

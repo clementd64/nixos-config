@@ -77,7 +77,6 @@
   };
   hardware.bluetooth.enable = true;
 
-  clement.local.network.enable = true;
   clement.docker = {
     enable = true;
     gvisor = {

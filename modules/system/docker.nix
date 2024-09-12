@@ -89,6 +89,7 @@ in with lib; {
       };
     };
 
+    clement.local.network.enable = mkDefault true;
     clement.local.network.resolved.enable = true;
   };
 }

@@ -10,6 +10,7 @@
     system/ipset.nix
     system/k3s.nix
     system/kubelet.nix
+    system/local/network.nix
     system/secrets.nix
     system/ssh.nix
     system/systemd-socket.nix

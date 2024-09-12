@@ -5,15 +5,26 @@ in with lib; {
   options.clement.docker = {
     enable = mkEnableOption "Enable Docker";
 
-    useResolved = {
-      enable = mkEnableOption "Use systemd-resolved stub resolver";
-      ipv4 = mkOption {
-        type = types.str;
-        default = "192.168.192.168";
+    pools = {
+      ipv4 = {
+        subnet = mkOption {
+          type = types.str;
+          default = "172.17.0.0/16";
+        };
+        size = mkOption {
+          type = types.int;
+          default = 24;
+        };
       };
-      ipv6 = mkOption {
-        type = types.str;
-        default = "fd55:d249:5b9d:4dce:64fd:f7c3:cf53:9905";
+      ipv6 = {
+        subnet = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        size = mkOption {
+          type = types.int;
+          default = 64;
+        };
       };
     };
 
@@ -44,16 +55,23 @@ in with lib; {
 
         default-address-pools = [
           {
-            base = "172.17.0.0/16";
-            size = 24;
+            base = cfg.pools.ipv4.subnet;
+            size = cfg.pools.ipv4.size;
           }
-        ];
-        bip = "172.17.0.1/24";
+        ] ++ optional (cfg.pools.ipv6.subnet != null) {
+          base = cfg.pools.ipv6.subnet;
+          size = cfg.pools.ipv6.size;
+        };
 
-        dns = mkIf cfg.useResolved.enable [
-          cfg.useResolved.ipv4
-          # cfg.useResolved.ipv6
-        ];
+        ipv6 = cfg.pools.ipv6.subnet != null;
+        fixed-cidr = "${builtins.head (splitString "/" cfg.pools.ipv4.subnet)}/${toString cfg.pools.ipv4.size}";
+        fixed-cidr-v6 = mkIf (cfg.pools.ipv6.subnet != null) "${builtins.head (splitString "/" cfg.pools.ipv6.subnet)}/${toString cfg.pools.ipv6.size}";
+
+        dns = mkIf config.clement.local.network.enable (
+          [
+            config.clement.local.network.ipv4
+          ] ++ optional (cfg.pools.ipv6.subnet != null) config.clement.local.network.ipv6
+        );
 
         runtimes = {
           runsc = mkIf cfg.gvisor.enable {
@@ -71,33 +89,6 @@ in with lib; {
       };
     };
 
-    systemd.network = mkIf cfg.useResolved.enable {
-      netdevs."20-dockerdns" = {
-        netdevConfig = {
-          Name = "dockerdns";
-          Kind = "dummy";
-        };
-      };
-
-      networks."20-dockerdns" = {
-        matchConfig.Name = "dockerdns";
-        networkConfig = {
-          Address = [
-            "${cfg.useResolved.ipv4}/32"
-            "${cfg.useResolved.ipv6}/128"
-          ];
-        };
-      };
-    };
-
-    services.resolved.extraConfig = mkIf cfg.useResolved.enable ''
-      DNSStubListenerExtra=${cfg.useResolved.ipv4}
-      DNSStubListenerExtra=${cfg.useResolved.ipv6}
-    '';
-
-    networking.firewall.extraCommands = mkIf cfg.useResolved.enable ''
-      iptables -A nixos-fw -p udp --dport 53 -s 172.17.0.0/16 -j ACCEPT
-      iptables -A nixos-fw -p tcp --dport 53 -s 172.17.0.0/16 -j ACCEPT
-    '';
+    clement.local.network.resolved.enable = true;
   };
 }

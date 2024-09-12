@@ -58,8 +58,13 @@
   };
   nix.settings.trusted-users = [ "clement" ];
 
-  hardware.pulseaudio = {
+  services.pipewire = {
     enable = true;
+    pulse.enable = true;
+  };
+
+  hardware.pulseaudio = {
+    enable = false;
     # Auto switch between A2DP and HFP to make airpods mic working
     extraConfig = ''
       .ifexists module-bluetooth-policy.so

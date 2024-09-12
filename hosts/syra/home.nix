@@ -49,6 +49,7 @@
     opentofu
     osu-lazer-bin
     prismlauncher
+    pulseaudio # TMP need pipewire alternative
     signal-desktop
     telegram-desktop
     thunderbirdPackages.thunderbird-115

@@ -4,8 +4,15 @@ with lib; let
   secret = types.submodule {
     options = {
       text = mkOption {
-        type = types.str;
+        type = types.nullOr types.str;
+        default = null;
         description = "encrypted secret file content";
+      };
+
+      sops = mkOption {
+        type = types.nullOr types.path;
+        default = null;
+        description = "sops encrypted secret file";
       };
 
       user = mkOption {
@@ -40,10 +47,23 @@ in {
   };
 
   config = {
-    systemd.services = attrsets.mapAttrs' (name: { text, user, group, mode, identity }:
+    assertions = lists.flatten (attrsets.mapAttrsToList (name: value: [
+      {
+        assertion = value.text != null -> value.sops == null;
+        message = "text and sops are mutually exclusive";
+      }
+      {
+        assertion = value.text != null || value.sops != null;
+        message = "neither text nor sops provided";
+      }
+    ]) config.clement.secrets);
+
+    systemd.services = attrsets.mapAttrs' (name: { text, sops, user, group, mode, identity }:
       let
         path = "/run/secrets/${name}";
-        file = pkgs.writeText name text;
+        decodeCmd = if text != null
+          then "${pkgs.age}/bin/age -d -i ${identity} -o ${path} ${pkgs.writeText name text}"
+          else "${pkgs.sops}/bin/sops --decrypt --output ${path} ${sops}";
       in {
         name = "secrets-${utils.escapeSystemdPath name}";
         value = {
@@ -51,10 +71,11 @@ in {
           serviceConfig.Type = "oneshot";
           script = ''
             rm -rf ${path}
-            ${pkgs.age}/bin/age -d -i ${identity} -o ${path} ${file}
+            ${decodeCmd}
             chown ${user}:${group} ${path}
             chmod ${mode} ${path}
           '';
+          environment.SOPS_AGE_KEY_FILE = mkIf (sops != null) "${identity}";
         };
       }
     ) config.clement.secrets;

@@ -119,7 +119,7 @@
         pkgs = import inputs.nixpkgs-unstable { inherit system; overlays = baseOverlays; };
       in {
         name = system;
-        value = pkgs.callPackage (import ./pkgs) {};
+        value = (import ./pkgs) { inherit (pkgs) callPackage; };
       }
     ) ["x86_64-linux" "aarch64-linux"]);
   };

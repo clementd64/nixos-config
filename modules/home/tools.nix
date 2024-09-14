@@ -20,8 +20,8 @@ in with lib; {
       gnumake
       go
       graphviz
-      hashicorp.packer
-      hashicorp.terraform
+      packer
+      terraform
       jq
       ldns
       nodejs_22

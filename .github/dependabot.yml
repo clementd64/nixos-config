@@ -7,3 +7,7 @@ updates:
     labels:
       - "dependencies"
       - "github_actions"
+    groups:
+      ci:
+        patterns:
+          - "*"

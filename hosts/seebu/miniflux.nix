@@ -12,9 +12,6 @@ in {
     description = "Miniflux service";
     requires = [ "postgresql.service" ];
     after = [ "network.target" "postgresql.service" ];
-    unitConfig = {
-      StopWhenUnneeded = true;
-    };
     serviceConfig = {
       Type = "notify";
       ExecStart = "${pkgs.miniflux}/bin/miniflux";

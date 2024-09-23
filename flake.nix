@@ -88,10 +88,6 @@
         system = "x86_64-linux";
       };
 
-      loska = mkStable {
-        system = "aarch64-linux";
-      };
-
       seebu = mkStable {
         system = "aarch64-linux";
       };

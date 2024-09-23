@@ -1,16 +1,16 @@
 { fetchStaticBinary }:
 fetchStaticBinary rec {
   name = "flyctl";
-  version = "0.2.112";
+  version = "0.3.2";
   aliases = [ "fly" ];
   arch = {
     x86_64-linux = {
       url = "https://github.com/superfly/flyctl/releases/download/v${version}/flyctl_${version}_Linux_x86_64.tar.gz";
-      sha256 = "1f031d72782f3003c538ae3964e7471784d3c342bd2431a7d8784da06bada27b";
+      sha256 = "380a4b5ea083107dcf101d56f4ad3913239aa9ccfe38e7c6b2c8f02856371c60";
     };
     aarch64-linux = {
       url = "https://github.com/superfly/flyctl/releases/download/v${version}/flyctl_${version}_Linux_arm64.tar.gz";
-      sha256 = "38c55abbe7d2235b5508254482592f4c3a424dc8a9b5848fad88e21f09f238f5";
+      sha256 = "63e04ba48dd6a87c6a5175b8e5104fcf22843af608e364c078d0b528856e6504";
     };
   };
 }

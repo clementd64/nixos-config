@@ -49,5 +49,6 @@ in with lib; {
     ];
 
     programs.dconf.enable = true;
+    services.autorandr.enable = true;
   };
 }

@@ -77,9 +77,6 @@
     mkUnstable = mkSystem {
       nixpkgs = inputs.nixpkgs-unstable;
       home-manager = inputs.home-manager-unstable;
-      modules = [
-        { clement.unstable.enable = true; }
-      ];
     };
 
     hosts = {

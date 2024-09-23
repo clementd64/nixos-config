@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
     auto-optimise-store = true;

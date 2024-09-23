@@ -14,7 +14,6 @@
     system/secrets.nix
     system/ssh.nix
     system/systemd-socket.nix
-    system/unstable.nix
     system/xserver.nix
   ];
 

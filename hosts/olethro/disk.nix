@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk.main = {
-      device = "/dev/disk/by-id/scsi-3601cbf9297b64a96842e1dbd072105fb";
+      device = "/dev/sda";
       type = "disk";
       content = {
         type = "gpt";

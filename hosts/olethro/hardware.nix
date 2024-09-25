@@ -17,12 +17,12 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-id/scsi-3601cbf9297b64a96842e1dbd072105fb-part1";
+    { device = "/dev/sda1";
       fsType = "vfat";
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-id/scsi-3601cbf9297b64a96842e1dbd072105fb-part2";
+    { device = "/dev/sda2";
       fsType = "btrfs";
       options = [ "subvol=nix" "noatime" "compress=zstd" ];
       neededForBoot = true;

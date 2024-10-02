@@ -1,15 +1,15 @@
 { fetchStaticBinary }:
 fetchStaticBinary rec {
   name = "minikube";
-  version = "1.33.1";
+  version = "1.34.0";
   arch = {
     x86_64-linux = {
       url = "https://github.com/kubernetes/minikube/releases/download/v${version}/minikube-linux-amd64";
-      sha256 = "386eb267e0b1c1f000f1b7924031557402fffc470432dc23b9081fc6962fd69b";
+      sha256 = "c4a625f9b4a4523e74b745b6aac8b0bf45062472be72cd38a23c91ec04d534c9";
     };
     aarch64-linux = {
       url = "https://github.com/kubernetes/minikube/releases/download/v${version}/minikube-linux-arm64";
-      sha256 = "0b6a17d230b4a605002981f1eba2f5aa3f2153361a1ab000c01e7a95830b40ba";
+      sha256 = "fbe55f563ac33328320d64c319f635386fe020eedf25cba8ebf3850048deb7ae";
     };
   };
 }

@@ -1,16 +1,16 @@
 { fetchStaticBinary }:
 fetchStaticBinary rec {
   name = "kubectl";
-  version = "1.30.2";
+  version = "1.31.1";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://dl.k8s.io/release/v${version}/bin/linux/amd64/kubectl";
-      sha256 = "c6e9c45ce3f82c90663e3c30db3b27c167e8b19d83ed4048b61c1013f6a7c66e";
+      sha256 = "57b514a7facce4ee62c93b8dc21fda8cf62ef3fed22e44ffc9d167eab843b2ae";
     };
     aarch64-linux = {
       url = "https://dl.k8s.io/release/v${version}/bin/linux/arm64/kubectl";
-      sha256 = "56becf07105fbacd2b70f87f3f696cfbed226cb48d6d89ed7f65ba4acae3f2f8";
+      sha256 = "3af2451191e27ecd4ac46bb7f945f76b71e934d54604ca3ffc7fe6f5dd123edb";
     };
   };
 }

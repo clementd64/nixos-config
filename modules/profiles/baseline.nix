@@ -28,7 +28,12 @@
     wait-online.anyInterface = true;
   };
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    loginShellInit = ''
+      set -g fish_greeting
+    '';
+  };
   environment.shells = with pkgs; [ fish ];
 
   users.mutableUsers = false;

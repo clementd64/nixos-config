@@ -1,16 +1,16 @@
 { fetchStaticBinary }:
 fetchStaticBinary rec {
   name = "talosctl";
-  version = "1.8.0";
+  version = "1.8.1";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://github.com/siderolabs/talos/releases/download/v${version}/talosctl-linux-amd64";
-      sha256 = "e15f78aaf08b613c797ef350051b26271609890631ce51e50907f6348ac2d823";
+      sha256 = "c44180a3a4e91325a820464a9bff5ba3e5e86840ca8faa1d2f2e1340ecdd9271";
     };
     aarch64-linux = {
       url = "https://github.com/siderolabs/talos/releases/download/v${version}/talosctl-linux-arm64";
-      sha256 = "ab0880cbc0da9566b4d0d0dbaf9cef5a567d03fa282f95d3de22e03989937c73";
+      sha256 = "db684df5beab5a87ed51c2ba2868d8c10268338c9b424a01d3c9af4e3e17a184";
     };
   };
 }

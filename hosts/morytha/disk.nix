@@ -1,20 +1,14 @@
 {
   disko.devices = {
     disk.main = {
-      device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_53251754";
+      device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_53265838";
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          ESP = {
-            name = "ESP";
-            size = "512M";
-            type = "EF00";
-            content = {
-              type = "filesystem";
-              format = "vfat";
-              mountpoint = "/boot";
-            };
+          boot = {
+            size = "1M";
+            type = "EF02";
           };
           main = {
             size = "100%";
@@ -22,6 +16,10 @@
               type = "btrfs";
               extraArgs = [ "-f" ];
               subvolumes = {
+                "/boot" = {
+                  mountpoint = "/boot";
+                  mountOptions = [ "compress=zstd" "noatime" ];
+                };
                 "/nix" = {
                   mountpoint = "/nix";
                   mountOptions = [ "compress=zstd" "noatime" ];

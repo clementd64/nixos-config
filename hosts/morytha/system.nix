@@ -5,7 +5,8 @@
     ./hardware.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_53265838";
 
   systemd.network = {
     networks."10-enp1s0" = {

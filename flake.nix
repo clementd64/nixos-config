@@ -36,7 +36,6 @@
       # 3. Auto hostname injection (avoid duplication)
       name: nixpkgs.lib.nixosSystem {
         inherit system;
-
         modules = [
           {
             networking.hostName = name;
@@ -81,7 +80,7 @@
 
     hosts = {
       ekidno = mkStable {
-        system = "aarch64-linux";
+        system = "x86_64-linux";
       };
 
       flamii = mkStable {

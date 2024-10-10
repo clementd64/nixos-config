@@ -32,7 +32,7 @@
       # 1. Factory for mkStable and mkUnstable
       { nixpkgs, home-manager, modules ? [], overlays ? [] }:
       # 2. Hosts configuration
-      { system, home ? false }:
+      { system }:
       # 3. Auto hostname injection (avoid duplication)
       name: nixpkgs.lib.nixosSystem {
         inherit system;
@@ -47,22 +47,20 @@
           ++ modules
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/system.nix) ./hosts/${name}/system.nix
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix
-          ++ nixpkgs.lib.optionals home [
+          ++ nixpkgs.lib.optionals (builtins.pathExists ./hosts/${name}/home.nix) [
             home-manager.nixosModule
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.clement = with nixpkgs.lib; {
-                imports = module-list.home
-                  ++ optional (builtins.pathExists ./hosts/${name}/home.nix) ./hosts/${name}/home.nix;
+                imports = [./hosts/${name}/home.nix]
+                  ++ module-list.home;
 
                 clement = {
                   fish.enable = mkDefault true;
                   htop.enable = mkDefault true;
                   starship.enable = mkDefault true;
                 };
-
-                home.stateVersion = mkDefault "23.11";
               };
             }
           ];
@@ -101,7 +99,6 @@
 
       syra = mkUnstable {
         system = "x86_64-linux";
-        home = true;
       };
     };
   in {

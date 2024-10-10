@@ -1,17 +1,17 @@
 { fetchStaticBinary }:
 fetchStaticBinary rec {
   name = "helm";
-  version = "3.16.1";
+  version = "3.16.2";
   commonCompletion = true;
   arch = {
     x86_64-linux = {
       url = "https://get.helm.sh/helm-v${version}-linux-amd64.tar.gz";
-      sha256 = "e57e826410269d72be3113333dbfaac0d8dfdd1b0cc4e9cb08bdf97722731ca9";
+      sha256 = "9318379b847e333460d33d291d4c088156299a26cd93d570a7f5d0c36e50b5bb";
       path = "linux-amd64/helm";
     };
     aarch64-linux = {
       url = "https://get.helm.sh/helm-v${version}-linux-arm64.tar.gz";
-      sha256 = "780b5b86f0db5546769b3e9f0204713bbdd2f6696dfdaac122fbe7f2f31541d2";
+      sha256 = "1888301aeb7d08a03b6d9f4d2b73dcd09b89c41577e80e3455c113629fc657a4";
       path = "linux-arm64/helm";
     };
   };

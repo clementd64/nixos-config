@@ -30,6 +30,8 @@ in with lib; {
 
         vim = mkIf config.clement.neovim.enable "nvim";
         v = mkIf config.clement.neovim.enable "nvim";
+
+        sudo = "run0";
       };
 
       functions = {

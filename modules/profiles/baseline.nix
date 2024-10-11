@@ -48,6 +48,15 @@
     wheelNeedsPassword = false;
   };
 
+  # TODO(24.11): cleanup
+  security.polkit.extraConfig = lib.mkIf (config.security.polkit.enable && lib.versionAtLeast config.system.nixos.release "24.11") ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.systemd1.manage-units" && subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
   programs.command-not-found.enable = false;
   environment.defaultPackages = lib.mkForce [];
 

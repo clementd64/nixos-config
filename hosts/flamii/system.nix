@@ -36,5 +36,7 @@
     "2a0c:b640:8::ffff" # Servperso
   ];
 
+  clement.nat64.enable = true;
+
   system.stateVersion = "23.11";
 }

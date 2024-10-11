@@ -17,6 +17,7 @@ in {
   kubernetes-helm = callPackage ./kubernetes/helm.nix {};
   minikube = callPackage ./kubernetes/minikube.nix {};
   opentofu = callPackage ./opentofu.nix {};
+  proxy64 = callPackage ./proxy64.nix {};
   restic = callPackage ./restic.nix {};
   sops = callPackage ./sops.nix {};
   talosctl = callPackage ./kubernetes/talosctl.nix {};

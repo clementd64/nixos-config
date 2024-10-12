@@ -19,5 +19,21 @@
     };
   };
 
+  clement.factorio = {
+    enable = true;
+    savePath = "/var/lib/factorio/test.zip";
+    serverSettings = {
+      name = "";
+      description = "";
+      visibility = {
+        public = false;
+        lan = false;
+      };
+      require_user_verification = true;
+    };
+    whitelist = [ "Ashuta" ];
+    adminlist = [ "Ashuta" ];
+  };
+
   system.stateVersion = "24.05";
 }

@@ -25,7 +25,7 @@
                   mountOptions = [ "compress=zstd" "noatime" ];
                 };
                 "/factorio" = {
-                  mountpoint = "/var/lib/factorio";
+                  mountpoint = "/var/lib/private/factorio";
                   mountOptions = [ "compress=zstd" "noatime" ];
                 };
               };

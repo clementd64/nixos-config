@@ -4,7 +4,7 @@ let
   hashicorp = callPackage ./hashicorp {};
   qemu-user-static = callPackage ./qemu-user-static.nix {};
 in {
-  inherit (factorio) factorio factorio-env mapshot;
+  inherit (factorio) factorio factorio-env factorio-headless mapshot;
   inherit (hashicorp) packer terraform;
   inherit (qemu-user-static) qemu-aarch64-static;
   distribution = callPackage ./kubernetes/distribution.nix {};

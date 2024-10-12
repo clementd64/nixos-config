@@ -1,6 +1,13 @@
-# Wrapper that provide the necessary environment for Factorio to run
-{ buildFHSEnv, fetchStaticBinary }:
+{
+  autoPatchelfHook,
+  buildFHSEnv,
+  fetchStaticBinary,
+  fetchurl,
+  stdenvNoCC,
+  unzip,
+}:
 let
+  # Wrapper that provide the necessary environment for Factorio to run
   mkFactorioEnv = { name, runScript, extraPackages ? [] }: buildFHSEnv {
     inherit name runScript;
     targetPkgs = pkgs: (with pkgs; [
@@ -40,5 +47,25 @@ in {
     name = "mapshot";
     extraPackages = [ mapshot-bin ];
     runScript = "mapshot";
+  };
+
+  factorio-headless = stdenvNoCC.mkDerivation rec {
+    pname = "factorio";
+    version = "1.1.110";
+
+    src = fetchurl {
+      name = "factorio-headless-${version}.tar.xz";
+      url = "https://factorio.com/get-download/${version}/headless/linux64";
+      sha256 = "485fe6db36e5decd7dd0d70e7c97e61f818100fa3e48d87884b287027c7a646a";
+    };
+
+    dontBuild = true;
+    nativeBuildInputs = [ autoPatchelfHook unzip ];
+
+    installPhase = ''
+      mkdir -p $out/{bin,usr/share/factorio}
+      cp -a data $out/usr/share/factorio
+      cp -a bin/x64/factorio $out/bin/factorio
+    '';
   };
 }

@@ -28,7 +28,7 @@
       options = [ "subvol=nix" "noatime" "compress=zstd" ];
     };
 
-  fileSystems."/var/lib/factorio" =
+  fileSystems."/var/lib/private/factorio" =
     { device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_53265838-part2";
       fsType = "btrfs";
       options = [ "subvol=factorio" "noatime" "compress=zstd" ];

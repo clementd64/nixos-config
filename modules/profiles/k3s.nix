@@ -59,7 +59,7 @@ in with lib; {
 
     # Required for cilium IPv6
     boot.kernelModules = [ "ip6_tables" "ip6table_mangle" "ip6table_raw" "ip6table_filter" ];
-    # Cilium use asymesmetric routing. rp_filter can still be enabled per interface with sysctl
+    # Cilium use asymmetric routing. rp_filter can still be enabled per interface with sysctl
     networking.firewall.checkReversePath = false;
 
     networking.firewall.extraCommands = ''

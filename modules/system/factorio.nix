@@ -21,7 +21,7 @@ with lib; let
 in {
   options.clement.factorio = {
     enable = mkEnableOption "factorio";
-    savePath = mkOption {
+    saveFile = mkOption {
       type = types.str;
     };
     serverSettings = mkOption {
@@ -44,11 +44,12 @@ in {
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       unitConfig = {
-        ConditionPathExists = cfg.savePath;
+        # Must use private path as symlink is created on start
+        ConditionPathExists = "/var/lib/private/factorio/${cfg.saveFile}";
       };
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.factorio-headless}/bin/factorio --config ${settings} --server-settings ${serverSettingsFile} --start-server ${cfg.savePath} ${whitelistOption} ${adminlistOption}";
+        ExecStart = "${pkgs.factorio-headless}/bin/factorio --config ${settings} --server-settings ${serverSettingsFile} --start-server /var/lib/factorio/${cfg.saveFile} ${whitelistOption} ${adminlistOption}";
         Restart = "on-failure";
         Group = "factorio";
         StateDirectory = "factorio";

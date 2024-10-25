@@ -51,12 +51,12 @@ in {
 
   factorio-headless = stdenvNoCC.mkDerivation rec {
     pname = "factorio";
-    version = "1.1.110";
+    version = "2.0.10";
 
     src = fetchurl {
       name = "factorio-headless-${version}.tar.xz";
       url = "https://factorio.com/get-download/${version}/headless/linux64";
-      sha256 = "485fe6db36e5decd7dd0d70e7c97e61f818100fa3e48d87884b287027c7a646a";
+      sha256 = "2d7dd212fa6f715218a5e33bad7d593af8998fa7bf7ce727343159ee1f8c23f4";
     };
 
     dontBuild = true;

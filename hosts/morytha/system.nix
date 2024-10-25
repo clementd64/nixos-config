@@ -21,7 +21,7 @@
 
   clement.factorio = {
     enable = true;
-    savePath = "/var/lib/factorio/test.zip";
+    saveFile = "test.zip";
     serverSettings = {
       name = "";
       description = "";

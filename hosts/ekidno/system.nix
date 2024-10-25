@@ -112,5 +112,7 @@
     "2001:7f8:f2:e1::112" # AS112 LocIX FRA
   ];
 
+  clement.http2https.enable = true;
+
   system.stateVersion = "23.11";
 }

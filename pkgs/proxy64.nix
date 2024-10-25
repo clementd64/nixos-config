@@ -6,8 +6,8 @@ buildGo123Module {
   src = fetchFromGitHub {
       owner = "clementd64";
       repo = "proxy64";
-      rev = "fe384ed96116d83b98a07c78e759f5f03361621a";
-      hash = "sha256-8rWy/AQOCtU55T+S3BaT97YOUVUQN8Hkf78+sf98pL4=";
+      rev = "fac05b4deb44e53206db480895f240a5dea43f43";
+      hash = "sha256-9t4qbpUXgXAl9zzYhaaqsce+kiv1SGm/YqHfU4eFhuY=";
   };
 
   vendorHash = null;

@@ -52,7 +52,6 @@
     pulseaudio # TMP need pipewire alternative
     signal-desktop
     telegram-desktop
-    thunderbirdPackages.thunderbird-115
     vlc
     wireguard-tools
   ];

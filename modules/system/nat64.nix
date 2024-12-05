@@ -9,6 +9,10 @@ in {
       type = types.str;
       default = "64:ff9b::/96";
     };
+    allowed = mkOption {
+      type = types.listOf types.str;
+      default = [];
+    };
   };
 
   config = mkIf cfg.enable {
@@ -57,5 +61,15 @@ in {
         ];
       };
     };
+
+    networking.ipset."nat64-allowed" = mkIf (builtins.length cfg.allowed > 0) {
+      family = "ipv6";
+      type = "hash:ip";
+      set = cfg.allowed;
+    };
+
+    networking.firewall.extraCommands = mkIf (builtins.length cfg.allowed > 0) ''
+      ip6tables -A nixos-fw -d ${cfg.prefix} -p tcp -m set --match-set ${config.networking.ipset."nat64-allowed".name} src -j ACCEPT
+    '';
   };
 }

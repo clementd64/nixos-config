@@ -2,6 +2,7 @@
   system = [
     profiles/baseline.nix
     profiles/container.nix
+    profiles/edge-router.nix
     profiles/k3s.nix
     profiles/router
     profiles/server.nix

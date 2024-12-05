@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 {
   clement.profile.router.enable = true;
+  clement.profile.edge-router.enable = true;
   imports = [
     ./hardware.nix
   ];

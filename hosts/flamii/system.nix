@@ -1,6 +1,7 @@
 { lib, ... }:
 {
   clement.profile.router.enable = true;
+  clement.profile.edge-router.enable = true;
   imports = [
     ./hardware.nix
   ];
@@ -35,8 +36,6 @@
   clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:8::ffff" # Servperso
   ];
-
-  clement.nat64.enable = true;
 
   system.stateVersion = "23.11";
 }

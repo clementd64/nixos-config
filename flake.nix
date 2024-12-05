@@ -92,6 +92,10 @@
       syra = mkUnstable {
         system = "x86_64-linux";
       };
+
+      tarzan = mkUnstable {
+        system = "x86_64-linux";
+      };
     };
   in {
     nixosConfigurations = builtins.mapAttrs (name: mkSystem: mkSystem name) hosts;

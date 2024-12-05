@@ -3,7 +3,6 @@
   clement.profile.server.enable = true;
   imports = [
     ./hardware.nix
-    ./miniflux.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -31,7 +30,6 @@
     authentication = pkgs.lib.mkOverride 10 ''
       #type  database  DBuser    address  auth-method
       local  all       postgres           peer
-      local  miniflux  miniflux           peer
     '';
   };
 
@@ -39,9 +37,7 @@
     enable = true;
     tunnels.aegis = {
       credentialsFile = "/run/secrets/cloudflared";
-      ingress = {
-        "miniflux.segfault.ovh" = "unix:${config.clement.sockets.miniflux.listen}";
-      };
+      ingress = {};
       default = "http_status:404";
     };
   };

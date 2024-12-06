@@ -13,6 +13,13 @@ in {
       type = types.listOf types.str;
       default = [];
     };
+
+    dns64 = {
+      enable = mkEnableOption "dns64";
+      address = mkOption {
+        type = types.str;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -60,16 +67,54 @@ in {
           else { routeConfig = { Type = "local"; Destination = cfg.prefix; }; })
         ];
       };
+
+      netdevs."30-dns64" = mkIf cfg.dns64.enable {
+        netdevConfig = {
+          Name = "dns64";
+          Kind = "dummy";
+        };
+      };
+
+      networks."30-dns64" = mkIf cfg.dns64.enable {
+        matchConfig.Name = "dns64";
+        networkConfig = {
+          Address = [
+            "${cfg.dns64.address}/128"
+          ];
+        };
+      };
     };
 
     networking.ipset."nat64-allowed" = mkIf (builtins.length cfg.allowed > 0) {
       family = "ipv6";
-      type = "hash:ip";
+      type = "hash:net";
       set = cfg.allowed;
     };
 
-    networking.firewall.extraCommands = mkIf (builtins.length cfg.allowed > 0) ''
-      ip6tables -A nixos-fw -d ${cfg.prefix} -p tcp -m set --match-set ${config.networking.ipset."nat64-allowed".name} src -j ACCEPT
-    '';
+    networking.firewall.extraCommands = mkIf (builtins.length cfg.allowed > 0) (mkMerge [
+      ''ip6tables -A nixos-fw -d ${cfg.prefix} -p tcp -m set --match-set ${config.networking.ipset."nat64-allowed".name} src -j ACCEPT''
+      (mkIf cfg.dns64.enable ''
+        ip6tables -A nixos-fw -d ${cfg.dns64.address} -p udp --dport 53 -m set --match-set ${config.networking.ipset."nat64-allowed".name} src -j ACCEPT
+      '')
+    ]);
+
+    services.coredns = mkIf cfg.dns64.enable {
+      enable = true;
+      config = ''
+        . {
+          bind ${cfg.dns64.address}
+          forward . tls://2606:4700:4700::1111 tls://2606:4700:4700::1001 tls://1.1.1.1 tls://1.0.0.1 {
+            tls_servername cloudflare-dns.com
+          }
+          dns64 {
+            prefix ${cfg.prefix}
+          }
+          errors
+          loadbalance
+          cache
+          loop
+        }
+      '';
+    };
   };
 }

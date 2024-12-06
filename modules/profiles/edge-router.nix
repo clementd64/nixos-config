@@ -12,7 +12,13 @@ in with lib; {
     clement.nat64 = {
       enable = true;
       prefix = "2a0c:b641:2b0::64:0:0/96";
-      allowed = [];
+      allowed = [
+        "2001:bc8:1640:5d6::/64"
+      ];
+      dns64 = {
+        enable = true;
+        address = "2a0c:b641:2b0::64:0:53";
+      };
     };
   };
 }

@@ -12,6 +12,10 @@
       matchConfig.Name = "ens2";
       networkConfig = {
         DHCP = "yes";
+        DNS = "2a0c:b641:2b0::64:0:53";
+      };
+      ipv6AcceptRAConfig = {
+        UseDNS = "no";
       };
     };
   };

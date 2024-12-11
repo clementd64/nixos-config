@@ -20,5 +20,10 @@
     };
   };
 
+  swapDevices = [ {
+    device = "/nix/swap";
+    size = 2*1024;
+  } ];
+
   system.stateVersion = "24.05";
 }

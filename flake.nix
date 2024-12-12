@@ -93,7 +93,7 @@
         system = "x86_64-linux";
       };
 
-      tarzan = mkUnstable {
+      tarzan = mkStable {
         system = "x86_64-linux";
       };
     };

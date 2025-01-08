@@ -39,11 +39,6 @@ in with lib; {
         mkcd = "mkdir -p $argv && cd $argv";
       };
 
-      # TMP(ghostty): add .local/bin to PATH
-      shellInit = ''
-        fish_add_path $HOME/.local/bin
-      '';
-
       interactiveShellInit = ''
         if string match -q "$TERM_PROGRAM" "vscode"
           function cd

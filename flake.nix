@@ -16,6 +16,7 @@
 
     impermanence.url = "github:nix-community/impermanence";
     zig.url = "github:mitchellh/zig-overlay";
+    ghostty.url = "github:ghostty-org/ghostty";
   };
 
   outputs = { ... }@inputs:
@@ -24,6 +25,7 @@
 
     baseOverlays = [
       inputs.zig.overlays.default
+      inputs.ghostty.overlays.default
       (import ./overlays/pkgs.nix)
       (import ./overlays/lib.nix)
     ];

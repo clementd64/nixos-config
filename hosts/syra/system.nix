@@ -124,6 +124,7 @@
   clement.xserver.enable = true;
   services.xserver.dpi = 140;
 
+  services.tailscale.enable = true;
   services.flatpak.enable = true;
   xdg.portal = {
     enable = true;

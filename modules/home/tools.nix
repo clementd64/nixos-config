@@ -14,37 +14,32 @@ in with lib; {
       deno
       dig
       file
+      fluxcd
       flyctl
       gcc
       gh
       gnumake
       go
       graphviz
-      packer
-      terraform
       jq
+      kubectl
+      kubernetes-helm
       ldns
       nodejs_22
       openssl
+      packer
       python312
       python312Packages.requests
       rclone
       restic
       rsync
       sops
+      terraform
       unzip
       wget
       whois
       zigpkgs.master
       zls
-
-      # Kubernetes
-      fluxcd
-      kind
-      kubectl
-      kubernetes-helm
-      minikube
-      talosctl
     ];
   };
 }

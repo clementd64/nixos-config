@@ -3,7 +3,7 @@
 let cfg = config.clement.htop;
 in with lib; {
   options.clement.htop = {
-    enable = mkEnableOption "Enable htop";
+    enable = mkEnableOption "htop";
   };
 
   config = mkIf cfg.enable {

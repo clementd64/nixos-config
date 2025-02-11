@@ -3,7 +3,7 @@
 let cfg = config.clement.ssh;
 in with lib; {
   options.clement.ssh = {
-    enable = mkEnableOption "Enable ssh server";
+    enable = mkEnableOption "ssh server";
   };
 
   config = mkIf cfg.enable {

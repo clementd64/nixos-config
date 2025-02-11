@@ -20,7 +20,7 @@ let
   };
 in with lib; {
   options.clement.helix = {
-    enable = mkEnableOption "Enable helix";
+    enable = mkEnableOption "helix";
   };
 
   config = mkIf cfg.enable {

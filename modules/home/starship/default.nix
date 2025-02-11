@@ -3,7 +3,7 @@
 let cfg = config.clement.starship;
 in with lib; {
   options.clement.starship = {
-    enable = mkEnableOption "Enable starship";
+    enable = mkEnableOption "starship";
   };
 
   config = mkIf cfg.enable {

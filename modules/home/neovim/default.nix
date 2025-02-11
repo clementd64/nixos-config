@@ -3,7 +3,7 @@
 let cfg = config.clement.neovim;
 in with lib; {
   options.clement.neovim = {
-    enable = mkEnableOption "Enable neovim";
+    enable = mkEnableOption "neovim";
   };
 
   config = mkIf cfg.enable {

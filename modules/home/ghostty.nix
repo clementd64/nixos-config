@@ -34,7 +34,7 @@ let
 
 in with lib; {
   options.clement.ghostty = {
-    enable = mkEnableOption "Enable ghostty";
+    enable = mkEnableOption "ghostty";
 
     config = mkOption {
       type = with types; types.attrsOf (oneOf [ str int bool ]);

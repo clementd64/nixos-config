@@ -3,7 +3,7 @@
 let cfg = config.clement.alacritty;
 in with lib; {
   options.clement.alacritty = {
-    enable = mkEnableOption "Enable alacritty";
+    enable = mkEnableOption "alacritty";
 
     size = mkOption {
       type = types.int;

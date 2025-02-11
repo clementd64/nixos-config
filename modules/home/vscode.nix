@@ -3,7 +3,7 @@
 let cfg = config.clement.vscode;
 in with lib; {
   options.clement.vscode = {
-    enable = mkEnableOption "Enable vscode";
+    enable = mkEnableOption "vscode";
   };
 
   config = mkIf cfg.enable {

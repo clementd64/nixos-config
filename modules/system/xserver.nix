@@ -3,7 +3,7 @@
 let cfg = config.clement.xserver;
 in with lib; {
   options.clement.xserver = {
-    enable = mkEnableOption "Enable xserver";
+    enable = mkEnableOption "xserver";
   };
 
   config = mkIf cfg.enable {

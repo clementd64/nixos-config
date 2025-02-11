@@ -3,7 +3,7 @@
 let cfg = config.clement.rofi;
 in with lib; {
   options.clement.rofi = {
-    enable = mkEnableOption "Enable rofi";
+    enable = mkEnableOption "rofi";
 
     size = mkOption {
       type = types.int;

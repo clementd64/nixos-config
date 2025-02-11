@@ -3,7 +3,7 @@
 let cfg = config.clement.fish;
 in with lib; {
   options.clement.fish = {
-    enable = mkEnableOption "Enable fish";
+    enable = mkEnableOption "fish";
   };
 
   config = mkIf cfg.enable {

@@ -3,7 +3,7 @@
 let cfg = config.clement.docker;
 in with lib; {
   options.clement.docker = {
-    enable = mkEnableOption "Enable Docker";
+    enable = mkEnableOption "Docker";
 
     pools = {
       ipv4 = {
@@ -29,7 +29,7 @@ in with lib; {
     };
 
     gvisor = {
-      enable = mkEnableOption "Enable gVisor";
+      enable = mkEnableOption "gVisor";
 
       platform = mkOption {
         type = types.str;

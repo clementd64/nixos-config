@@ -3,7 +3,7 @@
 let cfg = config.clement.tools;
 in with lib; {
   options.clement.tools = {
-    enable = mkEnableOption "Enable tools";
+    enable = mkEnableOption "tools";
   };
 
   config = mkIf cfg.enable {

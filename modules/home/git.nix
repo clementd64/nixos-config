@@ -3,7 +3,7 @@
 let cfg = config.clement.git;
 in with lib; {
   options.clement.git = {
-    enable = mkEnableOption "Enable git";
+    enable = mkEnableOption "git";
   };
 
   config = mkIf cfg.enable {

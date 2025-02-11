@@ -6,7 +6,7 @@ with lib; let
   configPath = pkgs.writeText "config.json" (builtins.toJSON cfg.config);
 in {
   options.clement.k3s = {
-    enable = mkEnableOption "Enable k3s";
+    enable = mkEnableOption "k3s";
 
     role = mkOption {
       type = types.enum [ "server" "agent" ];

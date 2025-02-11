@@ -3,7 +3,7 @@
 let cfg = config.clement.dunst;
 in with lib; {
   options.clement.dunst = {
-    enable = mkEnableOption "Enable dunst";
+    enable = mkEnableOption "dunst";
 
     size = mkOption {
       type = types.int;

@@ -79,6 +79,10 @@
     };
 
     hosts = {
+      auresco = mkStable {
+        system = "x86_64-linux";
+      };
+
       ekidno = mkStable {
         system = "x86_64-linux";
       };

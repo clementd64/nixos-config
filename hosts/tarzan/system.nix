@@ -1,9 +1,6 @@
 { config, pkgs, lib, ... }:
 {
   clement.profile.server.enable = true;
-  imports = [
-    ./hardware.nix
-  ];
 
   boot.loader.systemd-boot.enable = true;
 

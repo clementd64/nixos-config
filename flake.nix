@@ -48,6 +48,7 @@
         ] ++ module-list.system
           ++ modules
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/system.nix) ./hosts/${name}/system.nix
+          ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/hardware.nix) ./hosts/${name}/hardware.nix
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix
           ++ nixpkgs.lib.optionals (builtins.pathExists ./hosts/${name}/home.nix) [
             home-manager.nixosModule

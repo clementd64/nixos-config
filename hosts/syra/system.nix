@@ -1,9 +1,5 @@
 { pkgs, lib, ... }:
 {
-  imports = [
-    ./hardware.nix
-  ];
-
   boot.loader.systemd-boot.enable = true;
 
   networking.wireless.iwd = {

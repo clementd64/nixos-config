@@ -2,9 +2,6 @@
 {
   clement.profile.router.enable = true;
   clement.profile.edge-router.enable = true;
-  imports = [
-    ./hardware.nix
-  ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";

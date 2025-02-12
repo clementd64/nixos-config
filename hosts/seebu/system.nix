@@ -30,7 +30,6 @@
     authentication = pkgs.lib.mkOverride 10 ''
       #type  database  DBuser    address  auth-method
       local  all       postgres           peer
-      local  miniflux  miniflux           peer
     '';
   };
 

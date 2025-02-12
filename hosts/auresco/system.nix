@@ -23,5 +23,16 @@
     };
   };
 
+  clement.profile.k3s = {
+    enable = true;
+    ipv6.pods = "2a01:4f8:c012:79f8::1:0/116";
+  };
+
+  environment.persistence."/nix/persist" = {
+    directories = [
+      "/var/lib/rancher/k3s"
+    ];
+  };
+
   system.stateVersion = "24.11";
 }

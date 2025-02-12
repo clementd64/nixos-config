@@ -36,7 +36,6 @@ in with lib; {
       config = {
         disable = [ "servicelb" "traefik" "local-storage" ];
         disable-helm-controller = true;
-        disable-kube-proxy = true;
         flannel-backend = "wireguard-native";
         secrets-encryption = true;
 

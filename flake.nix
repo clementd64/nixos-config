@@ -51,7 +51,7 @@
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}/hardware.nix) ./hosts/${name}/hardware.nix
           ++ nixpkgs.lib.optional (builtins.pathExists ./hosts/${name}.nix) ./hosts/${name}.nix
           ++ nixpkgs.lib.optionals (builtins.pathExists ./hosts/${name}/home.nix) [
-            home-manager.nixosModule
+            home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

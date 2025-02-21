@@ -144,9 +144,4 @@
   };
 
   system.stateVersion = "23.11";
-
-  networking.extraHosts =
-    ''
-      51.210.122.99 traefik.spacefoot.net lldap.spacefoot.net
-    '';
 }

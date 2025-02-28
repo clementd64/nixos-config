@@ -95,7 +95,7 @@
     pulse.enable = true;
   };
 
-  hardware.pulseaudio = {
+  services.pulseaudio = {
     enable = false;
     # Auto switch between A2DP and HFP to make airpods mic working
     extraConfig = ''

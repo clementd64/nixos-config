@@ -5,6 +5,7 @@
     profiles/edge-router.nix
     profiles/k3s.nix
     profiles/router
+    profiles/mesh.nix
     profiles/server.nix
     system/container.nix
     system/docker.nix

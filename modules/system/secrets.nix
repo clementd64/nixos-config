@@ -15,6 +15,12 @@ with lib; let
         description = "sops encrypted secret file";
       };
 
+      extract = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "document sub-part to extract";
+      };
+
       user = mkOption {
         type = types.str;
         default = "root";
@@ -39,6 +45,12 @@ with lib; let
         description = "age identity file";
       };
 
+      before = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        description = "services that should be started after the secret is decrypted";
+      };
+
       path = mkOption {
         type = types.str;
         default = "/run/secrets/${name}";
@@ -54,9 +66,10 @@ in {
   };
 
   config = {
-    systemd.services = attrsets.mapAttrs' (name: { file, user, group, mode, key, path, ... }: {
+    systemd.services = attrsets.mapAttrs' (name: { file, extract, user, group, mode, key, before, path, ... }: {
       name = "secrets-${utils.escapeSystemdPath name}";
       value = {
+        inherit before;
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Type = "oneshot";
@@ -64,7 +77,7 @@ in {
         };
         script = ''
           rm -rf ${path}
-          ${pkgs.sops}/bin/sops --decrypt --output ${path} ${file}
+          ${pkgs.sops}/bin/sops --decrypt --output ${path} ${if extract != null then "--extract '${extract}'" else ""} ${file}
           chown ${user}:${group} ${path}
           chmod ${mode} ${path}
         '';

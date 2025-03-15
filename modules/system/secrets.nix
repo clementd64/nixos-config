@@ -1,17 +1,17 @@
 { config, lib, pkgs, utils, ... }:
 
 with lib; let
-  secret = types.submodule {
+  secret = types.submodule ({ name, config, ... }: {
     options = {
       text = mkOption {
-        type = types.nullOr types.str;
-        default = null;
-        description = "encrypted secret file content";
+        type = types.str;
+        default = "";
+        description = "sops encrypted secret file";
       };
 
-      sops = mkOption {
-        type = types.nullOr types.path;
-        default = null;
+      file = mkOption {
+        type = types.path;
+        default = pkgs.writeText name config.text;
         description = "sops encrypted secret file";
       };
 
@@ -33,13 +33,20 @@ with lib; let
         description = "permissions of the secret file";
       };
 
-      identity = mkOption {
+      key = mkOption {
         type = types.str;
-        default = "/etc/ssh/ssh_host_ed25519_key";
+        default = "/nix/key.txt"; # default to /nix because tmpfs as root
         description = "age identity file";
       };
+
+      path = mkOption {
+        type = types.str;
+        default = "/run/secrets/${name}";
+        internal = true;
+        readOnly = true;
+      };
     };
-  };
+  });
 in {
   options.clement.secrets = mkOption {
     type = types.attrsOf secret;
@@ -47,38 +54,24 @@ in {
   };
 
   config = {
-    assertions = lists.flatten (attrsets.mapAttrsToList (name: value: [
-      {
-        assertion = value.text != null -> value.sops == null;
-        message = "text and sops are mutually exclusive";
-      }
-      {
-        assertion = value.text != null || value.sops != null;
-        message = "neither text nor sops provided";
-      }
-    ]) config.clement.secrets);
-
-    systemd.services = attrsets.mapAttrs' (name: { text, sops, user, group, mode, identity }:
-      let
-        path = "/run/secrets/${name}";
-        decodeCmd = if text != null
-          then "${pkgs.age}/bin/age -d -i ${identity} -o ${path} ${pkgs.writeText name text}"
-          else "${pkgs.sops}/bin/sops --decrypt --output ${path} ${sops}";
-      in {
-        name = "secrets-${utils.escapeSystemdPath name}";
-        value = {
-          wantedBy = [ "multi-user.target" ];
-          serviceConfig.Type = "oneshot";
-          script = ''
-            rm -rf ${path}
-            ${decodeCmd}
-            chown ${user}:${group} ${path}
-            chmod ${mode} ${path}
-          '';
-          environment.SOPS_AGE_KEY_FILE = mkIf (sops != null) "${identity}";
+    systemd.services = attrsets.mapAttrs' (name: { file, user, group, mode, key, path, ... }: {
+      name = "secrets-${utils.escapeSystemdPath name}";
+      value = {
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
         };
-      }
-    ) config.clement.secrets;
+        script = ''
+          rm -rf ${path}
+          ${pkgs.sops}/bin/sops --decrypt --output ${path} ${file}
+          chown ${user}:${group} ${path}
+          chmod ${mode} ${path}
+        '';
+        preStop = "rm -rf ${path}";
+        environment.SOPS_AGE_KEY_FILE = "${key}";
+      };
+    }) config.clement.secrets;
 
     # Ensure /run/secrets exist
     systemd.tmpfiles.rules = [

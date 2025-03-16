@@ -25,6 +25,16 @@ with lib;
           AllowedIPs = ["fd34:ad42:6ef8::2/128"];
           Endpoint = "[2a01:4f8:c012:79f8::1]:57205";
         };
+        ekidno = {
+          PublicKey = "Wf/cdH/76KByhaPrgJ3g5TssQj9YK++pDo0ehy86ZnM=";
+          AllowedIPs = ["fd34:ad42:6ef8::4/128"];
+          Endpoint = "[2a0c:b640:13:42::1]:57205";
+        };
+        flamii = {
+          PublicKey = "1YQCbqn3jNHkV5ennY3JVoTeSPGtQe8TKwM/GHgDlAw=";
+          AllowedIPs = ["fd34:ad42:6ef8::3/128"];
+          Endpoint = "[2a0c:b640:8:82::1]:57205";
+        };
         seebu = {
           PublicKey = "jJvJIRLPAkKkddMPN+dNPtvMk1bo2sN/BmIHmPfOPCE=";
           AllowedIPs = ["fd34:ad42:6ef8::1/128"];

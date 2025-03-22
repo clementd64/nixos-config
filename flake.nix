@@ -84,6 +84,10 @@
         system = "aarch64-linux";
       };
 
+      cadensia = mkStable {
+        system = "x86_64-linux";
+      };
+
       ekidno = mkStable {
         system = "x86_64-linux";
       };

@@ -23,7 +23,7 @@
 
   clement.mesh = {
     secretsFile = ./secrets.json;
-    address = "fd34:ad42:6ef8::2";
+    address = "fd34:ad42:6ef8::5";
     port = 57205;
   };
 

@@ -21,5 +21,11 @@
 
   clement.docker.enable = true;
 
+  clement.mesh = {
+    secretsFile = ./secrets.json;
+    address = "fd34:ad42:6ef8::2";
+    port = 57205;
+  };
+
   system.stateVersion = "24.11";
 }

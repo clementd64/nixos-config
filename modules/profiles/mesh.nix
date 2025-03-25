@@ -25,6 +25,11 @@ with lib;
           AllowedIPs = ["fd34:ad42:6ef8::2/128"];
           Endpoint = "[2a01:4f8:c012:79f8::1]:57205";
         };
+        cadensia = {
+          PublicKey = "13nqNA855D4a8+vfcvLP/Lxk81mOjB82FTPmG8fYXmg=";
+          AllowedIPs = ["fd34:ad42:6ef8::5/128"];
+          Endpoint = "[2001:41d0:2:9ed3::1]:57205";
+        };
         ekidno = {
           PublicKey = "Wf/cdH/76KByhaPrgJ3g5TssQj9YK++pDo0ehy86ZnM=";
           AllowedIPs = ["fd34:ad42:6ef8::4/128"];

@@ -1,9 +1,4 @@
 creation_rules:
-  - path_regex: hosts/auresco/secrets.json
-    age: >-
-      age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
-      age1ngh9jhfe42xag0cp2q9wejackurw7rcp5kj80avdpwyfmeg9gd9swlrhy8
-
   - path_regex: hosts/cadensia/secrets.json
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,

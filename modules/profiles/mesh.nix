@@ -20,11 +20,6 @@ with lib;
     peers = mkOption {
       type = types.attrs;
       default = {
-        auresco = {
-          PublicKey = "PZlLUirj+gk24ZEkNAUJZdcN8sPxPsXEaZisXIJ07Gw=";
-          AllowedIPs = ["fd34:ad42:6ef8::2/128"];
-          Endpoint = "[2a01:4f8:c012:79f8::1]:57205";
-        };
         cadensia = {
           PublicKey = "13nqNA855D4a8+vfcvLP/Lxk81mOjB82FTPmG8fYXmg=";
           AllowedIPs = ["fd34:ad42:6ef8::5/128"];

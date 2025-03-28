@@ -19,7 +19,12 @@
     };
   };
 
-  clement.profile.k3s.enable = true;
+  clement.profile.k3s = {
+    enable = true;
+    san = [ "cadensia.host.segfault.ovh" ];
+  };
+
+  networking.firewall.allowedTCPPorts = [ 6443 ];
 
   clement.mesh = {
     secretsFile = ./secrets.json;

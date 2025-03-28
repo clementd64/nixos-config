@@ -28,6 +28,11 @@ in with lib; {
         default = "fd62:ec16:d507:1af6::/112";
       };
     };
+
+    san = mkOption {
+      type = types.listOf types.str;
+      default = [];
+    };
   };
 
   config = mkIf cfg.enable {
@@ -39,6 +44,7 @@ in with lib; {
         disable-helm-controller = true;
         flannel-backend = "host-gw";
         secrets-encryption = true;
+        tls-san = cfg.san;
 
         cluster-cidr = cfg.ipv4.pods + optionalString (cfg.ipv6.pods != null) ",${cfg.ipv6.pods}";
         service-cidr = cfg.ipv4.service + optionalString (cfg.ipv6.pods != null) ",${cfg.ipv6.service}";

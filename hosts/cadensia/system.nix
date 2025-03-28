@@ -19,7 +19,7 @@
     };
   };
 
-  clement.docker.enable = true;
+  clement.profile.k3s.enable = true;
 
   clement.mesh = {
     secretsFile = ./secrets.json;

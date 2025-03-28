@@ -20,7 +20,8 @@ in with lib; {
 
     ipv6 = {
       pods = mkOption {
-        type = types.str;
+        type = types.nullOr types.str;
+        default = null;
       };
       service = mkOption {
         type = types.str;
@@ -36,17 +37,18 @@ in with lib; {
       config = {
         disable = [ "servicelb" "traefik" "local-storage" ];
         disable-helm-controller = true;
-        flannel-backend = "wireguard-native";
+        flannel-backend = "host-gw";
         secrets-encryption = true;
 
-        cluster-cidr = "${cfg.ipv4.pods},${cfg.ipv6.pods}";
-        service-cidr = "${cfg.ipv4.service},${cfg.ipv6.service}";
-        kube-controller-manager-arg = "node-cidr-mask-size-ipv6=116";
+        cluster-cidr = cfg.ipv4.pods + optionalString (cfg.ipv6.pods != null) ",${cfg.ipv6.pods}";
+        service-cidr = cfg.ipv4.service + optionalString (cfg.ipv6.pods != null) ",${cfg.ipv6.service}";
+        kube-controller-manager-arg = mkIf (cfg.ipv6.pods != null) "node-cidr-mask-size-ipv6=116";
       };
     };
 
     networking.firewall.extraCommands = ''
       iptables -A nixos-fw -s ${cfg.ipv4.pods} -p tcp -m multiport --dports 6443,10250 -j ACCEPT
+    '' + optionalString (cfg.ipv6.pods != null) ''
       ip6tables -A nixos-fw -s ${cfg.ipv6.pods} -p tcp -m multiport --dports 6443,10250 -j ACCEPT
     '';
   };

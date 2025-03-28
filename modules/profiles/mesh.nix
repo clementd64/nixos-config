@@ -22,7 +22,7 @@ with lib;
       default = {
         cadensia = {
           PublicKey = "13nqNA855D4a8+vfcvLP/Lxk81mOjB82FTPmG8fYXmg=";
-          AllowedIPs = ["fd34:ad42:6ef8::5/128"];
+          AllowedIPs = ["fd34:ad42:6ef8::5/128", "2a0c:b641:2b0:100::/56"];
           Endpoint = "[2001:41d0:2:9ed3::1]:57205";
         };
         ekidno = {

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, pkgs, lib, ... }:
 {
   clement.profile.server.enable = true;
 
@@ -18,6 +18,22 @@
       };
     };
   };
+
+  services.postgresql = {
+    enable = true;
+    enableJIT = true;
+    enableTCPIP = true;
+    package = pkgs.postgresql_17;
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type  database  DBuser    address  auth-method
+      local  all       postgres           peer
+    '';
+  };
+
+  # Open postgresql port for k8s pods
+  networking.firewall.extraCommands = ''
+    iptables -A nixos-fw -s ${config.clement.profile.k3s.ipv4.pods} -p tcp --dport 5432 -j ACCEPT
+  '';
 
   clement.profile.k3s = {
     enable = true;

@@ -27,6 +27,7 @@
     authentication = pkgs.lib.mkOverride 10 ''
       #type  database  DBuser    address                                  auth-method
       local  all       postgres                                           peer
+      host   dex       dex       ${config.clement.profile.k3s.ipv4.pods}  scram-sha-256
       host   lldap     lldap     ${config.clement.profile.k3s.ipv4.pods}  scram-sha-256
     '';
   };

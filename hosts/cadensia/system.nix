@@ -25,8 +25,9 @@
     enableTCPIP = true;
     package = pkgs.postgresql_17;
     authentication = pkgs.lib.mkOverride 10 ''
-      #type  database  DBuser    address  auth-method
-      local  all       postgres           peer
+      #type  database  DBuser    address                                  auth-method
+      local  all       postgres                                           peer
+      host   lldap     lldap     ${config.clement.profile.k3s.ipv4.pods}  scram-sha-256
     '';
   };
 
@@ -40,6 +41,7 @@
     san = [ "cadensia.host.segfault.ovh" ];
   };
 
+  clement.http2https.enable = true;
   networking.firewall.allowedTCPPorts = [ 80 443 6443 ];
 
   clement.mesh = {

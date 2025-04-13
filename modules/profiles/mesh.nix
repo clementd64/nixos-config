@@ -35,11 +35,6 @@ with lib;
           AllowedIPs = ["fd34:ad42:6ef8::3/128"];
           Endpoint = "[2a0c:b640:8:82::1]:57205";
         };
-        seebu = {
-          PublicKey = "jJvJIRLPAkKkddMPN+dNPtvMk1bo2sN/BmIHmPfOPCE=";
-          AllowedIPs = ["fd34:ad42:6ef8::1/128"];
-          Endpoint = "[2a01:4f8:c013:578a::1]:57205";
-        };
       };
       internal = true;
       readOnly = true;

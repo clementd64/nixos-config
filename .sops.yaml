@@ -13,8 +13,3 @@ creation_rules:
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
       age1j85fgdkpyh2uh4keysxk08pmmlael75zewpqqr8jt8wajszdmuhqkx7q6g
-
-  - path_regex: hosts/seebu/secrets.json
-    age: >-
-      age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
-      age1563lf48t3pe4xfzluk7nd3fa0dpak5mpejdzyyt5npc07g233s5qt22th9

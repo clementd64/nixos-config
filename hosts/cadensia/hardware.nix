@@ -34,6 +34,12 @@
       options = [ "subvol=postgresql" "compress=zstd" "noatime" ];
     };
 
+  fileSystems."/var/lib/rabbitmq" =
+    { device = "/dev/disk/by-id/ata-INTEL_SSDSC2BB480G6_PHWA634507N9480FGN-part2";
+      fsType = "btrfs";
+      options = [ "subvol=rabbitmq" "compress=zstd" "noatime" ];
+    };
+
   fileSystems."/var/lib/rancher/k3s" =
     { device = "/dev/disk/by-id/ata-INTEL_SSDSC2BB480G6_PHWA634507N9480FGN-part2";
       fsType = "btrfs";

@@ -33,6 +33,13 @@
     '';
   };
 
+  services.epmd.enable = true;
+  services.rabbitmq = {
+    enable = true;
+    listenAddress = "::";
+    managementPlugin.enable = true;
+  };
+
   # Open postgresql port for k8s pods
   networking.firewall.extraCommands = ''
     iptables -A nixos-fw -s ${config.clement.profile.k3s.ipv4.pods} -p tcp --dport 5432 -j ACCEPT

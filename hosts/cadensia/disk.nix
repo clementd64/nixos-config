@@ -45,6 +45,10 @@
                     mountpoint = "/var/lib/postgresql";
                     mountOptions = [ "compress=zstd" "noatime" ];
                   };
+                  "/rabbitmq" = {
+                    mountpoint = "/var/lib/rabbitmq";
+                    mountOptions = [ "compress=zstd" ];
+                  };
                   "/k3s" = {
                     mountpoint = "/var/lib/rancher/k3s";
                     mountOptions = [ "compress=zstd" ];

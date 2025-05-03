@@ -112,11 +112,5 @@
 
   clement.http2https.enable = true;
 
-  clement.mesh = {
-    secretsFile = ./secrets.json;
-    address = "fd34:ad42:6ef8::4";
-    port = 57205;
-  };
-
   system.stateVersion = "23.11";
 }

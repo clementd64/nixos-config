@@ -110,6 +110,16 @@
     "2001:7f8:f2:e1::112" # AS112 LocIX FRA
   ];
 
+  clement.wireguard.cadensia = {
+    secretsFile = ./secrets.json;
+    privateKey = ''["cadensia"]["private-key"]'';
+    publicKey = "q294JQjhdED3yydB+LC4VA6f/9o2lfqC7z28HE80aEU=";
+    port = 57206;
+    addresses = ["fe80::1/64"];
+    allowedIps = ["::/0"];
+    endpoint = "[2001:41d0:2:9ed3::1]:57207";
+  };
+
   clement.http2https.enable = true;
 
   system.stateVersion = "23.11";

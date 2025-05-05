@@ -34,5 +34,15 @@
     "2a0c:b640:8::ffff" # Servperso
   ];
 
+  clement.wireguard.cadensia = {
+    secretsFile = ./secrets.json;
+    privateKey = ''["cadensia"]["private-key"]'';
+    publicKey = "ZF4I42A615HDEFROsxZXc9fhxIoIVZkBp0UrC3osSFU=";
+    port = 57206;
+    addresses = ["fe80::1/64"];
+    allowedIps = ["::/0"];
+    endpoint = "[2001:41d0:2:9ed3::1]:57206";
+  };
+
   system.stateVersion = "23.11";
 }

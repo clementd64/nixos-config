@@ -4,8 +4,8 @@
     profiles/container.nix
     profiles/edge-router.nix
     profiles/k3s.nix
-    profiles/router
     profiles/mesh.nix
+    profiles/router
     profiles/server.nix
     system/container.nix
     system/docker.nix
@@ -19,6 +19,7 @@
     system/secrets.nix
     system/ssh.nix
     system/systemd-socket.nix
+    system/wireguard.nix
     system/xserver.nix
   ];
 

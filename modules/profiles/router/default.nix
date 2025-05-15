@@ -52,6 +52,7 @@ in {
     boot.kernel.sysctl = {
       "net.ipv6.conf.all.autoconf" = "0";
       "net.ipv6.conf.all.accept_ra" = "0";
+      "net.ipv6.conf.all.forwarding" = "1";
     };
 
     services.resolved.llmnr = "false";

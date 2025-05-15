@@ -32,6 +32,7 @@
   clement.profile.router.bird.config = ./bird.conf;
   clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:8::ffff" # Servperso
+    "fe80::2" # Cadensia
   ];
 
   clement.wireguard.cadensia = {
@@ -40,7 +41,7 @@
     publicKey = "ZF4I42A615HDEFROsxZXc9fhxIoIVZkBp0UrC3osSFU=";
     port = 57206;
     addresses = ["fe80::1/64"];
-    allowedIps = ["::/0"];
+    allowedIps = ["fe80::2/128" "2a0c:b641:2b0:100::/56"];
     endpoint = "[2001:41d0:2:9ed3::1]:57206";
   };
 

@@ -41,7 +41,7 @@ in {
 
     networking.firewall.checkReversePath = false;
 
-    services.bird2 = {
+    services.bird = {
       enable = true;
       config = strings.concatMapStringsSep "\n" (x: builtins.readFile x) [
         ./common.conf

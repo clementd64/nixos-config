@@ -36,6 +36,17 @@ in with lib; {
         default = "systrap";
       };
     };
+
+    cli.config = {
+      secretsFile = mkOption {
+        type = types.nullOr types.path;
+        default = null;
+      };
+
+      extract = mkOption {
+        type = types.str;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -88,6 +99,17 @@ in with lib; {
         dates = "weekly";
       };
     };
+
+    clement.secrets."docker-cli" = mkIf (cfg.cli.config.secretsFile != null) {
+      file = cfg.cli.config.secretsFile;
+      extract = cfg.cli.config.extract;
+      user = "clement";
+    };
+
+    systemd.tmpfiles.rules = mkIf (cfg.cli.config.secretsFile != null) [
+      "d /home/clement/.docker - clement users - -" # create directory with correct ownership first
+      "L+ /home/clement/.docker/config.json - - - - ${config.clement.secrets."docker-cli".path}"
+    ];
 
     clement.local.network.enable = mkDefault true;
     clement.local.network.resolved.enable = true;

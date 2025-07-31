@@ -1,4 +1,9 @@
 creation_rules:
+  - path_regex: hosts/cadensia/secrets.json
+    age: >-
+      age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
+      age1vagskeavswpatvxegn4hanlw6xhq5c82rxujgjtm8jwkwpsmf9mq9lt4cm
+
   - path_regex: hosts/ekidno/secrets.json
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,

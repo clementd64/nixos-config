@@ -30,5 +30,13 @@
     '';
   };
 
+  clement.docker = {
+    enable = true;
+    cli.config = {
+      secretsFile = ./secrets.json;
+      extract = ''["docker"]'';
+    };
+  };
+
   system.stateVersion = "25.05";
 }

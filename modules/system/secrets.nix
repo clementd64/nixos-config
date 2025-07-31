@@ -35,7 +35,7 @@ with lib; let
 
       mode = mkOption {
         type = types.str;
-        default = "0400";
+        default = "0440";
         description = "permissions of the secret file";
       };
 

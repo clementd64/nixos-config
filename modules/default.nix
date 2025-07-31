@@ -19,6 +19,7 @@
     system/secrets.nix
     system/ssh.nix
     system/systemd-socket.nix
+    system/traefik.nix
     system/wireguard.nix
     system/xserver.nix
   ];

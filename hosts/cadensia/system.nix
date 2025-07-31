@@ -38,5 +38,34 @@
     };
   };
 
+  clement.traefik = {
+    enable = true;
+    config = {
+      entryPoints.https = {
+        address = ":443";
+        http.tls = {};
+      };
+    };
+    dynamic = {
+      tls.certificates = [{
+        certFile = config.clement.secrets."tls-cert".path;
+        keyFile = config.clement.secrets."tls-key".path;
+      }];
+    };
+  };
+
+  clement.secrets = {
+    "tls-cert" = {
+      file = ./secrets.json;
+      extract = ''["tls"]["cert"]'';
+      user = "traefik";
+    };
+    "tls-key" = {
+      file = ./secrets.json;
+      extract = ''["tls"]["key"]'';
+      user = "traefik";
+    };
+  };
+
   system.stateVersion = "25.05";
 }

@@ -7,6 +7,7 @@
     profiles/mesh.nix
     profiles/router
     profiles/server.nix
+    system/compose.nix
     system/container.nix
     system/docker.nix
     system/factorio.nix

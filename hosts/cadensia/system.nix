@@ -38,6 +38,11 @@
     };
   };
 
+  clement.compose = {
+    enable = true;
+    config = "oci://ghcr.io/clementd64/nixos-config/cadensia:latest";
+  };
+
   clement.traefik = {
     enable = true;
     config = {

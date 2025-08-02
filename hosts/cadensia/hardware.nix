@@ -28,6 +28,12 @@
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
+  fileSystems."/var/lib/docker" =
+    { device = "/dev/disk/by-id/ata-INTEL_SSDSC2BB480G6_PHWA634507N9480FGN-part2";
+      fsType = "btrfs";
+      options = [ "subvol=docker" "compress=zstd" "noatime" ];
+    };
+
   fileSystems."/var/lib/postgresql" =
     { device = "/dev/disk/by-id/ata-INTEL_SSDSC2BB480G6_PHWA634507N9480FGN-part2";
       fsType = "btrfs";

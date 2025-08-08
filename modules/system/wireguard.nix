@@ -1,8 +1,15 @@
 { config, lib, pkgs, utils, ... }:
 
 with lib; let
-  wireguard = types.submodule ({ ... }: {
+  wireguard = types.submodule ({ name, ... }: {
     options = {
+      interface = mkOption {
+        type = types.str;
+        default = "wg-${name}";
+        internal = true;
+        readOnly = true;
+      };
+
       secretsFile = mkOption {
         type = types.path;
       };
@@ -58,14 +65,14 @@ in {
   };
 
   config.clement.secrets = mkMerge (attrsets.mapAttrsToList (name: value: {
-    "wg-${name}-private-key" = {
+    "${value.interface}-private-key" = {
       file = value.secretsFile;
       extract = value.privateKey;
       user = "systemd-network";
       before = [ "systemd-networkd.service" ];
     };
 
-    "wg-${name}-preshared-key" = mkIf (value.presharedKey != null) {
+    "${value.interface}-preshared-key" = mkIf (value.presharedKey != null) {
       file = value.secretsFile;
       extract = value.presharedKey;
       user = "systemd-network";
@@ -76,23 +83,23 @@ in {
   config.systemd.network = mkMerge (attrsets.mapAttrsToList (name: value: {
     netdevs."20-${name}" = {
       netdevConfig = {
-        Name = "wg-${name}";
+        Name = value.interface;
         Kind = "wireguard";
       };
       wireguardConfig = {
-        PrivateKeyFile = config.clement.secrets."wg-${name}-private-key".path;
+        PrivateKeyFile = config.clement.secrets."${value.interface}-private-key".path;
         ListenPort = mkIf (value.port != null) value.port;
       };
       wireguardPeers = [{
         PublicKey = value.publicKey;
-        PresharedKeyFile = mkIf (value.presharedKey != null) config.clement.secrets."wg-${name}-preshared-key".path;
+        PresharedKeyFile = mkIf (value.presharedKey != null) config.clement.secrets."${value.interface}-preshared-key".path;
         AllowedIPs = mkIf (value.allowedIps != null) value.allowedIps;
         Endpoint = mkIf (value.endpoint != null) value.endpoint;
       }];
     };
 
     networks."20-${name}" = {
-      matchConfig.Name = "wg-${name}";
+      matchConfig.Name = value.interface;
       networkConfig = {
         Address = value.addresses;
         DNS = value.dns;

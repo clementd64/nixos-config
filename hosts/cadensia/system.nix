@@ -83,5 +83,9 @@
     domains = ["~internal."];
   };
 
+  networking.firewall.extraCommands = ''
+    ip6tables -A nixos-fw -i ${config.clement.wireguard.fly.interface} -p tcp --dport 11434 -j ACCEPT
+  '';
+
   system.stateVersion = "25.05";
 }

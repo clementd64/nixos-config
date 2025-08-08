@@ -72,5 +72,16 @@
     };
   };
 
+  clement.wireguard.fly = {
+    secretsFile = ./secrets.json;
+    privateKey = ''["fly"]["private-key"]'';
+    publicKey = "trM7zOMMKsWHT+F6V08e4e5YVe3VVgf6M8zONd7qzwQ=";
+    addresses = ["fdaa:1:70d9:a7b:1596:0:a:202/120"];
+    allowedIps = ["fdaa:1:70d9::/48"];
+    endpoint = "cdg1.gateway.6pn.dev:51820";
+    dns = ["fdaa:1:70d9::3"];
+    domains = ["~internal."];
+  };
+
   system.stateVersion = "25.05";
 }

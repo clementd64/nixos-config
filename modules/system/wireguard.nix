@@ -39,6 +39,16 @@ with lib; let
         type = types.listOf types.str;
         default = [];
       };
+
+      dns = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
+
+      domains = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
     };
   });
 in {
@@ -85,9 +95,19 @@ in {
       matchConfig.Name = "wg-${name}";
       networkConfig = {
         Address = value.addresses;
+        DNS = value.dns;
+        Domains = value.domains;
       };
+      routes = mkIf (value.allowedIps != null) [
+        {
+          Destination = value.allowedIps;
+          Scope = "link";
+        }
+      ];
     };
   }) config.clement.wireguard);
 
-  config.networking.firewall.allowedUDPPorts = attrsets.mapAttrsToList (name: value: value.port) config.clement.wireguard;
+  config.networking.firewall.allowedUDPPorts = attrsets.mapAttrsToList
+    (name: value: value.port)
+    (filterAttrs (name: value: value.port != null) config.clement.wireguard);
 }

@@ -128,6 +128,9 @@
     configPackages = [pkgs.gnome-session];
   };
 
+  services.power-profiles-daemon.enable = true;
+  hardware.fw-fanctrl.enable = true;
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";

@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
     zig.url = "github:mitchellh/zig-overlay";
     ghostty.url = "github:ghostty-org/ghostty";
@@ -32,16 +33,16 @@
 
     mkSystem =
       # 1. Factory for mkStable and mkUnstable
-      { nixpkgs, home-manager, modules ? [], overlays ? [] }:
+      { nixpkgs, home-manager }:
       # 2. Hosts configuration
-      { system }:
+      { system, modules ? [] }:
       # 3. Auto hostname injection (avoid duplication)
       name: nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           {
             networking.hostName = name;
-            nixpkgs.overlays = baseOverlays ++ overlays;
+            nixpkgs.overlays = baseOverlays;
             nix.registry.nixpkgs.flake = nixpkgs;
           }
           inputs.impermanence.nixosModules.impermanence
@@ -94,6 +95,9 @@
 
       syra = mkUnstable {
         system = "x86_64-linux";
+        modules = [
+          inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+        ];
       };
 
       tarzan = mkStable {

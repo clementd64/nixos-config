@@ -1,5 +1,5 @@
-{ buildGo123Module, fetchFromGitHub }:
-buildGo123Module {
+{ buildGo125Module, fetchFromGitHub }:
+buildGo125Module {
   pname = "proxy64";
   version = "0.0.0";
 

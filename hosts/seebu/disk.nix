@@ -26,6 +26,10 @@
                   mountpoint = "/nix";
                   mountOptions = [ "compress=zstd" "noatime" ];
                 };
+                "/docker" = {
+                  mountpoint = "/var/lib/docker";
+                  mountOptions = [ "compress=zstd" "noatime" ];
+                };
               };
             };
           };

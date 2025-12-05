@@ -28,6 +28,12 @@
       neededForBoot = true;
     };
 
+  fileSystems."/var/lib/docker" =
+    { device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_107795658-part2";
+      fsType = "btrfs";
+      options = [ "subvol=docker" "noatime" "compress=zstd" ];
+    };
+
   swapDevices = [ ];
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

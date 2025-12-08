@@ -3,7 +3,6 @@
     profiles/baseline.nix
     profiles/container.nix
     profiles/edge-router.nix
-    profiles/k3s.nix
     profiles/mesh.nix
     profiles/router
     profiles/server.nix
@@ -13,7 +12,6 @@
     system/factorio.nix
     system/http2https.nix
     system/ipset.nix
-    system/k3s.nix
     system/kubelet.nix
     system/local/network.nix
     system/nat64.nix

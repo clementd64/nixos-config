@@ -1,0 +1,25 @@
+app = "openbao"
+primary_region = "cdg"
+
+[[services]]
+  internal_port = 8200
+  protocol = "tcp"
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[services.ports]]
+    port = 443
+
+[[files]]
+  guest_path = "/app/client-cert.pem"
+  secret_name = "KMIP_CLIENT_CERT"
+[[files]]
+  guest_path = "/app/client-key.pem"
+  secret_name = "KMIP_CLIENT_KEY"
+[[files]]
+  guest_path = "/app/origin-cert.pem"
+  secret_name = "TLS_CERT"
+[[files]]
+  guest_path = "/app/origin-key.pem"
+  secret_name = "TLS_KEY"

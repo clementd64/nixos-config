@@ -34,6 +34,7 @@
     home/neovim
     home/rofi.nix
     home/starship
+    home/tmux
     home/tools.nix
     home/vscode.nix
   ];

@@ -5,7 +5,6 @@
   # TODO: migrate end of ./users/clement as module
   imports = [
     ../../users/clement/i3.nix
-    ../../users/clement/tmux.nix
   ];
 
   clement = {
@@ -19,6 +18,7 @@
     neovim.enable = true;
     rofi.enable = true;
     starship.enable = true;
+    tmux.enable = true;
     tools.enable = true;
     vscode.enable = true;
   };

@@ -45,7 +45,7 @@ in with lib; {
       fira-code
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
 
     programs.dconf.enable = true;

@@ -137,13 +137,9 @@
     memoryPercent = 100;
   };
 
-  # TODO: create a module for this
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" "wasm32-wasi" ];
-  boot.binfmt.registrations.aarch64-linux = {
-    interpreter = "${pkgs.qemu-aarch64-static}/bin/qemu-aarch64-static"; # -binfmt-P";
-    fixBinary = true;
-    matchCredentials = true;
-    preserveArgvZero = true;
+  boot.binfmt = {
+    emulatedSystems = [ "aarch64-linux" "wasm32-wasi" ];
+    preferStaticEmulators = true;
   };
 
   system.stateVersion = "23.11";

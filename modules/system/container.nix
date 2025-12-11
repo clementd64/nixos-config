@@ -99,26 +99,18 @@ in {
 
         networks."20-${cfg.network.bridge}" = {
           matchConfig.Name = cfg.network.bridge;
-          # TODO(24.11): cleanup
           networkConfig = {
             Address = optional (cfg.network.address.ipv4 != null) cfg.network.address.ipv4
               ++ optional (cfg.network.address.ipv6 != null) cfg.network.address.ipv6;
-          } // (if versionAtLeast config.system.nixos.release "24.11" then {
             IPv4Forwarding = true;
             IPv6Forwarding = true;
-          } else {
-            IPForward = true;
-          });
+          };
           linkConfig.RequiredForOnline = "no";
 
-          # TODO(24.11): cleanup
-          routes =
-            let
-              mkRoute = Destination: Gateway:
-                if versionAtLeast config.system.nixos.release "24.11"
-                then { inherit Destination Gateway; }
-                else { routeConfig = { inherit Destination Gateway; }; };
-            in builtins.map (x: mkRoute x.destination x.gateway) cfg.network.routes;
+          routes = builtins.map (x: {
+            Destination = x.destination;
+            Gateway = x.gateway;
+          }) cfg.network.routes;
         };
       };
 

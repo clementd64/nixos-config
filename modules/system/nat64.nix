@@ -60,12 +60,7 @@ in {
     systemd.network = {
       networks."30-nat64" = {
         matchConfig.Name = "lo";
-        # TODO(24.11): cleanup
-        routes = [
-          (if versionAtLeast config.system.nixos.release "24.11"
-          then { Type = "local"; Destination = cfg.prefix; }
-          else { routeConfig = { Type = "local"; Destination = cfg.prefix; }; })
-        ];
+        routes = [{ Type = "local"; Destination = cfg.prefix; }];
       };
 
       netdevs."30-dns64" = mkIf cfg.dns64.enable {

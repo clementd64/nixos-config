@@ -111,16 +111,6 @@
     "fe80::2" # Cadensia
   ];
 
-  clement.wireguard.cadensia = {
-    secretsFile = ./secrets.json;
-    privateKey = ''["cadensia"]["private-key"]'';
-    publicKey = "q294JQjhdED3yydB+LC4VA6f/9o2lfqC7z28HE80aEU=";
-    port = 57206;
-    addresses = ["fe80::1/64"];
-    allowedIps = ["fe80::2/128" "2a0c:b641:2b0:100::/56"];
-    endpoint = "[2001:41d0:2:9ed3::1]:57207";
-  };
-
   clement.http2https.enable = true;
 
   system.stateVersion = "23.11";

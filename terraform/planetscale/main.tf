@@ -21,14 +21,6 @@ resource "postgresql_role" "role" {
   password_wo_version = each.value.password_version
 }
 
-# Set postgres as child of all roles. Allow database administration
-resource "postgresql_grant_role" "grant_postgres" {
-  for_each          = local.databases
-  role              = "postgres"
-  grant_role        = each.key
-  with_admin_option = true
-}
-
 resource "postgresql_database" "database" {
   for_each = local.databases
   name     = each.key

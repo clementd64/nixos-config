@@ -12,9 +12,5 @@ locals {
       password         = var.openbao_password
       password_version = 1
     }
-    miniflux = {
-      password         = var.miniflux_password
-      password_version = 1
-    }
   }
 }

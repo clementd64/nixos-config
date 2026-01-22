@@ -14,6 +14,7 @@ in with lib; {
       prefix = "2a0c:b641:2b0::64:0:0/96";
       allowed = [
         "2001:bc8:1640:5d6::/64"
+        "2001:bc8:710:1198::/64"
       ];
       dns64 = {
         enable = true;

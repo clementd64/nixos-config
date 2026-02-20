@@ -71,6 +71,7 @@ in {
       value = {
         inherit before;
         wantedBy = [ "multi-user.target" ];
+        unitConfig.ConditionFileNotEmpty = key;
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;

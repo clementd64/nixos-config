@@ -56,6 +56,11 @@ with lib; let
         type = types.listOf types.str;
         default = [];
       };
+
+      mtu = mkOption {
+        type = types.nullOr types.int;
+        default = 1280;
+      };
     };
   });
 in {
@@ -85,6 +90,7 @@ in {
       netdevConfig = {
         Name = value.interface;
         Kind = "wireguard";
+        MTUBytes = value.mtu;
       };
       wireguardConfig = {
         PrivateKeyFile = config.clement.secrets."${value.interface}-private-key".path;

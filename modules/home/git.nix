@@ -10,15 +10,7 @@ in with lib; {
     programs.git = {
       enable = true;
 
-      delta = {
-        enable = false; # TODO: 0.17 currently broken
-        options = {
-          navigate = true;
-          side-by-side = true;
-        };
-      };
-
-      extraConfig = {
+      settings = {
         user = {
           email = "clement@dubreuil.dev";
           name = "Clément Dubreuil";

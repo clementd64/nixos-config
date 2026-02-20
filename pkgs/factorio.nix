@@ -14,12 +14,12 @@ let
       alsa-lib
       libGL
       libpulseaudio
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXext
-      xorg.libXi
-      xorg.libXinerama
-      xorg.libXrandr
+      libx11
+      libxcursor
+      libxext
+      libxi
+      libxinerama
+      libxrandr
     ]) ++ extraPackages;
   };
 

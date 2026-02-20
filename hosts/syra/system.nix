@@ -81,6 +81,41 @@
 
   services.resolved.settings.Resolve.DNS = "2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2001:4860:4860::8888#dns.google 2001:4860:4860::8844#dns.google 8.8.8.8#dns.google 8.8.4.4#dns.google";
 
+  clement.wireguard = {
+    spacefoot = {
+      addresses = [ "10.11.0.1/32" ];
+      allowedIps = [ "10.10.0.0/16" ];
+      dns = [ "10.10.10.10" ];
+      domains = [ "~spacefoot.net." ];
+      endpoint = "188.165.39.112:42928";
+      presharedKey = ''["wireguard"]["spacefoot"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["spacefoot"]["private-key"]'';
+      publicKey = "izbe24xKpXV6ZxhwFx0qA7sHNeY062WPfFkh+XpL3Us=";
+      secretsFile = ./secrets.json;
+    };
+    fly = {
+      addresses = [ "fdaa:1:70d9:a7b:1596:0:a:102/120" ];
+      allowedIps = [ "fdaa:1:70d9::/48" ];
+      dns = [ "fdaa:1:70d9::3" ];
+      domains = [ "~internal." ];
+      endpoint = "cdg1.gateway.6pn.dev:51820";
+      privateKey = ''["wireguard"]["fly"]["private-key"]'';
+      publicKey = "trM7zOMMKsWHT+F6V08e4e5YVe3VVgf6M8zONd7qzwQ=";
+      secretsFile = ./secrets.json;
+    };
+    proxmox = {
+      addresses = [ "10.100.1.1/32" ];
+      allowedIps = [ "10.100.0.0/24" ];
+      dns = [ "10.100.0.254" ];
+      domains = [ "~prox.internal." ];
+      endpoint = "51.254.167.78:51820";
+      presharedKey = ''["wireguard"]["proxmox"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["proxmox"]["private-key"]'';
+      publicKey = "t59gHUDoyYqKHIfT/7K9Q7W2rYCrIUCJyHAWQETaIUo=";
+      secretsFile = ./secrets.json;
+    };
+  };
+
   users.users.clement = {
     # TODO: find a way to manage secret that is installer friendly
     hashedPasswordFile = "/etc/user-password";

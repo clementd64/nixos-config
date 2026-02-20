@@ -108,7 +108,6 @@
     "2a0c:2f07:9459::b4" # bgp.tools
     "2a0c:b641:701:0:a5:0:112:1" # AS112 LocIX DUS
     "2001:7f8:f2:e1::112" # AS112 LocIX FRA
-    "fe80::2" # Cadensia
   ];
 
   clement.http2https.enable = true;

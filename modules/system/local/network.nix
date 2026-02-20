@@ -40,9 +40,16 @@ in with lib; {
       ++ optional (config.clement.docker.enable && config.clement.docker.pools.ipv6.subnet != null) "ip6tables -A nixos-fw -s ${config.clement.docker.pools.ipv6.subnet} -d ${cfg.ipv6} -j ACCEPT"
     );
 
-    services.resolved.settings.Resolve.DNSStubListenerExtra = [
-      "${cfg.ipv4}"
-      "${cfg.ipv6}"
-    ];
+    services.resolved = if versionAtLeast config.system.nixos.release "26.05" then {
+      settings.Resolve.DNSStubListenerExtra = [
+        cfg.ipv4
+        cfg.ipv6
+      ];
+    } else {
+      extraConfig = ''
+        DNSStubListenerExtra=${cfg.ipv4}
+        DNSStubListenerExtra=${cfg.ipv6}
+      '';
+    };
   };
 }

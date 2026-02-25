@@ -22,5 +22,37 @@
     size = 2*1024;
   } ];
 
+  services.postgresql = {
+    enable = true;
+    enableJIT = true;
+    package = pkgs.postgresql_18;
+    authentication = lib.mkOverride 10 ''
+      #type  database  DBuser    address  auth-method
+      local  all       postgres           peer
+    '';
+  };
+
+  clement.traefik = {
+    enable = true;
+    config = {
+      entryPoints = {
+        http = {
+          address = ":80";
+          http.redirections.entryPoint.to = ":443";
+        };
+
+        https = {
+          address = ":443";
+          asDefault = true;
+          http.tls = {};
+        };
+      };
+    };
+
+    dynamic = {};
+  };
+
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   system.stateVersion = "25.11";
 }

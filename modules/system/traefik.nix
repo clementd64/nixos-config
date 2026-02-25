@@ -42,8 +42,7 @@ in {
         ExecStart = "${pkgs.traefik}/bin/traefik --configfile=${staticConfigFile}";
         Restart = "on-failure";
 
-        User = "traefik";
-        Group = "traefik";
+        DynamicUser = true;
         SupplementaryGroups = mkIf (config.clement.docker.enable && cfg.enableDocker) "docker";
         AmbientCapabilities = "CAP_NET_BIND_SERVICE";
         CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
@@ -68,13 +67,5 @@ in {
         LockPersonality = true;
       };
     };
-
-    users.users.traefik = {
-      group = "traefik";
-      isSystemUser = true;
-    };
-    users.groups.traefik = {};
-
-    networking.firewall.allowedTCPPorts = [ 443 ];
   };
 }

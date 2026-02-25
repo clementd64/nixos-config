@@ -16,7 +16,7 @@ in stdenvNoCC.mkDerivation {
     source $stdenv/setup
     mkdir -p $out
     crane export --platform ${{ "x86_64-linux" = "linux/amd64"; "aarch64-linux" = "linux/arm64"; }.${system}} "${image}" - | tar xC $out
-    mkdir -p $out/{dev,proc,sys}
+    mkdir -p $out/{dev,proc,sys,run,tmp,var/tmp}
   '';
 
   outputHash = hash;

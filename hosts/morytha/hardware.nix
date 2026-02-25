@@ -28,6 +28,12 @@
       neededForBoot = true;
     };
 
+  fileSystems."/var/lib/postgresql" =
+    { device = "/dev/sda1";
+      fsType = "ext4";
+      options = [ "noatime" "noexec" ];
+    };
+
   swapDevices = [ ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

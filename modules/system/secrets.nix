@@ -21,6 +21,12 @@ with lib; let
         description = "document sub-part to extract";
       };
 
+      format = mkOption {
+        type = types.nullOr (types.enum [ "json" "yaml" "dotenv" ]);
+        default = null;
+        description = "output format";
+      };
+
       user = mkOption {
         type = types.str;
         default = "root";
@@ -66,7 +72,7 @@ in {
   };
 
   config = {
-    systemd.services = attrsets.mapAttrs' (name: { file, extract, user, group, mode, key, before, path, ... }: {
+    systemd.services = attrsets.mapAttrs' (name: { file, extract, format, user, group, mode, key, before, path, ... }: {
       name = "secrets-${utils.escapeSystemdPath name}";
       value = {
         inherit before;
@@ -78,7 +84,7 @@ in {
         };
         script = ''
           rm -rf ${path}
-          ${pkgs.sops}/bin/sops --decrypt --output ${path} ${if extract != null then "--extract '${extract}'" else ""} ${file}
+          ${pkgs.sops}/bin/sops --decrypt --output ${path} ${if extract != null then "--extract '${extract}'" else ""} ${if format != null then "--output-type '${format}'" else ""} ${file}
           chown ${user}:${group} ${path}
           chmod ${mode} ${path}
         '';

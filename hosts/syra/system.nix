@@ -170,6 +170,10 @@
     memoryPercent = 100;
   };
 
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
   boot.binfmt = {
     emulatedSystems = [ "aarch64-linux" "wasm32-wasi" ];
     preferStaticEmulators = true;

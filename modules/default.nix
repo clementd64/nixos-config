@@ -15,6 +15,7 @@
     system/kubelet.nix
     system/local/network.nix
     system/nat64.nix
+    system/oci.nix
     system/secrets.nix
     system/ssh.nix
     system/systemd-socket.nix

@@ -38,4 +38,8 @@
     home/tools.nix
     home/vscode.nix
   ];
+
+  disk = {
+    mira = import disk/mira.nix;
+  };
 }

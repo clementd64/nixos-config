@@ -111,8 +111,10 @@
   in {
     nixosConfigurations = builtins.mapAttrs (name: mkSystem: mkSystem name) hosts;
 
-    diskoConfigurations = builtins.mapAttrs (name: value: import ./hosts/${name}/disk.nix)
-      (inputs.nixpkgs-stable.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts);
+    diskoConfigurations = module-list.disk // (
+      builtins.mapAttrs (name: value: import ./hosts/${name}/disk.nix)
+      (inputs.nixpkgs-stable.lib.filterAttrs (name: value: builtins.pathExists ./hosts/${name}/disk.nix) hosts)
+    );
 
     packages = builtins.listToAttrs (builtins.map (system:
       let

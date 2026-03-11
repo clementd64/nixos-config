@@ -97,6 +97,18 @@
         system = "x86_64-linux";
       };
 
+      noctilum = mkStable {
+        system = "x86_64-linux";
+      };
+
+      oblivia = mkStable {
+        system = "x86_64-linux";
+      };
+
+      primordia = mkStable {
+        system = "x86_64-linux";
+      };
+
       syra = mkUnstable {
         system = "x86_64-linux";
         modules = [

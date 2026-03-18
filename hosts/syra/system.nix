@@ -8,6 +8,9 @@
       Generals = {
         Country = "FR";
       };
+      DriverQuirks = {
+        PowerSaveDisable = "*";
+      };
     };
   };
 

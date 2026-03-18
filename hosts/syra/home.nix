@@ -41,6 +41,7 @@
   };
 
   home.packages = with pkgs; [
+    androidenv.androidPkgs.platform-tools
     discord
     factorio
     factorio-env

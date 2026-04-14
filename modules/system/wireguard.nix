@@ -38,7 +38,7 @@ with lib; let
       };
 
       endpoint = mkOption {
-        type = types.str;
+        type = types.nullOr types.str;
         default = null;
       };
 

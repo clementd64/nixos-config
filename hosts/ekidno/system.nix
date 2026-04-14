@@ -110,6 +110,18 @@
     "2001:7f8:f2:e1::112" # AS112 LocIX FRA
   ];
 
+  clement.wireguard = {
+    home = {
+      addresses = [ "fe80::1/64" ];
+      port = 51820;
+      allowedIps = [ "fe80::/64" "2a0c:b641:2b0:100::/56" ];
+      presharedKey = ''["wireguard"]["home"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["home"]["private-key"]'';
+      publicKey = "Mq7bv5oeB/8OZsfwOZ8b8KI+nJD/DIhphs/icenBy24=";
+      secretsFile = ./secrets.json;
+    };
+  };
+
   clement.http2https.enable = true;
 
   system.stateVersion = "23.11";

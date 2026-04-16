@@ -1,4 +1,5 @@
-{}: rec {
+{ lib }:
+rec {
   # Test if a string look like an IPv4 address.
   # Only the format is checked, not the validity of the address. (e.g. 999.999.999.999 is considered valid)
   # Only dot-decimal notation is supported.
@@ -11,4 +12,54 @@
   # Filter a list of strings to keep only the ones that do not look like an IPv4 address.
   # Only keep IPv6 assuming the list contains only valid IPs.
   filterIPv6 = list: builtins.filter (ip: !isIPv4 ip) list;
+
+  ipsetRule =
+    {
+      name,
+      type,
+      family,
+      set,
+      rules,
+    }: let
+      ipset = "nixos-${name}";
+      iptables = {
+        ipv4 = "iptables";
+        ipv6 = "ip6tables";
+      }.${family};
+      enabled = builtins.length set > 0;
+    in {
+      ipset = lib.optionalAttrs enabled {
+        "${name}" = {
+          inherit type family set;
+        };
+      };
+
+      extraCommands = lib.optionalString enabled (rules {
+        inherit iptables ipset;
+      });
+    };
+
+  ipsetRules =
+    {
+      name,
+      type,
+      set,
+      rules,
+    }: let
+      ipv4 = ipsetRule {
+        inherit type rules;
+        name = "${name}-ipv4";
+        family = "ipv4";
+        set = filterIPv4 set;
+      };
+      ipv6 = ipsetRule {
+        inherit type rules;
+        name = "${name}-ipv6";
+        family = "ipv6";
+        set = filterIPv6 set;
+      };
+    in {
+      ipset = ipv4.ipset // ipv6.ipset;
+      extraCommands = ipv4.extraCommands + ipv6.extraCommands;
+    };
 }

@@ -1,0 +1,24 @@
+$ORIGIN as212625.net.
+$TTL 1H
+@                                               IN   SOA        ns1 noc (
+                                                                   1            ; serial  
+                                                                   1H           ; refresh
+                                                                   15M          ; retry
+                                                                   1W           ; expire
+                                                                   1H           ; minimum
+                                                                   )
+                                                IN   NS         ns1
+                                                IN   NS         ns2
+                                                IN   MX         1 mx1.mail.ovh.net.
+                                                IN   MX         5 mx2.mail.ovh.net.
+                                                IN   MX         100 mx3.mail.ovh.net.
+                                                IN   TXT        "v=spf1 include:mx.ovh.com ~all"
+
+ns1                                             IN   A          194.28.99.42
+                                                IN   AAAA       2a0c:b641:2b1::1
+
+ns2                                             IN   A          194.28.98.82
+                                                IN   AAAA       2a0c:b641:2b2::1
+
+ovhmo4384488-selector1._domainkey               IN   CNAME      ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.
+ovhmo4384488-selector2._domainkey               IN   CNAME      ovhmo4384488-selector2._domainkey.602626.dz.dkim.mail.ovh.net.

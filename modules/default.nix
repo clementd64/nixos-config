@@ -1,8 +1,8 @@
 {
   system = [
+    profiles/as212625
     profiles/baseline.nix
     profiles/container.nix
-    profiles/edge-router.nix
     profiles/mesh.nix
     profiles/router
     profiles/server.nix

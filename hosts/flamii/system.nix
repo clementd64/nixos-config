@@ -1,7 +1,6 @@
 { lib, ... }:
 {
-  clement.profile.router.enable = true;
-  clement.profile.edge-router.enable = true;
+  clement.profile.as212625.enable = true;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
@@ -21,6 +20,22 @@
         IPv6AcceptRA = false;
       };
     };
+
+    # Loopback
+    netdevs."20-dum0".netdevConfig = {
+      Name = "dum0";
+      Kind = "dummy";
+    };
+
+    networks."20-dum0" = {
+      matchConfig.Name = "dum0";
+      networkConfig = {
+        Address = [
+          "2a0c:b641:2b2::1/128"
+        ];
+        IPv6AcceptRA = false;
+      };
+    };
   };
 
   environment.persistence."/nix/persist" = {
@@ -32,6 +47,10 @@
   clement.profile.router.bird.config = ./bird.conf;
   clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:8::ffff" # Servperso
+  ];
+  clement.profile.as212625.dns.bind = [
+    "194.28.98.82"
+    "2a0c:b641:2b2::1"
   ];
 
   clement.wireguard = {

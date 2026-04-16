@@ -1,7 +1,6 @@
 { lib, pkgs, ... }:
 {
-  clement.profile.router.enable = true;
-  clement.profile.edge-router.enable = true;
+  clement.profile.as212625.enable = true;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
@@ -109,6 +108,10 @@
     "2a0c:b641:701:0:a5:0:112:1" # AS112 LocIX DUS
     "2001:7f8:f2:e1::112" # AS112 LocIX FRA
   ];
+  clement.profile.as212625.dns.bind = [
+    "194.28.99.42"
+    "2a0c:b641:2b1::1"
+  ];
 
   clement.wireguard = {
     home = {
@@ -120,8 +123,6 @@
       secretsFile = ./secrets.json;
     };
   };
-
-  clement.http2https.enable = true;
 
   system.stateVersion = "23.11";
 }

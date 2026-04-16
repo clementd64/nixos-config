@@ -2,6 +2,18 @@
 
 with lib; let
   cfg = config.clement.nat64;
+  allowedRule = pkgs.net.ipsetRule {
+    name = "nat64-allowed";
+    type = "hash:net";
+    family = "ipv6";
+    set = cfg.allowed;
+    rules = { iptables, ipset }: mkMerge [
+      ''${iptables} -A nixos-fw -d ${cfg.prefix} -p tcp -m set --match-set ${ipset} src -j ACCEPT''
+      (mkIf cfg.dns64.enable ''
+        ${iptables} -A nixos-fw -d ${cfg.dns64.address} -p udp --dport 53 -m set --match-set ${ipset} src -j ACCEPT
+      '')
+    ];
+  };
 in {
   options.clement.nat64 = {
     enable = mkEnableOption "nat64";
@@ -80,18 +92,8 @@ in {
       };
     };
 
-    networking.ipset."nat64-allowed" = mkIf (builtins.length cfg.allowed > 0) {
-      family = "ipv6";
-      type = "hash:net";
-      set = cfg.allowed;
-    };
-
-    networking.firewall.extraCommands = mkIf (builtins.length cfg.allowed > 0) (mkMerge [
-      ''ip6tables -A nixos-fw -d ${cfg.prefix} -p tcp -m set --match-set ${config.networking.ipset."nat64-allowed".name} src -j ACCEPT''
-      (mkIf cfg.dns64.enable ''
-        ip6tables -A nixos-fw -d ${cfg.dns64.address} -p udp --dport 53 -m set --match-set ${config.networking.ipset."nat64-allowed".name} src -j ACCEPT
-      '')
-    ]);
+    networking.ipset = allowedRule.ipset;
+    networking.firewall.extraCommands = allowedRule.extraCommands;
 
     services.coredns = mkIf cfg.dns64.enable {
       enable = true;

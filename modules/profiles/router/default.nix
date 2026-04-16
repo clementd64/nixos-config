@@ -1,18 +1,13 @@
-{ config, lib, pkgs, utils, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib; let
   cfg = config.clement.profile.router;
-
-  mkBgpAllowRule = family: allowedIp:
-    { ... }: mkIf (cfg.enable && builtins.length allowedIp > 0) {
-    networking.ipset."bgp-allowed-${family}" = {
-      inherit family;
-      type = "hash:ip";
-      set = allowedIp;
-    };
-
-    networking.firewall.extraCommands = ''
-      ${{ "ipv4" = "iptables"; "ipv6" = "ip6tables"; }.${family}} -A nixos-fw -m set --match-set ${config.networking.ipset."bgp-allowed-${family}".name} src -p tcp --dport 179 -j ACCEPT
+  bgpAllowedRule = pkgs.net.ipsetRules {
+    name = "bgp-allowed";
+    type = "hash:ip";
+    set = cfg.bgp.allowedIp;
+    rules = { iptables, ipset }: ''
+      ${iptables} -A nixos-fw -m set --match-set ${ipset} src -p tcp --dport 179 -j ACCEPT
     '';
   };
 in {
@@ -31,14 +26,11 @@ in {
     };
   };
 
-  imports = [
-    (mkBgpAllowRule "ipv4" (pkgs.net.filterIPv4 cfg.bgp.allowedIp))
-    (mkBgpAllowRule "ipv6" (pkgs.net.filterIPv6 cfg.bgp.allowedIp))
-  ];
-
   config = mkIf cfg.enable {
     clement.profile.server.enable = true;
 
+    networking.ipset = bgpAllowedRule.ipset;
+    networking.firewall.extraCommands = bgpAllowedRule.extraCommands;
     networking.firewall.checkReversePath = false;
 
     services.bird = {

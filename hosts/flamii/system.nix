@@ -38,7 +38,6 @@
     home = {
       addresses = [ "fe80::1/64" ];
       port = 51820;
-      allowedIps = [ "fe80::/64" "2a0c:b641:2b0:100::/56" ];
       presharedKey = ''["wireguard"]["home"]["preshared-key"]'';
       privateKey = ''["wireguard"]["home"]["private-key"]'';
       publicKey = "fL2bCOcZFXJeUtE4372q1URCIToWgj0H0qkyTDIv0Qc=";

@@ -43,8 +43,8 @@ with lib; let
       };
 
       allowedIps = mkOption {
-        type = types.listOf types.str;
-        default = [];
+        type = types.nullOr (types.listOf types.str);
+        default = null;
       };
 
       dns = mkOption {
@@ -99,7 +99,7 @@ in {
       wireguardPeers = [{
         PublicKey = value.publicKey;
         PresharedKeyFile = mkIf (value.presharedKey != null) config.clement.secrets."${value.interface}-preshared-key".path;
-        AllowedIPs = mkIf (value.allowedIps != null) value.allowedIps;
+        AllowedIPs = if value.allowedIps == null then [ "::/0" "0.0.0.0/0" ] else value.allowedIps;
         Endpoint = mkIf (value.endpoint != null) value.endpoint;
       }];
     };
@@ -111,7 +111,7 @@ in {
         DNS = value.dns;
         Domains = value.domains;
       };
-      routes = mkIf (value.allowedIps != null) [
+      routes = mkIf (value.allowedIps != null && !(builtins.elem "::/0" value.allowedIps || builtins.elem "0.0.0.0/0" value.allowedIps)) [
         {
           Destination = value.allowedIps;
           Scope = "link";

@@ -19,6 +19,11 @@ in {
       type = types.listOf types.str;
       default = [];
     };
+
+    dns.resolver.listen = mkOption {
+      type = types.listOf types.attrs;
+      default = [];
+    };
   };
 
   config = mkIf cfg.enable {
@@ -47,7 +52,40 @@ in {
       '';
     };
 
+    clement.secrets = {
+      "as212625-dns-cert" = {
+        file = ./secrets.json;
+        extract = ''["dns"]["cert"]'';
+        user = "knot-resolver";
+        before = [ "knot-resolver.service" ];
+      };
+      "as212625-dns-key" = {
+        file = ./secrets.json;
+        extract = ''["dns"]["key"]'';
+        user = "knot-resolver";
+        before = [ "knot-resolver.service" ];
+      };
+    };
+
+    services.knot-resolver = {
+      enable = true;
+      settings = {
+        network = {
+          listen = cfg.dns.resolver.listen;
+          tls = {
+            cert-file = config.clement.secrets."as212625-dns-cert".path;
+            key-file = config.clement.secrets."as212625-dns-key".path;
+          };
+        };
+        management.interface = "::1@5000";
+        dnssec.log-bogus = true;
+        nsid = config.networking.hostName;
+      };
+    };
+
     networking.ipset = dnsRule.ipset;
     networking.firewall.extraCommands = dnsRule.extraCommands;
+    # TODO: rewrite firewall to add some fine-grained generic ipset rules.
+    networking.firewall.allowedTCPPorts = [ 853 ];
   };
 }

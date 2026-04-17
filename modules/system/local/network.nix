@@ -16,24 +16,10 @@ in with lib; {
   };
 
   config = mkIf cfg.enable {
-    systemd.network = {
-      netdevs."20-local" = {
-        netdevConfig = {
-          Name = "local";
-          Kind = "dummy";
-        };
-      };
-
-      networks."20-local" = {
-        matchConfig.Name = "local";
-        networkConfig = {
-          Address = [
-            "${cfg.ipv4}/32"
-            "${cfg.ipv6}/128"
-          ];
-        };
-      };
-    };
+    clement.dummy.local.addresses = [
+      "${cfg.ipv4}/32"
+      "${cfg.ipv6}/128"
+    ];
 
     networking.firewall.extraCommands = concatStringsSep "\n" ([]
       ++ optional config.clement.docker.enable "iptables -A nixos-fw -s ${config.clement.docker.pools.ipv4.subnet} -d ${cfg.ipv4} -j ACCEPT"

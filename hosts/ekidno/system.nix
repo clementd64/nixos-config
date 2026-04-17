@@ -69,22 +69,10 @@
       };
     };
 
-    # Loopback
-    netdevs."20-dum0".netdevConfig = {
-      Name = "dum0";
-      Kind = "dummy";
-    };
-
-    networks."20-dum0" = {
-      matchConfig.Name = "dum0";
-      networkConfig = {
-        Address = [
-          "2a0c:b641:2b1::1/128"
-        ];
-        IPv6AcceptRA = false;
-      };
-    };
   };
+
+  clement.dummy.dum0.addresses = [ "2a0c:b641:2b1::1/128" ];
+  clement.dummy.dns-rec.addresses = [ "2a0c:b641:2b1::53/128" ];
 
   environment.persistence."/nix/persist" = {
     files = [
@@ -111,6 +99,11 @@
   clement.profile.as212625.dns.bind = [
     "194.28.99.42"
     "2a0c:b641:2b1::1"
+  ];
+  clement.profile.as212625.dns.resolver.listen = [
+    { interface = "194.28.99.42"; kind = "dot"; }
+    { interface = "2a0c:b641:2b1::53"; kind = "dot"; }
+    { interface = "2a0c:b641:2b1::53"; kind = "dns"; }
   ];
 
   clement.wireguard = {

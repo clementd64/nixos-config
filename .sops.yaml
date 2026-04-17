@@ -16,3 +16,9 @@ creation_rules:
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
       age15szmxhqfa5cyeg558kf2ee8q4h29p2x80la54llr98qctd56purs70yfzd
+
+  - path_regex: modules/profiles/as212625/secrets.json
+    age: >-
+      age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
+      age1njf4a8s0sckv6n5ua80tkwj90a08p30qtzjaj7m2rt48qe6t7sascptp7d,
+      age1psjq06sfp9apu8yrseg05hytjkdcelqqhn58zaxw9dqad2n7kvsq5d5q8p

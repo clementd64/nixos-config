@@ -7,12 +7,11 @@ with lib; let
     type = "hash:net";
     family = "ipv6";
     set = cfg.allowed;
-    rules = { iptables, ipset }: mkMerge [
-      ''${iptables} -A nixos-fw -d ${cfg.prefix} -p tcp -m set --match-set ${ipset} src -j ACCEPT''
-      (mkIf cfg.dns64.enable ''
-        ${iptables} -A nixos-fw -d ${cfg.dns64.address} -p udp --dport 53 -m set --match-set ${ipset} src -j ACCEPT
-      '')
-    ];
+    rules = { iptables, ipset }: ''
+      ${iptables} -A nixos-fw -d ${cfg.prefix} -p tcp -m set --match-set ${ipset} src -j ACCEPT
+    '' + optionalString cfg.dns64.enable ''
+      ${iptables} -A nixos-fw -d ${cfg.dns64.address} -p udp --dport 53 -m set --match-set ${ipset} src -j ACCEPT
+    '';
   };
 in {
   options.clement.nat64 = {
@@ -41,8 +40,6 @@ in {
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStartPre = "${pkgs.iptables}/bin/ip6tables -t mangle -A PREROUTING -d ${cfg.prefix} -p tcp -j TPROXY --on-port=1337 --on-ip=::1";
-        ExecStopPost = "${pkgs.iptables}/bin/ip6tables -t mangle -D PREROUTING -d ${cfg.prefix} -p tcp -j TPROXY --on-port=1337 --on-ip=::1";
         ExecStart = "${pkgs.proxy64}/bin/proxy64 nat64";
         Restart = "on-failure";
 
@@ -74,26 +71,28 @@ in {
         matchConfig.Name = "lo";
         routes = [{ Type = "local"; Destination = cfg.prefix; }];
       };
+    };
 
-      netdevs."30-dns64" = mkIf cfg.dns64.enable {
-        netdevConfig = {
-          Name = "dns64";
-          Kind = "dummy";
-        };
-      };
-
-      networks."30-dns64" = mkIf cfg.dns64.enable {
-        matchConfig.Name = "dns64";
-        networkConfig = {
-          Address = [
-            "${cfg.dns64.address}/128"
-          ];
-        };
-      };
+    clement.dummy.dns64 = mkIf cfg.dns64.enable {
+      addresses = [ "${cfg.dns64.address}/128" ];
     };
 
     networking.ipset = allowedRule.ipset;
-    networking.firewall.extraCommands = allowedRule.extraCommands;
+    networking.firewall.extraCommands = allowedRule.extraCommands + ''
+      # Clean up nat64 rules
+      ip6tables -t mangle -D PREROUTING -j nat64 2> /dev/null || true
+      ip6tables -t mangle -F nat64 2> /dev/null || true
+      ip6tables -t mangle -X nat64 2> /dev/null || true
+
+      # Set up nat64 rules
+      ip6tables -t mangle -N nat64 2> /dev/null || true
+      ip6tables -t mangle -A nat64 -d ${cfg.prefix} -p tcp -j TPROXY --on-port=1337 --on-ip=::1
+      ip6tables -t mangle -A PREROUTING -j nat64
+    '';
+
+    networking.firewall.extraStopCommands = ''
+      ip6tables -t mangle -D PREROUTING -j nat64 2>/dev/null || true
+    '';
 
     services.coredns = mkIf cfg.dns64.enable {
       enable = true;

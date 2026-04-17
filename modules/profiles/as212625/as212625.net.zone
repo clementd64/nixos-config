@@ -20,5 +20,10 @@ ns1                                             IN   A          194.28.99.42
 ns2                                             IN   A          194.28.98.82
                                                 IN   AAAA       2a0c:b641:2b2::1
 
+dns                                             IN   A          194.28.99.42
+                                                IN   A          194.28.98.82
+                                                IN   AAAA       2a0c:b641:2b1::53
+                                                IN   AAAA       2a0c:b641:2b2::53
+
 ovhmo4384488-selector1._domainkey               IN   CNAME      ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.
 ovhmo4384488-selector2._domainkey               IN   CNAME      ovhmo4384488-selector2._domainkey.602626.dz.dkim.mail.ovh.net.

@@ -2,14 +2,6 @@
 
 with lib; let
   cfg = config.clement.profile.router;
-  bgpAllowedRule = pkgs.net.ipsetRules {
-    name = "bgp-allowed";
-    type = "hash:ip";
-    set = cfg.bgp.allowedIp;
-    rules = { iptables, ipset }: ''
-      ${iptables} -A nixos-fw -m set --match-set ${ipset} src -p tcp --dport 179 -j ACCEPT
-    '';
-  };
 in {
   options.clement.profile.router = {
     enable = mkEnableOption "router profile";
@@ -29,8 +21,7 @@ in {
   config = mkIf cfg.enable {
     clement.profile.server.enable = true;
 
-    networking.ipset = bgpAllowedRule.ipset;
-    networking.firewall.extraCommands = bgpAllowedRule.extraCommands;
+    clement.firewall.src."tcp:179" = cfg.bgp.allowedIp;
     networking.firewall.checkReversePath = false;
 
     services.bird = {

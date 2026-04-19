@@ -2,15 +2,6 @@
 
 with lib; let
   cfg = config.clement.profile.as212625;
-  dnsRule = pkgs.net.ipsetRules {
-    name = "as212625-dns";
-    type = "hash:ip";
-    set = cfg.dns.bind;
-    rules = { iptables, ipset }: ''
-      ${iptables} -A nixos-fw -p tcp --dport 53 -m set --match-set ${ipset} dst -j ACCEPT
-      ${iptables} -A nixos-fw -p udp --dport 53 -m set --match-set ${ipset} dst -j ACCEPT
-    '';
-  };
 in {
   options.clement.profile.as212625 = {
     enable = mkEnableOption "profile as212625";
@@ -83,9 +74,10 @@ in {
       };
     };
 
-    networking.ipset = dnsRule.ipset;
-    networking.firewall.extraCommands = dnsRule.extraCommands;
-    # TODO: rewrite firewall to add some fine-grained generic ipset rules.
-    networking.firewall.allowedTCPPorts = [ 853 ];
+    clement.firewall.dst = {
+      "udp:53" = cfg.dns.bind;
+      "tcp:53" = cfg.dns.bind;
+      "tcp:853" = map (value: value.interface) (builtins.filter (value: value.kind == "dot") cfg.dns.resolver.listen);
+    };
   };
 }

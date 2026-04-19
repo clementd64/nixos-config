@@ -123,4 +123,6 @@ in {
   config.networking.firewall.allowedUDPPorts = attrsets.mapAttrsToList
     (name: value: value.port)
     (filterAttrs (name: value: value.port != null) config.clement.wireguard);
+
+  config.environment.systemPackages = mkIf (config.clement.wireguard != {}) [pkgs.wireguard-tools];
 }

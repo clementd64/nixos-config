@@ -11,6 +11,7 @@
     system/docker.nix
     system/dummy.nix
     system/factorio.nix
+    system/firewall.nix
     system/http2https.nix
     system/ipset.nix
     system/kubelet.nix

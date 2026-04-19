@@ -45,18 +45,22 @@ rec {
       type,
       set,
       rules,
+      filters ? {
+        ipv4 = filterIPv4;
+        ipv6 = filterIPv6;
+      },
     }: let
       ipv4 = ipsetRule {
         inherit type rules;
         name = "${name}-ipv4";
         family = "ipv4";
-        set = filterIPv4 set;
+        set = filters.ipv4 set;
       };
       ipv6 = ipsetRule {
         inherit type rules;
         name = "${name}-ipv6";
         family = "ipv6";
-        set = filterIPv6 set;
+        set = filters.ipv6 set;
       };
     in {
       ipset = ipv4.ipset // ipv6.ipset;

@@ -111,12 +111,9 @@ in {
         DNS = value.dns;
         Domains = value.domains;
       };
-      routes = mkIf (value.allowedIps != null && !(builtins.elem "::/0" value.allowedIps || builtins.elem "0.0.0.0/0" value.allowedIps)) [
-        {
-          Destination = value.allowedIps;
-          Scope = "link";
-        }
-      ];
+      routes = mkIf
+        (value.allowedIps != null && !(builtins.elem "::/0" value.allowedIps || builtins.elem "0.0.0.0/0" value.allowedIps))
+        (map (ip: { Destination = ip; Scope = mkIf (pkgs.net.isIPv4 ip) "link"; }) value.allowedIps);
     };
   }) config.clement.wireguard);
 

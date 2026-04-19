@@ -55,6 +55,15 @@
       publicKey = "fL2bCOcZFXJeUtE4372q1URCIToWgj0H0qkyTDIv0Qc=";
       secretsFile = ./secrets.json;
     };
+    pixel = {
+      addresses = [ "fe80::1/64" ];
+      allowedIps = [ "2a0c:b641:2b2::9/128" "194.28.98.113/32" ];
+      port = 51821;
+      presharedKey = ''["wireguard"]["pixel"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["pixel"]["private-key"]'';
+      publicKey = "Q7mUDHH4ksk/2BCQHIWso94JIvX+BcQJQhs+qluBIyI=";
+      secretsFile = ./secrets.json;
+    };
   };
 
   system.stateVersion = "23.11";

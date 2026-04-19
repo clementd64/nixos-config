@@ -94,23 +94,24 @@ in {
       ip6tables -t mangle -D PREROUTING -j nat64 2>/dev/null || true
     '';
 
-    services.coredns = mkIf cfg.dns64.enable {
-      enable = true;
-      config = ''
-        . {
-          bind ${cfg.dns64.address}
-          forward . tls://2606:4700:4700::1111 tls://2606:4700:4700::1001 tls://1.1.1.1 tls://1.0.0.1 {
-            tls_servername cloudflare-dns.com
-          }
-          dns64 {
-            prefix ${cfg.prefix}
-          }
-          errors
-          loadbalance
-          cache
-          loop
-        }
-      '';
+    containers.dns64 = mkIf cfg.dns64.enable {
+      autoStart = true;
+      config = { ... }: {
+        services.knot-resolver = {
+          enable = true;
+          settings = {
+            network = {
+              listen =[{ interface = cfg.dns64.address; kind = "dns"; }];
+            };
+            dns64 = {
+              enable = true;
+              prefix = cfg.prefix;
+            };
+            dnssec.log-bogus = true;
+            nsid = config.networking.hostName;
+          };
+        };
+      };
     };
   };
 }

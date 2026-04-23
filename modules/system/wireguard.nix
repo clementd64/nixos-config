@@ -109,6 +109,8 @@ in {
       networkConfig = {
         Address = value.addresses;
         DNS = value.dns;
+        DNSOverTLS = "opportunistic";
+        DNSDefaultRoute = false;
         Domains = value.domains;
       };
       routes = mkIf

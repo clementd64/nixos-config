@@ -42,11 +42,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1776903249,
-        "narHash": "sha256-X6DfL3OPeF1kCfHAkt6AyejvQ+WVsr3dX06MVXpBUos=",
+        "lastModified": 1777175394,
+        "narHash": "sha256-O85asIMCDEZotzFUzgQ+6neoIxEgotjOKvmfNg1fkq0=",
         "owner": "ghostty-org",
         "repo": "ghostty",
-        "rev": "880a599d66c0678c9d1709097b38beb5c0730175",
+        "rev": "c74f6d56d1feef473033057bc0ff7e3f00cf6421",
         "type": "github"
       },
       "original": {
@@ -104,11 +104,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776904464,
-        "narHash": "sha256-sBUCj7/4d3Hoevpu3oQp8ccJNA1EDeVmFi1F8O6VJro=",
+        "lastModified": 1777250669,
+        "narHash": "sha256-lswnQkFAkciQwXO0u23wUVZvq6TABj6Kk/+Po4FJYW4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "667b3c47325441e6a444faaf405bba76ec70338a",
+        "rev": "4883af6edbdf222c66edb545d312f4e40030a2be",
         "type": "github"
       },
       "original": {
@@ -159,11 +159,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1776830795,
-        "narHash": "sha256-PAfvLwuHc1VOvsLcpk6+HDKgMEibvZjCNvbM1BJOA7o=",
+        "lastModified": 1776983936,
+        "narHash": "sha256-ZOQyNqSvJ8UdrrqU1p7vaFcdL53idK+LOM8oRWEWh6o=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "72674a6b5599e844c045ae7449ba91f803d44ebc",
+        "rev": "2096f3f411ce46e88a79ae4eafcfc9df8ed41c61",
         "type": "github"
       },
       "original": {
@@ -188,11 +188,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1776734388,
-        "narHash": "sha256-vl3dkhlE5gzsItuHoEMVe+DlonsK+0836LIRDnm6MXQ=",
+        "lastModified": 1777077449,
+        "narHash": "sha256-AIiMJiqvGrN4HyLEbKAoCSRRYn0rnlW5VbKNIMIYqm4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "10e7ad5bbcb421fe07e3a4ad53a634b0cd57ffac",
+        "rev": "a4bf06618f0b5ee50f14ed8f0da77d34ecc19160",
         "type": "github"
       },
       "original": {
@@ -204,11 +204,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1776329215,
-        "narHash": "sha256-a8BYi3mzoJ/AcJP8UldOx8emoPRLeWqALZWu4ZvjPXw=",
+        "lastModified": 1776949667,
+        "narHash": "sha256-GMSVw35Q+294GlrTUKlx087E31z7KurReQ1YHSKp5iw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b86751bc4085f48661017fa226dee99fab6c651b",
+        "rev": "01fbdeef22b76df85ea168fbfe1bfd9e63681b30",
         "type": "github"
       },
       "original": {
@@ -332,11 +332,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776208985,
-        "narHash": "sha256-IOuRFpbeQ9jSk54OURX5yvjoC759ujgSNjkMKpChdDA=",
+        "lastModified": 1776888758,
+        "narHash": "sha256-OlQexlc8pMXAPhGrT89MtDcPCJv8MsFJcxFPMibRBho=",
         "ref": "refs/heads/main",
-        "rev": "e8ee348125247e7bd74932cc42ac92df90961d5b",
-        "revCount": 1666,
+        "rev": "a380ec6969faf5fae32f08b96f8529a3bca55d42",
+        "revCount": 1672,
         "type": "git",
         "url": "https://codeberg.org/jcollie/zig-overlay.git"
       },
@@ -352,11 +352,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1776789209,
-        "narHash": "sha256-G6B7Q4TXn7MZ1mB+f9rymjsYF5PLWoSvmbxijb/99bw=",
+        "lastModified": 1777165267,
+        "narHash": "sha256-aw2LW4Ucrjg9hIDZ6wMfIp24fEDiINwLix59Qn4wgFo=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "14fe971844e841297ddd2ce9783d6892b467af39",
+        "rev": "95b014de9d65dc9998c2cc4ee61c6c2a82880d13",
         "type": "github"
       },
       "original": {
@@ -374,11 +374,11 @@
         "zig": "zig_2"
       },
       "locked": {
-        "lastModified": 1776613749,
-        "narHash": "sha256-9TgoEDSagvvG59NSYvE6WUDrkyJuf0PyVLFKRSySs7M=",
+        "lastModified": 1776999674,
+        "narHash": "sha256-dEuWd2li80+H7f0k7RA25/Od49G91Pn3El3TcbEpONw=",
         "owner": "jcollie",
         "repo": "zon2nix",
-        "rev": "7eacc96583245cfdb04edb31183d9e60eacca51d",
+        "rev": "fe860f11b076bba30708d1efb4830459ecf85f0d",
         "type": "github"
       },
       "original": {

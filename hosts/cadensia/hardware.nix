@@ -28,6 +28,12 @@
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
+  fileSystems."/var/lib/private/loki" =
+    { device = "/dev/disk/by-id/ata-INTEL_SSDSC2BB480G6_PHWA634507N9480FGN-part2";
+      fsType = "btrfs";
+      options = [ "subvol=loki" "compress=zstd" "noatime" ];
+    };
+
   swapDevices = [ ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

@@ -43,6 +43,10 @@ in {
       description = "Factorio server service";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
+      protect = {
+        enable = true;
+        memoryExec = true;
+      };
       unitConfig = {
         # Must use private path as symlink is created on start
         ConditionPathExists = "/var/lib/private/factorio/${cfg.saveFile}";
@@ -54,24 +58,6 @@ in {
         Group = "factorio";
         StateDirectory = "factorio";
 
-        DynamicUser = true;
-        NoNewPrivileges = true;
-        PrivateTmp = true;
-        DevicePolicy = "closed";
-        ProtectProc = "invisible";
-        ProtectClock = true;
-        ProtectControlGroups = true;
-        ProtectHome = true;
-        ProtectKernelLogs = true;
-        ProtectKernelModules = true;
-        ProtectKernelTunables = true;
-        ProtectSystem = "strict";
-        RestrictNamespaces = true;
-        RestrictRealtime = true;
-        RestrictSUIDSGID = true;
-        MemoryDenyWriteExecute = true;
-        RestrictAddressFamilies = "AF_UNIX AF_INET AF_INET6 AF_NETLINK";
-        LockPersonality = true;
       };
     };
 

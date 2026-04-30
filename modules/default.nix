@@ -20,6 +20,7 @@
     system/oci.nix
     system/secrets.nix
     system/ssh.nix
+    system/systemd-protect.nix
     system/systemd-socket.nix
     system/traefik.nix
     system/wireguard.nix

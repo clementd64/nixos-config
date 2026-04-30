@@ -37,34 +37,20 @@ in {
       description = "Traefik service";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
+      protect = {
+        enable = true;
+        memoryExec = true;
+      };
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.traefik}/bin/traefik --configfile=${staticConfigFile}";
         Restart = "on-failure";
 
-        DynamicUser = true;
         SupplementaryGroups = mkIf (config.clement.docker.enable && cfg.enableDocker) "docker";
         AmbientCapabilities = "CAP_NET_BIND_SERVICE";
         CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
-        NoNewPrivileges = true;
         LimitNPROC = 64;
         LimitNOFILE = 1048576;
-        PrivateTmp = true;
-        DevicePolicy = "closed";
-        ProtectProc = "invisible";
-        ProtectClock = true;
-        ProtectControlGroups = true;
-        ProtectHome = true;
-        ProtectKernelLogs = true;
-        ProtectKernelModules = true;
-        ProtectKernelTunables = true;
-        ProtectSystem = "strict";
-        RestrictNamespaces = true;
-        RestrictRealtime = true;
-        RestrictSUIDSGID = true;
-        MemoryDenyWriteExecute = true;
-        RestrictAddressFamilies = "AF_UNIX AF_INET AF_INET6 AF_NETLINK";
-        LockPersonality = true;
       };
     };
   };

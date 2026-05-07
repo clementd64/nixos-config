@@ -41,10 +41,6 @@
                     mountpoint = "/nix";
                     mountOptions = [ "compress=zstd" "noatime" ];
                   };
-                  "/loki" = {
-                    mountpoint = "/var/lib/private/loki";
-                    mountOptions = [ "compress=zstd" "noatime" ];
-                  };
                 };
               };
             };

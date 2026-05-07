@@ -1,9 +1,5 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [
-    ./loki.nix
-  ];
-
   clement.profile.server.enable = true;
 
   boot.loader.grub.enable = true;

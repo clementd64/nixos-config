@@ -45,9 +45,12 @@
     };
   };
 
-  networking.firewall.extraCommands = ''
-    iptables -A nixos-fw -s 172.16.0.0/16 -p tcp -m multiport --dports 6443,10250 -j ACCEPT
-  '';
+  networking.firewall.allowedTCPPorts = [ 6443 ];
+  clement.firewall.src = {
+    "tcp:5432" = [ "172.16.0.0/16" ];
+    "tcp:6443" = [ "172.16.0.0/16" ];
+    "tcp:10250" = [ "172.16.0.0/16" ];
+  };
 
   system.stateVersion = "25.11";
 }

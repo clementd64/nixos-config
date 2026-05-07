@@ -28,6 +28,18 @@
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
+  fileSystems."/var/lib/postgresql" =
+    { device = "/dev/disk/by-id/ata-INTEL_SSDSC2BB480G6_PHWA634507N9480FGN-part2";
+      fsType = "btrfs";
+      options = [ "subvol=postgresql" "compress=zstd" "noatime" ];
+    };
+
+  fileSystems."/var/lib/rancher/k3s" =
+    { device = "/dev/disk/by-id/ata-INTEL_SSDSC2BB480G6_PHWA634507N9480FGN-part2";
+      fsType = "btrfs";
+      options = [ "subvol=k3s" "compress=zstd" ];
+    };
+
   swapDevices = [ ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

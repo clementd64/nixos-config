@@ -14,6 +14,7 @@
     system/firewall.nix
     system/http2https.nix
     system/ipset.nix
+    system/k3s.nix
     system/kubelet.nix
     system/local/network.nix
     system/nat64.nix

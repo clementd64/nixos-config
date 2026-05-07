@@ -19,5 +19,35 @@
     };
   };
 
+  services.postgresql = {
+    enable = true;
+    enableJIT = true;
+    enableTCPIP = true;
+    package = pkgs.postgresql_18;
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type  database  DBuser    address  auth-method
+      local  all       postgres           peer
+    '';
+  };
+
+  clement.k3s = {
+    enable = true;
+    role = "server";
+    config = {
+      disable = [ "servicelb" "traefik" "local-storage" ];
+      disable-helm-controller = true;
+      flannel-backend = "host-gw";
+      secrets-encryption = true;
+      tls-san = "cadensia.host.segfault.ovh";
+
+      cluster-cidr = "172.16.0.0/16";
+      service-cidr = "172.17.0.0/16";
+    };
+  };
+
+  networking.firewall.extraCommands = ''
+    iptables -A nixos-fw -s 172.16.0.0/16 -p tcp -m multiport --dports 6443,10250 -j ACCEPT
+  '';
+
   system.stateVersion = "25.11";
 }

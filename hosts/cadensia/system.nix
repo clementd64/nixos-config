@@ -25,8 +25,9 @@
     enableTCPIP = true;
     package = pkgs.postgresql_18;
     authentication = pkgs.lib.mkOverride 10 ''
-      #type  database  DBuser    address  auth-method
-      local  all       postgres           peer
+      #type  database  DBuser    address        auth-method
+      local  all       postgres                 peer
+      host   miniflux  miniflux  172.16.0.0/16  scram-sha-256
     '';
   };
 
@@ -45,7 +46,7 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 6443 ];
   clement.firewall.src = {
     "tcp:5432" = [ "172.16.0.0/16" ];
     "tcp:6443" = [ "172.16.0.0/16" ];

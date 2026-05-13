@@ -11,6 +11,7 @@ in with lib; {
       age
       ansible
       ansible-lint
+      bubblewrap
       deno
       dig
       file

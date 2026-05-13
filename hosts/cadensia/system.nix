@@ -27,6 +27,7 @@
     authentication = pkgs.lib.mkOverride 10 ''
       #type  database  DBuser    address        auth-method
       local  all       postgres                 peer
+      host   grafana   grafana   172.16.0.0/16  scram-sha-256
       host   miniflux  miniflux  172.16.0.0/16  scram-sha-256
     '';
   };

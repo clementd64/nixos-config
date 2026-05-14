@@ -136,19 +136,8 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
-  };
-
-  services.pulseaudio = {
-    enable = false;
-    # Auto switch between A2DP and HFP to make airpods mic working
-    extraConfig = ''
-      .ifexists module-bluetooth-policy.so
-      .nofail
-      unload-module module-bluetooth-policy
-      .fail
-      load-module module-bluetooth-policy auto_switch=2
-      .endif
-    '';
+    alsa.enable = true;
+    wireplumber.enable = true;
   };
   hardware.bluetooth.enable = true;
 

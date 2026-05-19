@@ -24,9 +24,11 @@
     enableJIT = true;
     enableTCPIP = true;
     package = pkgs.postgresql_18;
+    settings.shared_preload_libraries = [ "pg_stat_statements" ];
     authentication = pkgs.lib.mkOverride 10 ''
       #type  database  DBuser    address        auth-method
       local  all       postgres                 peer
+      local  all       alloy                    peer
       host   grafana   grafana   172.16.0.0/16  scram-sha-256
       host   miniflux  miniflux  172.16.0.0/16  scram-sha-256
     '';
@@ -71,6 +73,9 @@
       "2001:41d0:fc17:5900::/56"
     ];
   };
+
+  services.alloy.enable = true;
+  environment.etc."alloy/config.alloy".source = ./config.alloy;
 
   system.stateVersion = "25.11";
 }

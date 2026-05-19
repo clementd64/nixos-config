@@ -44,7 +44,10 @@ in stdenvNoCC.mkDerivation {
         )
         "chmod +x $out/bin/${name}"
       ]
-      else [ "mv ${binaryPath} $out/bin/${name}" ]
+      else [
+        "chmod +x ${binaryPath}"
+        "mv ${binaryPath} $out/bin/${name}"
+      ]
     )
     ++ (map (x: "ln -s ${name} $out/bin/${x}") aliases)
     ++ [ "runHook postInstall" ]

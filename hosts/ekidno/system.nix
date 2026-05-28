@@ -102,7 +102,9 @@
   ];
   clement.profile.as212625.dns.resolver.listen = [
     { interface = "194.28.99.42"; kind = "dot"; }
+    { interface = "194.28.99.42"; kind = "doh2"; }
     { interface = "2a0c:b641:2b1::53"; kind = "dot"; }
+    { interface = "2a0c:b641:2b1::53"; kind = "doh2"; }
     { interface = "2a0c:b641:2b1::53"; kind = "dns"; }
   ];
 

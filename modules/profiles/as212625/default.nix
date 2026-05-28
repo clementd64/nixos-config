@@ -82,6 +82,7 @@ in {
       "udp:53" = cfg.dns.bind;
       "tcp:53" = cfg.dns.bind;
       "tcp:853" = map (value: value.interface) (builtins.filter (value: value.kind == "dot") cfg.dns.resolver.listen);
+      "tcp:443" = map (value: value.interface) (builtins.filter (value: value.kind == "doh2") cfg.dns.resolver.listen);
     };
   };
 }

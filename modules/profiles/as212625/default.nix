@@ -6,9 +6,12 @@ in {
   options.clement.profile.as212625 = {
     enable = mkEnableOption "profile as212625";
 
-    dns.bind = mkOption {
-      type = types.listOf types.str;
-      default = [];
+    dns = {
+      primary = mkEnableOption "primary";
+      bind = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
     };
 
     dns.resolver.listen = mkOption {
@@ -30,6 +33,7 @@ in {
       dns64 = {
         enable = true;
         address = "2a0c:b641:2b0::64:0:53";
+        resolvers = map (value: value.interface) (builtins.filter (value: value.kind == "dns") cfg.dns.resolver.listen);
       };
     };
 

@@ -30,6 +30,10 @@ in {
       address = mkOption {
         type = types.str;
       };
+      resolvers = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
     };
   };
 
@@ -79,25 +83,20 @@ in {
     networking.firewall.extraStopCommands = ''
       ip6tables -t mangle -D PREROUTING -j nat64 2>/dev/null || true
     '';
-
-    containers.dns64 = mkIf cfg.dns64.enable {
-      autoStart = true;
-      config = { ... }: {
-        services.knot-resolver = {
-          enable = true;
-          settings = {
-            network = {
-              listen =[{ interface = cfg.dns64.address; kind = "dns"; }];
-            };
-            dns64 = {
-              enable = true;
-              prefix = cfg.prefix;
-            };
-            dnssec.log-bogus = true;
-            nsid = config.networking.hostName;
-          };
-        };
-      };
+    services.coredns = mkIf cfg.dns64.enable {
+      enable = true;
+      config = ''
+        . {
+          bind ${cfg.dns64.address}
+          forward . ${concatStringsSep " " cfg.dns64.resolvers}
+          dns64 {
+            prefix ${cfg.prefix}
+          }
+          errors
+          loop
+          nsid ${config.networking.hostName}
+        }
+      '';
     };
   };
 }

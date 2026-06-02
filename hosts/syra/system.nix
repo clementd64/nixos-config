@@ -86,7 +86,7 @@
   };
 
   services.resolved.settings.Resolve = {
-    DNS = "2a0c:b641:2b1::53#dns.as212625.net 2a0c:b641:2b2::53#dns.as212625.net 194.28.99.42#dns.as212625.net 194.28.98.82#dns.as212625.net";
+    DNS = "2a0c:b641:2b0::1#dns.as212625.net 62.3.50.46#dns.as212625.net";
     DNSOverTLS = true;
     FallbackDNS = "2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com 1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2001:4860:4860::8888#dns.google 2001:4860:4860::8844#dns.google 8.8.8.8#dns.google 8.8.4.4#dns.google";
   };

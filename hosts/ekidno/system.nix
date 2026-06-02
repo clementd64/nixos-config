@@ -71,7 +71,7 @@
 
   };
 
-  clement.dummy.dum0.addresses = [ "2a0c:b641:2b1::1/128" "62.3.50.46/32" ];
+  clement.dummy.dum0.addresses = [ "2a0c:b641:2b1::1/128" ];
   clement.dummy.dns-rec.addresses = [ "2a0c:b641:2b1::53/128" ];
 
   environment.persistence."/nix/persist" = {
@@ -105,9 +105,7 @@
   ];
   clement.profile.as212625.dns.resolver.listen = [
     { interface = "194.28.99.42"; kind = "dot"; }
-    { interface = "194.28.99.42"; kind = "doh2"; }
     { interface = "2a0c:b641:2b1::53"; kind = "dot"; }
-    { interface = "2a0c:b641:2b1::53"; kind = "doh2"; }
     { interface = "2a0c:b641:2b1::53"; kind = "dns"; }
   ];
 

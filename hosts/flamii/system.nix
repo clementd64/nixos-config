@@ -23,7 +23,7 @@
 
   };
 
-  clement.dummy.dum0.addresses = [ "2a0c:b641:2b2::1/128" ];
+  clement.dummy.dum0.addresses = [ "2a0c:b641:2b2::1/128" "62.3.50.46/32" ];
   clement.dummy.dns-rec.addresses = [ "2a0c:b641:2b2::53/128" ];
 
   environment.persistence."/nix/persist" = {
@@ -32,7 +32,10 @@
     ];
   };
 
-  clement.profile.router.bird.config = ./bird.conf;
+  clement.profile.router.bird.config = [
+    ../../modules/profiles/router/servperso.conf
+    ./bird.conf
+  ];
   clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:8::ffff" # Servperso
   ];
@@ -59,7 +62,7 @@
     };
     pixel = {
       addresses = [ "fe80::1/64" ];
-      allowedIps = [ "2a0c:b641:2b2::9/128" "194.28.98.113/32" ];
+      allowedIps = [ "2a0c:b641:2b2::9/128" "62.3.50.47/32" ];
       port = 51821;
       presharedKey = ''["wireguard"]["pixel"]["preshared-key"]'';
       privateKey = ''["wireguard"]["pixel"]["private-key"]'';

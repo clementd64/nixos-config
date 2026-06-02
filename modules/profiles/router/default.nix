@@ -7,7 +7,7 @@ in {
     enable = mkEnableOption "router profile";
 
     bird.config = mkOption {
-      type = types.path;
+      type = types.listOf types.path;
       description = "Bird configuration";
     };
 
@@ -26,10 +26,9 @@ in {
 
     services.bird = {
       enable = true;
-      config = strings.concatMapStringsSep "\n" (x: builtins.readFile x) [
-        ./common.conf
-        cfg.bird.config
-      ];
+      config = strings.concatMapStringsSep "\n" (x: builtins.readFile x) (
+        [./common.conf] ++ cfg.bird.config
+      );
     };
 
     boot.kernel.sysctl = {

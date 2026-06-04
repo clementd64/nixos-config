@@ -39,7 +39,8 @@ in {
       dns64 = {
         enable = true;
         address = "2a0c:b641:2b0::64:0:53";
-        resolvers = map (value: value.interface) (builtins.filter (value: value.kind == "dns") cfg.dns.resolver.listen);
+        resolvers = map (value: "tls://${value.interface}") (builtins.filter (value: value.kind == "dot") cfg.dns.resolver.listen);
+        tlsServerName = "dns.as212625.net";
       };
     };
 

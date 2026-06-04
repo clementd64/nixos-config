@@ -34,6 +34,10 @@ in {
         type = types.listOf types.str;
         default = [];
       };
+      tlsServerName = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+      };
     };
   };
 
@@ -88,7 +92,9 @@ in {
       config = ''
         . {
           bind ${cfg.dns64.address}
-          forward . ${concatStringsSep " " cfg.dns64.resolvers}
+          forward . ${concatStringsSep " " cfg.dns64.resolvers} {
+            ${optionalString (cfg.dns64.tlsServerName != null) "tls_servername ${cfg.dns64.tlsServerName}"}
+          }
           dns64 {
             prefix ${cfg.prefix}
           }

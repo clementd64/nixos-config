@@ -24,7 +24,6 @@
   };
 
   clement.dummy.dum0.addresses = [ "2a0c:b641:2b2::1/128" ];
-  clement.dummy.dns-rec.addresses = [ "2a0c:b641:2b2::53/128" ];
 
   environment.persistence."/nix/persist" = {
     files = [
@@ -42,11 +41,6 @@
   clement.profile.as212625.dns.bind = [
     "194.28.98.82"
     "2a0c:b641:2b2::1"
-  ];
-  clement.profile.as212625.dns.resolver.listen = [
-    { interface = "194.28.98.82"; kind = "dot"; }
-    { interface = "2a0c:b641:2b2::53"; kind = "dot"; }
-    { interface = "2a0c:b641:2b2::53"; kind = "dns"; }
   ];
 
   clement.wireguard = {

@@ -31,6 +31,7 @@
       local  all       alloy                    peer
       host   grafana   grafana   172.16.0.0/16  scram-sha-256
       host   miniflux  miniflux  172.16.0.0/16  scram-sha-256
+      host   n8n       n8n       172.16.0.0/16  scram-sha-256
     '';
   };
 

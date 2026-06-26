@@ -31,6 +31,7 @@
 
   gtk.enable = true;
   gtk.theme.name = "Adwaita-dark";
+  gtk.gtk4.theme.name = "Adwaita-dark";
   qt.enable = true;
   qt.style.name = "adwaita-dark";
 
@@ -58,5 +59,5 @@
     wireguard-tools
   ];
 
-  home.stateVersion = "23.11";
+  home.stateVersion = "26.05";
 }

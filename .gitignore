@@ -1,3 +1,4 @@
 key.txt
+terraform.tfstate
 .terraform
 *.tfstate.*

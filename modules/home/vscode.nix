@@ -51,8 +51,11 @@ in with lib; {
           "zig.path" = "";
           "zig.zls.path" = "";
           "zig.initialSetupDone" = true;
+          "dev.containers.defaultFeatures" = {
+            "ghcr.io/clementd64/images-catalog/codex:latest" = {};
+          };
 
-            # Theme
+          # Theme
           "editor.fontFamily" = "'Fira Code', 'monospace'";
           "editor.fontLigatures" = true;
           "editor.lineNumbers" = "relative";

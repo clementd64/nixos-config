@@ -49,9 +49,9 @@
     enableTCPIP = true;
     package = pkgs.postgresql_18;
     authentication = lib.mkOverride 10 ''
-      #type   database  DBuser    address  auth-method
-      local   all       postgres           peer
-      hostssl all       miniflux  ::/0     cert
+      #type   database  DBuser    address             auth-method
+      local   all       postgres                      peer
+      hostssl miniflux  miniflux  2a0c:b641:2b0::/44  cert
     '';
     settings = {
       ssl = true;

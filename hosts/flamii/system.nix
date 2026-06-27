@@ -1,5 +1,9 @@
 { lib, ... }:
 {
+  imports = [
+    ./miniflux.nix
+  ];
+
   clement.profile.as212625.enable = true;
 
   boot.loader.grub.enable = true;

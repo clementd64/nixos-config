@@ -7,7 +7,6 @@ terraform {
   }
 }
 
-
 locals {
   client_names = toset([
     "miniflux",
@@ -26,7 +25,7 @@ resource "tls_self_signed_cert" "ca" {
 
   subject {
     common_name  = "morytha"
-    organization = "morytha"
+    organization = "AS212625"
   }
 
   allowed_uses = [
@@ -36,7 +35,7 @@ resource "tls_self_signed_cert" "ca" {
   ]
 }
 
-output "ca_certificate_pem" {
+output "ca" {
   value = tls_self_signed_cert.ca.cert_pem
 }
 
@@ -46,11 +45,11 @@ resource "tls_private_key" "server" {
 
 resource "tls_cert_request" "server" {
   private_key_pem = tls_private_key.server.private_key_pem
-  dns_names       = []
+  dns_names       = ["db.as212625.net"]
 
   subject {
-    common_name  = "morytha"
-    organization = "morytha"
+    common_name  = "db.as212625.net"
+    organization = "AS212625"
   }
 }
 
@@ -69,6 +68,7 @@ resource "tls_locally_signed_cert" "server" {
 
 output "server" {
   value = {
+    ca   = tls_self_signed_cert.ca.cert_pem
     cert = tls_locally_signed_cert.server.cert_pem
     key  = tls_private_key.server.private_key_pem
   }
@@ -88,7 +88,7 @@ resource "tls_cert_request" "client" {
 
   subject {
     common_name  = each.key
-    organization = "morytha"
+    organization = "AS212625"
   }
 }
 
@@ -110,6 +110,7 @@ resource "tls_locally_signed_cert" "client" {
 output "clients" {
   value = {
     for name in sort(tolist(local.client_names)) : name => {
+      ca   = tls_self_signed_cert.ca.cert_pem
       cert = tls_locally_signed_cert.client[name].cert_pem
       key  = tls_private_key.client[name].private_key_pem
     }

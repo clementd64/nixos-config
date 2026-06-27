@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   settings = {
-    DATABASE_URL = "host=2001:bc8:710:1198:dc00:ff:fee8:47b9 user=miniflux dbname=miniflux sslmode=verify-ca sslcert=${config.clement.secrets."miniflux-postgresql-tls-cert".path} sslkey=${config.clement.secrets."miniflux-postgresql-tls-key".path} sslrootcert=${config.clement.secrets."miniflux-postgresql-tls-ca".path}";
+    DATABASE_URL = "host=db.as212625.net user=miniflux dbname=miniflux sslmode=verify-full sslcert=${config.clement.secrets."miniflux-postgresql-tls-cert".path} sslkey=${config.clement.secrets."miniflux-postgresql-tls-key".path} sslrootcert=${config.clement.secrets."miniflux-postgresql-tls-ca".path}";
     LISTEN_ADDR = "[2a0c:b641:2b2::10]:443";
     CERT_FILE = config.clement.secrets."miniflux-tls-cert".path;
     KEY_FILE = config.clement.secrets."miniflux-tls-key".path;

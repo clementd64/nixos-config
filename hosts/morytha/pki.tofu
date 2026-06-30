@@ -1,4 +1,26 @@
+variable "passphrase" {
+  type      = string
+  sensitive = true
+}
+
 terraform {
+  encryption {
+    key_provider "pbkdf2" "sops" {
+      passphrase = var.passphrase
+    }
+    method "aes_gcm" "crypto" {
+      keys = key_provider.pbkdf2.sops
+    }
+    state {
+      method = method.aes_gcm.crypto
+      enforced = true
+    }
+    plan {
+      method = method.aes_gcm.crypto
+      enforced = true
+    }
+  }
+
   required_providers {
     tls = {
       source  = "opentofu/tls"

@@ -32,6 +32,7 @@ terraform {
 locals {
   client_names = toset([
     "miniflux",
+    "pocketid",
   ])
 }
 

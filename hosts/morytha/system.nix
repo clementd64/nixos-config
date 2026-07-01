@@ -52,6 +52,7 @@
       #type   database  DBuser    address             auth-method
       local   all       postgres                      peer
       hostssl miniflux  miniflux  2a0c:b641:2b0::/44  cert
+      hostssl pocketid  pocketid  2a0c:b641:2b0::/44  cert
     '';
     settings = {
       ssl = true;

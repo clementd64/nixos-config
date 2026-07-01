@@ -7,8 +7,16 @@ let
     KEY_FILE = config.clement.secrets."miniflux-tls-key".path;
     BASE_URL = "https://miniflux.dubreuil.dev/";
     HTTPS = 1;
-    WEBAUTHN = 1;
     RUN_MIGRATIONS = 1;
+
+    OAUTH2_PROVIDER = "oidc";
+    OAUTH2_CLIENT_ID_FILE = config.clement.secrets."miniflux-oauth2_client_id".path;
+    OAUTH2_CLIENT_SECRET_FILE = config.clement.secrets."miniflux-oauth2_client_secret".path;
+    OAUTH2_REDIRECT_URL = "https://miniflux.dubreuil.dev/oauth2/oidc/callback";
+    OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://id.dubreuil.dev";
+    OAUTH2_OIDC_PROVIDER_NAME = "PocketID";
+    OAUTH2_USER_CREATION = 1;
+    DISABLE_LOCAL_AUTH = 1;
   };
 in {
   clement.dummy.miniflux.addresses = [ "2a0c:b641:2b2::10/128" ];
@@ -42,6 +50,18 @@ in {
     miniflux-tls-key = {
       file = ./secrets.json;
       extract = ''["miniflux"]["key"]'';
+      group = "miniflux";
+      before = [ "miniflux.service" ];
+    };
+    miniflux-oauth2_client_id = {
+      file = ./secrets.json;
+      extract = ''["miniflux"]["oauth2_client_id"]'';
+      group = "miniflux";
+      before = [ "miniflux.service" ];
+    };
+    miniflux-oauth2_client_secret = {
+      file = ./secrets.json;
+      extract = ''["miniflux"]["oauth2_client_secret"]'';
       group = "miniflux";
       before = [ "miniflux.service" ];
     };

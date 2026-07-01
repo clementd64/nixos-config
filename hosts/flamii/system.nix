@@ -2,6 +2,7 @@
 {
   imports = [
     ./miniflux.nix
+    ./pocket-id.nix
   ];
 
   clement.profile.as212625.enable = true;

@@ -38,7 +38,7 @@ in {
       "net.ipv6.conf.all.forwarding" = "1";
     };
 
-    services.resolved.llmnr = "false";
+    services.resolved.settings.Resolve.LLMNR = "false";
     systemd.network.config.networkConfig = {
       ManageForeignRoutes = false;
     };

@@ -29,18 +29,20 @@ in {
       { interface = "62.3.50.46"; kind = "dot"; }
     ];
 
-    clement.nat64 = {
-      enable = true;
-      prefix = "2a0c:b641:2b0::64:0:0/96";
-      allowed = [
-        "2001:bc8:1640:5d6::/64"
-        "2001:bc8:710:1198::/64"
-      ];
-      dns64 = {
+    clement.proxy64 = {
+      nat64 = {
         enable = true;
-        address = "2a0c:b641:2b0::64:0:53";
-        resolvers = map (value: "tls://${value.interface}") (builtins.filter (value: value.kind == "dot") cfg.dns.resolver.listen);
-        tlsServerName = "dns.as212625.net";
+        prefix = "2a0c:b641:2b0::64:0:0/96";
+        allowed = [
+          "2001:bc8:1640:5d6::/64"
+          "2001:bc8:710:1198::/64"
+        ];
+        dns64 = {
+          enable = true;
+          address = "2a0c:b641:2b0::64:0:53";
+          resolvers = map (value: "tls://${value.interface}") (builtins.filter (value: value.kind == "dot") cfg.dns.resolver.listen);
+          tlsServerName = "dns.as212625.net";
+        };
       };
     };
 

@@ -1,8 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib; let
-  nat64 = config.clement.nat64;
-  http2https = config.clement.http2https;
+  nat64 = config.clement.proxy64.nat64;
+  sni = config.clement.proxy64.sni;
+  http2https = config.clement.proxy64.http2https;
 
   allowedRule = pkgs.net.ipsetRule {
     name = "nat64-allowed";
@@ -16,9 +17,9 @@ with lib; let
     '';
   };
 
-  enable = nat64.enable || http2https.enable;
+  enable = nat64.enable || sni.enable || http2https.enable;
 in {
-  options.clement = {
+  options.clement.proxy64 = {
     nat64 = {
       enable = mkEnableOption "nat64";
       prefix = mkOption {
@@ -46,6 +47,21 @@ in {
       };
     };
 
+    sni = {
+      enable = mkEnableOption "sni";
+      listen = mkOption {
+        type = types.str;
+        default = ":443";
+      };
+      prefix = mkOption {
+        type = types.str;
+      };
+      allowed = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
+    };
+
     http2https = {
       enable = mkEnableOption "http2https";
       listen = mkOption {
@@ -69,22 +85,23 @@ in {
         ExecStart = "${pkgs.proxy64}/bin/proxy64";
         Restart = "on-failure";
 
-        AmbientCapabilities = "CAP_NET_ADMIN";
-        CapabilityBoundingSet = "CAP_NET_ADMIN";
+        AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
+        CapabilityBoundingSet = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
       };
       environment = {
         NAT64_PORT = mkIf nat64.enable "1337";
         HTTP2HTTPS_LISTEN = mkIf http2https.enable http2https.listen;
+        SNI_LISTEN = mkIf sni.enable sni.listen;
+        SNI_PREFIX = mkIf sni.enable sni.prefix;
+        SNI_ALLOWED_CIDRS = mkIf sni.enable (concatStringsSep "," sni.allowed);
       };
     };
 
     # NAT64
 
-    systemd.network = mkIf nat64.enable {
-      networks."30-nat64" = {
-        matchConfig.Name = "lo";
-        routes = [{ Type = "local"; Destination = nat64.prefix; }];
-      };
+    systemd.network.networks."30-nat64" = mkIf nat64.enable {
+      matchConfig.Name = "lo";
+      routes = [{ Type = "local"; Destination = nat64.prefix; }];
     };
 
     networking.ipset = mkIf nat64.enable allowedRule.ipset;
@@ -126,6 +143,13 @@ in {
           nsid ${config.networking.hostName}
         }
       '';
+    };
+
+    ## SNI
+
+    systemd.network.networks."30-sni" = mkIf sni.enable {
+      matchConfig.Name = "lo";
+      routes = [{ Type = "local"; Destination = sni.prefix; }];
     };
   };
 }

@@ -12,13 +12,12 @@
     system/dummy.nix
     system/factorio.nix
     system/firewall.nix
-    system/http2https.nix
     system/ipset.nix
     system/k3s.nix
     system/kubelet.nix
     system/local/network.nix
-    system/nat64.nix
     system/oci.nix
+    system/proxy64.nix
     system/secrets.nix
     system/ssh.nix
     system/systemd-protect.nix

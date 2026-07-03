@@ -68,6 +68,10 @@ in {
         type = types.str;
         default = ":80";
       };
+      acmeWebroot = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+      };
     };
   };
 
@@ -90,10 +94,11 @@ in {
       };
       environment = {
         NAT64_PORT = mkIf nat64.enable "1337";
-        HTTP2HTTPS_LISTEN = mkIf http2https.enable http2https.listen;
         SNI_LISTEN = mkIf sni.enable sni.listen;
         SNI_PREFIX = mkIf sni.enable sni.prefix;
         SNI_ALLOWED_CIDRS = mkIf sni.enable (concatStringsSep "," sni.allowed);
+        HTTP2HTTPS_LISTEN = mkIf http2https.enable http2https.listen;
+        ACME_WEBROOT = mkIf http2https.enable http2https.acmeWebroot;
       };
     };
 

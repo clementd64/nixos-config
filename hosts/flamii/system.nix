@@ -48,6 +48,11 @@
     "2a0c:b641:2b2::1"
   ];
 
+  clement.proxy64.http2https = {
+    enable = true;
+    acmeWebroot = "/var/tmp/acme-challenges";
+  };
+
   clement.wireguard = {
     home = {
       addresses = [ "fe80::1/64" ];

@@ -21,6 +21,7 @@ let
 in {
   clement.dummy.miniflux.addresses = [ "2a0c:b641:2b2::10/128" ];
   clement.firewall.dst."tcp:443" = ["2a0c:b641:2b2::10"];
+  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b2::10"];
 
   clement.secrets = {
     miniflux-postgresql-tls-ca = {

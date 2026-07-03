@@ -17,6 +17,7 @@ let
 in {
   clement.dummy.pocket-id.addresses = [ "2a0c:b641:2b2::11/128" ];
   clement.firewall.dst."tcp:443" = ["2a0c:b641:2b2::11"];
+  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b2::11"];
 
   clement.secrets = {
     pocket-id-postgresql-tls-ca = {

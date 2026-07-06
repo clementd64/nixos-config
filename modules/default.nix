@@ -3,7 +3,6 @@
     profiles/as212625
     profiles/baseline.nix
     profiles/container.nix
-    profiles/mesh.nix
     profiles/router
     profiles/server.nix
     system/compose.nix

@@ -23,7 +23,7 @@ in {
   config = mkIf cfg.enable {
     clement.profile.router.enable = true;
 
-    clement.dummy.anycast.addresses = [ "2a0c:b641:2b0::1/128" "62.3.50.46/32" ];
+    clement.local.addresses = [ "2a0c:b641:2b0::1/128" "62.3.50.46/32" ];
     clement.profile.as212625.dns.resolver.listen = [
       { interface = "2a0c:b641:2b0::1"; kind = "dot"; }
       { interface = "62.3.50.46"; kind = "dot"; }

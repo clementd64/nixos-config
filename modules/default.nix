@@ -9,10 +9,10 @@
     system/compose.nix
     system/container.nix
     system/docker.nix
-    system/dummy.nix
     system/firewall.nix
     system/ipset.nix
     system/k3s.nix
+    system/local.nix
     system/local/network.nix
     system/oci.nix
     system/proxy64.nix

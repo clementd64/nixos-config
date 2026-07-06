@@ -16,7 +16,7 @@ in with lib; {
   };
 
   config = mkIf cfg.enable {
-    clement.dummy.local.addresses = [
+    clement.local.addresses = [
       "${cfg.ipv4}/32"
       "${cfg.ipv6}/128"
     ];

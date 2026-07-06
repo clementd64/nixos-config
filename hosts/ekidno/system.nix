@@ -71,7 +71,7 @@
 
   };
 
-  clement.dummy.dum0.addresses = [ "2a0c:b641:2b1::1/128" ];
+  clement.local.addresses = [ "2a0c:b641:2b1::1/128" ];
 
   environment.persistence."/nix/persist" = {
     files = [

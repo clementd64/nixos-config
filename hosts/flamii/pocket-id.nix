@@ -14,7 +14,7 @@ let
     GEOLITE_DB_PATH = "%C/pocket-id/GeoLite2-City.mmdb";
   };
 in {
-  clement.dummy.pocket-id.addresses = [ "2a0c:b641:2b2::11/128" ];
+  clement.local.addresses = [ "2a0c:b641:2b2::11/128" ];
   clement.firewall.dst."tcp:443" = ["2a0c:b641:2b2::11"];
   clement.firewall.dst."tcp:80" = ["2a0c:b641:2b2::11"];
 

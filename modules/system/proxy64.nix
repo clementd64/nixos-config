@@ -119,10 +119,7 @@ in {
 
     # NAT64
 
-    systemd.network.networks."30-nat64" = mkIf nat64.enable {
-      matchConfig.Name = "lo";
-      routes = [{ Type = "local"; Destination = nat64.prefix; }];
-    };
+    clement.local.routes = mkIf nat64.enable [ nat64.prefix ];
 
     networking.ipset = mkIf nat64.enable allowedRule.ipset;
     networking.firewall.extraCommands = mkIf nat64.enable (allowedRule.extraCommands + ''
@@ -146,9 +143,7 @@ in {
 
     # DNS64
 
-    clement.dummy.dns64 = mkIf nat64.dns64.enable {
-      addresses = [ "${nat64.dns64.address}/128" ];
-    };
+    clement.local.addresses = mkIf nat64.dns64.enable [ "${nat64.dns64.address}/128" ];
 
     services.coredns = mkIf nat64.dns64.enable {
       enable = true;

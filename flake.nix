@@ -81,10 +81,6 @@
     };
 
     hosts = {
-      cadensia = mkStable {
-        system = "x86_64-linux";
-      };
-
       ekidno = mkStable {
         system = "x86_64-linux";
       };

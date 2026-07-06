@@ -9,7 +9,6 @@
     system/container.nix
     system/docker.nix
     system/dummy.nix
-    system/factorio.nix
     system/firewall.nix
     system/ipset.nix
     system/k3s.nix

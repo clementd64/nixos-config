@@ -42,6 +42,8 @@ in {
           address = "2a0c:b641:2b0::64:0:53";
           resolvers = map (value: "tls://${value.interface}") (builtins.filter (value: value.kind == "dot") cfg.dns.resolver.listen);
           tlsServerName = "dns.as212625.net";
+          certFile = config.clement.secrets."as212625-dns-cert".path;
+          keyFile = config.clement.secrets."as212625-dns-key".path;
         };
       };
     };
@@ -60,16 +62,20 @@ in {
       "as212625-dns-cert" = {
         file = ./secrets.json;
         extract = ''["dns"]["cert"]'';
-        user = "knot-resolver";
-        before = [ "knot-resolver.service" ];
+        group = "dns";
+        before = [ "knot-resolver.service" "coredns.service" ];
       };
       "as212625-dns-key" = {
         file = ./secrets.json;
         extract = ''["dns"]["key"]'';
-        user = "knot-resolver";
-        before = [ "knot-resolver.service" ];
+        group = "dns";
+        before = [ "knot-resolver.service" "coredns.service" ];
       };
     };
+
+    users.groups.dns = {};
+    systemd.services.coredns.serviceConfig.SupplementaryGroups = [ "dns" ];
+    systemd.services.knot-resolver.serviceConfig.SupplementaryGroups = [ "dns" ];
 
     services.knot-resolver = {
       enable = true;

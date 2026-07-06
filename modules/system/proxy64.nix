@@ -44,6 +44,14 @@ in {
           type = types.nullOr types.str;
           default = null;
         };
+        certFile = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
+        keyFile = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+        };
       };
     };
 
@@ -76,6 +84,13 @@ in {
   };
 
   config = {
+    assertions = [
+      {
+        assertion = (nat64.dns64.certFile != null) == (nat64.dns64.keyFile != null);
+        message = "clement.proxy64.nat64.dns64.certFile and keyFile must be set together.";
+      }
+    ];
+
     systemd.services.proxy64 = mkIf enable {
       description = "proxy64 service";
       after = [ "network.target" ];
@@ -118,6 +133,9 @@ in {
 
       # Set up nat64 rules
       ip6tables -t mangle -N nat64 2> /dev/null || true
+      ${optionalString nat64.dns64.enable ''
+        ip6tables -t mangle -A nat64 -d ${nat64.dns64.address} -p tcp -j RETURN
+      ''}
       ip6tables -t mangle -A nat64 -d ${nat64.prefix} -p tcp -j TPROXY --on-port=1337 --on-ip=::1
       ip6tables -t mangle -A PREROUTING -j nat64
     '');
@@ -134,8 +152,7 @@ in {
 
     services.coredns = mkIf nat64.dns64.enable {
       enable = true;
-      config = ''
-        . {
+      config = let settings = ''
           bind ${nat64.dns64.address}
           forward . ${concatStringsSep " " nat64.dns64.resolvers} {
             ${optionalString (nat64.dns64.tlsServerName != null) "tls_servername ${nat64.dns64.tlsServerName}"}
@@ -146,6 +163,15 @@ in {
           errors
           loop
           nsid ${config.networking.hostName}
+      '';
+      in ''
+        . {
+          ${settings}
+        }
+      '' + optionalString (nat64.dns64.certFile != null && nat64.dns64.keyFile != null) ''
+        tls://. {
+          tls ${nat64.dns64.certFile} ${nat64.dns64.keyFile}
+          ${settings}
         }
       '';
     };

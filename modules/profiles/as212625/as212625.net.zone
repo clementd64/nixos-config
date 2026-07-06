@@ -23,6 +23,7 @@ ns2                                             IN   A          194.28.98.82
 dns                                             IN   A          62.3.50.46
                                                 IN   AAAA       2a0c:b641:2b0::1
 
+dns64                                           IN   AAAA       2a0c:b641:2b0::64:0:53
 db                                              IN   AAAA       2001:bc8:710:1198:dc00:ff:fee8:47b9
 
 ovhmo4384488-selector1._domainkey               IN   CNAME      ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.

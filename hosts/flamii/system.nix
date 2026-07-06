@@ -50,7 +50,7 @@
 
   clement.proxy64.http2https = {
     enable = true;
-    acmeWebroot = "/var/tmp/acme-challenges";
+    acmeWebroot = "/run/acme-challenges";
   };
 
   clement.wireguard = {

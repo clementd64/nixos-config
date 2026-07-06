@@ -5,9 +5,8 @@ let
     ENCRYPTION_KEY_FILE = config.clement.secrets."pocket-id-encryption-key".path;
     HOST = "2a0c:b641:2b2::11";
     PORT = 443;
-    TLS_CERT = config.clement.secrets."pocket-id-tls-cert".path;
-    TLS_KEY = config.clement.secrets."pocket-id-tls-key".path;
-    TRUSTED_PLATFORM = "CF-Connecting-IP";
+    TLS_CERT = config.clement.acme.certificates."id.dubreuil.dev".cert;
+    TLS_KEY = config.clement.acme.certificates."id.dubreuil.dev".key;
     APP_URL = "https://id.dubreuil.dev";
     FILE_BACKEND = "database";
     UI_CONFIG_DISABLED = true;
@@ -38,24 +37,17 @@ in {
       group = "pocket-id";
       before = [ "pocket-id.service" ];
     };
-    pocket-id-tls-cert = {
-      file = ./secrets.json;
-      extract = ''["pocket-id"]["cert"]'';
-      group = "pocket-id";
-      before = [ "pocket-id.service" ];
-    };
-    pocket-id-tls-key = {
-      file = ./secrets.json;
-      extract = ''["pocket-id"]["key"]'';
-      group = "pocket-id";
-      before = [ "pocket-id.service" ];
-    };
     pocket-id-encryption-key = {
       file = ./secrets.json;
       extract = ''["pocket-id"]["encryption-key"]'';
       group = "pocket-id";
       before = [ "pocket-id.service" ];
     };
+  };
+
+  clement.acme.certificates."id.dubreuil.dev" = {
+    reload = "pocket-id.service";
+    group = "pocket-id";
   };
 
   systemd.services.pocket-id = {

@@ -5,6 +5,7 @@
     profiles/container.nix
     profiles/router
     profiles/server.nix
+    system/acme.nix
     system/compose.nix
     system/container.nix
     system/docker.nix

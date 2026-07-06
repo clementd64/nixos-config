@@ -12,7 +12,6 @@
     system/firewall.nix
     system/ipset.nix
     system/k3s.nix
-    system/kubelet.nix
     system/local/network.nix
     system/oci.nix
     system/proxy64.nix

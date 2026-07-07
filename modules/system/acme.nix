@@ -105,7 +105,7 @@ in {
                 ${pkgs.systemd}/bin/systemctl try-reload-or-restart ${cert.reload}
               '')
             ];
-          in "${pkgs.certbot}/bin/certbot ${escapeShellArgs (certbotArgs cert)}";
+          in "${pkgs.util-linux}/bin/flock /run/acme-lock ${pkgs.certbot}/bin/certbot ${escapeShellArgs (certbotArgs cert)}";
         };
       };
     }) cfg.certificates;

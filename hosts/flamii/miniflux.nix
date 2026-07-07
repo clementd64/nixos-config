@@ -3,8 +3,8 @@ let
   settings = {
     DATABASE_URL = "host=db.as212625.net user=miniflux dbname=miniflux sslmode=verify-full sslcert=${config.clement.secrets."miniflux-postgresql-tls-cert".path} sslkey=${config.clement.secrets."miniflux-postgresql-tls-key".path} sslrootcert=${config.clement.secrets."miniflux-postgresql-tls-ca".path}";
     LISTEN_ADDR = "[2a0c:b641:2b2::10]:443";
-    CERT_FILE = config.clement.secrets."miniflux-tls-cert".path;
-    KEY_FILE = config.clement.secrets."miniflux-tls-key".path;
+    CERT_FILE = config.clement.acme.certificates."miniflux.dubreuil.dev".cert;
+    KEY_FILE = config.clement.acme.certificates."miniflux.dubreuil.dev".key;
     BASE_URL = "https://miniflux.dubreuil.dev/";
     HTTPS = 1;
     RUN_MIGRATIONS = 1;
@@ -42,18 +42,6 @@ in {
       group = "miniflux";
       before = [ "miniflux.service" ];
     };
-    miniflux-tls-cert = {
-      file = ./secrets.json;
-      extract = ''["miniflux"]["cert"]'';
-      group = "miniflux";
-      before = [ "miniflux.service" ];
-    };
-    miniflux-tls-key = {
-      file = ./secrets.json;
-      extract = ''["miniflux"]["key"]'';
-      group = "miniflux";
-      before = [ "miniflux.service" ];
-    };
     miniflux-oauth2_client_id = {
       file = ./secrets.json;
       extract = ''["miniflux"]["oauth2_client_id"]'';
@@ -66,6 +54,11 @@ in {
       group = "miniflux";
       before = [ "miniflux.service" ];
     };
+  };
+
+  clement.acme.certificates."miniflux.dubreuil.dev" = {
+    reload = "miniflux.service";
+    group = "miniflux";
   };
 
   systemd.services.miniflux = {

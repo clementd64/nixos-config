@@ -37,7 +37,7 @@ with lib; let
 
       cert = mkOption {
         type = types.str;
-        default = "${cfg.directory}/live/${config.certName}/cert.pem";
+        default = "${cfg.directory}/live/${config.certName}/fullchain.pem";
         internal = true;
         readOnly = true;
       };

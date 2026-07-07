@@ -28,6 +28,18 @@ in with lib; {
       };
     };
 
+    resolver = {
+      enable = mkEnableOption "systemd-resolved integration";
+      ipv4 = mkOption {
+        type = types.str;
+        default = "192.168.192.168";
+      };
+      ipv6 = mkOption {
+        type = types.str;
+        default = "fd55:d249:5b9d:4dce:64fd:f7c3:cf53:9905";
+      };
+    };
+
     gvisor = {
       enable = mkEnableOption "gVisor";
 
@@ -78,10 +90,9 @@ in with lib; {
         fixed-cidr = "${builtins.head (splitString "/" cfg.pools.ipv4.subnet)}/${toString cfg.pools.ipv4.size}";
         fixed-cidr-v6 = mkIf (cfg.pools.ipv6.subnet != null) "${builtins.head (splitString "/" cfg.pools.ipv6.subnet)}/${toString cfg.pools.ipv6.size}";
 
-        dns = mkIf config.clement.local.network.enable (
-          [
-            config.clement.local.network.ipv4
-          ] ++ optional (cfg.pools.ipv6.subnet != null) config.clement.local.network.ipv6
+        dns = mkIf cfg.resolver.enable (
+          [ cfg.resolver.ipv4 ]
+          ++ optional (cfg.pools.ipv6.subnet != null) cfg.resolver.ipv6
         );
 
         runtimes = {
@@ -111,7 +122,19 @@ in with lib; {
       "L+ /home/clement/.docker/config.json - - - - ${config.clement.secrets."docker-cli".path}"
     ];
 
-    clement.local.network.enable = mkDefault true;
-    clement.local.network.resolved.enable = true;
+    clement.docker.resolver.enable = mkDefault true;
+    clement.local.addresses = mkIf cfg.resolver.enable [
+      "${cfg.resolver.ipv4}/32"
+      "${cfg.resolver.ipv6}/128"
+    ];
+    networking.firewall.extraCommands = optionalString cfg.resolver.enable ''
+      iptables -A nixos-fw -s ${config.clement.docker.pools.ipv4.subnet} -d ${cfg.resolver.ipv4} -j ACCEPT
+    '' + optionalString (cfg.pools.ipv6.subnet != null) ''
+      ip6tables -A nixos-fw -s ${config.clement.docker.pools.ipv6.subnet} -d ${cfg.resolver.ipv6} -j ACCEPT
+    '';
+    services.resolved.settings.Resolve.DNSStubListenerExtra = mkIf cfg.resolver.enable [
+      cfg.resolver.ipv4
+      cfg.resolver.ipv6
+    ];
   };
 }

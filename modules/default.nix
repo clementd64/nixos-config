@@ -13,7 +13,6 @@
     system/ipset.nix
     system/k3s.nix
     system/local.nix
-    system/local/network.nix
     system/oci.nix
     system/proxy64.nix
     system/secrets.nix

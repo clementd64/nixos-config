@@ -55,6 +55,10 @@ in {
           bind ${concatStringsSep " " cfg.dns.bind}
           file ${./as212625.net.zone}
         }
+        dubreuil.dev. {
+          bind ${concatStringsSep " " cfg.dns.bind}
+          file ${./dubreuil.dev.zone}
+        }
       '';
     };
 

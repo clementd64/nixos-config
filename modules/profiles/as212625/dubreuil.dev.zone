@@ -1,6 +1,6 @@
 $ORIGIN dubreuil.dev.
 $TTL 1H
-@                                                             IN   SOA        ns1.as212625.net noc.as212625.net (
+@                                                             IN   SOA        ns1.as212625.net. noc.as212625.net. (
                                                                                  1            ; serial  
                                                                                  1H           ; refresh
                                                                                  15M          ; retry

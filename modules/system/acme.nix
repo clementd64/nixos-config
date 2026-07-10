@@ -77,7 +77,14 @@ in {
         wants = [ "network-online.target" ];
         wantedBy = [ "multi-user.target" ];
         before = mkIf (cert.reload != null) [ cert.reload ];
-        serviceConfig = {
+        serviceConfig = let
+          fixPermissions = ''
+            set -e
+            ${pkgs.coreutils}/bin/chmod 755 ${escapeShellArg "${cfg.directory}"} ${escapeShellArg "${cfg.directory}/live"} ${escapeShellArg "${cfg.directory}/archive"}
+            ${pkgs.coreutils}/bin/chown -R "${cert.user}:${cert.group}" ${escapeShellArg "${cfg.directory}/live/${cert.certName}"} ${escapeShellArg "${cfg.directory}/archive/${cert.certName}"}
+            ${pkgs.coreutils}/bin/chmod -R u=rwX,g=rX,o= ${escapeShellArg "${cfg.directory}/live/${cert.certName}"} ${escapeShellArg "${cfg.directory}/archive/${cert.certName}"}
+          '';
+        in {
           Type = "oneshot";
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${cfg.webroot}";
           ExecStart = let
@@ -99,13 +106,12 @@ in {
             ++ optionals (cert.reload != null) [
               "--deploy-hook" (pkgs.writeShellScript "deploy-${utils.escapeSystemdPath name}" ''
                 set -e
-                ${pkgs.coreutils}/bin/chmod 755 ${escapeShellArg "${cfg.directory}"} ${escapeShellArg "${cfg.directory}/live"} ${escapeShellArg "${cfg.directory}/archive"}
-                ${pkgs.coreutils}/bin/chown -R "${cert.user}:${cert.group}" ${escapeShellArg "${cfg.directory}/live/${cert.certName}"} ${escapeShellArg "${cfg.directory}/archive/${cert.certName}"}
-                ${pkgs.coreutils}/bin/chmod -R u=rwX,g=rX,o= ${escapeShellArg "${cfg.directory}/live/${cert.certName}"} ${escapeShellArg "${cfg.directory}/archive/${cert.certName}"}
+                ${fixPermissions}
                 ${pkgs.systemd}/bin/systemctl try-reload-or-restart ${cert.reload}
               '')
             ];
           in "${pkgs.util-linux}/bin/flock /run/acme-lock ${pkgs.certbot}/bin/certbot ${escapeShellArgs (certbotArgs cert)}";
+          ExecStartPost = pkgs.writeShellScript "post-${utils.escapeSystemdPath name}" fixPermissions;
         };
       };
     }) cfg.certificates;

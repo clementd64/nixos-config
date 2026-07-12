@@ -107,7 +107,7 @@ in {
               "--deploy-hook" (pkgs.writeShellScript "deploy-${utils.escapeSystemdPath name}" ''
                 set -e
                 ${fixPermissions}
-                ${pkgs.systemd}/bin/systemctl try-reload-or-restart ${cert.reload}
+                ${pkgs.systemd}/bin/systemctl --no-block try-reload-or-restart ${cert.reload}
               '')
             ];
           in "${pkgs.util-linux}/bin/flock /run/acme-lock ${pkgs.certbot}/bin/certbot ${escapeShellArgs (certbotArgs cert)}";

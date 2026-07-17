@@ -39,6 +39,9 @@ in {
     };
 
     services.resolved.settings.Resolve.LLMNR = "false";
+    # PTR synthesis performs synchronous rtnetlink dumps. On full-table BGP
+    # routers this can wedge systemd-resolved's single event loop.
+    systemd.services.systemd-resolved.environment.SYSTEMD_RESOLVED_SYNTHESIZE_HOSTNAME = "false";
     systemd.network.config.networkConfig = {
       ManageForeignRoutes = false;
     };

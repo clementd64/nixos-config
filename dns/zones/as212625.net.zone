@@ -1,0 +1,27 @@
+$ORIGIN as212625.net.
+
+@ 3600 IN SOA ns1.as212625.net. webmaster.as212625.net. (
+    1784305743 ; Serial
+    3600 ; Refresh
+    600 ; Retry
+    604800 ; Expire
+    3600 ; NXDOMAIN ttl
+)
+
+; Name: as212625.net.
+@                                     3600 IN MX       1 mx1.mail.ovh.net.
+                                      3600 IN MX       5 mx2.mail.ovh.net.
+                                      3600 IN MX       100 mx3.mail.ovh.net.
+                                      3600 IN NS       ns1.as212625.net.
+                                      3600 IN NS       ns2.as212625.net.
+                                      3600 IN TXT      "v=spf1 include:mx.ovh.com ~all"
+db                                    3600 IN AAAA     2001:bc8:710:1198:dc00:ff:fee8:47b9
+dns                                   3600 IN A        62.3.50.46
+                                      3600 IN AAAA     2a0c:b641:2b0::1
+dns64                                 3600 IN AAAA     2a0c:b641:2b0::64:0:53
+ns1                                   3600 IN A        194.28.99.42
+                                      3600 IN AAAA     2a0c:b641:2b1::1
+ns2                                   3600 IN A        194.28.98.82
+                                      3600 IN AAAA     2a0c:b641:2b2::1
+ovhmo4384488-selector1._domainkey     3600 IN CNAME    ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.
+ovhmo4384488-selector2._domainkey     3600 IN CNAME    ovhmo4384488-selector2._domainkey.602626.dz.dkim.mail.ovh.net.

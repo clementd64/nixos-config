@@ -53,11 +53,11 @@ in {
       config = ''
         as212625.net. {
           bind ${concatStringsSep " " cfg.dns.bind}
-          file ${./as212625.net.zone}
+          file ${../../../dns/zones/as212625.net.zone}
         }
         dubreuil.dev. {
           bind ${concatStringsSep " " cfg.dns.bind}
-          file ${./dubreuil.dev.zone}
+          file ${../../../dns/zones/dubreuil.dev.zone}
         }
       '';
     };

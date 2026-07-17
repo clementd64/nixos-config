@@ -1,0 +1,42 @@
+---
+? ''
+: - type: NS
+    values:
+    - ns1.as212625.net.
+    - ns2.as212625.net.
+  - type: TXT
+    value: v=spf1 include:mx.ovh.com include:_spf.tem.scaleway.com ~all
+70b31c16-61dc-4b75-bec3-4bd53a4656ce._domainkey:
+  type: TXT
+  value: v=DKIM1\; h=sha256\; k=rsa\; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyt2euWRLcDVxFrftSoTVS3slo9MEGJ3VFgNpQKHmr75TuSuw+9wtyXY8cvrmAcM8gH7Iti0XQGnvJC1PtjLuU2iMG3ct0HuYq8F+u1TuWIbKkDatDs9ee9oXeF+YQBnPK1tig44BfZBnG7S7v+eL7ekqvI1/qxyCnPKSY7qxkqD/dZ3WFRp5EtbdH+ei82PDmS1ey5iZbOb/ZKHu8k3iDVQ3l6lWzQJ3Vf0DWilnzpT0WfPkrdW7EThRA7MK7CWObh5JBB/QnzL8+GCj/Wsxq+7p5IdDTzRQN+C9iVhSG8Ewp1w83XwxaT4qgCKffbDa2mRft5agapDzs1NCkOJCJQIDAQAB
+_acme-challenge.glacier:
+  type: CNAME
+  value: glacier.dubreuil.dev.369058m.flydns.net.
+_atproto:
+  type: TXT
+  value: did=did:plc:gduxbgn6xgqoi2dbxx7xo62t
+_autodiscover._tcp:
+  type: SRV
+  value:
+    port: 443
+    priority: 0
+    target: pro3.mail.ovh.net.
+    weight: 0
+_dmarc:
+  type: TXT
+  value: v=DMARC1\; p=none
+glacier:
+  type: AAAA
+  value: 2a09:8280:1::cf:75d3:0
+id:
+  type: AAAA
+  value: 2a0c:b641:2b2::11
+miniflux:
+  type: AAAA
+  value: 2a0c:b641:2b2::10
+nw7yp-check:
+  type: CNAME
+  value: ovh.com.
+ovh-zimbra-xv1xqn7d:
+  type: CNAME
+  value: ovh.com.

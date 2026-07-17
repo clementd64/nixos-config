@@ -1,0 +1,17 @@
+---
+manager:
+  include_meta: false
+  max_workers: 2
+
+providers:
+  config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: .
+  local:
+    class: octodns_bind.ZoneFileSource
+    directory: ./zones
+    file_extension: .zone
+
+zones:
+  as212625.net.: { sources: [config], targets: [local] }
+  dubreuil.dev.: { sources: [config], targets: [local] }

@@ -1,0 +1,43 @@
+---
+? ''
+: - type: MX
+    values:
+    - exchange: mx1.mail.ovh.net.
+      preference: 1
+    - exchange: mx2.mail.ovh.net.
+      preference: 5
+    - exchange: mx3.mail.ovh.net.
+      preference: 100
+  - type: NS
+    values:
+    - ns1.as212625.net.
+    - ns2.as212625.net.
+  - type: TXT
+    value: v=spf1 include:mx.ovh.com ~all
+db:
+  type: AAAA
+  value: 2001:bc8:710:1198:dc00:ff:fee8:47b9
+dns:
+- type: A
+  value: 62.3.50.46
+- type: AAAA
+  value: 2a0c:b641:2b0::1
+dns64:
+  type: AAAA
+  value: 2a0c:b641:2b0::64:0:53
+ns1:
+- type: A
+  value: 194.28.99.42
+- type: AAAA
+  value: 2a0c:b641:2b1::1
+ns2:
+- type: A
+  value: 194.28.98.82
+- type: AAAA
+  value: 2a0c:b641:2b2::1
+ovhmo4384488-selector1._domainkey:
+  type: CNAME
+  value: ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.
+ovhmo4384488-selector2._domainkey:
+  type: CNAME
+  value: ovhmo4384488-selector2._domainkey.602626.dz.dkim.mail.ovh.net.

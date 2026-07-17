@@ -1,0 +1,24 @@
+$ORIGIN dubreuil.dev.
+
+@ 3600 IN SOA ns1.as212625.net. webmaster.dubreuil.dev. (
+    1784305743 ; Serial
+    3600 ; Refresh
+    600 ; Retry
+    604800 ; Expire
+    3600 ; NXDOMAIN ttl
+)
+
+; Name: dubreuil.dev.
+@                                                   3600 IN NS       ns1.as212625.net.
+                                                    3600 IN NS       ns2.as212625.net.
+                                                    3600 IN TXT      "v=spf1 include:mx.ovh.com include:_spf.tem.scaleway.com ~all"
+70b31c16-61dc-4b75-bec3-4bd53a4656ce._domainkey     3600 IN TXT      "v=DKIM1\; h=sha256\; k=rsa\; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyt2euWRLcDVxFrftSoTVS3slo9MEGJ3VFgNpQKHmr75TuSuw+9wtyXY8cvrmAcM8gH7Iti0XQGnvJC1PtjLuU2iMG3ct0HuYq8F+u1TuWIbKkDatDs9ee9oXeF+YQBnPK1tig44BfZBnG7S7v+eL7ekqvI1/qxyCnPKSY7qxkqD/dZ3WFRp5" "EtbdH+ei82PDmS1ey5iZbOb/ZKHu8k3iDVQ3l6lWzQJ3Vf0DWilnzpT0WfPkrdW7EThRA7MK7CWObh5JBB/QnzL8+GCj/Wsxq+7p5IdDTzRQN+C9iVhSG8Ewp1w83XwxaT4qgCKffbDa2mRft5agapDzs1NCkOJCJQIDAQAB"
+_acme-challenge.glacier                             3600 IN CNAME    glacier.dubreuil.dev.369058m.flydns.net.
+_atproto                                            3600 IN TXT      "did=did:plc:gduxbgn6xgqoi2dbxx7xo62t"
+_autodiscover._tcp                                  3600 IN SRV      0 0 443 pro3.mail.ovh.net.
+_dmarc                                              3600 IN TXT      "v=DMARC1\; p=none"
+glacier                                             3600 IN AAAA     2a09:8280:1::cf:75d3:0
+id                                                  3600 IN AAAA     2a0c:b641:2b2::11
+miniflux                                            3600 IN AAAA     2a0c:b641:2b2::10
+nw7yp-check                                         3600 IN CNAME    ovh.com.
+ovh-zimbra-xv1xqn7d                                 3600 IN CNAME    ovh.com.

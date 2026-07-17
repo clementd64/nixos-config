@@ -85,6 +85,10 @@
         system = "x86_64-linux";
       };
 
+      erythia = mkStable {
+        system = "x86_64-linux";
+      };
+
       flamii = mkStable {
         system = "x86_64-linux";
       };

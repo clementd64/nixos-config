@@ -1,7 +1,7 @@
 $ORIGIN dubreuil.dev.
 
-@ 3600 IN SOA ns1.as212625.net. noc.as212625.net (
-    1784542542 ; Serial
+@ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
+    1784542802 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire

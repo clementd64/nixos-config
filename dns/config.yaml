@@ -15,7 +15,7 @@ providers:
     class: octodns_bind.ZoneFileSource
     directory: ./zones
     file_extension: .zone
-    hostmaster_email: noc@as212625.net
+    hostmaster_email: noc@as212625.net.
 
 zones:
   as212625.net.: { sources: [config], targets: [local] }

@@ -17,13 +17,13 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/fa1e6040-bdc4-4cca-9de9-5169e94a1288";
+    { device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0-0-0-0-part2";
       fsType = "btrfs";
       options = [ "compress=zstd" "subvol=boot" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/fa1e6040-bdc4-4cca-9de9-5169e94a1288";
+    { device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0-0-0-0-part2";
       fsType = "btrfs";
       options = [ "subvol=nix" "noatime" "compress=zstd" ];
       neededForBoot = true;

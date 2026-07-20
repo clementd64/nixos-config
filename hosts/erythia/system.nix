@@ -17,6 +17,10 @@
         Gateway = ["2001:41d0:305:2100::1"];
         IPv6AcceptRA = false;
       };
+      routes = [{
+        Destination = "2001:41d0:305:2100::/64";
+        Scope = "link";
+      }];
     };
   };
 

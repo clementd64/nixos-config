@@ -5,6 +5,7 @@ manager:
   validators:
     enabled:
       - strict
+      - best-practice
 
 providers:
   config:

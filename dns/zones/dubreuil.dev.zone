@@ -1,7 +1,7 @@
 $ORIGIN dubreuil.dev.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net (
-    1784541215 ; Serial
+    1784542542 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -9,7 +9,11 @@ $ORIGIN dubreuil.dev.
 )
 
 ; Name: dubreuil.dev.
-@                                                   3600 IN NS       ns1.as212625.net.
+@                                                   3600 IN MX       1 mx0.mail.ovh.net.
+                                                    3600 IN MX       5 mx1.mail.ovh.net.
+                                                    3600 IN MX       50 mx2.mail.ovh.net.
+                                                    3600 IN MX       100 mx3.mail.ovh.net.
+                                                    3600 IN NS       ns1.as212625.net.
                                                     3600 IN NS       ns2.as212625.net.
                                                     3600 IN TXT      "v=spf1 include:mx.ovh.com include:_spf.tem.scaleway.com ~all"
 70b31c16-61dc-4b75-bec3-4bd53a4656ce._domainkey     3600 IN TXT      "v=DKIM1\; h=sha256\; k=rsa\; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyt2euWRLcDVxFrftSoTVS3slo9MEGJ3VFgNpQKHmr75TuSuw+9wtyXY8cvrmAcM8gH7Iti0XQGnvJC1PtjLuU2iMG3ct0HuYq8F+u1TuWIbKkDatDs9ee9oXeF+YQBnPK1tig44BfZBnG7S7v+eL7ekqvI1/qxyCnPKSY7qxkqD/dZ3WFRp5" "EtbdH+ei82PDmS1ey5iZbOb/ZKHu8k3iDVQ3l6lWzQJ3Vf0DWilnzpT0WfPkrdW7EThRA7MK7CWObh5JBB/QnzL8+GCj/Wsxq+7p5IdDTzRQN+C9iVhSG8Ewp1w83XwxaT4qgCKffbDa2mRft5agapDzs1NCkOJCJQIDAQAB"

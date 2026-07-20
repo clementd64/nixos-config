@@ -7,11 +7,14 @@
 
   systemd.network = {
     networks."10-ens3" = {
-      matchConfig.Name = "ens3";
+      matchConfig = {
+        Name = "ens3";
+        PermanentMACAddress = "fa:16:3e:96:0c:bf";
+      };
       networkConfig = {
         DHCP = "ipv4";
         Address = ["2001:41d0:305:2100::dd40/128"];
-        Gateway = ["2001:41d0:305:2100::1/64"];
+        Gateway = ["2001:41d0:305:2100::1"];
         IPv6AcceptRA = false;
       };
     };

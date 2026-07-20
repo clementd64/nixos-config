@@ -55,6 +55,10 @@ in {
           bind ${concatStringsSep " " cfg.dns.bind}
           file ${../../../dns/zones/as212625.net.zone}
         }
+        b.2.0.1.4.6.b.c.0.a.2.ip6.arpa. {
+          bind ${concatStringsSep " " cfg.dns.bind}
+          file ${../../../dns/zones/b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.zone}
+        }
         dubreuil.dev. {
           bind ${concatStringsSep " " cfg.dns.bind}
           file ${../../../dns/zones/dubreuil.dev.zone}

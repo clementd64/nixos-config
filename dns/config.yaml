@@ -1,7 +1,7 @@
 ---
 manager:
-  include_meta: false
-  max_workers: 2
+  auto_arpa:
+    max_auto_arpa: 1
   validators:
     enabled:
       - strict
@@ -19,4 +19,5 @@ providers:
 
 zones:
   as212625.net.: { sources: [config], targets: [local] }
+  b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.: { sources: [config, auto-arpa], targets: [local] }
   dubreuil.dev.: { sources: [config], targets: [local] }

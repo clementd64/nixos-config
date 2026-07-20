@@ -1,0 +1,19 @@
+$ORIGIN b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.
+
+@ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
+    1784565252 ; Serial
+    3600 ; Refresh
+    600 ; Retry
+    604800 ; Expire
+    3600 ; NXDOMAIN ttl
+)
+
+; Name: b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.
+@                                             3600 IN NS       ns1.as212625.net.
+                                              3600 IN NS       ns2.as212625.net.
+0.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2     3600 IN PTR      miniflux.dubreuil.dev.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0     3600 IN PTR      dns.as212625.net.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1     3600 IN PTR      ekidno.h.as212625.net.
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2     3600 IN PTR      flamii.h.as212625.net.
+1.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2     3600 IN PTR      id.dubreuil.dev.
+3.5.0.0.0.0.0.0.4.6.0.0.0.0.0.0.0.0.0.0.0     3600 IN PTR      dns64.as212625.net.

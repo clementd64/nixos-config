@@ -49,12 +49,16 @@ morytha.h:
 ns1:
 - type: A
   value: 194.28.99.42
-- type: AAAA
+- octodns:
+    auto_arpa_priority: 1000
+  type: AAAA
   value: 2a0c:b641:2b1::1
 ns2:
 - type: A
   value: 194.28.98.82
-- type: AAAA
+- octodns:
+    auto_arpa_priority: 1000
+  type: AAAA
   value: 2a0c:b641:2b2::1
 ovhmo4384488-selector1._domainkey:
   type: CNAME

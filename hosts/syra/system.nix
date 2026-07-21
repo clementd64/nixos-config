@@ -113,17 +113,6 @@
       publicKey = "trM7zOMMKsWHT+F6V08e4e5YVe3VVgf6M8zONd7qzwQ=";
       secretsFile = ./secrets.json;
     };
-    proxmox = {
-      addresses = [ "10.100.1.1/32" ];
-      allowedIps = [ "10.100.0.0/24" ];
-      dns = [ "10.100.0.254" ];
-      domains = [ "~prox.internal." ];
-      endpoint = "51.254.167.78:51820";
-      presharedKey = ''["wireguard"]["proxmox"]["preshared-key"]'';
-      privateKey = ''["wireguard"]["proxmox"]["private-key"]'';
-      publicKey = "t59gHUDoyYqKHIfT/7K9Q7W2rYCrIUCJyHAWQETaIUo=";
-      secretsFile = ./secrets.json;
-    };
   };
 
   users.users.clement = {

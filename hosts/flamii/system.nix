@@ -63,12 +63,19 @@
       secretsFile = ./secrets.json;
     };
     pixel = {
-      addresses = [ "fe80::1/64" ];
       allowedIps = [ "2a0c:b641:2b2::9/128" "62.3.50.47/32" ];
       port = 51821;
       presharedKey = ''["wireguard"]["pixel"]["preshared-key"]'';
       privateKey = ''["wireguard"]["pixel"]["private-key"]'';
       publicKey = "Q7mUDHH4ksk/2BCQHIWso94JIvX+BcQJQhs+qluBIyI=";
+      secretsFile = ./secrets.json;
+    };
+    erythia = {
+      port = 51823;
+      endpoint = "erythia.h.as212625.net:51823";
+      presharedKey = ''["wireguard"]["erythia"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["erythia"]["private-key"]'';
+      publicKey = "Dy41q02Zxc8+NCWnzFDpe68JRM9ASPxUM0JTUoTYchE=";
       secretsFile = ./secrets.json;
     };
   };

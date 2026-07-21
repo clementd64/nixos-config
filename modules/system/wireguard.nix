@@ -34,7 +34,7 @@ with lib; let
 
       addresses = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = [ "${pkgs.net.genLinkLocal config.networking.hostName}/64" ];
       };
 
       endpoint = mkOption {

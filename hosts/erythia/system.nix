@@ -24,5 +24,24 @@
     };
   };
 
+  clement.wireguard = {
+    ekidno = {
+      port = 51822;
+      endpoint = "ekidno.h.as212625.net:51822";
+      presharedKey = ''["wireguard"]["ekidno"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["ekidno"]["private-key"]'';
+      publicKey = "DMwv37qI9m1VqXKVZVI2c/GUW7B/0Y52qWOU+ZRVsGw=";
+      secretsFile = ./secrets.json;
+    };
+    flamii = {
+      port = 51823;
+      endpoint = "flamii.h.as212625.net:51823";
+      presharedKey = ''["wireguard"]["flamii"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["flamii"]["private-key"]'';
+      publicKey = "Q41VPpfj9todiCdur5fmOfERBlXhcO+75j4lML03hzc=";
+      secretsFile = ./secrets.json;
+    };
+  };
+
   system.stateVersion = "26.05";
 }

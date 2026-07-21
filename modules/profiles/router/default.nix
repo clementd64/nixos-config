@@ -2,6 +2,15 @@
 
 with lib; let
   cfg = config.clement.profile.router;
+
+  birdExpression = with types; either
+    (either int str)
+    (listOf (either int str));
+
+  renderBirdExpression = value:
+    if builtins.isList value
+    then "[ ${concatMapStringsSep ", " toString value} ]"
+    else toString value;
 in {
   options.clement.profile.router = {
     enable = mkEnableOption "router profile";
@@ -9,6 +18,11 @@ in {
     bird.config = mkOption {
       type = types.listOf types.path;
       description = "Bird configuration";
+    };
+
+    bird.defines = mkOption {
+      type = types.attrsOf birdExpression;
+      default = {};
     };
 
     bgp.allowedIp = mkOption {
@@ -26,8 +40,9 @@ in {
 
     services.bird = {
       enable = true;
-      config = strings.concatMapStringsSep "\n" (x: builtins.readFile x) (
-        [./common.conf] ++ cfg.bird.config
+      config = strings.concatStringsSep "\n" (
+        (mapAttrsToList (name: value: "define ${name} = ${renderBirdExpression value};") cfg.bird.defines)
+        ++ (map builtins.readFile ([./common.conf] ++ cfg.bird.config))
       );
     };
 

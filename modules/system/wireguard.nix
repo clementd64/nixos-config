@@ -61,6 +61,12 @@ with lib; let
         type = types.nullOr types.int;
         default = 1280;
       };
+
+      vrf = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "VRF interface to attach the WireGuard interface to";
+      };
     };
   });
 in {
@@ -112,6 +118,7 @@ in {
         DNSOverTLS = "opportunistic";
         DNSDefaultRoute = false;
         Domains = value.domains;
+        VRF = mkIf (value.vrf != null) value.vrf;
       };
       routes = mkIf
         (value.allowedIps != null && !(builtins.elem "::/0" value.allowedIps || builtins.elem "0.0.0.0/0" value.allowedIps))

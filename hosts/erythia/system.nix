@@ -1,11 +1,20 @@
 { lib, pkgs, ... }:
 {
-  clement.profile.server.enable = true;
+  clement.profile.router.enable = true;
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0-0-0-0";
 
   systemd.network = {
+    netdevs."10-as212625" = {
+      netdevConfig = {
+        Name = "as212625";
+        Kind = "vrf";
+      };
+      vrfConfig.Table = 212625;
+    };
+    networks."10-as212625".matchConfig.Name = "as212625";
+
     networks."10-ens3" = {
       matchConfig = {
         Name = "ens3";
@@ -32,6 +41,7 @@
       privateKey = ''["wireguard"]["ekidno"]["private-key"]'';
       publicKey = "DMwv37qI9m1VqXKVZVI2c/GUW7B/0Y52qWOU+ZRVsGw=";
       secretsFile = ./secrets.json;
+      vrf = "as212625";
     };
     flamii = {
       port = 51823;
@@ -40,8 +50,19 @@
       privateKey = ''["wireguard"]["flamii"]["private-key"]'';
       publicKey = "Q41VPpfj9todiCdur5fmOfERBlXhcO+75j4lML03hzc=";
       secretsFile = ./secrets.json;
+      vrf = "as212625";
     };
   };
+
+  clement.profile.router.bird.config = [ ./bird.conf ];
+  clement.profile.router.bird.defines = {
+    EKIDNO_IP = pkgs.net.genLinkLocal "ekidno";
+    FLAMII_IP = pkgs.net.genLinkLocal "flamii";
+  };
+  clement.profile.router.bgp.allowedIp = [
+    (pkgs.net.genLinkLocal "ekidno")
+    (pkgs.net.genLinkLocal "flamii")
+  ];
 
   system.stateVersion = "26.05";
 }

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./miniflux.nix
@@ -40,8 +40,12 @@
     ../../modules/profiles/router/servperso.conf
     ./bird.conf
   ];
+  clement.profile.router.bird.defines = {
+    ERYTHIA_IP = pkgs.net.genLinkLocal "erythia";
+  };
   clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:8::ffff" # Servperso
+    (pkgs.net.genLinkLocal "erythia")
   ];
   clement.profile.as212625.dns.bind = [
     "194.28.98.82"

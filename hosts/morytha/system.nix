@@ -8,9 +8,7 @@
     networks."10-ens2" = {
       matchConfig.Name = "ens2";
       networkConfig = {
-        DHCP = true;
-        DNS = "2a0c:b641:2b0::64:0:53#dns64.as212625.net";
-        DNSOverTLS = true;
+        DHCP = "ipv6";
       };
       ipv6AcceptRAConfig = {
         UseDNS = "no";

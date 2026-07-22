@@ -3,6 +3,7 @@
     profiles/as212625
     profiles/baseline.nix
     profiles/container.nix
+    profiles/mesh
     profiles/router
     profiles/server.nix
     system/acme.nix
@@ -13,6 +14,7 @@
     system/ipset.nix
     system/k3s.nix
     system/local.nix
+    system/mesh.nix
     system/oci.nix
     system/proxy64.nix
     system/secrets.nix

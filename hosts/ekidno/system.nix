@@ -107,6 +107,8 @@
     "2a0c:b641:2b1::1"
   ];
 
+  clement.profile.mesh.enable = true;
+
   clement.wireguard = {
     home = {
       addresses = [ "fe80::1/64" ];

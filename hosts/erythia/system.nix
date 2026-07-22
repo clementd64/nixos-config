@@ -33,6 +33,9 @@
     };
   };
 
+  clement.profile.mesh.enable = true;
+  clement.mesh.vrf = "as212625";
+
   clement.wireguard = {
     ekidno = {
       port = 51822;

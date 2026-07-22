@@ -57,6 +57,8 @@
     acmeWebroot = "/run/acme-challenges";
   };
 
+  clement.profile.mesh.enable = true;
+
   clement.wireguard = {
     home = {
       addresses = [ "fe80::1/64" ];

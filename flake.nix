@@ -81,6 +81,10 @@
     };
 
     hosts = {
+      aion = mkStable {
+        system = "x86_64-linux";
+      };
+
       ekidno = mkStable {
         system = "x86_64-linux";
       };
@@ -93,7 +97,7 @@
         system = "x86_64-linux";
       };
 
-      morytha = mkStable {
+      siren = mkStable {
         system = "x86_64-linux";
       };
 
@@ -102,10 +106,6 @@
         modules = [
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
         ];
-      };
-
-      tarzan = mkStable {
-        system = "x86_64-linux";
       };
     };
   in {

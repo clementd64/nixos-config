@@ -1,7 +1,7 @@
 $ORIGIN as212625.net.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1784840469 ; Serial
+    1784913612 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -31,6 +31,7 @@ ns1                                   3600 IN A        194.28.99.42
                                       3600 IN AAAA     2a0c:b641:2b1::1
 ns2                                   3600 IN A        194.28.98.82
                                       3600 IN AAAA     2a0c:b641:2b2::1
+ophion.h                              3600 IN AAAA     2001:bc8:1d90:1a1:dc00:ff:fe2d:ee0f
 ovhmo4384488-selector1._domainkey     3600 IN CNAME    ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.
 ovhmo4384488-selector2._domainkey     3600 IN CNAME    ovhmo4384488-selector2._domainkey.602626.dz.dkim.mail.ovh.net.
 siren.h                               3600 IN AAAA     2001:bc8:710:1198:dc00:ff:fee8:47b9

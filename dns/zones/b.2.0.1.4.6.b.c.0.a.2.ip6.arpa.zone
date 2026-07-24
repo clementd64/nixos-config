@@ -1,7 +1,7 @@
 $ORIGIN b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1784840469 ; Serial
+    1784913612 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire

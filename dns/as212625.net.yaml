@@ -60,6 +60,9 @@ ns2:
     auto_arpa_priority: 1000
   type: AAAA
   value: 2a0c:b641:2b2::1
+ophion.h:
+  type: AAAA
+  value: 2001:bc8:1d90:1a1:dc00:ff:fe2d:ee0f
 ovhmo4384488-selector1._domainkey:
   type: CNAME
   value: ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.

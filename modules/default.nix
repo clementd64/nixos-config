@@ -4,12 +4,14 @@
     profiles/baseline.nix
     profiles/container.nix
     profiles/mesh
+    profiles/patroni
     profiles/router
     profiles/server.nix
     system/acme.nix
     system/compose.nix
     system/container.nix
     system/docker.nix
+    system/etcd.nix
     system/firewall.nix
     system/ipset.nix
     system/k3s.nix

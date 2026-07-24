@@ -9,11 +9,18 @@
       matchConfig.Name = "ens2";
       networkConfig = {
         DHCP = "ipv6";
+        IPv6PrivacyExtensions = false;
       };
       ipv6AcceptRAConfig = {
+        Token = "eui64";
         UseDNS = "no";
       };
     };
+  };
+
+  clement.profile.patroni = {
+    enable = true;
+    secretsFile = ./secrets.json;
   };
 
   swapDevices = [ {

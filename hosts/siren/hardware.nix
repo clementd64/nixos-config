@@ -28,6 +28,12 @@
       neededForBoot = true;
     };
 
+  fileSystems."/var/lib/private/etcd" =
+    { device = "/dev/vda2";
+      fsType = "btrfs";
+      options = [ "subvol=etcd" "noatime" "compress=zstd" ];
+    };
+
   fileSystems."/var/lib/postgresql" =
     { device = "/dev/sda1";
       fsType = "ext4";

@@ -1,4 +1,9 @@
 creation_rules:
+  - path_regex: hosts/aion/secrets.json
+    age: >-
+      age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
+      age1nmk9xfl5nx53hu9jm6felxghv6lkl2xjg8qedcj7wz97rnj3gd4qu4yj54
+
   - path_regex: hosts/ekidno/secrets.json
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
@@ -8,6 +13,11 @@ creation_rules:
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
       age1lp2h5twptx95gc2n6gtpptk9h3xq22ttlm69cd3uys2g37yj5c0s22tlde
+
+  - path_regex: hosts/ophion/secrets.json
+    age: >-
+      age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
+      age1tz55vp60chv0g2u77xhckccjr9tuhnfu9xkgr56nfeal0a2ujv7q35suxw
 
   - path_regex: hosts/flamii/secrets.json
     age: >-

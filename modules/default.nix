@@ -45,6 +45,8 @@
   ];
 
   disk = {
-    mira = import disk/mira.nix;
+    ovh = import disk/ovh.nix;
+    scw-patroni = import disk/scw-patroni.nix;
+    servperso = import disk/servperso.nix;
   };
 }

@@ -10,6 +10,7 @@
     system/acme.nix
     system/compose.nix
     system/container.nix
+    system/credentials.nix
     system/docker.nix
     system/etcd.nix
     system/firewall.nix

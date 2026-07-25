@@ -4,26 +4,14 @@
   clement.firewall.dst."tcp:443" = ["2a0c:b641:2b2::11"];
   clement.firewall.dst."tcp:80" = ["2a0c:b641:2b2::11"];
 
-  clement.secrets = {
-    pocket-id-postgresql-tls-ca = {
-      file = ./secrets.json;
-      extract = ''["pocket-id"]["postgresql"]["ca"]'';
-      before = [ "pocket-id.service" ];
-    };
-    pocket-id-postgresql-tls-cert = {
-      file = ./secrets.json;
-      extract = ''["pocket-id"]["postgresql"]["cert"]'';
-      before = [ "pocket-id.service" ];
-    };
-    pocket-id-postgresql-tls-key = {
-      file = ./secrets.json;
-      extract = ''["pocket-id"]["postgresql"]["key"]'';
-      before = [ "pocket-id.service" ];
-    };
-    pocket-id-encryption-key = {
-      file = ./secrets.json;
-      extract = ''["pocket-id"]["encryption-key"]'';
-      before = [ "pocket-id.service" ];
+  clement.credentials.pocket-id = {
+    file = ./secrets.json;
+    service = "pocket-id";
+    secrets = {
+      "postgresql-tls-ca.pem".extract = ''["pocket-id"]["postgresql"]["ca"]'';
+      "postgresql-tls-cert.pem".extract = ''["pocket-id"]["postgresql"]["cert"]'';
+      "postgresql-tls-key.pem".extract = ''["pocket-id"]["postgresql"]["key"]'';
+      "encryption-key".extract = ''["pocket-id"]["encryption-key"]'';
     };
   };
 
@@ -47,10 +35,6 @@
       RestartSec = 5;
       CacheDirectory = "pocket-id";
       LoadCredential = [
-        "postgresql-tls-ca.pem:${config.clement.secrets."pocket-id-postgresql-tls-ca".path}"
-        "postgresql-tls-cert.pem:${config.clement.secrets."pocket-id-postgresql-tls-cert".path}"
-        "postgresql-tls-key.pem:${config.clement.secrets."pocket-id-postgresql-tls-key".path}"
-        "encryption-key:${config.clement.secrets."pocket-id-encryption-key".path}"
         "tls-cert.pem:${config.clement.acme.certificates."id.dubreuil.dev".cert}"
         "tls-key.pem:${config.clement.acme.certificates."id.dubreuil.dev".key}"
       ];

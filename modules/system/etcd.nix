@@ -63,7 +63,10 @@ in {
       wantedBy = [ "multi-user.target" ];
       unitConfig.RequiresMountsFor = "/var/lib/private/etcd";
 
-      protect.enable = true;
+      protect = {
+        enable = true;
+        memoryExec = true;
+      };
 
       environment = {
         ETCD_NAME = cfg.name;
@@ -91,7 +94,6 @@ in {
       serviceConfig = {
         Type = "notify";
         ExecStart = "${pkgs.etcd}/bin/etcd";
-        User = "etcd";
         DynamicUser = true;
         StateDirectory = "etcd";
         LoadCredential = [

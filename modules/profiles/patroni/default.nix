@@ -38,45 +38,25 @@ in {
       advertiseHost = nodes."${config.networking.hostName}".host;
       initialCluster = mapAttrsToList (name: value: "${name}=https://${value.host}:2380") nodes;
       tls = {
-        caFile = config.clement.secrets."patroni-etcd-server-ca".path;
-        certFile = config.clement.secrets."patroni-etcd-server-cert".path;
-        keyFile = config.clement.secrets."patroni-etcd-server-key".path;
-        peerCaFile = config.clement.secrets."patroni-etcd-peer-ca".path;
-        peerCertFile = config.clement.secrets."patroni-etcd-peer-cert".path;
-        peerKeyFile = config.clement.secrets."patroni-etcd-peer-key".path;
+        caFile = config.clement.credentials."patroni-etcd".secrets."server-ca.pem".path;
+        certFile = config.clement.credentials."patroni-etcd".secrets."server-cert.pem".path;
+        keyFile = config.clement.credentials."patroni-etcd".secrets."server-key.pem".path;
+        peerCaFile = config.clement.credentials."patroni-etcd".secrets."peer-ca.pem".path;
+        peerCertFile = config.clement.credentials."patroni-etcd".secrets."peer-cert.pem".path;
+        peerKeyFile = config.clement.credentials."patroni-etcd".secrets."peer-key.pem".path;
       };
     };
 
-    clement.secrets = {
-      patroni-etcd-server-ca = {
-        file = cfg.secretsFile;
-        extract = ''["patroni"]["etcd"]["server"]["ca"]'';
-        before = [ "etcd.service" ];
-      };
-      patroni-etcd-server-cert = {
-        file = cfg.secretsFile;
-        extract = ''["patroni"]["etcd"]["server"]["cert"]'';
-        before = [ "etcd.service" ];
-      };
-      patroni-etcd-server-key = {
-        file = cfg.secretsFile;
-        extract = ''["patroni"]["etcd"]["server"]["key"]'';
-        before = [ "etcd.service" ];
-      };
-      patroni-etcd-peer-ca = {
-        file = cfg.secretsFile;
-        extract = ''["patroni"]["etcd"]["peer"]["ca"]'';
-        before = [ "etcd.service" ];
-      };
-      patroni-etcd-peer-cert = {
-        file = cfg.secretsFile;
-        extract = ''["patroni"]["etcd"]["peer"]["cert"]'';
-        before = [ "etcd.service" ];
-      };
-      patroni-etcd-peer-key = {
-        file = cfg.secretsFile;
-        extract = ''["patroni"]["etcd"]["peer"]["key"]'';
-        before = [ "etcd.service" ];
+    clement.credentials."patroni-etcd" = {
+      file = cfg.secretsFile;
+      before = [ "etcd.service" ];
+      secrets = {
+        "server-ca.pem".extract = ''["patroni"]["etcd"]["server"]["ca"]'';
+        "server-cert.pem".extract = ''["patroni"]["etcd"]["server"]["cert"]'';
+        "server-key.pem".extract = ''["patroni"]["etcd"]["server"]["key"]'';
+        "peer-ca.pem".extract = ''["patroni"]["etcd"]["peer"]["ca"]'';
+        "peer-cert.pem".extract = ''["patroni"]["etcd"]["peer"]["cert"]'';
+        "peer-key.pem".extract = ''["patroni"]["etcd"]["peer"]["key"]'';
       };
     };
 

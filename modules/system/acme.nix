@@ -25,16 +25,6 @@ with lib; let
         default = null;
       };
 
-      user = mkOption {
-        type = types.str;
-        default = "root";
-      };
-
-      group = mkOption {
-        type = types.str;
-        default = "root";
-      };
-
       cert = mkOption {
         type = types.str;
         default = "${cfg.directory}/live/${config.certName}/fullchain.pem";
@@ -77,14 +67,7 @@ in {
         wants = [ "network-online.target" ];
         wantedBy = [ "multi-user.target" ];
         before = mkIf (cert.reload != null) [ cert.reload ];
-        serviceConfig = let
-          fixPermissions = ''
-            set -e
-            ${pkgs.coreutils}/bin/chmod 755 ${escapeShellArg "${cfg.directory}"} ${escapeShellArg "${cfg.directory}/live"} ${escapeShellArg "${cfg.directory}/archive"}
-            ${pkgs.coreutils}/bin/chown -R "${cert.user}:${cert.group}" ${escapeShellArg "${cfg.directory}/live/${cert.certName}"} ${escapeShellArg "${cfg.directory}/archive/${cert.certName}"}
-            ${pkgs.coreutils}/bin/chmod -R u=rwX,g=rX,o= ${escapeShellArg "${cfg.directory}/live/${cert.certName}"} ${escapeShellArg "${cfg.directory}/archive/${cert.certName}"}
-          '';
-        in {
+        serviceConfig = {
           Type = "oneshot";
           ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${cfg.webroot}";
           ExecStart = let
@@ -104,14 +87,9 @@ in {
             ]
             ++ concatMap (domain: [ "-d" domain ]) cert.domains
             ++ optionals (cert.reload != null) [
-              "--deploy-hook" (pkgs.writeShellScript "deploy-${utils.escapeSystemdPath name}" ''
-                set -e
-                ${fixPermissions}
-                ${pkgs.systemd}/bin/systemctl --no-block try-reload-or-restart ${cert.reload}
-              '')
+              "--deploy-hook" "${pkgs.systemd}/bin/systemctl --no-block try-reload-or-restart ${cert.reload}"
             ];
           in "${pkgs.util-linux}/bin/flock /run/acme-lock ${pkgs.certbot}/bin/certbot ${escapeShellArgs (certbotArgs cert)}";
-          ExecStartPost = pkgs.writeShellScript "post-${utils.escapeSystemdPath name}" fixPermissions;
         };
       };
     }) cfg.certificates;

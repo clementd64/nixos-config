@@ -57,23 +57,57 @@ output "patroni" {
       for name, server in local.etcd_servers : name => {
         etcd = {
           server = {
-            ca   = tls_locally_signed_cert.etcd_client_server_ca.cert_pem
+            ca   = local.etcd_client_server_ca_bundle
             cert = tls_locally_signed_cert.etcd_server[name].cert_pem
             key  = tls_private_key.etcd_server[name].private_key_pem
           }
           peer = {
-            ca   = tls_locally_signed_cert.etcd_peer_ca.cert_pem
+            ca   = local.etcd_peer_ca_bundle
             cert = tls_locally_signed_cert.etcd_peer[name].cert_pem
             key  = tls_private_key.etcd_peer[name].private_key_pem
+          }
+        }
+        postgresql = {
+          server = {
+            ca   = local.postgresql_ca_bundle
+            cert = tls_locally_signed_cert.postgresql_server[name].cert_pem
+            key  = tls_private_key.postgresql_server[name].private_key_pem
+          }
+          client = {
+            ca   = local.postgresql_ca_bundle
+            cert = tls_locally_signed_cert.postgresql_patroni[name].cert_pem
+            key  = tls_private_key.postgresql_patroni[name].private_key_pem
+          }
+        }
+        patroni = {
+          server = {
+            ca   = local.patroni_ca_bundle
+            cert = tls_locally_signed_cert.patroni_member[name].cert_pem
+            key  = tls_private_key.patroni_member[name].private_key_pem
+          }
+          etcd = {
+            ca   = local.etcd_client_server_ca_bundle
+            cert = tls_locally_signed_cert.etcd_patroni[name].cert_pem
+            key  = tls_private_key.etcd_patroni[name].private_key_pem
           }
         }
       }
     }
     clients = {
       "etcd-admin" = {
-        ca   = tls_locally_signed_cert.etcd_client_server_ca.cert_pem
+        ca   = local.etcd_client_server_ca_bundle
         cert = tls_locally_signed_cert.etcd_admin.cert_pem
         key  = tls_private_key.etcd_admin.private_key_pem
+      }
+      "postgresql-admin" = {
+        ca   = local.postgresql_ca_bundle
+        cert = tls_locally_signed_cert.postgresql_admin.cert_pem
+        key  = tls_private_key.postgresql_admin.private_key_pem
+      }
+      "patroni-admin" = {
+        ca   = local.patroni_ca_bundle
+        cert = tls_locally_signed_cert.patroni_admin.cert_pem
+        key  = tls_private_key.patroni_admin.private_key_pem
       }
     }
   }

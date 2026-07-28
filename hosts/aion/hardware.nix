@@ -34,7 +34,7 @@
       options = [ "subvol=etcd" "noatime" "compress=zstd" ];
     };
 
-  fileSystems."/var/lib/postgresql" =
+  fileSystems."/var/lib/private/postgresql" =
     { device = "/dev/sda1";
       fsType = "ext4";
       options = [ "noatime" "noexec" ];

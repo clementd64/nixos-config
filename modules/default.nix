@@ -19,6 +19,7 @@
     system/local.nix
     system/mesh.nix
     system/oci.nix
+    system/patroni.nix
     system/proxy64.nix
     system/secrets.nix
     system/ssh.nix

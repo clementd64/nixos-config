@@ -135,7 +135,6 @@
   clement.xserver.enable = true;
   services.xserver.dpi = 140;
 
-  services.tailscale.enable = true;
   services.flatpak.enable = true;
   xdg.portal = {
     enable = true;
@@ -157,7 +156,7 @@
     binfmt = true;
   };
   boot.binfmt = {
-    emulatedSystems = [ "aarch64-linux" "wasm32-wasi" ];
+    emulatedSystems = [ "aarch64-linux" ];
     preferStaticEmulators = true;
   };
 

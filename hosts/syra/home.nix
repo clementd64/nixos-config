@@ -41,8 +41,29 @@
     components = [ "secrets" ];
   };
 
+  systemd.user.services.fehbg = {
+    Unit = {
+      Description = "Update wallpaper";
+      ConditionPathExists = "%h/.fehbg";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "%h/.fehbg";
+    };
+  };
+
+  systemd.user.timers.fehbg = {
+    Unit.Description = "Update wallpaper";
+    Timer = {
+      OnCalendar = "hourly";
+      Persistent = true;
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
   home.packages = with pkgs; [
     androidenv.androidPkgs.platform-tools
+    dbeaver-bin
     discord
     factorio
     factorio-env

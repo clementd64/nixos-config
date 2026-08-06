@@ -31,6 +31,9 @@
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
     ];
+    directories = [
+      "/var/lib/postgresql"
+    ];
   };
 
   clement.profile.router.bird.config = [
@@ -81,6 +84,17 @@
       publicKey = "Dy41q02Zxc8+NCWnzFDpe68JRM9ASPxUM0JTUoTYchE=";
       secretsFile = ./secrets.json;
     };
+  };
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_18;
+    authentication = lib.mkOverride 10 ''
+      #type  database  DBuser    address  auth-method
+      local  all       postgres           peer
+      local  sameuser  all                peer
+    '';
+    settings.listen_addresses = lib.mkOverride 10 "";
   };
 
   system.stateVersion = "23.11";

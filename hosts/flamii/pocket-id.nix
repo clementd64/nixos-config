@@ -8,9 +8,6 @@
     file = ./secrets.json;
     service = "pocket-id";
     secrets = {
-      "postgresql-tls-ca.pem".extract = ''["pocket-id"]["postgresql"]["ca"]'';
-      "postgresql-tls-cert.pem".extract = ''["pocket-id"]["postgresql"]["cert"]'';
-      "postgresql-tls-key.pem".extract = ''["pocket-id"]["postgresql"]["key"]'';
       "encryption-key".extract = ''["pocket-id"]["encryption-key"]'';
     };
   };
@@ -31,6 +28,7 @@
       Type = "notify";
       ExecStart = "${pkgs.pocket-id}/bin/pocket-id";
       DynamicUser = true;
+      User = "pocketid";
       Restart = "always";
       RestartSec = 5;
       CacheDirectory = "pocket-id";
@@ -42,7 +40,7 @@
       CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
     };
     environment = {
-      DB_CONNECTION_STRING = "postgresql://pocketid@db.as212625.net/pocketid?sslmode=verify-full&sslcert=%d/postgresql-tls-cert.pem&sslkey=%d/postgresql-tls-key.pem&sslrootcert=%d/postgresql-tls-ca.pem";
+      DB_CONNECTION_STRING = "postgresql://pocketid@/pocketid?sslmode=disable";
       ENCRYPTION_KEY_FILE = "%d/encryption-key";
       HOST = "2a0c:b641:2b2::11";
       PORT = "443";

@@ -8,9 +8,6 @@
     file = ./secrets.json;
     service = "miniflux";
     secrets = {
-      "postgresql-tls-ca.pem".extract = ''["miniflux"]["postgresql"]["ca"]'';
-      "postgresql-tls-cert.pem".extract = ''["miniflux"]["postgresql"]["cert"]'';
-      "postgresql-tls-key.pem".extract = ''["miniflux"]["postgresql"]["key"]'';
       "oauth2-client-id".extract = ''["miniflux"]["oauth2_client_id"]'';
       "oauth2-client-secret".extract = ''["miniflux"]["oauth2_client_secret"]'';
     };
@@ -43,7 +40,7 @@
       CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
     };
     environment = {
-      DATABASE_URL = "host=db.as212625.net user=miniflux dbname=miniflux sslmode=verify-full sslcert=%d/postgresql-tls-cert.pem sslkey=%d/postgresql-tls-key.pem sslrootcert=%d/postgresql-tls-ca.pem";
+      DATABASE_URL = "host=/run/postgresql user=miniflux dbname=miniflux sslmode=disable";
       LISTEN_ADDR = "[2a0c:b641:2b2::10]:443";
       CERT_FILE = "%d/tls-cert.pem";
       KEY_FILE = "%d/tls-key.pem";

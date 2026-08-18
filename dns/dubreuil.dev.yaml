@@ -38,6 +38,9 @@ _dmarc:
 glacier:
   type: AAAA
   value: 2a09:8280:1::cf:75d3:0
+grafana:
+  type: AAAA
+  value: 2a0c:b641:2b0:100::2
 id:
   type: AAAA
   value: 2a0c:b641:2b2::11

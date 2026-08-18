@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 {
+  imports = [
+    ./grafana.nix
+  ];
+
   clement.profile.router.enable = true;
 
   boot.loader.grub.enable = true;
@@ -13,7 +17,13 @@
       };
       vrfConfig.Table = 212625;
     };
-    networks."10-as212625".matchConfig.Name = "as212625";
+    networks."10-as212625" = {
+      matchConfig.Name = "as212625";
+      routingPolicyRules = [{
+        From = "2a0c:b641:2b0:100::/56";
+        Table = 212625;
+      }];
+    };
 
     networks."10-ens3" = {
       matchConfig = {
@@ -33,8 +43,15 @@
     };
   };
 
+  boot.kernel.sysctl."net.ipv4.tcp_l3mdev_accept" = 1;
+
   clement.profile.mesh.enable = true;
   clement.mesh.vrf = "as212625";
+
+  clement.proxy64.http2https = {
+    enable = true;
+    acmeWebroot = "/run/acme-challenges";
+  };
 
   clement.wireguard = {
     ekidno = {
@@ -66,6 +83,17 @@
     (pkgs.net.genLinkLocal "ekidno")
     (pkgs.net.genLinkLocal "flamii")
   ];
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_18;
+    authentication = lib.mkOverride 10 ''
+      #type  database  DBuser    address  auth-method
+      local  all       postgres           peer
+      local  sameuser  all                peer
+    '';
+    settings.listen_addresses = lib.mkOverride 10 "";
+  };
 
   system.stateVersion = "26.05";
 }

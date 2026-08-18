@@ -29,6 +29,12 @@
       neededForBoot = true;
     };
 
+  fileSystems."/var/lib/postgresql" =
+    { device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0-0-0-0-part2";
+      fsType = "btrfs";
+      options = [ "subvol=postgresql" "noatime" "compress=zstd" ];
+    };
+
   swapDevices = [ ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

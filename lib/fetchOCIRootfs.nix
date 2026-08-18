@@ -3,25 +3,33 @@
   stdenvNoCC,
   system,
   writeShellScript,
-
   image,
   sha256,
 }:
 let
-  hash = sha256.${system} or (throw "unsupported system: ${system}");
+  platform = {
+    x86_64-linux = "linux/amd64";
+    aarch64-linux = "linux/arm64";
+  }.${system} or (throw "unsupported system: ${system}");
+
+  hash = sha256.${system} or (throw "missing hash for system: ${system}");
 in stdenvNoCC.mkDerivation {
-  name = image;
+  name = "oci-rootfs";
 
   builder = writeShellScript "fetch-oci-image.sh" ''
-    source $stdenv/setup
-    mkdir -p $out
-    crane export --platform ${{ "x86_64-linux" = "linux/amd64"; "aarch64-linux" = "linux/arm64"; }.${system}} "${image}" - | tar xC $out
-    mkdir -p $out/{dev,proc,sys,run,tmp,var/tmp}
+    source "$stdenv/setup"
+    set -euo pipefail
+    mkdir -p "$out"
+    crane export \
+      --platform "${platform}" \
+      "${image}" - |
+      tar --extract --directory="$out" --no-same-owner
+    mkdir -p "$out"/{dev,proc,sys,run,tmp,var/tmp}
   '';
+
+  nativeBuildInputs = [ crane ];
 
   outputHash = hash;
   outputHashAlgo = "sha256";
   outputHashMode = "recursive";
-
-  nativeBuildInputs = [ crane ];
 }

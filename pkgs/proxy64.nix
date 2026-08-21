@@ -6,8 +6,8 @@ buildGo126Module {
   src = fetchFromGitHub {
       owner = "clementd64";
       repo = "proxy64";
-      rev = "32375fc666d9607e788834b6bff9a50b7784ab20";
-      hash = "sha256-BTlmpzYueG8NHtgsEztKmeda+yGcDnNUw5huvdhECTg=";
+      rev = "cb98825df6200716f6d114afbc2cb03051c43338";
+      hash = "sha256-iQI7nZU2nf63QMTeIN2McKZTX0RA8vPZmArdl8B0jvI=";
   };
 
   vendorHash = "sha256-Y/V0phjxNPTDHxslhJ6iuw27saX5931lS7njRDYySdQ=";

@@ -52,6 +52,7 @@
     "2a0c:b641:2b2::1"
   ];
 
+  clement.proxy64.sni.prefix = "2a0c:b641:2b2::46:0:0/96";
   clement.proxy64.http2https = {
     enable = true;
     acmeWebroot = "/run/acme-challenges";

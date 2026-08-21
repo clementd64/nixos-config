@@ -1,7 +1,7 @@
 $ORIGIN dubreuil.dev.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1787089151 ; Serial
+    1787306624 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -23,7 +23,8 @@ _autodiscover._tcp                                  3600 IN SRV      0 0 443 pro
 _dmarc                                              3600 IN TXT      "v=DMARC1\; p=none"
 glacier                                             3600 IN AAAA     2a09:8280:1::cf:75d3:0
 grafana                                             3600 IN AAAA     2a0c:b641:2b0:100::2
-id                                                  3600 IN AAAA     2a0c:b641:2b2::11
+id                                                  3600 IN A        62.3.50.46
+                                                    3600 IN AAAA     2a0c:b641:2b2::11
 miniflux                                            3600 IN AAAA     2a0c:b641:2b2::10
 nw7yp-check                                         3600 IN CNAME    ovh.com.
 ovh-zimbra-xv1xqn7d                                 3600 IN CNAME    ovh.com.

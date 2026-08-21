@@ -42,8 +42,10 @@ grafana:
   type: AAAA
   value: 2a0c:b641:2b0:100::2
 id:
-  type: AAAA
+- type: AAAA
   value: 2a0c:b641:2b2::11
+- type: A
+  value: 62.3.50.46
 miniflux:
   type: AAAA
   value: 2a0c:b641:2b2::10

@@ -57,9 +57,12 @@ in {
 
     sni = {
       enable = mkEnableOption "sni";
-      listen = mkOption {
+      address = mkOption {
         type = types.str;
-        default = ":443";
+      };
+      port = mkOption {
+        type = types.int;
+        default = 443;
       };
       prefix = mkOption {
         type = types.str;
@@ -109,7 +112,8 @@ in {
       };
       environment = {
         NAT64_PORT = mkIf nat64.enable "1337";
-        SNI_LISTEN = mkIf sni.enable sni.listen;
+        SNI_ADDR = mkIf sni.enable sni.address;
+        SNI_PORT = mkIf sni.enable (toString sni.port);
         SNI_PREFIX = mkIf sni.enable sni.prefix;
         SNI_ALLOWED_CIDRS = mkIf sni.enable (concatStringsSep "," sni.allowed);
         HTTP2HTTPS_LISTEN = mkIf http2https.enable http2https.listen;
@@ -117,9 +121,10 @@ in {
       };
     };
 
-    # NAT64
+    clement.local.routes = optional nat64.enable nat64.prefix
+      ++ optional sni.enable sni.prefix;
 
-    clement.local.routes = mkIf nat64.enable [ nat64.prefix ];
+    # NAT64
 
     networking.ipset = mkIf nat64.enable allowedRule.ipset;
     networking.firewall.extraCommands = mkIf nat64.enable (allowedRule.extraCommands + ''
@@ -171,11 +176,8 @@ in {
       '';
     };
 
-    ## SNI
+    # SNI
 
-    systemd.network.networks."30-sni" = mkIf sni.enable {
-      matchConfig.Name = "lo";
-      routes = [{ Type = "local"; Destination = sni.prefix; }];
-    };
+    clement.firewall.dst."tcp:${toString sni.port}" = mkIf sni.enable [ sni.address ];
   };
 }

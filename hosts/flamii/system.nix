@@ -1,10 +1,5 @@
 { pkgs, lib, ... }:
 {
-  imports = [
-    ./miniflux.nix
-    ./pocket-id.nix
-  ];
-
   clement.profile.as212625.enable = true;
 
   boot.loader.grub.enable = true;
@@ -30,9 +25,6 @@
   environment.persistence."/nix/persist" = {
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
-    ];
-    directories = [
-      "/var/lib/postgresql"
     ];
   };
 
@@ -85,17 +77,6 @@
       publicKey = "Dy41q02Zxc8+NCWnzFDpe68JRM9ASPxUM0JTUoTYchE=";
       secretsFile = ./secrets.json;
     };
-  };
-
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_18;
-    authentication = lib.mkOverride 10 ''
-      #type  database  DBuser    address  auth-method
-      local  all       postgres           peer
-      local  sameuser  all                peer
-    '';
-    settings.listen_addresses = lib.mkOverride 10 "";
   };
 
   system.stateVersion = "23.11";

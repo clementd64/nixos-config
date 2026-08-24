@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./grafana.nix
+    ./apps/grafana.nix
+    ./apps/miniflux.nix
+    ./apps/pocket-id.nix
   ];
 
   clement.profile.router.enable = true;

@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 {
-  clement.local.addresses = [ "2a0c:b641:2b2::10/128" ];
-  clement.firewall.dst."tcp:443" = ["2a0c:b641:2b2::10"];
-  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b2::10"];
+  clement.local.addresses = [ "2a0c:b641:2b0:100::3/128" ];
+  clement.firewall.dst."tcp:443" = ["2a0c:b641:2b0:100::3"];
+  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b0:100::3"];
 
   clement.credentials.miniflux = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "miniflux";
     secrets = {
       "oauth2-client-id".extract = ''["miniflux"]["oauth2_client_id"]'';
@@ -37,7 +37,7 @@
     };
     environment = {
       DATABASE_URL = "host=/run/postgresql user=miniflux dbname=miniflux sslmode=disable";
-      LISTEN_ADDR = "[2a0c:b641:2b2::10]:443";
+      LISTEN_ADDR = "[2a0c:b641:2b0:100::3]:443";
       CERT_FILE = config.clement.acme.certificates."miniflux.dubreuil.dev".credentials.cert;
       KEY_FILE = config.clement.acme.certificates."miniflux.dubreuil.dev".credentials.key;
       BASE_URL = "https://miniflux.dubreuil.dev/";

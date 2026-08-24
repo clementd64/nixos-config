@@ -43,12 +43,12 @@ grafana:
   value: 2a0c:b641:2b0:100::2
 id:
 - type: AAAA
-  value: 2a0c:b641:2b2::11
+  value: 2a0c:b641:2b0:100::4
 - type: A
   value: 62.3.50.46
 miniflux:
   type: AAAA
-  value: 2a0c:b641:2b2::10
+  value: 2a0c:b641:2b0:100::3
 nw7yp-check:
   type: CNAME
   value: ovh.com.

@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 {
-  clement.local.addresses = [ "2a0c:b641:2b2::11/128" ];
-  clement.firewall.dst."tcp:443" = ["2a0c:b641:2b2::11"];
-  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b2::11"];
+  clement.local.addresses = [ "2a0c:b641:2b0:100::4/128" ];
+  clement.firewall.dst."tcp:443" = ["2a0c:b641:2b0:100::4"];
+  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b0:100::4"];
 
   clement.credentials.pocket-id = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "pocket-id";
     secrets = {
       "encryption-key".extract = ''["pocket-id"]["encryption-key"]'';
@@ -38,7 +38,7 @@
     environment = {
       DB_CONNECTION_STRING = "postgresql://pocketid@/pocketid?sslmode=disable";
       ENCRYPTION_KEY_FILE = "%d/encryption-key";
-      HOST = "2a0c:b641:2b2::11";
+      HOST = "2a0c:b641:2b0:100::4";
       PORT = "443";
       TLS_CERT_FILE = config.clement.acme.certificates."id.dubreuil.dev".credentials.cert;
       TLS_KEY_FILE = config.clement.acme.certificates."id.dubreuil.dev".credentials.key;

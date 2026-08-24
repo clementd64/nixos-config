@@ -5,7 +5,7 @@
   clement.firewall.dst."tcp:80" = ["2a0c:b641:2b0:100::2"];
 
   clement.credentials.grafana = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "grafana";
     secrets = {
       "secret-key".extract = ''["grafana"]["secret_key"]'';

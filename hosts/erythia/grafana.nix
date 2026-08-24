@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   clement.local.addresses = [ "2a0c:b641:2b0:100::2/128" ];
   clement.firewall.dst."tcp:443" = ["2a0c:b641:2b0:100::2"];
@@ -15,7 +15,7 @@
   };
 
   clement.acme.certificates."grafana.dubreuil.dev" = {
-    reload = "grafana.service";
+    service = "grafana";
   };
 
   systemd.services.grafana = {
@@ -32,10 +32,6 @@
       Restart = "on-failure";
       RestartSec = 5;
       RuntimeDirectory = "grafana";
-      LoadCredential = [
-        "tls-cert.pem:${config.clement.acme.certificates."grafana.dubreuil.dev".cert}"
-        "tls-key.pem:${config.clement.acme.certificates."grafana.dubreuil.dev".key}"
-      ];
       AmbientCapabilities = "CAP_NET_BIND_SERVICE";
       CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
     };
@@ -46,8 +42,8 @@
       GF_SERVER_HTTP_PORT = "443";
       GF_SERVER_DOMAIN = "grafana.dubreuil.dev";
       GF_SERVER_ENFORCE_DOMAIN = "true";
-      GF_SERVER_CERT_FILE = "%d/tls-cert.pem";
-      GF_SERVER_CERT_KEY = "%d/tls-key.pem";
+      GF_SERVER_CERT_FILE = config.clement.acme.certificates."grafana.dubreuil.dev".credentials.cert;
+      GF_SERVER_CERT_KEY = config.clement.acme.certificates."grafana.dubreuil.dev".credentials.key;
       GF_SERVER_STATIC_ROOT_PATH = "${pkgs.grafana}/share/grafana/public";
       GF_SERVER_ENABLE_GZIP = "true";
       GF_DATABASE_TYPE = "postgres";

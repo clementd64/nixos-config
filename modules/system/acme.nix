@@ -22,6 +22,11 @@ with lib; let
 
       reload = mkOption {
         type = types.nullOr types.str;
+        default = if config.service != null then "${config.service}.service" else null;
+      };
+
+      service = mkOption {
+        type = types.nullOr types.str;
         default = null;
       };
 
@@ -37,6 +42,22 @@ with lib; let
         default = "${cfg.directory}/live/${config.certName}/privkey.pem";
         internal = true;
         readOnly = true;
+      };
+
+      credentials = {
+        cert = mkOption {
+          type = types.str;
+          default = "%d/acme-tls-${name}-cert.pem";
+          internal = true;
+          readOnly = true;
+        };
+
+        key = mkOption {
+          type = types.str;
+          default = "%d/acme-tls-${name}-key.pem";
+          internal = true;
+          readOnly = true;
+        };
       };
     };
   });
@@ -59,40 +80,49 @@ in {
   };
 
   config = mkIf (cfg.certificates != {}) {
-    systemd.services = attrsets.mapAttrs' (name: cert: {
-      name = "acme-${utils.escapeSystemdPath name}";
-      value = {
-        description = "ACME certificate ${cert.certName}";
-        after = [ "network-online.target" ];
-        wants = [ "network-online.target" ];
-        wantedBy = [ "multi-user.target" ];
-        before = mkIf (cert.reload != null) [ cert.reload ];
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${cfg.webroot}";
-          ExecStart = let
-            certbotArgs = cert: [
-              "certonly"
-              "--non-interactive"
-              "--agree-tos"
-              "--email" "clement@dubreuil.dev"
-              "--keep-until-expiring"
-              "--renew-with-new-domains"
-              "--config-dir" cfg.directory
-              "--webroot"
-              "-w" cfg.webroot
-              "--preferred-profile" cert.profile
-              "--key-type" "ecdsa"
-              "--cert-name" cert.certName
-            ]
-            ++ concatMap (domain: [ "-d" domain ]) cert.domains
-            ++ optionals (cert.reload != null) [
-              "--deploy-hook" "${pkgs.systemd}/bin/systemctl --no-block try-reload-or-restart ${cert.reload}"
-            ];
-          in "${pkgs.util-linux}/bin/flock /run/acme-lock ${pkgs.certbot}/bin/certbot ${escapeShellArgs (certbotArgs cert)}";
+    systemd.services = mkMerge [
+      (attrsets.mapAttrs' (name: cert: {
+        name = "acme-${utils.escapeSystemdPath name}";
+        value = {
+          description = "ACME certificate ${cert.certName}";
+          after = [ "network-online.target" ];
+          wants = [ "network-online.target" ];
+          wantedBy = [ "multi-user.target" ];
+          before = mkIf (cert.reload != null) [ cert.reload ];
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${cfg.webroot}";
+            ExecStart = let
+              certbotArgs = cert: [
+                "certonly"
+                "--non-interactive"
+                "--agree-tos"
+                "--email" "clement@dubreuil.dev"
+                "--keep-until-expiring"
+                "--renew-with-new-domains"
+                "--config-dir" cfg.directory
+                "--webroot"
+                "-w" cfg.webroot
+                "--preferred-profile" cert.profile
+                "--key-type" "ecdsa"
+                "--cert-name" cert.certName
+              ]
+              ++ concatMap (domain: [ "-d" domain ]) cert.domains
+              ++ optionals (cert.reload != null) [
+                "--deploy-hook" "${pkgs.systemd}/bin/systemctl --no-block try-reload-or-restart ${cert.reload}"
+              ];
+            in "${pkgs.util-linux}/bin/flock /run/acme-lock ${pkgs.certbot}/bin/certbot ${escapeShellArgs (certbotArgs cert)}";
+          };
         };
-      };
-    }) cfg.certificates;
+      }) cfg.certificates)
+
+      (mkMerge (mapAttrsToList (name: cert: {
+        "${cert.service}".serviceConfig.LoadCredential = [
+          "acme-tls-${name}-cert.pem:${cert.cert}"
+          "acme-tls-${name}-key.pem:${cert.key}"
+        ];
+      }) (filterAttrs (_: cert: cert.service != null) cfg.certificates)))
+    ];
 
     systemd.timers = attrsets.mapAttrs' (name: cert: {
       name = "acme-${utils.escapeSystemdPath name}";

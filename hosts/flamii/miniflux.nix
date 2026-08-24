@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   clement.local.addresses = [ "2a0c:b641:2b2::10/128" ];
   clement.firewall.dst."tcp:443" = ["2a0c:b641:2b2::10"];
@@ -14,7 +14,7 @@
   };
 
   clement.acme.certificates."miniflux.dubreuil.dev" = {
-    reload = "miniflux.service";
+    service = "miniflux";
   };
 
   systemd.services.miniflux = {
@@ -32,18 +32,14 @@
       WatchdogSignal = "SIGKILL";
       Restart = "always";
       RestartSec = 5;
-      LoadCredential = [
-        "tls-cert.pem:${config.clement.acme.certificates."miniflux.dubreuil.dev".cert}"
-        "tls-key.pem:${config.clement.acme.certificates."miniflux.dubreuil.dev".key}"
-      ];
       AmbientCapabilities = "CAP_NET_BIND_SERVICE";
       CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
     };
     environment = {
       DATABASE_URL = "host=/run/postgresql user=miniflux dbname=miniflux sslmode=disable";
       LISTEN_ADDR = "[2a0c:b641:2b2::10]:443";
-      CERT_FILE = "%d/tls-cert.pem";
-      KEY_FILE = "%d/tls-key.pem";
+      CERT_FILE = config.clement.acme.certificates."miniflux.dubreuil.dev".credentials.cert;
+      KEY_FILE = config.clement.acme.certificates."miniflux.dubreuil.dev".credentials.key;
       BASE_URL = "https://miniflux.dubreuil.dev/";
       HTTPS = "1";
       RUN_MIGRATIONS = "1";

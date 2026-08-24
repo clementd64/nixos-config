@@ -13,7 +13,7 @@
   };
 
   clement.acme.certificates."id.dubreuil.dev" = {
-    reload = "pocket-id.service";
+    service = "pocket-id";
   };
 
   systemd.services.pocket-id = {
@@ -32,10 +32,6 @@
       Restart = "always";
       RestartSec = 5;
       CacheDirectory = "pocket-id";
-      LoadCredential = [
-        "tls-cert.pem:${config.clement.acme.certificates."id.dubreuil.dev".cert}"
-        "tls-key.pem:${config.clement.acme.certificates."id.dubreuil.dev".key}"
-      ];
       AmbientCapabilities = "CAP_NET_BIND_SERVICE";
       CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
     };
@@ -44,8 +40,8 @@
       ENCRYPTION_KEY_FILE = "%d/encryption-key";
       HOST = "2a0c:b641:2b2::11";
       PORT = "443";
-      TLS_CERT = "%d/tls-cert.pem";
-      TLS_KEY = "%d/tls-key.pem";
+      TLS_CERT_FILE = config.clement.acme.certificates."id.dubreuil.dev".credentials.cert;
+      TLS_KEY_FILE = config.clement.acme.certificates."id.dubreuil.dev".credentials.key;
       APP_URL = "https://id.dubreuil.dev";
       FILE_BACKEND = "database";
       UI_CONFIG_DISABLED = "true";

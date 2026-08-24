@@ -4,7 +4,6 @@
     profiles/baseline.nix
     profiles/container.nix
     profiles/mesh
-    profiles/patroni
     profiles/router
     profiles/server.nix
     system/acme.nix
@@ -12,14 +11,12 @@
     system/container.nix
     system/credentials.nix
     system/docker.nix
-    system/etcd.nix
     system/firewall.nix
     system/ipset.nix
     system/k3s.nix
     system/local.nix
     system/mesh.nix
     system/oci.nix
-    system/patroni.nix
     system/proxy64.nix
     system/secrets.nix
     system/ssh.nix

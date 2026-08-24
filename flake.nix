@@ -81,10 +81,6 @@
     };
 
     hosts = {
-      aion = mkStable {
-        system = "x86_64-linux";
-      };
-
       ekidno = mkStable {
         system = "x86_64-linux";
       };
@@ -94,14 +90,6 @@
       };
 
       flamii = mkStable {
-        system = "x86_64-linux";
-      };
-
-      ophion = mkStable {
-        system = "x86_64-linux";
-      };
-
-      siren = mkStable {
         system = "x86_64-linux";
       };
 

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./apps/grafana.nix
@@ -90,11 +90,100 @@
     enable = true;
     package = pkgs.postgresql_18;
     authentication = lib.mkOverride 10 ''
-      #type  database  DBuser    address  auth-method
-      local  all       postgres           peer
-      local  sameuser  all                peer
+      #type  database  DBuser         address  auth-method
+      local  all       postgres                peer
+      local  all       opentelemetry           peer
+      local  sameuser  all                     peer
     '';
-    settings.listen_addresses = lib.mkOverride 10 "";
+    settings = {
+      listen_addresses = lib.mkOverride 10 "";
+      shared_preload_libraries = "pg_stat_statements";
+      "pg_stat_statements.max" = 10000;
+      "pg_stat_statements.track" = "all";
+      track_io_timing = "on";
+    };
+  };
+
+  clement.credentials.opentelemetry-collector = {
+    file = ./secrets.json;
+    service = "opentelemetry-collector";
+    secrets = {
+      "authorization-token".extract = ''["dash0"]["authorization-token"]'';
+    };
+  };
+
+  systemd.services.opentelemetry-collector.environment.DASH0_AUTHORIZATION_TOKEN_FILE = "%d/authorization-token";
+  systemd.services.opentelemetry-collector.serviceConfig.User = "opentelemetry";
+  services.opentelemetry-collector = {
+    enable = true;
+    package = pkgs.opentelemetry-collector-contrib;
+    settings = {
+      receivers = {
+        otlp = {
+          protocols = {
+            grpc = {};
+            http = {};
+          };
+        };
+
+        host_metrics = {
+          collection_interval = "60s";
+          scrapers = {
+            cpu = {};
+            disk = {};
+            filesystem = {};
+            load = {};
+            memory = {};
+            network = {};
+            paging = {};
+            processes = {};
+          };
+        };
+
+        postgresql = {
+          transport = "unix";
+          endpoint = "/var/run/postgresql:5432";
+          username = "opentelemetry";
+          password = "unused";
+          collection_interval = "60s";
+        };
+      };
+
+      processors.batch = {};
+
+      exporters = {
+        "otlp_grpc/dash0" = {
+          auth.authenticator = "bearertokenauth/dash0";
+          endpoint = "ingress.europe-west4.gcp.dash0.com:4317";
+        };
+      };
+
+      extensions."bearertokenauth/dash0" = {
+        scheme = "Bearer";
+        filename = "\${env:DASH0_AUTHORIZATION_TOKEN_FILE}";
+      };
+
+      service = {
+        extensions = [ "bearertokenauth/dash0" ];
+        pipelines = {
+          metrics = {
+            receivers = [ "otlp" "host_metrics" "postgresql" ];
+            processors = [ "batch" ];
+            exporters = [ "otlp_grpc/dash0" ];
+          };
+          logs = {
+            receivers = [ "otlp" ];
+            processors = [ "batch" ];
+            exporters = [ "otlp_grpc/dash0" ];
+          };
+          traces = {
+            receivers = [ "otlp" ];
+            processors = [ "batch" ];
+            exporters = [ "otlp_grpc/dash0" ];
+          };
+        };
+      };
+    };
   };
 
   system.stateVersion = "26.05";

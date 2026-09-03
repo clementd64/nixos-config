@@ -47,6 +47,11 @@
       UI_CONFIG_DISABLED = "true";
       GEOLITE_DB_URL = "https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-City.mmdb";
       GEOLITE_DB_PATH = "%C/pocket-id/GeoLite2-City.mmdb";
+      OTEL_TRACES_EXPORTER = "otlp";
+      OTEL_METRICS_EXPORTER = "otlp";
+      OTEL_LOGS_EXPORTER = "otlp";
+      OTEL_EXPORTER_OTLP_ENDPOINT = "http://localhost:4317";
+      OTEL_EXPORTER_OTLP_PROTOCOL = "grpc";
     };
   };
 }

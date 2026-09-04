@@ -145,7 +145,7 @@
           endpoint = "/var/run/postgresql:5432";
           username = "opentelemetry";
           password = "unused";
-          collection_interval = "60s";
+          collection_interval = "10m";
         };
       };
 

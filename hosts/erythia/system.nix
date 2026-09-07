@@ -90,18 +90,11 @@
     enable = true;
     package = pkgs.postgresql_18;
     authentication = lib.mkOverride 10 ''
-      #type  database  DBuser         address  auth-method
-      local  all       postgres                peer
-      local  all       opentelemetry           peer
-      local  sameuser  all                     peer
+      #type  database  DBuser    address  auth-method
+      local  all       postgres           peer
+      local  sameuser  all                peer
     '';
-    settings = {
-      listen_addresses = lib.mkOverride 10 "";
-      shared_preload_libraries = "pg_stat_statements";
-      "pg_stat_statements.max" = 10000;
-      "pg_stat_statements.track" = "all";
-      track_io_timing = "on";
-    };
+    settings.listen_addresses = lib.mkOverride 10 "";
   };
 
   clement.credentials.opentelemetry-collector = {
@@ -139,14 +132,6 @@
             processes = {};
           };
         };
-
-        postgresql = {
-          transport = "unix";
-          endpoint = "/var/run/postgresql:5432";
-          username = "opentelemetry";
-          password = "unused";
-          collection_interval = "10m";
-        };
       };
 
       processors.batch = {};
@@ -167,7 +152,7 @@
         extensions = [ "bearertokenauth/dash0" ];
         pipelines = {
           metrics = {
-            receivers = [ "otlp" "host_metrics" "postgresql" ];
+            receivers = [ "otlp" "host_metrics" ];
             processors = [ "batch" ];
             exporters = [ "otlp_grpc/dash0" ];
           };

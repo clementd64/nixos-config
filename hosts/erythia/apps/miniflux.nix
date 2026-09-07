@@ -17,6 +17,22 @@
     service = "miniflux";
   };
 
+  services.opentelemetry-collector.settings = {
+    receivers."prometheus/miniflux".config.scrape_configs = [
+      {
+        job_name = "miniflux";
+        scrape_interval = "60s";
+        scheme = "https";
+        metrics_path = "/metrics";
+        tls_config.server_name = "miniflux.dubreuil.dev";
+        static_configs = [
+          { targets = [ "[2a0c:b641:2b0:100::3]:443" ]; }
+        ];
+      }
+    ];
+    service.pipelines.metrics.receivers = [ "prometheus/miniflux" ];
+  };
+
   systemd.services.miniflux = {
     description = "Miniflux service";
     after = [ "network.target" ];
@@ -43,6 +59,8 @@
       BASE_URL = "https://miniflux.dubreuil.dev/";
       HTTPS = "1";
       RUN_MIGRATIONS = "1";
+      METRICS_COLLECTOR = "1";
+      METRICS_ALLOWED_NETWORKS = "2a0c:b641:2b0:100::3/128";
 
       OAUTH2_PROVIDER = "oidc";
       OAUTH2_CLIENT_ID_FILE = "%d/oauth2-client-id";

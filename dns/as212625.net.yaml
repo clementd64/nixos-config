@@ -30,15 +30,39 @@ ekidno.h:
   value: 194.28.99.42
 - type: AAAA
   value: 2a0c:b641:2b1::1
+ekidno.v4.h:
+  type: A
+  value: 194.28.99.42
+ekidno.v6.h:
+  octodns:
+    auto_arpa_priority: 1000
+  type: AAAA
+  value: 2a0c:b641:2b1::1
 erythia.h:
 - type: A
   value: 51.254.131.24
 - type: AAAA
   value: 2001:41d0:305:2100::dd40
+erythia.v4.h:
+  type: A
+  value: 51.254.131.24
+erythia.v6.h:
+  octodns:
+    auto_arpa_priority: 1000
+  type: AAAA
+  value: 2001:41d0:305:2100::dd40
 flamii.h:
 - type: A
   value: 194.28.98.82
 - type: AAAA
+  value: 2a0c:b641:2b2::1
+flamii.v4.h:
+  type: A
+  value: 194.28.98.82
+flamii.v6.h:
+  octodns:
+    auto_arpa_priority: 1000
+  type: AAAA
   value: 2a0c:b641:2b2::1
 ns1:
 - type: A

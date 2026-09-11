@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
   boot.loader.systemd-boot.enable = true;
 
@@ -107,7 +107,21 @@
       publicKey = "trM7zOMMKsWHT+F6V08e4e5YVe3VVgf6M8zONd7qzwQ=";
       secretsFile = ./secrets.json;
     };
+    ekidno = {
+      addresses = [ "2a0c:b641:2b1::a/128" ];
+      endpoint = "ekidno.v4.h.as212625.net:51823";
+      presharedKey = ''["wireguard"]["ekidno"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["ekidno"]["private-key"]'';
+      publicKey = "SwHLOEf38CErlhdKXlfgV0Oz/Z+Ii5s20+N4L5v+qXQ=";
+      secretsFile = ./secrets.json;
+    };
   };
+
+  systemd.network.networks."20-ekidno".routes = [{
+    Destination = "::/0";
+    Metric = 4096;
+    PreferredSource = "2a0c:b641:2b1::a";
+  }];
 
   users.users.clement = {
     # TODO: find a way to manage secret that is installer friendly

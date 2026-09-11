@@ -133,6 +133,14 @@
       publicKey = "NKyovNmQV5nq85cXBNAYJkH5GRVhUhh3Xo4DAS4gFGA=";
       secretsFile = ./secrets.json;
     };
+    syra = {
+      allowedIps = [ "2a0c:b641:2b1::a/128" ];
+      port = 51823;
+      presharedKey = ''["wireguard"]["syra"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["syra"]["private-key"]'';
+      publicKey = "IYrZycjKMKXstOPEhb952yKEs3sMiI+pgdY2dchS7Fo=";
+      secretsFile = ./secrets.json;
+    };
   };
 
   system.stateVersion = "23.11";

@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 {
-  clement.local.addresses = [ "2a0c:b641:2b0:100::3/128" ];
-  clement.firewall.dst."tcp:443" = ["2a0c:b641:2b0:100::3"];
-  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b0:100::3"];
-
   clement.credentials.miniflux = {
     file = ../secrets.json;
     service = "miniflux";
@@ -70,7 +66,6 @@
   };
 
   clement.traefik = {
-    config.entryPoints.miniflux.address = "[2a0c:b641:2b0:100::3]:443";
     dynamic = {
       tls.certificates = [{
         certFile = builtins.baseNameOf config.clement.acme.certificates."miniflux.dubreuil.dev".credentials.cert;
@@ -78,7 +73,6 @@
       }];
       http = {
         routers.miniflux = {
-          entryPoints = [ "miniflux" "ipv4" ];
           rule = "Host(`miniflux.dubreuil.dev`) && !Path(`/metrics`)";
           service = "miniflux";
           tls = {};

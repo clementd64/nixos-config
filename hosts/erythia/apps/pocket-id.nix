@@ -1,13 +1,5 @@
 { config, pkgs, ... }:
 {
-  clement.local.addresses = [ "2a0c:b641:2b0:100::4/128" ];
-  clement.firewall.dst."tcp:443" = [ "2a0c:b641:2b0:100::4" ];
-  clement.firewall.dst."tcp:80" = [ "2a0c:b641:2b0:100::4" ];
-
-  systemd.services.traefik.serviceConfig = {
-    WorkingDirectory = "%d";
-  };
-
   clement.credentials.pocket-id = {
     file = ../secrets.json;
     service = "pocket-id";
@@ -57,7 +49,6 @@
   };
 
   clement.traefik = {
-    config.entryPoints.pocket-id.address = "[2a0c:b641:2b0:100::4]:443";
     dynamic = {
       tls.certificates = [{
         certFile = builtins.baseNameOf config.clement.acme.certificates."id.dubreuil.dev".credentials.cert;
@@ -65,7 +56,6 @@
       }];
       http = {
         routers.pocket-id = {
-          entryPoints = [ "pocket-id" "ipv4" ];
           rule = "Host(`id.dubreuil.dev`)";
           service = "pocket-id";
           tls = {};

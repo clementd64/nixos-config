@@ -42,7 +42,7 @@ erythia.h:
 - type: A
   value: 51.254.131.24
 - type: AAAA
-  value: 2001:41d0:305:2100::dd40
+  value: 2a0c:b641:2b0:100::1
 erythia.v4.h:
   type: A
   value: 51.254.131.24
@@ -50,7 +50,7 @@ erythia.v6.h:
   octodns:
     auto_arpa_priority: 1000
   type: AAAA
-  value: 2001:41d0:305:2100::dd40
+  value: 2a0c:b641:2b0:100::1
 flamii.h:
 - type: A
   value: 194.28.98.82

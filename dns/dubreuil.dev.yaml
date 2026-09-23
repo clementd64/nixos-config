@@ -40,12 +40,12 @@ glacier:
   value: 2a09:8280:1::cf:75d3:0
 id:
 - type: AAAA
-  value: 2a0c:b641:2b0:100::4
+  value: 2a0c:b641:2b0:100::1
 - type: A
   value: 51.254.131.24
 miniflux:
 - type: AAAA
-  value: 2a0c:b641:2b0:100::3
+  value: 2a0c:b641:2b0:100::1
 - type: A
   value: 51.254.131.24
 nw7yp-check:

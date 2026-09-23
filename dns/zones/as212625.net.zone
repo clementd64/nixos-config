@@ -1,7 +1,7 @@
 $ORIGIN as212625.net.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1788972361 ; Serial
+    1790182598 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -24,9 +24,9 @@ ekidno.h                              3600 IN A        194.28.99.42
 ekidno.v4.h                           3600 IN A        194.28.99.42
 ekidno.v6.h                           3600 IN AAAA     2a0c:b641:2b1::1
 erythia.h                             3600 IN A        51.254.131.24
-                                      3600 IN AAAA     2001:41d0:305:2100::dd40
+                                      3600 IN AAAA     2a0c:b641:2b0:100::1
 erythia.v4.h                          3600 IN A        51.254.131.24
-erythia.v6.h                          3600 IN AAAA     2001:41d0:305:2100::dd40
+erythia.v6.h                          3600 IN AAAA     2a0c:b641:2b0:100::1
 flamii.h                              3600 IN A        194.28.98.82
                                       3600 IN AAAA     2a0c:b641:2b2::1
 flamii.v4.h                           3600 IN A        194.28.98.82

@@ -96,10 +96,18 @@
     settings.listen_addresses = lib.mkOverride 10 "";
   };
 
+  clement.local.addresses = [ "2a0c:b641:2b0:100::1/128" ];
+  clement.firewall.dst."tcp:443" = [ "2a0c:b641:2b0:100::1" "51.254.131.24" ];
+  clement.firewall.dst."tcp:80" = [ "2a0c:b641:2b0:100::1" "51.254.131.24" ];
+
   clement.traefik = {
     enable = true;
     config = {
-      entryPoints.ipv4.address = "51.254.131.24:443";
+      entryPoints = {
+        https-v6.address = "[2a0c:b641:2b0:100::1]:443";
+        https-v4.address = "51.254.131.24:443";
+      };
+
       experimental.otlpLogs = true;
       log.otlp.grpc = {
         endpoint = "127.0.0.1:4317";
@@ -122,8 +130,6 @@
       };
     };
   };
-
-  clement.firewall.dst."tcp:443" = [ "51.254.131.24" ];
 
   clement.credentials.opentelemetry-collector = {
     file = ./secrets.json;

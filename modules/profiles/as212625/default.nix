@@ -43,11 +43,6 @@ in {
           keyFile = config.clement.secrets."as212625-dns-key".path;
         };
       };
-      sni = {
-        enable = true;
-        address = "62.3.50.46";
-        allowed = ["2a0c:b641:2b0::/44"];
-      };
     };
 
     services.coredns = {

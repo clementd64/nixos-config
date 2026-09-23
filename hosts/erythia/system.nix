@@ -1,7 +1,6 @@
 { lib, pkgs, ... }:
 {
   imports = [
-    ./apps/grafana.nix
     ./apps/miniflux.nix
     ./apps/pocket-id.nix
   ];

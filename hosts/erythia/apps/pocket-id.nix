@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 {
   clement.local.addresses = [ "2a0c:b641:2b0:100::4/128" ];
-  clement.firewall.dst."tcp:443" = ["2a0c:b641:2b0:100::4"];
-  clement.firewall.dst."tcp:80" = ["2a0c:b641:2b0:100::4"];
+  clement.firewall.dst."tcp:443" = [ "2a0c:b641:2b0:100::4" ];
+  clement.firewall.dst."tcp:80" = [ "2a0c:b641:2b0:100::4" ];
+
+  systemd.services.traefik.serviceConfig = {
+    WorkingDirectory = "%d";
+  };
 
   clement.credentials.pocket-id = {
     file = ../secrets.json;
@@ -13,7 +17,7 @@
   };
 
   clement.acme.certificates."id.dubreuil.dev" = {
-    service = "pocket-id";
+    service = "traefik";
   };
 
   systemd.services.pocket-id = {
@@ -32,16 +36,13 @@
       Restart = "always";
       RestartSec = 5;
       CacheDirectory = "pocket-id";
-      AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-      CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
     };
     environment = {
       DB_CONNECTION_STRING = "postgresql://pocketid@/pocketid?sslmode=disable";
       ENCRYPTION_KEY_FILE = "%d/encryption-key";
-      HOST = "2a0c:b641:2b0:100::4";
-      PORT = "443";
-      TLS_CERT_FILE = config.clement.acme.certificates."id.dubreuil.dev".credentials.cert;
-      TLS_KEY_FILE = config.clement.acme.certificates."id.dubreuil.dev".credentials.key;
+      HOST = "::1";
+      PORT = "1411";
+      TRUST_PROXY = "::1";
       APP_URL = "https://id.dubreuil.dev";
       FILE_BACKEND = "database";
       UI_CONFIG_DISABLED = "true";
@@ -52,6 +53,27 @@
       OTEL_LOGS_EXPORTER = "otlp";
       OTEL_EXPORTER_OTLP_ENDPOINT = "http://localhost:4317";
       OTEL_EXPORTER_OTLP_PROTOCOL = "grpc";
+    };
+  };
+
+  clement.traefik = {
+    config.entryPoints.pocket-id.address = "[2a0c:b641:2b0:100::4]:443";
+    dynamic = {
+      tls.certificates = [{
+        certFile = builtins.baseNameOf config.clement.acme.certificates."id.dubreuil.dev".credentials.cert;
+        keyFile = builtins.baseNameOf config.clement.acme.certificates."id.dubreuil.dev".credentials.key;
+      }];
+      http = {
+        routers.pocket-id = {
+          entryPoints = [ "pocket-id" "ipv4" ];
+          rule = "Host(`id.dubreuil.dev`)";
+          service = "pocket-id";
+          tls = {};
+        };
+        services.pocket-id.loadBalancer.servers = [{
+          url = "http://[::1]:1411";
+        }];
+      };
     };
   };
 }

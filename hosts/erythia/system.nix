@@ -97,6 +97,35 @@
     settings.listen_addresses = lib.mkOverride 10 "";
   };
 
+  clement.traefik = {
+    enable = true;
+    config = {
+      entryPoints.ipv4.address = "51.254.131.24:443";
+      experimental.otlpLogs = true;
+      log.otlp.grpc = {
+        endpoint = "127.0.0.1:4317";
+        insecure = true;
+      };
+      accessLog = {
+        dualOutput = false;
+        otlp.grpc = {
+          endpoint = "127.0.0.1:4317";
+          insecure = true;
+        };
+      };
+      metrics.otlp.grpc = {
+        endpoint = "127.0.0.1:4317";
+        insecure = true;
+      };
+      tracing.otlp.grpc = {
+        endpoint = "127.0.0.1:4317";
+        insecure = true;
+      };
+    };
+  };
+
+  clement.firewall.dst."tcp:443" = [ "51.254.131.24" ];
+
   clement.credentials.opentelemetry-collector = {
     file = ./secrets.json;
     service = "opentelemetry-collector";
@@ -106,7 +135,6 @@
   };
 
   systemd.services.opentelemetry-collector.environment.DASH0_AUTHORIZATION_TOKEN_FILE = "%d/authorization-token";
-  systemd.services.opentelemetry-collector.serviceConfig.User = "opentelemetry";
   services.opentelemetry-collector = {
     enable = true;
     package = pkgs.opentelemetry-collector-contrib;

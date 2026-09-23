@@ -45,10 +45,12 @@ id:
 - type: AAAA
   value: 2a0c:b641:2b0:100::4
 - type: A
-  value: 62.3.50.46
+  value: 51.254.131.24
 miniflux:
-  type: AAAA
+- type: AAAA
   value: 2a0c:b641:2b0:100::3
+- type: A
+  value: 51.254.131.24
 nw7yp-check:
   type: CNAME
   value: ovh.com.

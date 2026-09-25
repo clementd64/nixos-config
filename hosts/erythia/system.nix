@@ -120,10 +120,6 @@
           insecure = true;
         };
       };
-      metrics.otlp.grpc = {
-        endpoint = "127.0.0.1:4317";
-        insecure = true;
-      };
       tracing.otlp.grpc = {
         endpoint = "127.0.0.1:4317";
         insecure = true;

@@ -60,6 +60,14 @@ in {
           bind ${concatStringsSep " " cfg.dns.bind}
           file ${../../../dns/zones/dubreuil.dev.zone}
         }
+        _acme-challenge.dns.as212625.net. {
+          bind ${concatStringsSep " " cfg.dns.bind}
+          forward . dns112.ovh.net
+        }
+        _acme-challenge.dns64.as212625.net. {
+          bind ${concatStringsSep " " cfg.dns.bind}
+          forward . dns112.ovh.net
+        }
       '';
     };
 

@@ -6,6 +6,10 @@
   ];
 
   clement.profile.router.enable = true;
+  clement.opentelemetry = {
+    enable = true;
+    secretsFile = ./secrets.json;
+  };
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0-0-0-0";
@@ -123,79 +127,6 @@
       tracing.otlp.grpc = {
         endpoint = "127.0.0.1:4317";
         insecure = true;
-      };
-    };
-  };
-
-  clement.credentials.opentelemetry-collector = {
-    file = ./secrets.json;
-    service = "opentelemetry-collector";
-    secrets = {
-      "authorization-token".extract = ''["dash0"]["authorization-token"]'';
-    };
-  };
-
-  systemd.services.opentelemetry-collector.environment.DASH0_AUTHORIZATION_TOKEN_FILE = "%d/authorization-token";
-  services.opentelemetry-collector = {
-    enable = true;
-    package = pkgs.opentelemetry-collector-contrib;
-    settings = {
-      receivers = {
-        otlp = {
-          protocols = {
-            grpc = {};
-            http = {};
-          };
-        };
-
-        host_metrics = {
-          collection_interval = "60s";
-          scrapers = {
-            cpu = {};
-            disk = {};
-            filesystem = {};
-            load = {};
-            memory = {};
-            network = {};
-            paging = {};
-            processes = {};
-          };
-        };
-      };
-
-      processors.batch = {};
-
-      exporters = {
-        "otlp_grpc/dash0" = {
-          auth.authenticator = "bearertokenauth/dash0";
-          endpoint = "ingress.europe-west4.gcp.dash0.com:4317";
-        };
-      };
-
-      extensions."bearertokenauth/dash0" = {
-        scheme = "Bearer";
-        filename = "\${env:DASH0_AUTHORIZATION_TOKEN_FILE}";
-      };
-
-      service = {
-        extensions = [ "bearertokenauth/dash0" ];
-        pipelines = {
-          metrics = {
-            receivers = [ "otlp" "host_metrics" ];
-            processors = [ "batch" ];
-            exporters = [ "otlp_grpc/dash0" ];
-          };
-          logs = {
-            receivers = [ "otlp" ];
-            processors = [ "batch" ];
-            exporters = [ "otlp_grpc/dash0" ];
-          };
-          traces = {
-            receivers = [ "otlp" ];
-            processors = [ "batch" ];
-            exporters = [ "otlp_grpc/dash0" ];
-          };
-        };
       };
     };
   };

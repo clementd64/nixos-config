@@ -17,6 +17,7 @@
     system/local.nix
     system/mesh.nix
     system/oci.nix
+    system/opentelemetry.nix
     system/proxy64.nix
     system/secrets.nix
     system/ssh.nix

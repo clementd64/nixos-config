@@ -1,6 +1,10 @@
 { lib, pkgs, ... }:
 {
   clement.profile.as212625.enable = true;
+  clement.opentelemetry = {
+    enable = true;
+    secretsFile = ./secrets.json;
+  };
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";

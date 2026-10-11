@@ -15,10 +15,10 @@ in {
     clement.credentials.opentelemetry-collector = {
       file = cfg.secretsFile;
       service = "opentelemetry-collector";
-      secrets."authorization-token".extract = ''["dash0"]["authorization-token"]'';
+      secrets."uptrace-dsn".extract = ''["uptrace_dsn"]'';
     };
 
-    systemd.services.opentelemetry-collector.environment.DASH0_AUTHORIZATION_TOKEN_FILE = "%d/authorization-token";
+    systemd.services.opentelemetry-collector.environment.UPTRACE_DSN_FILE = "%d/uptrace-dsn";
 
     services.opentelemetry-collector = {
       enable = true;
@@ -33,11 +33,11 @@ in {
           host_metrics = {
             collection_interval = "60s";
             scrapers = {
-              cpu.metrics."system.cpu.utilization".enabled = true;
+              cpu = {};
               disk = {};
-              filesystem.metrics."system.filesystem.utilization".enabled = true;
+              filesystem = {};
               load = {};
-              memory.metrics."system.memory.utilization".enabled = true;
+              memory = {};
               network = {};
               paging = {};
               processes = {};
@@ -46,37 +46,46 @@ in {
         };
 
         processors = {
+          memory_limiter = {
+            check_interval = "1s";
+            limit_mib = 512;
+            spike_limit_mib = 128;
+          };
+
           resourcedetection = {
             detectors = [ "env" "system" ];
             system.hostname_sources = [ "os" ];
           };
+
+          cumulativetodelta = {};
+
+          batch = {
+            send_batch_size = 10000;
+            timeout = "10s";
+          };
         };
 
-        exporters."otlp_grpc/dash0" = {
-          auth.authenticator = "bearertokenauth/dash0";
-          endpoint = "ingress.europe-west4.gcp.dash0.com:4317";
-        };
-
-        extensions."bearertokenauth/dash0" = {
-          scheme = "Bearer";
-          filename = "\${env:DASH0_AUTHORIZATION_TOKEN_FILE}";
+        exporters."otlp_grpc/uptrace" = {
+          endpoint = "https://otlp.uptrace.dev:4317";
+          headers.uptrace-dsn = "\${file:\${env:UPTRACE_DSN_FILE}}";
         };
 
         service = {
-          extensions = [ "bearertokenauth/dash0" ];
           pipelines = {
             metrics = {
               receivers = [ "otlp" "host_metrics" ];
-              processors = [ "resourcedetection" ];
-              exporters = [ "otlp_grpc/dash0" ];
+              processors = [ "memory_limiter" "resourcedetection" "cumulativetodelta" "batch" ];
+              exporters = [ "otlp_grpc/uptrace" ];
             };
             logs = {
               receivers = [ "otlp" ];
-              exporters = [ "otlp_grpc/dash0" ];
+              processors = [ "memory_limiter" "batch" ];
+              exporters = [ "otlp_grpc/uptrace" ];
             };
             traces = {
               receivers = [ "otlp" ];
-              exporters = [ "otlp_grpc/dash0" ];
+              processors = [ "memory_limiter" "batch" ];
+              exporters = [ "otlp_grpc/uptrace" ];
             };
           };
         };

@@ -44,10 +44,12 @@ id:
 - type: A
   value: 51.254.131.24
 miniflux:
-- type: AAAA
-  value: 2a0c:b641:2b0:100::1
+- octodns:
+    auto_arpa_priority: 1000
+  type: AAAA
+  value: 2a0c:b641:2b2:100::1
 - type: A
-  value: 51.254.131.24
+  value: 62.3.50.47
 nw7yp-check:
   type: CNAME
   value: ovh.com.

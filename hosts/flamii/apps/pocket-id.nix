@@ -1,15 +1,11 @@
 { config, pkgs, ... }:
 {
   clement.credentials.pocket-id = {
-    file = ../secrets.json;
+    file = ./secrets.json;
     service = "pocket-id";
     secrets = {
       "encryption-key".extract = ''["pocket-id"]["encryption-key"]'';
     };
-  };
-
-  clement.acme.certificates."id.dubreuil.dev" = {
-    service = "traefik";
   };
 
   systemd.services.pocket-id = {
@@ -40,24 +36,15 @@
       UI_CONFIG_DISABLED = "true";
       GEOLITE_DB_URL = "https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-City.mmdb";
       GEOLITE_DB_PATH = "%C/pocket-id/GeoLite2-City.mmdb";
-      OTEL_TRACES_EXPORTER = "otlp";
-      OTEL_METRICS_EXPORTER = "otlp";
-      OTEL_LOGS_EXPORTER = "otlp";
-      OTEL_EXPORTER_OTLP_ENDPOINT = "http://localhost:4318";
     };
   };
 
   clement.traefik = {
     dynamic = {
-      tls.certificates = [{
-        certFile = builtins.baseNameOf config.clement.acme.certificates."id.dubreuil.dev".credentials.cert;
-        keyFile = builtins.baseNameOf config.clement.acme.certificates."id.dubreuil.dev".credentials.key;
-      }];
       http = {
         routers.pocket-id = {
           rule = "Host(`id.dubreuil.dev`)";
           service = "pocket-id";
-          tls = {};
         };
         services.pocket-id.loadBalancer.servers = [{
           url = "http://[::1]:1411";

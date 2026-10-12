@@ -47,7 +47,7 @@ in {
         ExecStart = "${pkgs.traefik}/bin/traefik --configfile=${staticConfigFile}";
         Restart = "on-failure";
         RuntimeDirectory = "traefik";
-        WorkingDirectory = "%d";
+        StateDirectory = "traefik";
 
         SupplementaryGroups = mkIf (config.clement.docker.enable && cfg.enableDocker) "docker";
         AmbientCapabilities = "CAP_NET_BIND_SERVICE";

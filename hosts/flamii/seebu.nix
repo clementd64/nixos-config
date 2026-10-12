@@ -1,0 +1,102 @@
+{ config, pkgs, ... }:
+{
+  systemd.network.networks."20-ve-seebu" = {
+    matchConfig.Name = "ve-seebu";
+    linkConfig.RequiredForOnline = "no";
+    networkConfig = {
+      Address = [ "${pkgs.net.genLinkLocal "flamii"}/64" ];
+      DHCP = false;
+      IPv6AcceptRA = false;
+    };
+    routes = [
+      { Destination = "62.3.50.47/32"; Scope = "link"; }
+      {
+        Destination = "2a0c:b641:2b2:100::/56";
+        Gateway = "2a0c:b641:2b2:100::1";
+        GatewayOnLink = true;
+      }
+    ];
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /nix/persist/seebu 0755 root root - -"
+    "d /nix/persist/seebu/postgresql 0755 root root - -"
+    "d /nix/persist/seebu/traefik 0700 root root - -"
+  ];
+
+  containers.seebu = {
+    autoStart = true;
+    privateNetwork = true;
+    extraFlags = [ "--network-veth" ];
+
+    bindMounts = {
+      "/nix/key.txt" = {
+        hostPath = "/nix/key.txt";
+        isReadOnly = true;
+      };
+      "/var/lib/postgresql" = {
+        hostPath = "/nix/persist/seebu/postgresql";
+        isReadOnly = false;
+      };
+      "/var/lib/private/traefik" = {
+        hostPath = "/nix/persist/seebu/traefik";
+        isReadOnly = false;
+      };
+    };
+
+    config = { lib, pkgs, ... }: {
+      imports = [
+        ./apps/miniflux.nix
+        ./apps/pocket-id.nix
+      ];
+
+      systemd.network = {
+        enable = true;
+        networks."40-host0" = {
+          matchConfig.Name = "host0";
+          networkConfig.Address = [ "62.3.50.47/32" "2a0c:b641:2b2:100::1/128" ];
+          routes = [
+            { Gateway = "194.28.98.82"; GatewayOnLink = true; }
+            { Gateway = pkgs.net.genLinkLocal "flamii"; }
+          ];
+        };
+      };
+
+      networking.firewall.allowedTCPPorts = [ 443 ];
+
+      clement.traefik = {
+        enable = true;
+        config = {
+          entryPoints = {
+            https = {
+              address = ":443";
+              http.tls.certResolver = "letsencrypt";
+            };
+          };
+
+          certificatesResolvers.letsencrypt.acme = {
+            email = "clement@dubreuil.dev";
+            storage = "/var/lib/traefik/acme.json";
+            profile = "shortlived";
+            certificatesDuration = 160;
+            keyType = "EC256";
+            tlsChallenge = {};
+          };
+        };
+      };
+
+      services.postgresql = {
+        enable = true;
+        package = pkgs.postgresql_18;
+        authentication = lib.mkOverride 10 ''
+          #type  database  DBuser    address  auth-method
+          local  all       postgres           peer
+          local  sameuser  all                peer
+        '';
+        settings.listen_addresses = lib.mkOverride 10 "";
+      };
+
+      system.stateVersion = "26.05";
+    };
+  };
+}

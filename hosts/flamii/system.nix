@@ -1,5 +1,9 @@
 { pkgs, lib, ... }:
 {
+  imports = [
+    ./seebu.nix
+  ];
+
   clement.profile.as212625.enable = true;
   clement.opentelemetry = {
     enable = true;
@@ -21,7 +25,6 @@
         IPv6AcceptRA = false;
       };
     };
-
   };
 
   clement.local.addresses = [ "2a0c:b641:2b2::1/128" ];
@@ -60,7 +63,7 @@
       secretsFile = ./secrets.json;
     };
     pixel = {
-      allowedIps = [ "2a0c:b641:2b2::9/128" "62.3.50.47/32" ];
+      allowedIps = [ "2a0c:b641:2b2::9/128" ];
       port = 51821;
       presharedKey = ''["wireguard"]["pixel"]["preshared-key"]'';
       privateKey = ''["wireguard"]["pixel"]["private-key"]'';

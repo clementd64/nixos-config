@@ -1,10 +1,5 @@
 { lib, pkgs, ... }:
 {
-  imports = [
-    ./apps/miniflux.nix
-    ./apps/pocket-id.nix
-  ];
-
   clement.profile.router.enable = true;
   clement.opentelemetry = {
     enable = true;

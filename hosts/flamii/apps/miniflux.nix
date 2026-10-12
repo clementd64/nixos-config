@@ -1,16 +1,12 @@
 { config, pkgs, ... }:
 {
   clement.credentials.miniflux = {
-    file = ../secrets.json;
+    file = ./secrets.json;
     service = "miniflux";
     secrets = {
       "oauth2-client-id".extract = ''["miniflux"]["oauth2_client_id"]'';
       "oauth2-client-secret".extract = ''["miniflux"]["oauth2_client_secret"]'';
     };
-  };
-
-  clement.acme.certificates."miniflux.dubreuil.dev" = {
-    service = "traefik";
   };
 
   systemd.services.miniflux = {
@@ -50,32 +46,12 @@
     };
   };
 
-  services.opentelemetry-collector.settings = {
-    receivers."prometheus/miniflux".config.scrape_configs = [
-      {
-        job_name = "miniflux";
-        scrape_interval = "60s";
-        scheme = "http";
-        metrics_path = "/metrics";
-        static_configs = [
-          { targets = [ "[::1]:8081" ]; }
-        ];
-      }
-    ];
-    service.pipelines.metrics.receivers = [ "prometheus/miniflux" ];
-  };
-
   clement.traefik = {
     dynamic = {
-      tls.certificates = [{
-        certFile = builtins.baseNameOf config.clement.acme.certificates."miniflux.dubreuil.dev".credentials.cert;
-        keyFile = builtins.baseNameOf config.clement.acme.certificates."miniflux.dubreuil.dev".credentials.key;
-      }];
       http = {
         routers.miniflux = {
           rule = "Host(`miniflux.dubreuil.dev`) && !Path(`/metrics`)";
           service = "miniflux";
-          tls = {};
         };
         services.miniflux.loadBalancer.servers = [{
           url = "http://[::1]:8081";

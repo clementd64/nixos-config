@@ -39,19 +39,13 @@
     ../../modules/profiles/router/servperso.conf
     ./bird.conf
   ];
-  clement.profile.router.bird.defines = {
-    ERYTHIA_IP = pkgs.net.genLinkLocal "erythia";
-  };
   clement.profile.router.bgp.allowedIp = [
     "2a0c:b640:8::ffff" # Servperso
-    (pkgs.net.genLinkLocal "erythia")
   ];
   clement.profile.as212625.dns.bind = [
     "194.28.98.82"
     "2a0c:b641:2b2::1"
   ];
-
-  clement.profile.mesh.enable = true;
 
   clement.wireguard = {
     home = {
@@ -68,14 +62,6 @@
       presharedKey = ''["wireguard"]["pixel"]["preshared-key"]'';
       privateKey = ''["wireguard"]["pixel"]["private-key"]'';
       publicKey = "Q7mUDHH4ksk/2BCQHIWso94JIvX+BcQJQhs+qluBIyI=";
-      secretsFile = ./secrets.json;
-    };
-    erythia = {
-      port = 51823;
-      endpoint = "erythia.h.as212625.net:51823";
-      presharedKey = ''["wireguard"]["erythia"]["preshared-key"]'';
-      privateKey = ''["wireguard"]["erythia"]["private-key"]'';
-      publicKey = "Dy41q02Zxc8+NCWnzFDpe68JRM9ASPxUM0JTUoTYchE=";
       secretsFile = ./secrets.json;
     };
   };

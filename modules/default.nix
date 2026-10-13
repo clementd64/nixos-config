@@ -3,7 +3,6 @@
     profiles/as212625
     profiles/baseline.nix
     profiles/container.nix
-    profiles/mesh
     profiles/router
     profiles/server.nix
     system/acme.nix

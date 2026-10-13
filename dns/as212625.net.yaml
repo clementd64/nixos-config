@@ -38,19 +38,6 @@ ekidno.v6.h:
     auto_arpa_priority: 1000
   type: AAAA
   value: 2a0c:b641:2b1::1
-erythia.h:
-- type: A
-  value: 51.254.131.24
-- type: AAAA
-  value: 2a0c:b641:2b0:100::1
-erythia.v4.h:
-  type: A
-  value: 51.254.131.24
-erythia.v6.h:
-  octodns:
-    auto_arpa_priority: 1000
-  type: AAAA
-  value: 2a0c:b641:2b0:100::1
 flamii.h:
 - type: A
   value: 194.28.98.82

@@ -24,6 +24,12 @@
     "d /nix/persist/seebu/traefik 0700 root root - -"
   ];
 
+  clement.secrets."seebu-age-key" = {
+    file = ./secrets.json;
+    extract = ''["seebu_age_key"]'';
+    before = [ "container@seebu.service" ];
+  };
+
   containers.seebu = {
     autoStart = true;
     privateNetwork = true;
@@ -31,7 +37,7 @@
 
     bindMounts = {
       "/nix/key.txt" = {
-        hostPath = "/nix/key.txt";
+        hostPath = config.clement.secrets."seebu-age-key".path;
         isReadOnly = true;
       };
       "/var/lib/postgresql" = {

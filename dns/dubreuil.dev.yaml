@@ -39,16 +39,12 @@ glacier:
   type: AAAA
   value: 2a09:8280:1::cf:75d3:0
 id:
-- octodns:
-    auto_arpa_priority: 1000
-  type: AAAA
+- type: AAAA
   value: 2a0c:b641:2b2:100::1
 - type: A
   value: 62.3.50.47
 miniflux:
-- octodns:
-    auto_arpa_priority: 1000
-  type: AAAA
+- type: AAAA
   value: 2a0c:b641:2b2:100::1
 - type: A
   value: 62.3.50.47

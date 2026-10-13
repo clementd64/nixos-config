@@ -28,42 +28,38 @@ dns64:
 ekidno.h:
 - type: A
   value: 194.28.99.42
-- type: AAAA
+- octodns:
+    auto_arpa_priority: 1
+  type: AAAA
   value: 2a0c:b641:2b1::1
 ekidno.v4.h:
   type: A
   value: 194.28.99.42
 ekidno.v6.h:
-  octodns:
-    auto_arpa_priority: 1000
   type: AAAA
   value: 2a0c:b641:2b1::1
 flamii.h:
 - type: A
   value: 194.28.98.82
-- type: AAAA
+- octodns:
+    auto_arpa_priority: 1
+  type: AAAA
   value: 2a0c:b641:2b2::1
 flamii.v4.h:
   type: A
   value: 194.28.98.82
 flamii.v6.h:
-  octodns:
-    auto_arpa_priority: 1000
   type: AAAA
   value: 2a0c:b641:2b2::1
 ns1:
 - type: A
   value: 194.28.99.42
-- octodns:
-    auto_arpa_priority: 1000
-  type: AAAA
+- type: AAAA
   value: 2a0c:b641:2b1::1
 ns2:
 - type: A
   value: 194.28.98.82
-- octodns:
-    auto_arpa_priority: 1000
-  type: AAAA
+- type: AAAA
   value: 2a0c:b641:2b2::1
 ovhmo4384488-selector1._domainkey:
   type: CNAME
@@ -74,13 +70,13 @@ ovhmo4384488-selector2._domainkey:
 seebu.h:
 - type: A
   value: 62.3.50.47
-- type: AAAA
+- octodns:
+    auto_arpa_priority: 1
+  type: AAAA
   value: 2a0c:b641:2b2:100::1
 seebu.v4.h:
   type: A
   value: 62.3.50.47
 seebu.v6.h:
-  octodns:
-    auto_arpa_priority: 1000
   type: AAAA
   value: 2a0c:b641:2b2:100::1

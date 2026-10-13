@@ -18,6 +18,7 @@
     system/oci.nix
     system/opentelemetry.nix
     system/proxy64.nix
+    system/restic.nix
     system/secrets.nix
     system/ssh.nix
     system/systemd-protect.nix

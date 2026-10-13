@@ -102,6 +102,11 @@
         settings.listen_addresses = lib.mkOverride 10 "";
       };
 
+      clement.restic.secrets = {
+        file = ./apps/secrets.json;
+        extract = ''["restic"]'';
+      };
+
       system.stateVersion = "26.05";
     };
   };

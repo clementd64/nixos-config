@@ -54,6 +54,11 @@ in {
                 type = types.str;
               };
 
+              format = mkOption {
+                type = types.nullOr (types.enum [ "json" "yaml" "dotenv" ]);
+                default = null;
+              };
+
               path = mkOption {
                 type = types.str;
                 default = config.clement.secrets."${credentialName}-${name}".path;
@@ -73,8 +78,9 @@ in {
     clement.secrets = mkMerge (flatten (mapAttrsToList (credentialName: value:
       mapAttrsToList (secretName: secret: {
         "${credentialName}-${secretName}" = {
-          inherit (value) file format user group mode key;
+          inherit (value) file user group mode key;
           inherit (secret) extract;
+          format = if secret.format != null then secret.format else value.format;
           before = value.before ++ optional (value.service != null) "${value.service}.service";
         };
       }) value.secrets

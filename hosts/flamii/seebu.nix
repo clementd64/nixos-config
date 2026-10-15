@@ -22,6 +22,7 @@
     "d /nix/persist/seebu 0755 root root - -"
     "d /nix/persist/seebu/postgresql 0755 root root - -"
     "d /nix/persist/seebu/traefik 0700 root root - -"
+    "d /nix/persist/seebu/synapse 0700 root root - -"
   ];
 
   clement.secrets."seebu-age-key" = {
@@ -53,12 +54,17 @@
         hostPath = "/nix/persist/seebu/traefik";
         isReadOnly = false;
       };
+      "/var/cache/private/synapse" = {
+        hostPath = "/nix/persist/seebu/synapse";
+        isReadOnly = false;
+      };
     };
 
     config = { lib, pkgs, ... }: {
       imports = [
         ./apps/miniflux.nix
         ./apps/pocket-id.nix
+        ./apps/synapse.nix
       ];
 
       systemd.network = {

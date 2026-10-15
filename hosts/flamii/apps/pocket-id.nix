@@ -10,7 +10,8 @@
 
   systemd.services.pocket-id = {
     description = "Pocket ID service";
-    after = [ "network.target" ];
+    after = [ "network.target" "postgresql.service" ];
+    wants = [ "postgresql.service" ];
     wantedBy = [ "multi-user.target" ];
     protect = {
       enable = true;
@@ -52,4 +53,6 @@
       };
     };
   };
+
+  clement.restic.postgresql.databases.pocketid = {};
 }

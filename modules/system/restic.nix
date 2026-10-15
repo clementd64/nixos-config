@@ -22,9 +22,21 @@ in
       };
     };
 
-    postgresql.enable = mkOption {
-      type = types.bool;
-      default = config.services.postgresql.enable;
+    postgresql = {
+      enable = mkOption {
+        type = types.bool;
+        default = config.services.postgresql.enable;
+      };
+
+      databases = mkOption {
+        type = types.attrsOf (types.submodule {
+          options.exclude-table-data = mkOption {
+            type = types.listOf types.str;
+            default = [];
+          };
+        });
+        default = {};
+      };
     };
 
     commands = mkOption {
@@ -34,30 +46,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    clement.restic.commands.postgresql = mkIf cfg.postgresql.enable (mkDefault ''
-      ${pkgs.util-linux}/bin/runuser --user postgres -- \
-        ${config.services.postgresql.package}/bin/psql \
-        --dbname=postgres \
-        --no-align \
-        --no-psqlrc \
-        --tuples-only \
-        --record-separator-zero \
-        --set=ON_ERROR_STOP=1 \
-        --command="SELECT datname FROM pg_database WHERE datallowconn AND NOT datistemplate AND datname != 'postgres' ORDER BY datname" |
-        while IFS= read -r -d "" database; do
-          ${pkgs.restic}/bin/restic backup \
-            --stdin-from-command \
-            --stdin-filename="$database.dump" \
-            --tag=postgresql \
-            -- \
-            ${pkgs.util-linux}/bin/runuser --user postgres -- \
-            ${config.services.postgresql.package}/bin/pg_dump \
-              --dbname="$database" \
-              --format=custom \
-              --compress=zstd \
-              --no-password
-        done
-    '');
+    clement.restic.commands.postgresql = mkIf cfg.postgresql.enable (mkDefault
+      (concatStringsSep "\n" (mapAttrsToList (database: options: ''
+        ${pkgs.restic}/bin/restic backup \
+          --stdin-from-command \
+          --stdin-filename=${escapeShellArg "${database}.dump"} \
+          --tag=postgresql \
+          -- \
+          ${pkgs.util-linux}/bin/runuser --user postgres -- \
+          ${config.services.postgresql.package}/bin/pg_dump \
+            --dbname=${escapeShellArg database} \
+            --format=custom \
+            --compress=zstd \
+            --no-password \
+            ${escapeShellArgs (map (table: "--exclude-table-data=${table}") options.exclude-table-data)}
+      '') cfg.postgresql.databases)));
 
     clement.secrets.restic = {
       file = cfg.secrets.file;

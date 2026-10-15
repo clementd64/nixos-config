@@ -11,7 +11,8 @@
 
   systemd.services.miniflux = {
     description = "Miniflux service";
-    after = [ "network.target" ];
+    after = [ "network.target" "postgresql.service" ];
+    wants = [ "postgresql.service" ];
     wantedBy = [ "multi-user.target" ];
     protect = {
       enable = true;
@@ -59,4 +60,6 @@
       };
     };
   };
+
+  clement.restic.postgresql.databases.miniflux = {};
 }

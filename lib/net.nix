@@ -1,5 +1,38 @@
 { lib }:
 rec {
+  bogonIPv4 = [
+    "0.0.0.0/8"
+    "10.0.0.0/8" # Private Use
+    "100.64.0.0/10" # Shared Address Space
+    "169.254.0.0/16" # Link Local
+    "127.0.0.0/8" # Loopback
+    "172.16.0.0/12" # Private Use
+    "185.1.0.0/16" # RIPE IXP Assignment
+    "192.0.0.0/24" # IETF Protocol Assignments
+    "192.0.2.0/24" # TEST-NET-1
+    "192.168.0.0/16" # Private Use
+    "198.18.0.0/15" # Benchmarking
+    "198.51.100.0/24" # TEST-NET-2
+    "203.0.113.0/24" # TEST-NET-3
+    "224.0.0.0/4" # Multicast
+    "240.0.0.0/4" # Reserved
+  ];
+
+  bogonIPv6 = [
+    "::/128"
+    "::1/128" # Loopback
+    "::ffff:0:0/96" # IPv4-mapped
+    "64:ff9b:1::/48" # IPv4-IPv6 Translation
+    "2001::/23" # IETF Protocol Assignments
+    "2001:2::/48" # Benchmarking
+    "2001:db8::/32" # Documentation
+    "3fff::/20" # Documentation
+    "5f00::/16" # Segment Routing
+    "fc00::/7" # Unique-Local
+    "fe80::/10" # Link Local
+    "ff00::/8" # Multicast
+  ];
+
   # Test if a string look like an IPv4 address.
   # Only the format is checked, not the validity of the address. (e.g. 999.999.999.999 is considered valid)
   # Only dot-decimal notation is supported.

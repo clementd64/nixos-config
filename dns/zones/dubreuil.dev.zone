@@ -1,7 +1,7 @@
 $ORIGIN dubreuil.dev.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1791830191 ; Serial
+    1792010331 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -9,7 +9,9 @@ $ORIGIN dubreuil.dev.
 )
 
 ; Name: dubreuil.dev.
-@                                                   3600 IN MX       1 mx0.mail.ovh.net.
+@                                                   3600 IN A        62.3.50.47
+                                                    3600 IN AAAA     2a0c:b641:2b2:100::1
+                                                    3600 IN MX       1 mx0.mail.ovh.net.
                                                     3600 IN MX       5 mx1.mail.ovh.net.
                                                     3600 IN MX       50 mx2.mail.ovh.net.
                                                     3600 IN MX       100 mx3.mail.ovh.net.
@@ -23,6 +25,8 @@ _autodiscover._tcp                                  3600 IN SRV      0 0 443 pro
 _dmarc                                              3600 IN TXT      "v=DMARC1\; p=none"
 glacier                                             3600 IN AAAA     2a09:8280:1::cf:75d3:0
 id                                                  3600 IN A        62.3.50.47
+                                                    3600 IN AAAA     2a0c:b641:2b2:100::1
+matrix                                              3600 IN A        62.3.50.47
                                                     3600 IN AAAA     2a0c:b641:2b2:100::1
 miniflux                                            3600 IN A        62.3.50.47
                                                     3600 IN AAAA     2a0c:b641:2b2:100::1

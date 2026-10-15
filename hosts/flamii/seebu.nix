@@ -30,6 +30,11 @@
     before = [ "container@seebu.service" ];
   };
 
+  systemd.services."container@seebu".serviceConfig = {
+    MemoryMax = "4G";
+    CPUQuota = "300%";
+  };
+
   containers.seebu = {
     autoStart = true;
     privateNetwork = true;

@@ -6,4 +6,5 @@ in {
   k3s = callPackage ./k3s.nix {};
   proxy64 = callPackage ./proxy64.nix {};
   synapse-delegation = callPackage ./synapse-delegation.nix {};
+  synapse-miniflux = callPackage ./synapse-miniflux.nix {};
 }

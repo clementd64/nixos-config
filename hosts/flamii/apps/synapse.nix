@@ -2,7 +2,7 @@
 let
   synapse = pkgs.matrix-synapse.override {
     extras = [ "postgres" "url-preview" "systemd" "oidc" ];
-    plugins = [ pkgs.matrix-synapse.plugins.matrix-synapse-s3-storage-provider pkgs.synapse-delegation ];
+    plugins = [ pkgs.matrix-synapse.plugins.matrix-synapse-s3-storage-provider pkgs.synapse-delegation pkgs.synapse-miniflux ];
   };
 
   settings = (pkgs.formats.yaml {}).generate "synapse-homeserver.yaml" {
@@ -36,6 +36,10 @@ let
         module = "synapse_delegation.FederationDelegation";
         config.server = "matrix.dubreuil.dev:443";
       };
+      additional_resources."/_synapse/client/miniflux/webhook" = {
+        module = "synapse_miniflux.MinifluxWebhook";
+        config.config_file = "/run/credentials/synapse.service/miniflux";
+      };
       resources = [{ names = [ "client" "federation" ]; compress = false; }];
     }];
     database = {
@@ -62,6 +66,10 @@ in
     service = "synapse";
     secrets = {
       "signing-key".extract = ''["synapse"]["signing-key"]'';
+      "miniflux" = {
+        extract = ''["synapse"]["miniflux"]'';
+        format = "json";
+      };
       "config" = {
         extract = ''["synapse"]["config"]'';
         format = "yaml";

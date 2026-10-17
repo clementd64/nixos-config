@@ -100,6 +100,8 @@
             keyType = "EC256";
             tlsChallenge = {};
           };
+
+          log.level = "INFO";
         };
       };
 

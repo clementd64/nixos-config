@@ -63,6 +63,7 @@
     config = { lib, pkgs, ... }: {
       imports = [
         ./apps/miniflux.nix
+        ./apps/ntfy.nix
         ./apps/pocket-id.nix
         ./apps/synapse.nix
       ];

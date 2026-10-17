@@ -1,7 +1,7 @@
 $ORIGIN dubreuil.dev.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1792010331 ; Serial
+    1792171757 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -29,6 +29,8 @@ id                                                  3600 IN A        62.3.50.47
 matrix                                              3600 IN A        62.3.50.47
                                                     3600 IN AAAA     2a0c:b641:2b2:100::1
 miniflux                                            3600 IN A        62.3.50.47
+                                                    3600 IN AAAA     2a0c:b641:2b2:100::1
+ntfy                                                3600 IN A        62.3.50.47
                                                     3600 IN AAAA     2a0c:b641:2b2:100::1
 nw7yp-check                                         3600 IN CNAME    ovh.com.
 ovh-zimbra-xv1xqn7d                                 3600 IN CNAME    ovh.com.

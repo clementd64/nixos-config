@@ -57,6 +57,11 @@ miniflux:
   value: 2a0c:b641:2b2:100::1
 - type: A
   value: 62.3.50.47
+ntfy:
+- type: AAAA
+  value: 2a0c:b641:2b2:100::1
+- type: A
+  value: 62.3.50.47
 nw7yp-check:
   type: CNAME
   value: ovh.com.

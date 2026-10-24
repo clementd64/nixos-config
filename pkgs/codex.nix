@@ -6,11 +6,11 @@ buildGo127Module (finalAttrs: {
   src = fetchFromGitHub {
     owner = "clementd64";
     repo = "codex";
-    rev = "f1d5c91c5877326cee5db5ef0a373af0adb9bdb0";
-    hash = "sha256-uX93kaXbrmoOyw/q60YAnB5BpNawgTQJBslgYQg55qw=";
+    rev = "d45cd5193b74001d2ba4525cc89d05b16f76f629";
+    hash = "sha256-7Eqt8STQdJVJIBU+2H791QmgFJDBorzCl2Co16VqfGY=";
   };
 
-  vendorHash = "sha256-5JrNNscrGpQ1OA387FValSizu7Es1w3R2cVjO7XPAnc=";
+  vendorHash = "sha256-isyogLsnWcBGpO439Lc9W2vQMAe11XtqBSGdSreuNLM=";
 
   frontend = buildNpmPackage {
     inherit (finalAttrs) pname version src;

@@ -17,7 +17,11 @@ providers:
     file_extension: .zone
     hostmaster_email: noc@as212625.net.
 
+processors:
+  split-dualstack:
+    class: plugins.SplitDualStack
+
 zones:
-  as212625.net.: { sources: [config], targets: [local] }
+  as212625.net.: { sources: [config], processors: [split-dualstack], targets: [local] }
   b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.: { sources: [config, auto-arpa], targets: [local] }
   dubreuil.dev.: { sources: [config], targets: [local] }

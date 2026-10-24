@@ -19,10 +19,9 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /nix/persist/seebu 0755 root root - -"
-    "d /nix/persist/seebu/postgresql 0755 root root - -"
-    "d /nix/persist/seebu/traefik 0700 root root - -"
-    "d /nix/persist/seebu/synapse 0700 root root - -"
+    "d /nix/persist/postgresql 0755 root root - -"
+    "d /nix/persist/traefik 0700 root root - -"
+    "d /nix/persist/synapse 0700 root root - -"
   ];
 
   clement.secrets."seebu-age-key" = {
@@ -47,15 +46,15 @@
         isReadOnly = true;
       };
       "/var/lib/postgresql" = {
-        hostPath = "/nix/persist/seebu/postgresql";
+        hostPath = "/nix/persist/postgresql";
         isReadOnly = false;
       };
       "/var/lib/private/traefik" = {
-        hostPath = "/nix/persist/seebu/traefik";
+        hostPath = "/nix/persist/traefik";
         isReadOnly = false;
       };
       "/var/cache/private/synapse" = {
-        hostPath = "/nix/persist/seebu/synapse";
+        hostPath = "/nix/persist/synapse";
         isReadOnly = false;
       };
     };

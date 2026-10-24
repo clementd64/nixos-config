@@ -6,8 +6,8 @@ buildGo127Module (finalAttrs: {
   src = fetchFromGitHub {
     owner = "clementd64";
     repo = "codex";
-    rev = "d45cd5193b74001d2ba4525cc89d05b16f76f629";
-    hash = "sha256-7Eqt8STQdJVJIBU+2H791QmgFJDBorzCl2Co16VqfGY=";
+    rev = "36e3a945f62d1aef0c6b761fe6c8cbfd4bbc4485";
+    hash = "sha256-DQ6OCqPdPYwqhWGotJFnaU3WCos7LIxg4cPvpXWmpjU=";
   };
 
   vendorHash = "sha256-isyogLsnWcBGpO439Lc9W2vQMAe11XtqBSGdSreuNLM=";

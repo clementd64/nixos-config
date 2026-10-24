@@ -39,6 +39,11 @@ _autodiscover._tcp:
 _dmarc:
   type: TXT
   value: v=DMARC1\; p=none
+codex:
+- type: AAAA
+  value: 2a0c:b641:2b2:100::1
+- type: A
+  value: 62.3.50.47
 glacier:
   type: AAAA
   value: 2a09:8280:1::cf:75d3:0

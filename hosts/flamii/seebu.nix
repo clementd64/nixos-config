@@ -62,6 +62,7 @@
 
     config = { lib, pkgs, ... }: {
       imports = [
+        ./apps/codex.nix
         ./apps/miniflux.nix
         ./apps/ntfy.nix
         ./apps/pocket-id.nix

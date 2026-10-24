@@ -1,7 +1,7 @@
 $ORIGIN dubreuil.dev.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1792171757 ; Serial
+    1792835899 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -23,6 +23,8 @@ _acme-challenge.glacier                             3600 IN CNAME    glacier.dub
 _atproto                                            3600 IN TXT      "did=did:plc:gduxbgn6xgqoi2dbxx7xo62t"
 _autodiscover._tcp                                  3600 IN SRV      0 0 443 pro3.mail.ovh.net.
 _dmarc                                              3600 IN TXT      "v=DMARC1\; p=none"
+codex                                               3600 IN A        62.3.50.47
+                                                    3600 IN AAAA     2a0c:b641:2b2:100::1
 glacier                                             3600 IN AAAA     2a09:8280:1::cf:75d3:0
 id                                                  3600 IN A        62.3.50.47
                                                     3600 IN AAAA     2a0c:b641:2b2:100::1

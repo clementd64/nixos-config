@@ -1,7 +1,7 @@
 $ORIGIN as212625.net.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1791892029 ; Serial
+    1792879182 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -34,6 +34,6 @@ ns2                                   3600 IN A        194.28.98.82
 ovhmo4384488-selector1._domainkey     3600 IN CNAME    ovhmo4384488-selector1._domainkey.602627.dz.dkim.mail.ovh.net.
 ovhmo4384488-selector2._domainkey     3600 IN CNAME    ovhmo4384488-selector2._domainkey.602626.dz.dkim.mail.ovh.net.
 seebu.h                               3600 IN A        62.3.50.47
-                                      3600 IN AAAA     2a0c:b641:2b2:100::1
+                                      3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35
 seebu.v4.h                            3600 IN A        62.3.50.47
-seebu.v6.h                            3600 IN AAAA     2a0c:b641:2b2:100::1
+seebu.v6.h                            3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35

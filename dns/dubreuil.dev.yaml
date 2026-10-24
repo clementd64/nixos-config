@@ -2,8 +2,10 @@
 ? ''
 : - type: A
     value: 62.3.50.47
-  - type: AAAA
-    value: 2a0c:b641:2b2:100::1
+  - octodns:
+      generate_ipv6: seebu
+    type: AAAA
+    value: "2a0c:b641:2b2::"
   - type: NS
     values:
     - ns1.as212625.net.
@@ -40,31 +42,41 @@ _dmarc:
   type: TXT
   value: v=DMARC1\; p=none
 codex:
-- type: AAAA
-  value: 2a0c:b641:2b2:100::1
+- octodns:
+    generate_ipv6: seebu
+  type: AAAA
+  value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 glacier:
   type: AAAA
   value: 2a09:8280:1::cf:75d3:0
 id:
-- type: AAAA
-  value: 2a0c:b641:2b2:100::1
+- octodns:
+    generate_ipv6: seebu
+  type: AAAA
+  value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 matrix:
-- type: AAAA
-  value: 2a0c:b641:2b2:100::1
+- octodns:
+    generate_ipv6: seebu
+  type: AAAA
+  value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 miniflux:
-- type: AAAA
-  value: 2a0c:b641:2b2:100::1
+- octodns:
+    generate_ipv6: seebu
+  type: AAAA
+  value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 ntfy:
-- type: AAAA
-  value: 2a0c:b641:2b2:100::1
+- octodns:
+    generate_ipv6: seebu
+  type: AAAA
+  value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 nw7yp-check:

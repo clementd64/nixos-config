@@ -10,11 +10,7 @@
     };
     routes = [
       { Destination = "62.3.50.47/32"; Scope = "link"; }
-      {
-        Destination = "2a0c:b641:2b2:100::/56";
-        Gateway = "2a0c:b641:2b2:100::1";
-        GatewayOnLink = true;
-      }
+      { Destination = "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "seebu"}/128"; GatewayOnLink = true; }
     ];
   };
 
@@ -72,7 +68,7 @@
         enable = true;
         networks."40-host0" = {
           matchConfig.Name = "host0";
-          networkConfig.Address = [ "62.3.50.47/32" "2a0c:b641:2b2:100::1/128" ];
+          networkConfig.Address = [ "62.3.50.47/32" "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "seebu"}/128" ];
           routes = [
             { Gateway = "194.28.98.82"; GatewayOnLink = true; }
             { Gateway = pkgs.net.genLinkLocal "flamii"; }

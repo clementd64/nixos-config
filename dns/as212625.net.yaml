@@ -60,5 +60,6 @@ seebu.h:
   value: 62.3.50.47
 - octodns:
     auto_arpa_priority: 1
+    generate_ipv6: true
   type: AAAA
-  value: 2a0c:b641:2b2:100::1
+  value: "2a0c:b641:2b2::"

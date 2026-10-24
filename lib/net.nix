@@ -47,11 +47,13 @@ rec {
   filterIPv6 = list: builtins.filter (ip: !isIPv4 ip) list;
 
   # Generate an IPv6 link-local address derived from a hostname.
-  genLinkLocal = hostname: let
+  genIPv6Addr = prefix: hostname: let
     interfaceId = builtins.substring 0 16 (builtins.hashString "sha256" hostname);
     hextets = builtins.genList (index: builtins.substring (index * 4) 4 interfaceId) 4;
   in
-    "fe80::${builtins.concatStringsSep ":" hextets}";
+    "${prefix}${builtins.concatStringsSep ":" hextets}";
+
+  genLinkLocal = genIPv6Addr "fe80::";
 
   ipsetRule =
     {

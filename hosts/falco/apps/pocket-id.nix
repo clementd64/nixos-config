@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   clement.credentials.pocket-id = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "pocket-id";
     secrets = {
       "encryption-key".extract = ''["pocket-id"]["encryption-key"]'';

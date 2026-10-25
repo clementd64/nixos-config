@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   clement.credentials.ntfy = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "ntfy";
     secrets.config = {
       extract = ''["ntfy"]["config"]'';

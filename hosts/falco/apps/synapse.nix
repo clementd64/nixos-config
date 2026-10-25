@@ -62,7 +62,7 @@ let
 in
 {
   clement.credentials.synapse = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "synapse";
     secrets = {
       "signing-key".extract = ''["synapse"]["signing-key"]'';

@@ -33,7 +33,10 @@ in {
       nat64 = {
         enable = true;
         prefix = "2a0c:b641:2b0::64:0:0/96";
-        allowed = [];
+        allowed = [
+          "2a0c:b641:2b1::/64"
+          "2a0c:b641:2b2::/64"
+        ];
         dns64 = {
           enable = true;
           address = "2a0c:b641:2b0::64:0:53";

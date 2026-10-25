@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   clement.credentials.codex = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "codex";
     secrets = {
       "tmdb-apikey".extract = ''["codex"]["tmdb_apikey"]'';

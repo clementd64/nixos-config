@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   clement.credentials.miniflux = {
-    file = ./secrets.json;
+    file = ../secrets.json;
     service = "miniflux";
     secrets = {
       "oauth2-client-id".extract = ''["miniflux"]["oauth2_client_id"]'';

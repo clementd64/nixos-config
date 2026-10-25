@@ -1,7 +1,7 @@
 $ORIGIN b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1792939766 ; Serial
+    1792956766 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -15,4 +15,5 @@ $ORIGIN b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.
 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1     3600 IN PTR      macbeth.h.as212625.net.
 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2     3600 IN PTR      zoness.h.as212625.net.
 3.5.0.0.0.0.0.0.4.6.0.0.0.0.0.0.0.0.0.0.0     3600 IN PTR      dns64.as212625.net.
+8.7.d.9.f.7.b.e.f.3.2.a.8.4.5.c.0.0.0.0.2     3600 IN PTR      bluemarine.h.as212625.net.
 8.8.d.e.b.4.f.9.b.2.2.d.e.b.5.f.0.0.0.0.2     3600 IN PTR      falco.h.as212625.net.

@@ -17,6 +17,14 @@
 _dmarc:
   type: TXT
   value: v=DMARC1\; p=none
+bluemarine.h:
+  octodns:
+      auto_arpa_priority: 1
+  type: GENAAAA
+  value: "2a0c:b641:2b2::<bluemarine>"
+db:
+  type: GENAAAA
+  value: "2a0c:b641:2b2::<bluemarine>"
 dns:
 - type: A
   value: 62.3.50.46

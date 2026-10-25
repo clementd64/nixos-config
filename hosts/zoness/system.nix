@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 {
   imports = [
+    ./containers/bluemarine.nix
     ./containers/falco.nix
   ];
 

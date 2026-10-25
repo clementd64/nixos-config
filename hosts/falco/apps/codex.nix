@@ -4,14 +4,16 @@
     file = ../secrets.json;
     service = "codex";
     secrets = {
+      "postgresql-tls-ca.pem".extract = ''["codex"]["postgresql"]["ca"]'';
+      "postgresql-tls-cert.pem".extract = ''["codex"]["postgresql"]["cert"]'';
+      "postgresql-tls-key.pem".extract = ''["codex"]["postgresql"]["key"]'';
       "tmdb-apikey".extract = ''["codex"]["tmdb_apikey"]'';
     };
   };
 
   systemd.services.codex = {
     description = "codex service";
-    after = [ "network.target" "postgresql.service" ];
-    wants = [ "postgresql.service" ];
+    after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     protect = {
       enable = true;
@@ -32,7 +34,7 @@
       RestartSec = 5;
     };
     environment = {
-      DATABASE_URL = "host=/run/postgresql user=codex dbname=codex sslmode=disable";
+      DATABASE_URL = "host=db.as212625.net user=codex dbname=codex sslmode=verify-full sslcert=%d/postgresql-tls-cert.pem sslkey=%d/postgresql-tls-key.pem sslrootcert=%d/postgresql-tls-ca.pem";
       LISTEN_ADDR = "[::1]:8082";
       OIDC_CLIENT_ID = "codex";
       OIDC_DISCOVERY_ENDPOINT = "https://id.dubreuil.dev";
@@ -53,6 +55,4 @@
       };
     };
   };
-
-  clement.restic.postgresql.databases.codex = {};
 }

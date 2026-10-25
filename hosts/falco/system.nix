@@ -45,21 +45,5 @@
     };
   };
 
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_18;
-    authentication = lib.mkOverride 10 ''
-      #type  database  DBuser    address  auth-method
-      local  all       postgres           peer
-      local  sameuser  all                peer
-    '';
-    settings.listen_addresses = lib.mkOverride 10 "";
-  };
-
-  clement.restic.secrets = {
-    file = ./secrets.json;
-    extract = ''["restic"]'';
-  };
-
   system.stateVersion = "26.05";
 }

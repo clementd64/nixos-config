@@ -4,6 +4,9 @@
     file = ../secrets.json;
     service = "miniflux";
     secrets = {
+      "postgresql-tls-ca.pem".extract = ''["miniflux"]["postgresql"]["ca"]'';
+      "postgresql-tls-cert.pem".extract = ''["miniflux"]["postgresql"]["cert"]'';
+      "postgresql-tls-key.pem".extract = ''["miniflux"]["postgresql"]["key"]'';
       "oauth2-client-id".extract = ''["miniflux"]["oauth2_client_id"]'';
       "oauth2-client-secret".extract = ''["miniflux"]["oauth2_client_secret"]'';
     };
@@ -11,8 +14,7 @@
 
   systemd.services.miniflux = {
     description = "Miniflux service";
-    after = [ "network.target" "postgresql.service" ];
-    wants = [ "postgresql.service" ];
+    after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     protect = {
       enable = true;
@@ -27,7 +29,7 @@
       RestartSec = 5;
     };
     environment = {
-      DATABASE_URL = "host=/run/postgresql user=miniflux dbname=miniflux sslmode=disable";
+      DATABASE_URL = "host=db.as212625.net user=miniflux dbname=miniflux sslmode=verify-full sslcert=%d/postgresql-tls-cert.pem sslkey=%d/postgresql-tls-key.pem sslrootcert=%d/postgresql-tls-ca.pem";
       LISTEN_ADDR = "[::1]:8081";
       BASE_URL = "https://miniflux.dubreuil.dev/";
       HTTPS = "1";
@@ -60,6 +62,4 @@
       };
     };
   };
-
-  clement.restic.postgresql.databases.miniflux = {};
 }

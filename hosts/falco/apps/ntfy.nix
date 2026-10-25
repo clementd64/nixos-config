@@ -3,16 +3,20 @@
   clement.credentials.ntfy = {
     file = ../secrets.json;
     service = "ntfy";
-    secrets.config = {
-      extract = ''["ntfy"]["config"]'';
-      format = "yaml";
+    secrets = {
+      "postgresql-tls-ca.pem".extract = ''["ntfy"]["postgresql"]["ca"]'';
+      "postgresql-tls-cert.pem".extract = ''["ntfy"]["postgresql"]["cert"]'';
+      "postgresql-tls-key.pem".extract = ''["ntfy"]["postgresql"]["key"]'';
+      config = {
+        extract = ''["ntfy"]["config"]'';
+        format = "yaml";
+      };
     };
   };
 
   systemd.services.ntfy = {
     description = "ntfy notification service";
-    after = [ "network.target" "postgresql.service" ];
-    wants = [ "postgresql.service" ];
+    after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     protect = {
       enable = true;
@@ -25,7 +29,7 @@
       RestartSec = 5;
     };
     environment = {
-      NTFY_DATABASE_URL = "postgresql://ntfy@/ntfy?host=/run/postgresql&sslmode=disable";
+      NTFY_DATABASE_URL = "postgresql://ntfy@db.as212625.net/ntfy?sslmode=verify-full&sslcert=%d/postgresql-tls-cert.pem&sslkey=%d/postgresql-tls-key.pem&sslrootcert=%d/postgresql-tls-ca.pem";
       NTFY_BASE_URL = "https://ntfy.dubreuil.dev";
       NTFY_LISTEN_HTTP = "[::1]:2586";
       NTFY_BEHIND_PROXY = "true";

@@ -15,7 +15,6 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /nix/persist/postgresql 0755 root root - -"
     "d /nix/persist/traefik 0700 root root - -"
     "d /nix/persist/synapse 0700 root root - -"
   ];
@@ -40,10 +39,6 @@
       "/nix/key.txt" = {
         hostPath = config.clement.secrets."falco-age-key".path;
         isReadOnly = true;
-      };
-      "/var/lib/postgresql" = {
-        hostPath = "/nix/persist/postgresql";
-        isReadOnly = false;
       };
       "/var/lib/private/traefik" = {
         hostPath = "/nix/persist/traefik";

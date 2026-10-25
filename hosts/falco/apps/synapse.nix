@@ -45,9 +45,13 @@ let
     database = {
       name = "psycopg2";
       args = {
-        host = "/run/postgresql";
+        host = "db.as212625.net";
         user = "synapse";
         dbname = "synapse";
+        sslmode = "verify-full";
+        sslcert = "/run/credentials/synapse.service/postgresql-tls-cert.pem";
+        sslkey = "/run/credentials/synapse.service/postgresql-tls-key.pem";
+        sslrootcert = "/run/credentials/synapse.service/postgresql-tls-ca.pem";
         cp_min = 5;
         cp_max = 10;
       };
@@ -65,6 +69,9 @@ in
     file = ../secrets.json;
     service = "synapse";
     secrets = {
+      "postgresql-tls-ca.pem".extract = ''["synapse"]["postgresql"]["ca"]'';
+      "postgresql-tls-cert.pem".extract = ''["synapse"]["postgresql"]["cert"]'';
+      "postgresql-tls-key.pem".extract = ''["synapse"]["postgresql"]["key"]'';
       "signing-key".extract = ''["synapse"]["signing-key"]'';
       "miniflux" = {
         extract = ''["synapse"]["miniflux"]'';
@@ -79,8 +86,8 @@ in
 
   systemd.services.synapse = {
     description = "Synapse Matrix server";
-    after = [ "network.target" "postgresql.service" "pocket-id.service" "traefik.service" ];
-    wants = [ "postgresql.service" "pocket-id.service" "traefik.service" ];
+    after = [ "network.target" "pocket-id.service" "traefik.service" ];
+    wants = [ "pocket-id.service" "traefik.service" ];
     wantedBy = [ "multi-user.target" ];
     protect.enable = true;
     serviceConfig = {
@@ -113,8 +120,6 @@ in
     };
     services.synapse.loadBalancer.servers = [{ url = "http://[::1]:8008"; }];
   };
-
-  clement.restic.postgresql.databases.synapse.exclude-table-data = [ "public.e2e_one_time_keys_json" ];
 
   systemd.tmpfiles.rules = [
     "e /var/cache/private/synapse/media - - - 7d -"

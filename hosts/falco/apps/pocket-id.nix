@@ -4,14 +4,16 @@
     file = ../secrets.json;
     service = "pocket-id";
     secrets = {
+      "postgresql-tls-ca.pem".extract = ''["pocket-id"]["postgresql"]["ca"]'';
+      "postgresql-tls-cert.pem".extract = ''["pocket-id"]["postgresql"]["cert"]'';
+      "postgresql-tls-key.pem".extract = ''["pocket-id"]["postgresql"]["key"]'';
       "encryption-key".extract = ''["pocket-id"]["encryption-key"]'';
     };
   };
 
   systemd.services.pocket-id = {
     description = "Pocket ID service";
-    after = [ "network.target" "postgresql.service" ];
-    wants = [ "postgresql.service" ];
+    after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     protect = {
       enable = true;
@@ -27,7 +29,7 @@
       CacheDirectory = "pocket-id";
     };
     environment = {
-      DB_CONNECTION_STRING = "postgresql://pocketid@/pocketid?sslmode=disable";
+      DB_CONNECTION_STRING = "postgresql://pocketid@db.as212625.net/pocketid?sslmode=verify-full&sslcert=%d/postgresql-tls-cert.pem&sslkey=%d/postgresql-tls-key.pem&sslrootcert=%d/postgresql-tls-ca.pem";
       ENCRYPTION_KEY_FILE = "%d/encryption-key";
       HOST = "::1";
       PORT = "1411";
@@ -53,6 +55,4 @@
       };
     };
   };
-
-  clement.restic.postgresql.databases.pocketid = {};
 }

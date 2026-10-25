@@ -1,3 +1,4 @@
-key.txt
+__pycache__
 .terraform
 *.tfstate.*
+key.txt

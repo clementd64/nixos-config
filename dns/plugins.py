@@ -3,12 +3,64 @@ from ipaddress import IPv6Address, IPv6Network
 
 from octodns.processor.base import BaseProcessor
 from octodns.record import Record
+from octodns.record.base import ValueMixin
+from octodns.record.target import _TargetValue
+from octodns.zone import Zone
+
+
+class AnameRecord(ValueMixin, Record):
+    _type = "ANAME"
+    _value_type = _TargetValue
+Record.register_type(AnameRecord)
+
+
+class ResolveAname(BaseProcessor):
+    def process_source_zone(self, zone, sources, lenient=False):
+        lenient = self.lenient or lenient
+        provider = sources[0]
+
+        for alias in zone.records:
+            if alias._type != "ANAME":
+                continue
+
+            fqdn = alias.value.lower()
+            zone_name = next((name for name in sorted(
+                provider.list_zones(), key=len, reverse=True
+            ) if fqdn == name or fqdn.endswith(f".{name}")), None)
+            if zone_name is None:
+                raise ValueError(f"ANAME target {fqdn} is outside local YAML zones")
+
+            source = zone
+            if zone_name != zone.name:
+                source = Zone(zone_name, [])
+                provider.populate(source, lenient=lenient)
+                for cls in (GenerateIPv6, SplitDualStack):
+                    processor = cls(self.id)
+                    processor.lenient = lenient
+                    processor.process_source_zone(source, sources, lenient=lenient)
+
+            records = [r for r in source.records if r.fqdn == fqdn]
+            if not records:
+                raise ValueError(f"ANAME target {fqdn} has no records")
+            if any(r._type == "ANAME" for r in records):
+                raise ValueError(f"ANAME target {fqdn} cannot be another ANAME")
+
+            zone.remove_record(alias)
+            for record in records:
+                # Keep the alias TTL; do not inherit generation/PTR metadata.
+                data = record.data.copy()
+                data.update(type=record._type, ttl=alias.ttl)
+                data.pop("octodns", None)
+                zone.add_record(Record.new(
+                    zone, alias.name, data, source=provider, lenient=lenient,
+                ), lenient=lenient)
+        return zone
 
 
 class GenerateIPv6(BaseProcessor):
     def process_source_zone(self, desired, sources, lenient=False):
         lenient = self.lenient or lenient
-        for record in list(desired.records):
+        for record in desired.records:
             if record._type != "AAAA":
                 continue
 

@@ -42,43 +42,23 @@ _dmarc:
   type: TXT
   value: v=DMARC1\; p=none
 codex:
-- octodns:
-    generate_ipv6: falco
-  type: AAAA
-  value: "2a0c:b641:2b2::"
-- type: A
-  value: 62.3.50.47
+  type: ANAME
+  value: falco.h.as212625.net.
 glacier:
   type: AAAA
   value: 2a09:8280:1::cf:75d3:0
 id:
-- octodns:
-    generate_ipv6: falco
-  type: AAAA
-  value: "2a0c:b641:2b2::"
-- type: A
-  value: 62.3.50.47
+  type: ANAME
+  value: falco.h.as212625.net.
 matrix:
-- octodns:
-    generate_ipv6: falco
-  type: AAAA
-  value: "2a0c:b641:2b2::"
-- type: A
-  value: 62.3.50.47
+  type: ANAME
+  value: falco.h.as212625.net.
 miniflux:
-- octodns:
-    generate_ipv6: falco
-  type: AAAA
-  value: "2a0c:b641:2b2::"
-- type: A
-  value: 62.3.50.47
+  type: ANAME
+  value: falco.h.as212625.net.
 ntfy:
-- octodns:
-    generate_ipv6: falco
-  type: AAAA
-  value: "2a0c:b641:2b2::"
-- type: A
-  value: 62.3.50.47
+  type: ANAME
+  value: falco.h.as212625.net.
 nw7yp-check:
   type: CNAME
   value: ovh.com.

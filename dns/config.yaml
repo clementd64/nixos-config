@@ -18,6 +18,8 @@ providers:
     hostmaster_email: noc@as212625.net.
 
 processors:
+  aname:
+    class: plugins.ResolveAname
   generate-ipv6:
     class: plugins.GenerateIPv6
   split-dualstack:
@@ -26,4 +28,4 @@ processors:
 zones:
   as212625.net.: { sources: [config], processors: [generate-ipv6, split-dualstack], targets: [local] }
   b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.: { sources: [config, auto-arpa], targets: [local] }
-  dubreuil.dev.: { sources: [config], processors: [generate-ipv6], targets: [local] }
+  dubreuil.dev.: { sources: [config], processors: [generate-ipv6, aname], targets: [local] }

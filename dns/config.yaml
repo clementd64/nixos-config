@@ -20,12 +20,10 @@ providers:
 processors:
   aname:
     class: plugins.ResolveAname
-  generate-ipv6:
-    class: plugins.GenerateIPv6
   split-dualstack:
     class: plugins.SplitDualStack
 
 zones:
-  as212625.net.: { sources: [config], processors: [generate-ipv6, split-dualstack], targets: [local] }
+  as212625.net.: { sources: [config], processors: [split-dualstack], targets: [local] }
   b.2.0.1.4.6.b.c.0.a.2.ip6.arpa.: { sources: [config, auto-arpa], targets: [local] }
-  dubreuil.dev.: { sources: [config], processors: [generate-ipv6, aname], targets: [local] }
+  dubreuil.dev.: { sources: [config], processors: [aname], targets: [local] }

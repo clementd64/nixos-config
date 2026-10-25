@@ -30,9 +30,8 @@ falco.h:
   value: 62.3.50.47
 - octodns:
     auto_arpa_priority: 1
-    generate_ipv6: true
-  type: AAAA
-  value: "2a0c:b641:2b2::"
+  type: GENAAAA
+  value: "2a0c:b641:2b2::<falco>"
 macbeth.h:
 - type: A
   value: 194.28.99.42

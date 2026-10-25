@@ -1,11 +1,7 @@
 ---
 ? ''
-: - type: A
-    value: 62.3.50.47
-  - octodns:
-      generate_ipv6: falco
-    type: AAAA
-    value: "2a0c:b641:2b2::"
+: - type: ANAME
+    value: falco.h.as212625.net.
   - type: NS
     values:
     - ns1.as212625.net.

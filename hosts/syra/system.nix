@@ -107,17 +107,17 @@
       publicKey = "trM7zOMMKsWHT+F6V08e4e5YVe3VVgf6M8zONd7qzwQ=";
       secretsFile = ./secrets.json;
     };
-    ekidno = {
+    macbeth = {
       addresses = [ "2a0c:b641:2b1::a/128" ];
-      endpoint = "ekidno.v4.h.as212625.net:51823";
-      presharedKey = ''["wireguard"]["ekidno"]["preshared-key"]'';
-      privateKey = ''["wireguard"]["ekidno"]["private-key"]'';
+      endpoint = "macbeth.v4.h.as212625.net:51823";
+      presharedKey = ''["wireguard"]["macbeth"]["preshared-key"]'';
+      privateKey = ''["wireguard"]["macbeth"]["private-key"]'';
       publicKey = "SwHLOEf38CErlhdKXlfgV0Oz/Z+Ii5s20+N4L5v+qXQ=";
       secretsFile = ./secrets.json;
     };
   };
 
-  systemd.network.networks."20-ekidno".routes = [{
+  systemd.network.networks."20-macbeth".routes = [{
     Destination = "::/0";
     Metric = 4096;
     PreferredSource = "2a0c:b641:2b1::a";

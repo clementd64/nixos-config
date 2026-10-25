@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./seebu.nix
+    ./falco.nix
   ];
 
   clement.profile.as212625.enable = true;

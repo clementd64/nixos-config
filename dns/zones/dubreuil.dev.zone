@@ -1,7 +1,7 @@
 $ORIGIN dubreuil.dev.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1792879182 ; Serial
+    1792939766 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -10,7 +10,7 @@ $ORIGIN dubreuil.dev.
 
 ; Name: dubreuil.dev.
 @                                                   3600 IN A        62.3.50.47
-                                                    3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35
+                                                    3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
                                                     3600 IN MX       1 mx0.mail.ovh.net.
                                                     3600 IN MX       5 mx1.mail.ovh.net.
                                                     3600 IN MX       50 mx2.mail.ovh.net.
@@ -24,15 +24,15 @@ _atproto                                            3600 IN TXT      "did=did:pl
 _autodiscover._tcp                                  3600 IN SRV      0 0 443 pro3.mail.ovh.net.
 _dmarc                                              3600 IN TXT      "v=DMARC1\; p=none"
 codex                                               3600 IN A        62.3.50.47
-                                                    3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35
+                                                    3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
 glacier                                             3600 IN AAAA     2a09:8280:1::cf:75d3:0
 id                                                  3600 IN A        62.3.50.47
-                                                    3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35
+                                                    3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
 matrix                                              3600 IN A        62.3.50.47
-                                                    3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35
+                                                    3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
 miniflux                                            3600 IN A        62.3.50.47
-                                                    3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35
+                                                    3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
 ntfy                                                3600 IN A        62.3.50.47
-                                                    3600 IN AAAA     2a0c:b641:2b2:0:bb3:fa93:d1c2:3f35
+                                                    3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
 nw7yp-check                                         3600 IN CNAME    ovh.com.
 ovh-zimbra-xv1xqn7d                                 3600 IN CNAME    ovh.com.

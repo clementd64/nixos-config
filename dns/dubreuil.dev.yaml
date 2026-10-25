@@ -3,7 +3,7 @@
 : - type: A
     value: 62.3.50.47
   - octodns:
-      generate_ipv6: seebu
+      generate_ipv6: falco
     type: AAAA
     value: "2a0c:b641:2b2::"
   - type: NS
@@ -43,7 +43,7 @@ _dmarc:
   value: v=DMARC1\; p=none
 codex:
 - octodns:
-    generate_ipv6: seebu
+    generate_ipv6: falco
   type: AAAA
   value: "2a0c:b641:2b2::"
 - type: A
@@ -53,28 +53,28 @@ glacier:
   value: 2a09:8280:1::cf:75d3:0
 id:
 - octodns:
-    generate_ipv6: seebu
+    generate_ipv6: falco
   type: AAAA
   value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 matrix:
 - octodns:
-    generate_ipv6: seebu
+    generate_ipv6: falco
   type: AAAA
   value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 miniflux:
 - octodns:
-    generate_ipv6: seebu
+    generate_ipv6: falco
   type: AAAA
   value: "2a0c:b641:2b2::"
 - type: A
   value: 62.3.50.47
 ntfy:
 - octodns:
-    generate_ipv6: seebu
+    generate_ipv6: falco
   type: AAAA
   value: "2a0c:b641:2b2::"
 - type: A

@@ -81,11 +81,11 @@
     };
 
     hosts = {
-      ekidno = mkStable {
+      macbeth = mkStable {
         system = "x86_64-linux";
       };
 
-      flamii = mkStable {
+      zoness = mkStable {
         system = "x86_64-linux";
       };
 

@@ -1,15 +1,15 @@
 creation_rules:
-  - path_regex: hosts/ekidno/secrets.json
+  - path_regex: hosts/macbeth/secrets.json
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
       age1njf4a8s0sckv6n5ua80tkwj90a08p30qtzjaj7m2rt48qe6t7sascptp7d
 
-  - path_regex: hosts/flamii/secrets.json
+  - path_regex: hosts/zoness/secrets.json
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
       age1psjq06sfp9apu8yrseg05hytjkdcelqqhn58zaxw9dqad2n7kvsq5d5q8p
 
-  - path_regex: hosts/flamii/apps/secrets.json
+  - path_regex: hosts/zoness/apps/secrets.json
     age: >-
       age1pfzj8gxp257vdn4xrjmytcc9yjhxecg8wcly4qj84jd7d2kmldyq9hy9kf,
       age1vv23k55pxwwpxh89m6m2p3y5sp2mp7p4u6zvavva05yu0gntm3asv5x6ts

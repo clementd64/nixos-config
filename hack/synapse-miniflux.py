@@ -1,19 +1,3 @@
-"""Receive signed Miniflux webhooks and send through Synapse's module API.
-
-Setup on flamii:
-  * Enable Settings > Integrations > Webhook in Miniflux, with URL
-    https://matrix.dubreuil.dev/_synapse/client/miniflux/webhook
-  * In hosts/flamii/apps/secrets.json (using sops), set synapse.miniflux to:
-    {"room_id": "!ROOM:dubreuil.dev", "webhook_secret": "SECRET_FROM_MINIFLUX"}
-  * Deploy and restart Synapse to reload credentials. The module creates the
-    passwordless @miniflux:dubreuil.dev account; invite it to that unencrypted
-    room. It accepts the invitation when the first notification arrives.
-
-Configuration is validated when the module loads. Only new_entries events
-are delivered. Delivery failures return 502, but there is no persistent
-queue or deduplication: replaying a signed webhook can duplicate notifications.
-"""
-
 import hashlib
 import hmac
 import json

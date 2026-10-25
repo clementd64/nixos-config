@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
-  systemd.network.networks."20-ve-seebu" = {
-    matchConfig.Name = "ve-seebu";
+  systemd.network.networks."20-ve-falco" = {
+    matchConfig.Name = "ve-falco";
     linkConfig.RequiredForOnline = "no";
     networkConfig = {
       Address = [ "${pkgs.net.genLinkLocal "flamii"}/64" ];
@@ -10,7 +10,7 @@
     };
     routes = [
       { Destination = "62.3.50.47/32"; Scope = "link"; }
-      { Destination = "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "seebu"}/128"; GatewayOnLink = true; }
+      { Destination = "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "falco"}/128"; GatewayOnLink = true; }
     ];
   };
 
@@ -20,25 +20,25 @@
     "d /nix/persist/synapse 0700 root root - -"
   ];
 
-  clement.secrets."seebu-age-key" = {
+  clement.secrets."falco-age-key" = {
     file = ./secrets.json;
-    extract = ''["seebu_age_key"]'';
-    before = [ "container@seebu.service" ];
+    extract = ''["falco_age_key"]'';
+    before = [ "container@falco.service" ];
   };
 
-  systemd.services."container@seebu".serviceConfig = {
+  systemd.services."container@falco".serviceConfig = {
     MemoryMax = "4G";
     CPUQuota = "300%";
   };
 
-  containers.seebu = {
+  containers.falco = {
     autoStart = true;
     privateNetwork = true;
     extraFlags = [ "--network-veth" ];
 
     bindMounts = {
       "/nix/key.txt" = {
-        hostPath = config.clement.secrets."seebu-age-key".path;
+        hostPath = config.clement.secrets."falco-age-key".path;
         isReadOnly = true;
       };
       "/var/lib/postgresql" = {
@@ -68,7 +68,7 @@
         enable = true;
         networks."40-host0" = {
           matchConfig.Name = "host0";
-          networkConfig.Address = [ "62.3.50.47/32" "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "seebu"}/128" ];
+          networkConfig.Address = [ "62.3.50.47/32" "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "falco"}/128" ];
           routes = [
             { Gateway = "194.28.98.82"; GatewayOnLink = true; }
             { Gateway = pkgs.net.genLinkLocal "flamii"; }

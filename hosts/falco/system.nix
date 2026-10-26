@@ -2,6 +2,7 @@
 {
   imports = [
     ./apps/codex.nix
+    ./apps/matrix-rtc.nix
     ./apps/miniflux.nix
     ./apps/ntfy.nix
     ./apps/pocket-id.nix

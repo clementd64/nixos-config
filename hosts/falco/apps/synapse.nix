@@ -62,6 +62,23 @@ let
     url_preview_enabled = true;
     ip_range_blacklist = pkgs.net.bogonIPv4 ++ pkgs.net.bogonIPv6;
     url_preview_ip_range_blacklist = pkgs.net.bogonIPv4 ++ pkgs.net.bogonIPv6;
+
+    # Call
+    extra_well_known_client_content."org.matrix.msc4143.rtc_foci" = [{
+      type = "livekit";
+      livekit_service_url = "https://rtc.matrix.dubreuil.dev/livekit/jwt";
+    }];
+    experimental_features = {
+      msc4143_enabled = true;
+      msc4222_enabled = true;
+    };
+    matrix_rtc.transports = [{
+      type = "livekit";
+      livekit_service_url = "https://rtc.matrix.dubreuil.dev/livekit/jwt";
+    }];
+    max_event_delay_duration = "24h";
+    rc_message = { per_second = 0.5; burst_count = 30; };
+    rc_delayed_event_mgmt = { per_second = 1; burst_count = 20; };
   };
 in
 {

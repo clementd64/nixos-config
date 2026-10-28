@@ -8,6 +8,8 @@
       "postgresql-tls-cert.pem".extract = ''["codex"]["postgresql"]["cert"]'';
       "postgresql-tls-key.pem".extract = ''["codex"]["postgresql"]["key"]'';
       "tmdb-apikey".extract = ''["codex"]["tmdb_apikey"]'';
+      "igdb-client-id".extract = ''["codex"]["igdb_client_id"]'';
+      "igdb-client-secret".extract = ''["codex"]["igdb_client_secret"]'';
     };
   };
 
@@ -29,7 +31,7 @@
             VITE_OIDC_PROVIDER_NAME = "PocketID";
           };
         };
-      in "${pkg}/bin/codex";
+      in "${pkg}/bin/codex server";
       Restart = "always";
       RestartSec = 5;
     };
@@ -39,6 +41,8 @@
       OIDC_CLIENT_ID = "codex";
       OIDC_DISCOVERY_ENDPOINT = "https://id.dubreuil.dev";
       TMDB_APIKEY_FILE = "%d/tmdb-apikey";
+      IGDB_CLIENT_ID_FILE = "%d/igdb-client-id";
+      IGDB_CLIENT_SECRET_FILE = "%d/igdb-client-secret";
     };
   };
 

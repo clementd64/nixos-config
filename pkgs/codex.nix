@@ -6,11 +6,11 @@ buildGo127Module (finalAttrs: {
   src = fetchFromGitHub {
     owner = "clementd64";
     repo = "codex";
-    rev = "36e3a945f62d1aef0c6b761fe6c8cbfd4bbc4485";
-    hash = "sha256-DQ6OCqPdPYwqhWGotJFnaU3WCos7LIxg4cPvpXWmpjU=";
+    rev = "b5feff1cfb44dfb2f91a51ea8aaa22987c82cd1b";
+    hash = "sha256-oVU2hHsSPBfgnqaYH/I+rsb8J0GTuSasMCIOp94/5Wc=";
   };
 
-  vendorHash = "sha256-isyogLsnWcBGpO439Lc9W2vQMAe11XtqBSGdSreuNLM=";
+  vendorHash = "sha256-LSmVQRyPhiYIAsfBpKLiKTU9VjlCQdNzpG44ei0sDgI=";
 
   frontend = buildNpmPackage {
     inherit (finalAttrs) pname version src;
@@ -30,11 +30,6 @@ buildGo127Module (finalAttrs: {
     '';
   };
 
-  preBuild = ''
-    mkdir -p packages/front/dist
-    cp -r ${finalAttrs.frontend}/. packages/front/dist/
-  '';
-
   env.CGO_ENABLED = "0";
-  ldflags = [ "-s" "-w" ];
+  ldflags = [ "-s" "-w" "-X" "github.com/clementd64/codex/internal/cmd.FrontPath=${finalAttrs.frontend}" ];
 })

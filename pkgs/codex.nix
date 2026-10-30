@@ -6,8 +6,8 @@ buildGo127Module (finalAttrs: {
   src = fetchFromGitHub {
     owner = "clementd64";
     repo = "codex";
-    rev = "b5feff1cfb44dfb2f91a51ea8aaa22987c82cd1b";
-    hash = "sha256-oVU2hHsSPBfgnqaYH/I+rsb8J0GTuSasMCIOp94/5Wc=";
+    rev = "31c62fc4a41874cd4913c1d8602ff4de73cad1cc";
+    hash = "sha256-jSjuzFVnV0xbM7SR67y7354A8AEUXETCFw1T6BIMF00=";
   };
 
   vendorHash = "sha256-LSmVQRyPhiYIAsfBpKLiKTU9VjlCQdNzpG44ei0sDgI=";
@@ -16,7 +16,7 @@ buildGo127Module (finalAttrs: {
     inherit (finalAttrs) pname version src;
     env = frontendEnv;
 
-    npmDepsHash = "sha256-jWOdXElTP2o9Jv29JAHKQithf9HMBY6GUPiDKxT3dJc=";
+    npmDepsHash = "sha256-mKbhcgPWg+QOkFELn9xTIr92Oq9IM5ZbI8scoTfXew4=";
     npmDepsFetcherVersion = 2;
     npmWorkspace = "packages/front";
 

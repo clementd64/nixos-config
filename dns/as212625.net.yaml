@@ -21,10 +21,10 @@ bluemarine.h:
   octodns:
       auto_arpa_priority: 1
   type: GENAAAA
-  value: "2a0c:b641:2b2::<bluemarine>"
+  value: "2a0c:b641:2b2::/bluemarine"
 db:
   type: GENAAAA
-  value: "2a0c:b641:2b2::<bluemarine>"
+  value: "2a0c:b641:2b2::/bluemarine"
 dns:
 - type: A
   value: 62.3.50.46
@@ -39,7 +39,7 @@ falco.h:
 - octodns:
     auto_arpa_priority: 1
   type: GENAAAA
-  value: "2a0c:b641:2b2::<falco>"
+  value: "2a0c:b641:2b2::/falco"
 macbeth.h:
 - type: A
   value: 194.28.99.42

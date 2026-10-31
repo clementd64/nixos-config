@@ -48,7 +48,7 @@ rec {
 
   # Generate an IPv6 link-local address derived from a hostname.
   genIPv6Addr = prefix: hostname: let
-    interfaceId = builtins.substring 0 16 (builtins.hashString "sha256" hostname);
+    interfaceId = builtins.substring 0 16 (builtins.hashString "sha256" "${prefix}/${hostname}");
     hextets = builtins.genList (index: builtins.substring (index * 4) 4 interfaceId) 4;
   in
     "${prefix}${builtins.concatStringsSep ":" hextets}";

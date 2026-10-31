@@ -1,7 +1,7 @@
 $ORIGIN as212625.net.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1792956766 ; Serial
+    1793471629 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -16,16 +16,16 @@ $ORIGIN as212625.net.
                                       3600 IN NS       ns2.as212625.net.
                                       3600 IN TXT      "v=spf1 include:mx.ovh.com ~all"
 _dmarc                                3600 IN TXT      "v=DMARC1\; p=none"
-bluemarine.h                          3600 IN AAAA     2a0c:b641:2b2:0:c548:a23f:eb7f:9d78
-bluemarine.v6.h                       3600 IN AAAA     2a0c:b641:2b2:0:c548:a23f:eb7f:9d78
-db                                    3600 IN AAAA     2a0c:b641:2b2:0:c548:a23f:eb7f:9d78
+bluemarine.h                          3600 IN AAAA     2a0c:b641:2b2:0:c01:9ba7:d281:c7b7
+bluemarine.v6.h                       3600 IN AAAA     2a0c:b641:2b2:0:c01:9ba7:d281:c7b7
+db                                    3600 IN AAAA     2a0c:b641:2b2:0:c01:9ba7:d281:c7b7
 dns                                   3600 IN A        62.3.50.46
                                       3600 IN AAAA     2a0c:b641:2b0::1
 dns64                                 3600 IN AAAA     2a0c:b641:2b0::64:0:53
 falco.h                               3600 IN A        62.3.50.47
-                                      3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
+                                      3600 IN AAAA     2a0c:b641:2b2:0:22e1:90fb:85ca:a9ef
 falco.v4.h                            3600 IN A        62.3.50.47
-falco.v6.h                            3600 IN AAAA     2a0c:b641:2b2:0:f5be:d22b:9f4b:ed88
+falco.v6.h                            3600 IN AAAA     2a0c:b641:2b2:0:22e1:90fb:85ca:a9ef
 macbeth.h                             3600 IN A        194.28.99.42
                                       3600 IN AAAA     2a0c:b641:2b1::1
 macbeth.v4.h                          3600 IN A        194.28.99.42

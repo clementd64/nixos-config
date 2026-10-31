@@ -61,12 +61,12 @@ class ResolveAname(BaseProcessor):
 class GenAaaaValue(Ipv6Value):
     @staticmethod
     def _address_type(value):
-        match = fullmatch(r"(.+::)<([^<>\s]+)>", value)
+        match = fullmatch(r"(.+::)/([^/\s]+)", value)
         if match is None:
             raise ValueError("expected IPv6 prefix followed by <hostname>")
         prefix, hostname = match.groups()
         network = IPv6Network(f"{prefix}/64")
-        interface_id = int(sha256(hostname.encode("utf-8")).hexdigest()[:16], 16)
+        interface_id = int(sha256(value.encode("utf-8")).hexdigest()[:16], 16)
         return IPv6Address(int(network.network_address) | interface_id)
 
 

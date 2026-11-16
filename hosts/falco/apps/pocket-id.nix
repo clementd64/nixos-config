@@ -31,9 +31,9 @@
     environment = {
       DB_CONNECTION_STRING = "postgresql://pocketid@db.as212625.net/pocketid?sslmode=verify-full&sslcert=%d/postgresql-tls-cert.pem&sslkey=%d/postgresql-tls-key.pem&sslrootcert=%d/postgresql-tls-ca.pem";
       ENCRYPTION_KEY_FILE = "%d/encryption-key";
-      HOST = "::1";
+      HOST = pkgs.net.ip.falco;
       PORT = "1411";
-      TRUST_PROXY = "::1";
+      TRUST_PROXY = pkgs.net.ip.zoness;
       APP_URL = "https://id.dubreuil.dev";
       FILE_BACKEND = "database";
       UI_CONFIG_DISABLED = "true";
@@ -42,17 +42,5 @@
     };
   };
 
-  clement.traefik = {
-    dynamic = {
-      http = {
-        routers.pocket-id = {
-          rule = "Host(`id.dubreuil.dev`)";
-          service = "pocket-id";
-        };
-        services.pocket-id.loadBalancer.servers = [{
-          url = "http://[::1]:1411";
-        }];
-      };
-    };
-  };
+  clement.firewall.src."tcp:1411" = [ "${pkgs.net.ip.zoness}/128" ];
 }

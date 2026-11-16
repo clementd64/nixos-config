@@ -31,7 +31,7 @@
     environment = {
       NTFY_DATABASE_URL = "postgresql://ntfy@db.as212625.net/ntfy?sslmode=verify-full&sslcert=%d/postgresql-tls-cert.pem&sslkey=%d/postgresql-tls-key.pem&sslrootcert=%d/postgresql-tls-ca.pem";
       NTFY_BASE_URL = "https://ntfy.dubreuil.dev";
-      NTFY_LISTEN_HTTP = "[::1]:2586";
+      NTFY_LISTEN_HTTP = "[${pkgs.net.ip.falco}]:2586";
       NTFY_BEHIND_PROXY = "true";
       NTFY_AUTH_DEFAULT_ACCESS = "deny-all";
       NTFY_AUTH_ACCESS = "*:up*:write-only";
@@ -42,13 +42,5 @@
     };
   };
 
-  clement.traefik.dynamic.http = {
-    routers.ntfy = {
-      rule = "Host(`ntfy.dubreuil.dev`)";
-      service = "ntfy";
-    };
-    services.ntfy.loadBalancer.servers = [{
-      url = "http://[::1]:2586";
-    }];
-  };
+  clement.firewall.src."tcp:2586" = [ "${pkgs.net.ip.zoness}/128" ];
 }

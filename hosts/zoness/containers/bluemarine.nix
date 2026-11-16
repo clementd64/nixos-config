@@ -9,7 +9,7 @@
       IPv6AcceptRA = false;
     };
     routes = [
-      { Destination = "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "bluemarine"}/128"; GatewayOnLink = true; }
+      { Destination = "${pkgs.net.ip.bluemarine}/128"; GatewayOnLink = true; PreferredSource = pkgs.net.ip.zoness; }
     ];
   };
 

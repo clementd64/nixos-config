@@ -30,13 +30,13 @@
     };
     environment = {
       DATABASE_URL = "host=db.as212625.net user=miniflux dbname=miniflux sslmode=verify-full sslcert=%d/postgresql-tls-cert.pem sslkey=%d/postgresql-tls-key.pem sslrootcert=%d/postgresql-tls-ca.pem";
-      LISTEN_ADDR = "[::1]:8081";
+      LISTEN_ADDR = "[${pkgs.net.ip.falco}]:8081";
       BASE_URL = "https://miniflux.dubreuil.dev/";
       HTTPS = "1";
-      TRUSTED_REVERSE_PROXY_NETWORKS = "::1/128";
+      TRUSTED_REVERSE_PROXY_NETWORKS = "${pkgs.net.ip.zoness}/128";
       RUN_MIGRATIONS = "1";
       METRICS_COLLECTOR = "1";
-      METRICS_ALLOWED_NETWORKS = "::1/128";
+      METRICS_ALLOWED_NETWORKS = "${pkgs.net.ip.zoness}/128";
 
       OAUTH2_PROVIDER = "oidc";
       OAUTH2_CLIENT_ID_FILE = "%d/oauth2-client-id";
@@ -49,17 +49,5 @@
     };
   };
 
-  clement.traefik = {
-    dynamic = {
-      http = {
-        routers.miniflux = {
-          rule = "Host(`miniflux.dubreuil.dev`) && !Path(`/metrics`)";
-          service = "miniflux";
-        };
-        services.miniflux.loadBalancer.servers = [{
-          url = "http://[::1]:8081";
-        }];
-      };
-    };
-  };
+  clement.firewall.src."tcp:8081" = ["${pkgs.net.ip.zoness}/128"];
 }

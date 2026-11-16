@@ -9,15 +9,9 @@
       IPv6AcceptRA = false;
     };
     routes = [
-      { Destination = "62.3.50.47/32"; Scope = "link"; }
-      { Destination = "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "falco"}/128"; GatewayOnLink = true; }
+      { Destination = "${pkgs.net.ip.falco}/128"; GatewayOnLink = true; PreferredSource = pkgs.net.ip.zoness; }
     ];
   };
-
-  systemd.tmpfiles.rules = [
-    "d /nix/persist/traefik 0700 root root - -"
-    "d /nix/persist/synapse 0700 root root - -"
-  ];
 
   clement.secrets."falco-age-key" = {
     file = ../secrets.json;
@@ -39,14 +33,6 @@
       "/nix/key.txt" = {
         hostPath = config.clement.secrets."falco-age-key".path;
         isReadOnly = true;
-      };
-      "/var/lib/private/traefik" = {
-        hostPath = "/nix/persist/traefik";
-        isReadOnly = false;
-      };
-      "/var/cache/private/synapse" = {
-        hostPath = "/nix/persist/synapse";
-        isReadOnly = false;
       };
     };
 

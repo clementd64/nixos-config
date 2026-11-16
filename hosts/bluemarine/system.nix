@@ -4,7 +4,7 @@
     enable = true;
     networks."40-host0" = {
       matchConfig.Name = "host0";
-      networkConfig.Address = [ "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "bluemarine"}/128" ];
+      networkConfig.Address = [ "${pkgs.net.ip.bluemarine}/128" ];
       routes = [
         { Gateway = pkgs.net.genLinkLocal "zoness"; }
       ];
@@ -26,9 +26,10 @@
     enableTCPIP = true;
     package = pkgs.postgresql_18;
     authentication = lib.mkOverride 10 ''
-      #type    database  DBuser    address                                                auth-method
-      local    all       postgres                                                         peer
-      hostssl  sameuser  all       ${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "falco"}/128  cert
+      #type    database  DBuser    address                    auth-method
+      local    all       postgres                             peer
+      hostssl  sameuser  all       ${pkgs.net.ip.falco}/128   cert
+      hostssl  sameuser  all       ${pkgs.net.ip.pepper}/128  cert
     '';
     settings = {
       ssl = true;
@@ -40,7 +41,8 @@
   };
 
   clement.firewall.src."tcp:5432" = [
-    "${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "falco"}/128"
+    "${pkgs.net.ip.falco}/128"
+    "${pkgs.net.ip.pepper}/128"
   ];
 
   clement.restic = {

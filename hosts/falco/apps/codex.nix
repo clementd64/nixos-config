@@ -38,7 +38,7 @@
       };
       environment = {
         DATABASE_URL = "host=db.as212625.net user=codex dbname=codex sslmode=verify-full sslcert=%d/postgresql-tls-cert.pem sslkey=%d/postgresql-tls-key.pem sslrootcert=%d/postgresql-tls-ca.pem";
-        LISTEN_ADDR = "[::1]:8082";
+        LISTEN_ADDR = "[${pkgs.net.ip.falco}]:8082";
         OIDC_CLIENT_ID = "codex";
         OIDC_DISCOVERY_ENDPOINT = "https://id.dubreuil.dev";
         TMDB_APIKEY_FILE = "%d/tmdb-apikey";
@@ -73,17 +73,5 @@
     timerConfig.OnCalendar = "hourly";
   };
 
-  clement.traefik = {
-    dynamic = {
-      http = {
-        routers.codex = {
-          rule = "Host(`codex.dubreuil.dev`)";
-          service = "codex";
-        };
-        services.codex.loadBalancer.servers = [{
-          url = "http://[::1]:8082";
-        }];
-      };
-    };
-  };
+  clement.firewall.src."tcp:8082" = [ "${pkgs.net.ip.zoness}/128" ];
 }

@@ -2,8 +2,9 @@
 let
   settings = (pkgs.formats.json {}).generate "livekit.json" {
     port = 7880;
+    bind_addresses = [ pkgs.net.ip.pepper ];
     rtc = {
-      node_ip = "62.3.50.47,${pkgs.net.genIPv6Addr "2a0c:b641:2b2::" "falco"}";
+      node_ip = "62.3.50.47,${pkgs.net.ip.pepper}";
       use_external_ip = false;
       tcp_port = 7881;
       udp_port = 7881;
@@ -67,7 +68,7 @@ in
     };
     environment = {
       LIVEKIT_URL = "wss://rtc.matrix.dubreuil.dev/livekit/sfu";
-      LIVEKIT_JWT_BIND = "[::1]:8083";
+      LIVEKIT_JWT_BIND = "[${pkgs.net.ip.pepper}]:8083";
       LIVEKIT_KEY_FILE = "%d/keys";
       LIVEKIT_FULL_ACCESS_HOMESERVERS = "dubreuil.dev";
     };
@@ -76,21 +77,8 @@ in
   networking.firewall.allowedTCPPorts = [ 7881 ];
   networking.firewall.allowedUDPPorts = [ 7881 ];
 
-  clement.traefik.dynamic.http = {
-    routers.matrix-rtc-jwt = {
-      rule = "Host(`rtc.matrix.dubreuil.dev`) && (Path(`/livekit/jwt`) || PathPrefix(`/livekit/jwt/`))";
-      middlewares = [ "matrix-rtc-jwt" ];
-      service = "lk-jwt-service";
-    };
-    middlewares.matrix-rtc-jwt.stripPrefix.prefixes = [ "/livekit/jwt" ];
-    services.lk-jwt-service.loadBalancer.servers = [{ url = "http://[::1]:8083"; }];
-
-    routers.matrix-rtc-sfu = {
-      rule = "Host(`rtc.matrix.dubreuil.dev`) && (Path(`/livekit/sfu`) || PathPrefix(`/livekit/sfu/`))";
-      middlewares = [ "matrix-rtc-sfu" ];
-      service = "livekit";
-    };
-    middlewares.matrix-rtc-sfu.stripPrefix.prefixes = [ "/livekit/sfu" ];
-    services.livekit.loadBalancer.servers = [{ url = "http://[::1]:7880"; }];
+  clement.firewall.src = {
+    "tcp:7880" = [ "${pkgs.net.ip.zoness}/128" ];
+    "tcp:8083" = [ "${pkgs.net.ip.zoness}/128" ];
   };
 }

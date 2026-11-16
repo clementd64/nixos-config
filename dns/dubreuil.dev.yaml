@@ -1,7 +1,7 @@
 ---
 ? ''
 : - type: ANAME
-    value: falco.h.as212625.net.
+    value: zoness.h.as212625.net.
   - type: NS
     values:
     - ns1.as212625.net.
@@ -39,22 +39,22 @@ _dmarc:
   value: v=DMARC1\; p=none
 codex:
   type: ANAME
-  value: falco.h.as212625.net.
+  value: zoness.h.as212625.net.
 glacier:
   type: AAAA
   value: 2a09:8280:1::cf:75d3:0
 id:
   type: ANAME
-  value: falco.h.as212625.net.
+  value: zoness.h.as212625.net.
 matrix:
   type: ANAME
-  value: falco.h.as212625.net.
+  value: zoness.h.as212625.net.
 miniflux:
   type: ANAME
-  value: falco.h.as212625.net.
+  value: zoness.h.as212625.net.
 ntfy:
   type: ANAME
-  value: falco.h.as212625.net.
+  value: zoness.h.as212625.net.
 nw7yp-check:
   type: CNAME
   value: ovh.com.
@@ -63,4 +63,4 @@ ovh-zimbra-xv1xqn7d:
   value: ovh.com.
 rtc.matrix:
   type: ANAME
-  value: falco.h.as212625.net.
+  value: zoness.h.as212625.net.

@@ -3,6 +3,7 @@
   imports = [
     ./containers/bluemarine.nix
     ./containers/falco.nix
+    ./containers/pepper.nix
   ];
 
   clement.profile.as212625.enable = true;
@@ -28,11 +29,17 @@
     };
   };
 
-  clement.local.addresses = [ "2a0c:b641:2b2::1/128" ];
+  clement.local.addresses = [
+    "${pkgs.net.ip.zoness}/128"
+    "2a0c:b641:2b2::1/128"
+  ];
 
   environment.persistence."/nix/persist" = {
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
+    ];
+    directories = [
+      { directory = "/var/lib/private/traefik"; mode = "0700"; }
     ];
   };
 
@@ -66,6 +73,98 @@
       secretsFile = ./secrets.json;
     };
   };
+
+  clement.traefik = {
+    enable = true;
+    config = {
+      entryPoints = {
+        https = {
+          address = ":443";
+          http.tls.certResolver = "letsencrypt";
+        };
+      };
+
+      certificatesResolvers.letsencrypt.acme = {
+        email = "clement@dubreuil.dev";
+        storage = "/var/lib/traefik/acme.json";
+        profile = "shortlived";
+        certificatesDuration = 160;
+        keyType = "EC256";
+        tlsChallenge = {};
+      };
+
+      log.level = "INFO";
+    };
+
+    dynamic.http = {
+      routers.miniflux = {
+        rule = "Host(`miniflux.dubreuil.dev`) && !Path(`/metrics`)";
+        service = "miniflux";
+      };
+      services.miniflux.loadBalancer.servers = [{
+        url = "http://[${pkgs.net.ip.falco}]:8081";
+      }];
+
+      routers.codex = {
+        rule = "Host(`codex.dubreuil.dev`)";
+        service = "codex";
+      };
+      services.codex.loadBalancer.servers = [{
+        url = "http://[${pkgs.net.ip.falco}]:8082";
+      }];
+
+      routers.ntfy = {
+        rule = "Host(`ntfy.dubreuil.dev`)";
+        service = "ntfy";
+      };
+      services.ntfy.loadBalancer.servers = [{
+        url = "http://[${pkgs.net.ip.falco}]:2586";
+      }];
+
+      routers.pocket-id = {
+        rule = "Host(`id.dubreuil.dev`)";
+        service = "pocket-id";
+      };
+      services.pocket-id.loadBalancer.servers = [{
+        url = "http://[${pkgs.net.ip.falco}]:1411";
+      }];
+
+      routers.matrix-delegation = {
+        rule = "Host(`dubreuil.dev`) && Path(`/.well-known/matrix/client`)";
+        service = "synapse";
+      };
+      routers.matrix-server-delegation = {
+        rule = "(Host(`dubreuil.dev`) || Host(`matrix.dubreuil.dev`)) && Path(`/.well-known/matrix/server`)";
+        priority = 1000;
+        middlewares = [ "matrix-server-delegation" ];
+        service = "synapse";
+      };
+      middlewares.matrix-server-delegation.replacePath.path = "/_synapse/server-delegation";
+      routers.synapse = {
+        rule = "Host(`matrix.dubreuil.dev`) && (PathPrefix(`/_matrix/`) || PathPrefix(`/_synapse/client/`) || PathPrefix(`/.well-known/matrix/`))";
+        service = "synapse";
+      };
+      services.synapse.loadBalancer.servers = [{ url = "http://[${pkgs.net.ip.pepper}]:8008"; }];
+
+      routers.matrix-rtc-jwt = {
+        rule = "Host(`rtc.matrix.dubreuil.dev`) && (Path(`/livekit/jwt`) || PathPrefix(`/livekit/jwt/`))";
+        middlewares = [ "matrix-rtc-jwt" ];
+        service = "lk-jwt-service";
+      };
+      middlewares.matrix-rtc-jwt.stripPrefix.prefixes = [ "/livekit/jwt" ];
+      services.lk-jwt-service.loadBalancer.servers = [{ url = "http://[${pkgs.net.ip.pepper}]:8083"; }];
+
+      routers.matrix-rtc-sfu = {
+        rule = "Host(`rtc.matrix.dubreuil.dev`) && (Path(`/livekit/sfu`) || PathPrefix(`/livekit/sfu/`))";
+        middlewares = [ "matrix-rtc-sfu" ];
+        service = "livekit";
+      };
+      middlewares.matrix-rtc-sfu.stripPrefix.prefixes = [ "/livekit/sfu" ];
+      services.livekit.loadBalancer.servers = [{ url = "http://[${pkgs.net.ip.pepper}]:7880"; }];
+    };
+  };
+
+  clement.firewall.dst."tcp:443" = [ "${pkgs.net.ip.zoness}/128" "194.28.98.82/32" ];
 
   system.stateVersion = "23.11";
 }

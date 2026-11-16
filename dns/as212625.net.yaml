@@ -34,8 +34,6 @@ dns64:
   type: AAAA
   value: 2a0c:b641:2b0::64:0:53
 falco.h:
-- type: A
-  value: 62.3.50.47
 - octodns:
     auto_arpa_priority: 1
   type: GENAAAA
@@ -63,10 +61,17 @@ ovhmo4384488-selector1._domainkey:
 ovhmo4384488-selector2._domainkey:
   type: CNAME
   value: ovhmo4384488-selector2._domainkey.602626.dz.dkim.mail.ovh.net.
+pepper.h:
+- type: A
+  value: 62.3.50.47
+- octodns:
+      auto_arpa_priority: 1
+  type: GENAAAA
+  value: "2a0c:b641:2b2::/pepper"
 zoness.h:
 - type: A
   value: 194.28.98.82
 - octodns:
     auto_arpa_priority: 1
-  type: AAAA
-  value: 2a0c:b641:2b2::1
+  type: GENAAAA
+  value: 2a0c:b641:2b2::/zoness

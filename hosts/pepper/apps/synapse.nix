@@ -28,7 +28,7 @@ let
     }];
     listeners = [{
       port = 8008;
-      bind_addresses = [ "::1" ];
+      bind_addresses = [ pkgs.net.ip.pepper ];
       type = "http";
       tls = false;
       x_forwarded = true;
@@ -103,8 +103,8 @@ in
 
   systemd.services.synapse = {
     description = "Synapse Matrix server";
-    after = [ "network.target" "pocket-id.service" "traefik.service" ];
-    wants = [ "pocket-id.service" "traefik.service" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
     protect.enable = true;
     serviceConfig = {
@@ -119,26 +119,9 @@ in
     };
   };
 
-  clement.traefik.dynamic.http = {
-    routers.matrix-delegation = {
-      rule = "Host(`dubreuil.dev`) && Path(`/.well-known/matrix/client`)";
-      service = "synapse";
-    };
-    routers.matrix-server-delegation = {
-      rule = "(Host(`dubreuil.dev`) || Host(`matrix.dubreuil.dev`)) && Path(`/.well-known/matrix/server`)";
-      priority = 1000;
-      middlewares = [ "matrix-server-delegation" ];
-      service = "synapse";
-    };
-    middlewares.matrix-server-delegation.replacePath.path = "/_synapse/server-delegation";
-    routers.synapse = {
-      rule = "Host(`matrix.dubreuil.dev`) && (PathPrefix(`/_matrix/`) || PathPrefix(`/_synapse/client/`) || PathPrefix(`/.well-known/matrix/`))";
-      service = "synapse";
-    };
-    services.synapse.loadBalancer.servers = [{ url = "http://[::1]:8008"; }];
-  };
-
   systemd.tmpfiles.rules = [
     "e /var/cache/private/synapse/media - - - 7d -"
   ];
+
+  clement.firewall.src."tcp:8008" = ["${pkgs.net.ip.zoness}/128"];
 }

@@ -1,5 +1,12 @@
 { lib }:
 rec {
+  ip = {
+    bluemarine = genIPv6Addr "2a0c:b641:2b2::" "bluemarine";
+    falco = genIPv6Addr "2a0c:b641:2b2::" "falco";
+    pepper = genIPv6Addr "2a0c:b641:2b2::" "pepper";
+    zoness = genIPv6Addr "2a0c:b641:2b2::" "zoness";
+  };
+
   bogonIPv4 = [
     "0.0.0.0/8"
     "10.0.0.0/8" # Private Use

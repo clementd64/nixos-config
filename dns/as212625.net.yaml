@@ -38,6 +38,9 @@ falco.h:
     auto_arpa_priority: 1
   type: GENAAAA
   value: "2a0c:b641:2b2::/falco"
+fichina.h:
+- type: AAAA
+  value: "2a01:4f9:c015:2455::1"
 macbeth.h:
 - type: A
   value: 194.28.99.42

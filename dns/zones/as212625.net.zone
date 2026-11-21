@@ -1,7 +1,7 @@
 $ORIGIN as212625.net.
 
 @ 3600 IN SOA ns1.as212625.net. noc.as212625.net. (
-    1794855396 ; Serial
+    1795294170 ; Serial
     3600 ; Refresh
     600 ; Retry
     604800 ; Expire
@@ -24,6 +24,8 @@ dns                                   3600 IN A        62.3.50.46
 dns64                                 3600 IN AAAA     2a0c:b641:2b0::64:0:53
 falco.h                               3600 IN AAAA     2a0c:b641:2b2:0:22e1:90fb:85ca:a9ef
 falco.v6.h                            3600 IN AAAA     2a0c:b641:2b2:0:22e1:90fb:85ca:a9ef
+fichina.h                             3600 IN AAAA     2a01:4f9:c015:2455::1
+fichina.v6.h                          3600 IN AAAA     2a01:4f9:c015:2455::1
 macbeth.h                             3600 IN A        194.28.99.42
                                       3600 IN AAAA     2a0c:b641:2b1::1
 macbeth.v4.h                          3600 IN A        194.28.99.42

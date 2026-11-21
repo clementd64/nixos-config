@@ -81,6 +81,10 @@
     };
 
     hosts = {
+      fichina = mkStable {
+        system = "aarch64-linux";
+      };
+
       macbeth = mkStable {
         system = "x86_64-linux";
       };

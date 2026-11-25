@@ -96,7 +96,7 @@ in with lib; {
         fi
       '');
 
-    programs.zsh.initExtra = mkIf cfg.enableZshIntegration (
+    programs.zsh.initContent = mkIf cfg.enableZshIntegration (
       mkBefore ''
         if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
             builtin source "''${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"

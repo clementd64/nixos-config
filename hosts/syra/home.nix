@@ -36,6 +36,7 @@
   qt.style.name = "adwaita-dark";
 
   services.ssh-agent.enable = true;
+  services.polkit-gnome.enable = true;
   services.gnome-keyring = {
     enable = true;
     components = [ "secrets" ];
@@ -67,7 +68,6 @@
     discord
     factorio
     factorio-env
-    keepassxc
     mapshot
     opentofu
     osu-lazer-bin

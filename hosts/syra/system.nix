@@ -137,6 +137,9 @@
     wireplumber.enable = true;
   };
   hardware.bluetooth.enable = true;
+  services.fprintd.enable = true;
+  # Install the Quick Unlock policy where the system Polkit daemon can read it.
+  environment.systemPackages = [ pkgs.keepassxc ];
 
   clement.docker = {
     enable = true;
